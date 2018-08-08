@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', 'Faculty'),
 
     /*
     |--------------------------------------------------------------------------
@@ -65,7 +65,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => env('APP_TIMEZONE', 'America/Los_Angeles'),
 
     /*
     |--------------------------------------------------------------------------
@@ -160,6 +160,11 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        // proxy service provider
+        CSUNMetaLab\ProxyPass\Providers\ProxyPassServiceProvider::class,
+
+        // Guzzle interface service provider
+        CSUNMetaLab\Guzzle\Providers\GuzzleServiceProvider::class,
     ],
 
     /*
