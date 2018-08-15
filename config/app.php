@@ -110,6 +110,17 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Entity ID (Application)
+    |--------------------------------------------------------------------------
+    |
+    | Entity ID listed as the parent_entity_id column for all child entities in
+    | nemo.memberships.
+    |
+    */
+    'application_entity_id' => env("APPLICATION_ENTITY_ID"),
+
+    /*
+    |--------------------------------------------------------------------------
     | Application Analytics
     |--------------------------------------------------------------------------
     |
