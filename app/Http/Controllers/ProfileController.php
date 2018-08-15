@@ -14,7 +14,8 @@ class ProfileController extends Controller
 	 * @param string $uri The URI of the individual
 	 */
     public function show($uri) {
-    	$user = User::whereUri($uri)
+    	$user = User::with('departments')
+    		->whereUri($uri)
     		->firstOrFail();
 
     	return view('pages.profile.show', compact('user'));
