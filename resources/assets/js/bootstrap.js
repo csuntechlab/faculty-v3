@@ -1,17 +1,21 @@
 
 window._ = require('lodash');
-window.Popper = require('popper.js').default;
+window.Popper = require('metaphor-theme/node_modules/popper.js').default;
 
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
  * for JavaScript based Bootstrap features such as modals and tabs. This
- * code may be modified to fit the specific needs of your application.
+ * code may be modified to fit the specific needs of your application. We
+ * then load Metaphor-specific dependencies.
  */
 
 try {
-    window.$ = window.jQuery = require('jquery');
+    window.$ = window.jQuery = require('metaphor-theme/node_modules/jquery');
 
-    require('bootstrap');
+    require('metaphor-theme/node_modules/bootstrap');
+
+    require('metaphor-theme/dist/js/datepicker/datepicker.js');
+    require('metaphor-theme/dist/js/fontawesome/all.js');
 } catch (e) {}
 
 /**
