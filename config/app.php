@@ -110,6 +110,26 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Application Analytics
+    |--------------------------------------------------------------------------
+    |
+    | The current release version of the application for display.
+    |
+    */
+    'google_analytics_id' => env("GOOGLE_ANALYTICS_TRACKING_ID", ""),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Application Site Validation
+    |--------------------------------------------------------------------------
+    |
+    | The current release version of the application for display.
+    |
+    */
+    'google_site_id' => env("GOOGLE_SITE_VERIFICATION_ID", ""),
+
+    /*
+    |--------------------------------------------------------------------------
     | Autoloaded Service Providers
     |--------------------------------------------------------------------------
     |
