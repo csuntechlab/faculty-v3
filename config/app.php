@@ -180,6 +180,9 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        // HTML and Form facade code
+        Collective\Html\HtmlServiceProvider::class,
+
         // proxy service provider
         CSUNMetaLab\ProxyPass\Providers\ProxyPassServiceProvider::class,
 
@@ -233,6 +236,9 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+
+        'Form' => Collective\Html\FormFacade::class,
+        'HTML' => Collective\Html\HtmlFacade::class,
 
     ],
 
