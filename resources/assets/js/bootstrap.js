@@ -10,9 +10,9 @@ window.Popper = require('metaphor-theme/node_modules/popper.js').default;
  */
 
 try {
-    window.$ = window.jQuery = require('metaphor-theme/node_modules/jquery');
+    window.$ = window.jQuery = require('metaphor-theme/node_modules/jquery/dist/jquery.min.js');
 
-    require('metaphor-theme/node_modules/bootstrap');
+    require('metaphor-theme/node_modules/bootstrap/dist/js/bootstrap.min.js');
 
     require('metaphor-theme/dist/js/datepicker/datepicker.js');
     require('metaphor-theme/dist/js/fontawesome/all.js');

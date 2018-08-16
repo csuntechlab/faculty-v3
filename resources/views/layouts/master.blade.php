@@ -37,6 +37,8 @@
 		@include('layouts.partials.meta-footer')
 
 		{{-- SCRIPTS --}}
+		{!! HTML::script('/js/manifest.js') !!}
+		{!! HTML::script('/js/vendor.js') !!}
 		{!! HTML::script('js/app.js') !!}
 
 		@yield('page-specific-scripts')
