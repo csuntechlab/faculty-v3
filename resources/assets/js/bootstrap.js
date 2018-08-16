@@ -15,7 +15,7 @@ try {
     require('metaphor-theme/node_modules/bootstrap/dist/js/bootstrap.min.js');
 
     require('metaphor-theme/dist/js/datepicker/datepicker.js');
-    require('metaphor-theme/dist/js/fontawesome/all.js');
+    require('@fortawesome/fontawesome-free');
 } catch (e) {}
 
 /**

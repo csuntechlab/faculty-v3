@@ -18,10 +18,10 @@ mix.js('resources/assets/js/app.js', 'public/js')
    .extract([
    	'vue',
    	'axios',
+   	'@fortawesome/fontawesome-free',
    	'metaphor-theme/node_modules/popper.js',
    	'metaphor-theme/node_modules/jquery/dist/jquery.min.js',
    	'metaphor-theme/node_modules/bootstrap/dist/js/bootstrap.min.js',
-   	'metaphor-theme/dist/js/datepicker/datepicker.js',
-   	'metaphor-theme/dist/js/fontawesome/all.js'
+   	'metaphor-theme/dist/js/datepicker/datepicker.js'
    ])
    .sass('resources/assets/sass/app.scss', 'public/css');
