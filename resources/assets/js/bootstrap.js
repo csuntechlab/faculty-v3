@@ -1,6 +1,6 @@
 
 window._ = require('lodash');
-window.Popper = require('metaphor-theme/node_modules/popper.js').default;
+window.Popper = require('popper.js').default;
 
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
@@ -10,9 +10,9 @@ window.Popper = require('metaphor-theme/node_modules/popper.js').default;
  */
 
 try {
-    window.$ = window.jQuery = require('metaphor-theme/node_modules/jquery/dist/jquery.min.js');
+    window.$ = window.jQuery = require('jquery');
 
-    require('metaphor-theme/node_modules/bootstrap/dist/js/bootstrap.min.js');
+    require('metaphor-theme/node_modules/bootstrap/dist/js/bootstrap.js');
 
     require('metaphor-theme/dist/js/datepicker/datepicker.js');
     require('@fortawesome/fontawesome-free');

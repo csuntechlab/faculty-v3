@@ -19,8 +19,8 @@ mix.js('resources/assets/js/app.js', 'public/js')
    	'vue',
    	'axios',
    	'@fortawesome/fontawesome-free',
-   	'metaphor-theme/node_modules/popper.js',
-   	'metaphor-theme/node_modules/jquery/dist/jquery.min.js',
+   	'popper.js',
+   	'jquery',
    	'metaphor-theme/node_modules/bootstrap/dist/js/bootstrap.min.js',
    	'metaphor-theme/dist/js/datepicker/datepicker.js'
    ])
