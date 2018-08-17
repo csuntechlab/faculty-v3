@@ -11,4 +11,5 @@
 
 @section('content')
 <p>Placeholder</p>
+<i class="fas fa-stroopwafel"></i>
 @stop

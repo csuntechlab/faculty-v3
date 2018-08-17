@@ -24,4 +24,10 @@ mix.js('resources/assets/js/app.js', 'public/js')
    	'metaphor-theme/node_modules/bootstrap/dist/js/bootstrap.min.js',
    	'metaphor-theme/dist/js/datepicker/datepicker.js'
    ])
-   .sass('resources/assets/sass/app.scss', 'public/css');
+   .sass('resources/assets/sass/app.scss', 'public/css')
+   .options({
+      processCssUrls: false
+   }); // we are not processing the CSS urls due to how the SCSS for Font Awesome works
+
+// copy the webfonts for Font Awesome
+mix.copyDirectory('node_modules/@fortawesome/fontawesome-free/webfonts', 'public/webfonts');
