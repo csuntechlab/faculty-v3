@@ -5,8 +5,8 @@ webpackJsonp([0],[
 "use strict";
 
 
-var bind = __webpack_require__(8);
-var isBuffer = __webpack_require__(22);
+var bind = __webpack_require__(10);
+var isBuffer = __webpack_require__(23);
 
 /*global toString:true*/
 
@@ -13255,7 +13255,7 @@ Popper.Defaults = Defaults;
 /* WEBPACK VAR INJECTION */(function(process) {
 
 var utils = __webpack_require__(0);
-var normalizeHeaderName = __webpack_require__(24);
+var normalizeHeaderName = __webpack_require__(25);
 
 var DEFAULT_CONTENT_TYPE = {
   'Content-Type': 'application/x-www-form-urlencoded'
@@ -13271,10 +13271,10 @@ function getDefaultAdapter() {
   var adapter;
   if (typeof XMLHttpRequest !== 'undefined') {
     // For browsers use XHR adapter
-    adapter = __webpack_require__(10);
+    adapter = __webpack_require__(12);
   } else if (typeof process !== 'undefined') {
     // For node use HTTP adapter
-    adapter = __webpack_require__(10);
+    adapter = __webpack_require__(12);
   }
   return adapter;
 }
@@ -13349,2467 +13349,10 @@ utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
 
 module.exports = defaults;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(9)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(11)))
 
 /***/ }),
 /* 5 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!function(){"use strict";void 0===Date.dp_locales&&(Date.dp_locales={texts:{buttonTitle:"Select date ...",buttonLabel:"Click or press the Enter key or the spacebar to open the calendar",prevButtonLabel:"Go to previous month",prevMonthButtonLabel:"Go to the previous year",prevYearButtonLabel:"Go to the previous twenty years",nextButtonLabel:"Go to next month",nextMonthButtonLabel:"Go to the next year",nextYearButtonLabel:"Go to the next twenty years",changeMonthButtonLabel:"Click or press the Enter key or the spacebar to change the month",changeYearButtonLabel:"Click or press the Enter key or the spacebar to change the year",changeRangeButtonLabel:"Click or press the Enter key or the spacebar to go to the next twenty years",closeButtonTitle:"Close",closeButtonLabel:"Close the calendar",calendarHelp:"- Up Arrow and Down Arrow - goes to the same day of the week in the previous or next week respectively. If the end of the month is reached, continues into the next or previous month as appropriate.\r\n- Left Arrow and Right Arrow - advances one day to the next, also in a continuum. Visually focus is moved from day to day and wraps from row to row in the grid of days.\r\n- Control+Page Up - Moves to the same date in the previous year.\r\n- Control+Page Down - Moves to the same date in the next year.\r\n- Home - Moves to the first day of the current month.\r\n- End - Moves to the last day of the current month.\r\n- Page Up - Moves to the same date in the previous month.\r\n- Page Down - Moves to the same date in the next month.\r\n- Enter or Espace - closes the calendar, and the selected date is shown in the associated text box.\r\n- Escape - closes the calendar without any action."},directionality:"LTR",month_names:["January","February","March","April","May","June","July","August","September","October","November","December"],month_names_abbreviated:["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],month_names_narrow:["J","F","M","A","M","J","J","A","S","O","N","D"],day_names:["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],day_names_abbreviated:["Sun","Mon","Tue","Wed","Thu","Fri","Sat"],day_names_short:["Su","Mo","Tu","We","Th","Fr","Sa"],day_names_narrow:["S","M","T","W","T","F","S"],day_periods:{am:"AM",noon:"noon",pm:"PM"},day_periods_abbreviated:{am:"AM",noon:"noon",pm:"PM"},day_periods_narrow:{am:"a",noon:"n",pm:"p"},quarter_names:["1st quarter","2nd quarter","3rd quarter","4th quarter"],quarter_names_abbreviated:["Q1","Q2","Q3","Q4"],quarter_names_narrow:["1","2","3","4"],era_names:["Before Christ","Anno Domini"],era_names_abbreviated:["BC","AD"],era_names_narrow:["B","A"],full_format:"EEEE, MMMM d, y",long_format:"MMMM d, y",medium_format:"MMM d, y",short_format:"M/d/yy",firstday_of_week:0})}(),function(t){if(true)!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(2)], __WEBPACK_AMD_DEFINE_FACTORY__ = (t),
-				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
-				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
-				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));else if("object"==typeof exports)t(require("jquery"));else{if("undefined"==typeof jQuery)throw new Error("Datepicker's JavaScript requires jQuery");t(jQuery)}}(function(g,c){"use strict";var r=['<a class="datepicker-button input-group-append" role="button" aria-haspopup="true" tabindex="0" aria-labelledby="datepicker-bn-open-label-CALENDARID">','\t<span class="input-group-text"><i class="fas fa-calendar-alt" title="Select Date..."></i></span>',"</a>"],n=['<div class="datepicker-calendar" id="datepicker-calendar-CALENDARID" aria-hidden="false">','\t<div class="datepicker-month-wrap">','\t\t<div class="datepicker-month-fast-next float-right" role="button" aria-labelledby="datepicker-bn-fast-next-label-CALENDARID" tabindex="0"><i class="fas fa-angle-double-right"></i></div>','\t\t<div class="datepicker-month-next float-right" role="button" aria-labelledby="datepicker-bn-next-label-CALENDARID" tabindex="0"><i class="fas fa-angle-right"></i></div>','\t\t<div class="datepicker-month-fast-prev float-left" role="button" aria-labelledby="datepicker-bn-fast-prev-label-CALENDARID" tabindex="0"><i class="fas fa-angle-double-left"></i></div>','\t\t<div class="datepicker-month-prev float-left" role="button" aria-labelledby="datepicker-bn-prev-label-CALENDARID" tabindex="0"><i class="fas fa-angle-left"></i></div>','\t\t<div id="datepicker-month-CALENDARID" class="datepicker-month" tabindex="0" role="heading" aria-live="assertive" aria-atomic="true" title="Click or press the Enter key or the spacebar to change the month">July 2015</div>',"\t</div>",'\t<table class="datepicker-grid" role="grid" aria-readonly="true" aria-activedescendant="datepicker-err-msg-CALENDARID" aria-labelledby="datepicker-month-CALENDARID" tabindex="0">','\t\t<thead role="presentation">','\t\t\t<tr class="datepicker-weekdays" role="row">','\t\t\t\t<th scope="col" id="day0-header-CALENDARID" class="datepicker-day" role="columnheader" aria-label="Sunday"><abbr title="Sunday">Su</abbr></th>','\t\t\t\t<th scope="col" id="day1-header-CALENDARID" class="datepicker-day" role="columnheader" aria-label="Monday"><abbr title="Monday">Mo</abbr></th>','\t\t\t\t<th scope="col" id="day2-header-CALENDARID" class="datepicker-day" role="columnheader" aria-label="Tuesday"><abbr title="Tuesday">Tu</abbr></th>','\t\t\t\t<th scope="col" id="day3-header-CALENDARID" class="datepicker-day" role="columnheader" aria-label="Wednesday"><abbr title="Wednesday">We</abbr></th>','\t\t\t\t<th scope="col" id="day4-header-CALENDARID" class="datepicker-day" role="columnheader" aria-label="Thursday"><abbr title="Thursday">Th</abbr></th>','\t\t\t\t<th scope="col" id="day5-header-CALENDARID" class="datepicker-day" role="columnheader" aria-label="Friday"><abbr title="Friday">Fr</abbr></th>','\t\t\t\t<th scope="col" id="day6-header-CALENDARID" class="datepicker-day" role="columnheader" aria-label="Saturday"><abbr title="Saturday">Sa</abbr></th>',"\t\t\t</tr>","\t\t</thead>",'\t\t<tbody role="presentation">',"\t\t\t<tr>",'\t\t\t\t<td id="datepicker-err-msg-CALENDARID" colspan="7">Javascript must be enabled</td>',"\t\t\t</tr>","\t\t</tbody>","\t</table>",'\t<div class="datepicker-close-wrap">','\t\t<button class="datepicker-close" id="datepicker-close-CALENDARID" aria-labelledby="datepicker-bn-close-label-CALENDARID">Close</button>',"\t</div>",'\t<div id="datepicker-bn-open-label-CALENDARID" class="datepicker-bn-open-label offscreen">Click or press the Enter key or the spacebar to open the calendar</div>','\t<div id="datepicker-bn-prev-label-CALENDARID" class="datepicker-bn-prev-label offscreen">Go to previous month</div>','\t<div id="datepicker-bn-next-label-CALENDARID" class="datepicker-bn-next-label offscreen">Go to next month</div>','\t<div id="datepicker-bn-fast-prev-label-CALENDARID" class="datepicker-bn-fast-prev-label offscreen">Go to previous year</div>','\t<div id="datepicker-bn-fast-next-label-CALENDARID" class="datepicker-bn-fast-next-label offscreen">Go to next year</div>','\t<div id="datepicker-bn-close-label-CALENDARID" class="datepicker-bn-close-label offscreen">Close the date picker</div>',"</div>"],o=function(t,e){var s=this;this.$target=g(t),this.options=g.extend({},o.DEFAULTS,e),this.locales=Date.dp_locales,this.startview(this.options.startView),"string"==typeof this.options.inputFormat&&(this.options.inputFormat=[this.options.inputFormat]),g.isArray(this.options.datesDisabled)||(this.options.datesDisabled=[this.options.datesDisabled]),g.each(this.options.datesDisabled,function(t,e){if("string"==typeof e){var a=s.parseDate(e);s.options.datesDisabled[t]=null===a?null:s.format(a)}else e instanceof Date&&!isNaN(e.valueOf())?s.options.datesDisabled[t]=s.format(e):s.options.datesDisabled[t]=null}),null!=this.options.min?this.options.min=this.parseDate(this.options.min):this.$target.attr("min")&&(this.options.min=this.parseDate(this.$target.attr("min"))),null!=this.options.max?this.options.max=this.parseDate(this.options.max):this.$target.attr("max")&&(this.options.max=this.parseDate(this.$target.attr("max"))),"string"==typeof this.options.previous?this.options.previous=g(this.options.previous):this.options.previous instanceof jQuery||(this.options.previous=null),"string"==typeof this.options.next?this.options.next=g(this.options.next):this.options.next instanceof jQuery||(this.options.next=null),this.id=this.$target.attr("id")||"datepicker-"+Math.floor(1e5*Math.random());var a=n.join("");a=a.replace(/CALENDARID/g,this.id+""),0==this.$target.parent(".input-group").length&&this.$target.wrap('<div class="input-group"></div>'),this.$label=this.$target.parents().find("label[for="+this.id+"]"),this.$group=this.$target.parent(".input-group"),this.$target.attr("aria-autocomplete","none"),this.$target.css("min-width","7em"),this.$target.addClass("form-control"),this.$target.attr("placeholder")||this.$target.attr("placeholder",this.options.inputFormat[0]);var i=r.join("");i=i.replace(/CALENDARID/g,this.id+""),this.$button=g(i),this.$button.addClass(this.options.theme),this.$calendar=g(a),this.$calendar.addClass(this.options.theme),this.$target.after(this.$button),"static"===this.$calendar.parent().css("position")&&this.$calendar.parent().css("position","relative"),this.$calendar.find(".datepicker-bn-open-label").html(this.options.buttonLabel),this.$target.attr("id")&&this.$calendar.attr("aria-controls",this.$target.attr("id")),this.$button.find("span").attr("title",this.options.buttonTitle),this.$calendar.css("left",this.$target.parent().position().left+"px"),this.$monthObj=this.$calendar.find(".datepicker-month"),this.$prev=this.$calendar.find(".datepicker-month-prev"),this.$next=this.$calendar.find(".datepicker-month-next"),this.$fastprev=this.$calendar.find(".datepicker-month-fast-prev"),this.$fastnext=this.$calendar.find(".datepicker-month-fast-next"),this.$grid=this.$calendar.find(".datepicker-grid"),"RTL"===this.locales.directionality&&this.$grid.addClass("rtl");this.$grid.find("th.datepicker-day abbr");(this.drawCalendarHeader(),0==this.options.inline&&1==this.options.modal?(this.$close=this.$calendar.find(".datepicker-close"),this.$close.html(this.options.closeButtonTitle).attr("title",this.options.closeButtonLabel),this.$calendar.find(".datepicker-bn-close-label").html(this.options.closeButtonLabel)):(this.hideObject(this.$calendar.find(".datepicker-close-wrap")),this.hideObject(this.$calendar.find(".datepicker-bn-close-label"))),0!=this.options.inline)?(this.hideObject(this.$button),("string"==typeof this.options.inline?g("#"+this.options.inline):this.options.inline).append(this.$calendar),this.$calendar.css({position:"relative",left:"0px"}),this.initializeDate()):(this.$calendar.css({display:"none"}),this.$target.parent().after(this.$calendar),this.hide(!this.options.gainFocusOnConstruction));this.keys={tab:9,enter:13,esc:27,space:32,pageup:33,pagedown:34,end:35,home:36,left:37,up:38,right:39,down:40},this.bindHandlers(),this.$button.click(function(t){return g(this).hasClass("disabled")||("true"===s.$calendar.attr("aria-hidden")?(s.initializeDate(),s.show()):s.hide(),s.selectGridCell(s.$grid.attr("aria-activedescendant"))),t.stopPropagation(),!1}),this.$button.keydown(function(t){var e=t||event;if(e.keyCode==s.keys.enter||e.keyCode==s.keys.space)return g(this).trigger("click"),!1}),this.$calendar.on("blur",function(t){"false"===s.$calendar.attr("aria-hidden")&&s.hide()})};o.VERSION="2.1.10",o.DEFAULTS={firstDayOfWeek:Date.dp_locales.firstday_of_week,weekDayFormat:"short",startView:0,daysOfWeekDisabled:[],datesDisabled:[],isDateDisabled:null,isMonthDisabled:null,isYearDisabled:null,inputFormat:[Date.dp_locales.short_format],outputFormat:Date.dp_locales.short_format,titleFormat:Date.dp_locales.full_format,buttonTitle:Date.dp_locales.texts.buttonTitle,buttonLabel:Date.dp_locales.texts.buttonLabel,prevButtonLabel:Date.dp_locales.texts.prevButtonLabel,prevMonthButtonLabel:Date.dp_locales.texts.prevMonthButtonLabel,prevYearButtonLabel:Date.dp_locales.texts.prevYearButtonLabel,nextButtonLabel:Date.dp_locales.texts.nextButtonLabel,nextMonthButtonLabel:Date.dp_locales.texts.nextMonthButtonLabel,nextYearButtonLabel:Date.dp_locales.texts.nextYearButtonLabel,changeMonthButtonLabel:Date.dp_locales.texts.changeMonthButtonLabel,changeYearButtonLabel:Date.dp_locales.texts.changeYearButtonLabel,changeRangeButtonLabel:Date.dp_locales.texts.changeRangeButtonLabel,closeButtonTitle:Date.dp_locales.texts.closeButtonTitle,closeButtonLabel:Date.dp_locales.texts.closeButtonLabel,onUpdate:function(t){},previous:null,next:null,theme:"default",modal:!1,inline:!1,gainFocusOnConstruction:!1,min:null,max:null},o.prototype.initializeDate=function(){var t=this.$target.val(),e=""===t?new Date:this.parseDate(t);this.setDate(e,!0)},o.prototype.getDate=function(){var t=this.$target.val();return""===t?new Date:this.parseDate(t)},o.prototype.setDate=function(t,e){switch(this.dateObj=t,e=void 0!==e&&e,null==this.dateObj&&(this.$target.attr("aria-invalid",!0),this.$target.parents(".form-group").addClass("has-error"),this.dateObj=new Date,this.dateObj.setHours(0,0,0,0)),null!=this.options.min&&this.dateObj<this.options.min?(this.$target.attr("aria-invalid",!0),this.$target.parents(".form-group").addClass("has-error"),this.dateObj=this.options.min):null!=this.options.max&&this.dateObj>this.options.max&&(this.$target.attr("aria-invalid",!0),this.$target.parents(".form-group").addClass("has-error"),this.dateObj=this.options.max),e&&""==this.$target.val()||this.$target.val(this.format(this.dateObj)),this.curYear=this.dateObj.getFullYear(),this.year=this.curYear,this.curMonth=this.dateObj.getMonth(),this.month=this.curMonth,this.date=this.dateObj.getDate(),this.options.startView){case 1:this.populateMonthsCalendar(),this.$grid.attr("aria-activedescendant",this.$grid.find(".curMonth").attr("id"));break;case 2:this.populateYearsCalendar(),this.$grid.attr("aria-activedescendant",this.$grid.find(".curYear").attr("id"));break;default:this.populateDaysCalendar(),this.$grid.attr("aria-activedescendant",this.$grid.find(".curDay").attr("id"))}},o.prototype.drawCalendarHeader=function(){for(var t=this.$grid.find("th.datepicker-day"),e=this.options.firstDayOfWeek,a=0;a<7;a++)t.eq(a).attr("aria-label",this.locales.day_names[e]),t.children("abbr").eq(a).attr("title",this.locales.day_names[e]).text("short"===this.options.weekDayFormat?this.locales.day_names_short[e]:this.locales.day_names_narrow[e]),e=(e+1)%7},o.prototype.populateDaysCalendar=function(){this.$calendar.find(".datepicker-bn-prev-label").html(this.options.prevButtonLabel),this.$calendar.find(".datepicker-bn-next-label").html(this.options.nextButtonLabel),this.$calendar.find(".datepicker-bn-fast-prev-label").html(this.options.prevMonthButtonLabel),this.$calendar.find(".datepicker-bn-fast-next-label").html(this.options.nextMonthButtonLabel),null!=this.options.min&&(this.year-1<this.options.min.getFullYear()||this.year-1==this.options.min.getFullYear()&&this.month<this.options.min.getMonth())?(this.$fastprev.attr("title",""),this.$fastprev.addClass("disabled"),this.$fastprev.removeClass("enabled")):(this.$fastprev.attr("title",this.options.prevMonthButtonLabel),this.$fastprev.addClass("enabled"),this.$fastprev.removeClass("disabled"));var t=this.previousMonth(this.year,this.month);null!=this.options.min&&(t.year<this.options.min.getFullYear()||t.year==this.options.min.getFullYear()&&t.month<this.options.min.getMonth())?(this.$prev.attr("title",""),this.$prev.addClass("disabled"),this.$prev.removeClass("enabled")):(this.$prev.attr("title",this.options.prevButtonLabel),this.$prev.addClass("enabled"),this.$prev.removeClass("disabled")),this.$monthObj.attr("title",this.options.changeMonthButtonLabel);var e=this.nextMonth(this.year,this.month);null!=this.options.max&&(e.year>this.options.max.getFullYear()||e.year==this.options.max.getFullYear()&&e.month>this.options.max.getMonth())?(this.$next.attr("title",""),this.$next.addClass("disabled"),this.$next.removeClass("enabled")):(this.$next.attr("title",this.options.nextButtonLabel),this.$next.addClass("enabled"),this.$next.removeClass("disabled")),null!=this.options.max&&(this.year+1>this.options.max.getFullYear()||this.year+1==this.options.max.getFullYear()&&this.month>this.options.max.getMonth())?(this.$fastnext.attr("title",""),this.$fastnext.addClass("disabled"),this.$fastnext.removeClass("enabled")):(this.$fastnext.attr("title",this.options.nextMonthButtonLabel),this.$fastnext.addClass("enabled"),this.$fastnext.removeClass("disabled")),this.showObject(this.$fastprev),this.showObject(this.$fastnext);var a=this.getDaysInMonth(this.year,this.month),s=this.getDaysInMonth(t.year,t.month),i=new Date(this.year,this.month,1).getDay(),r=(this.options.firstDayOfWeek+6)%7,n=1,o=1;this.$monthObj.html(this.locales.month_names[this.month]+" "+this.year),this.showObject(this.$grid.find("thead"));for(var l='\t<tr id="row0-'+this.id+'" role="row">\n',h=0,d=this.options.firstDayOfWeek;d!=i;)h++,d=(d+1)%7;for(;0<h;h--)l+='\t\t<td class="empty">'+(s-h+1)+"</td>\n";var c=this.options.isYearDisabled&&this.options.isYearDisabled(this.year),p=this.options.isMonthDisabled&&this.options.isMonthDisabled(this.year,this.month+1);for(n=1;n<=a;n++){var u=new Date(this.year,this.month,n,0,0,0,0),f=this.formatDate(u,this.options.titleFormat),y=n==this.date&&this.month==this.curMonth&&this.year==this.curYear?" curDay":"";c||p?l+='\t\t<td id="cell'+n+"-"+this.id+'" class="day unselectable'+y+'"':-1<g.inArray(d,this.options.daysOfWeekDisabled)?l+='\t\t<td id="cell'+n+"-"+this.id+'" class="day unselectable'+y+'"':null!=this.options.min&&u<this.options.min?l+='\t\t<td id="cell'+n+"-"+this.id+'" class="day unselectable'+y+'"':null!=this.options.max&&u>this.options.max?l+='\t\t<td id="cell'+n+"-"+this.id+'" class="day unselectable'+y+'"':-1<g.inArray(this.format(u),this.options.datesDisabled)?l+='\t\t<td id="cell'+n+"-"+this.id+'" class="day unselectable'+y+'"':this.options.isDateDisabled&&this.options.isDateDisabled(u)?l+='\t\t<td id="cell'+n+"-"+this.id+'" class="day unselectable'+y+'"':l+='\t\t<td id="cell'+n+"-"+this.id+'" class="day selectable'+y+'"',l+=' data-value="'+n+'"',l+=' title="'+f+'"',l+=' aria-label="'+f+'"',l+=' headers="day'+d+"-header-"+this.id+'" role="gridcell" tabindex="-1" aria-selected="false">'+n,l+="</td>",d==r&&n<a&&(l+='\t</tr>\n\t<tr id="row'+o+"-"+this.id+'" role="row">\n',o++),n<a&&(d=(d+1)%7)}for(;d!=r;)l+='\t\t<td class="empty">'+ ++h+"</td>\n",d=(d+1)%7;l+="\t</tr>";var b=this.$grid.find("tbody");b.empty(),b.append(l),this.gridType=0},o.prototype.populateMonthsCalendar=function(){this.$calendar.find(".datepicker-bn-prev-label").html(this.options.prevMonthButtonLabel),this.$calendar.find(".datepicker-bn-next-label").html(this.options.nextMonthButtonLabel),this.hideObject(this.$fastprev),this.hideObject(this.$fastnext),null!=this.options.min&&this.year-1<this.options.min.getFullYear()?(this.$prev.attr("title",""),this.$prev.addClass("disabled"),this.$prev.removeClass("enabled")):(this.$prev.attr("title",this.options.prevMonthButtonLabel),this.$prev.addClass("enabled"),this.$prev.removeClass("disabled")),this.$monthObj.attr("title",this.options.changeYearButtonLabel),null!=this.options.max&&this.year+1>this.options.max.getFullYear()?(this.$next.attr("title",""),this.$next.addClass("disabled"),this.$next.removeClass("enabled")):(this.$next.attr("title",this.options.nextMonthButtonLabel),this.$next.addClass("enabled"),this.$next.removeClass("disabled"));var t=0,e=1,a=this.$grid.find("tbody");this.$monthObj.html(this.year),this.hideObject(this.$grid.find("thead")),a.empty(),g("#datepicker-err-msg-"+this.id).empty();var s='\t<tr id="row0-'+this.id+'" role="row">\n',i=this.options.isYearDisabled&&this.options.isYearDisabled(this.year);for(t=0;t<12;t++)i?s+='\t\t<td id="cell'+(t+1)+"-"+this.id+'" class="month unselectable"':t==this.month&&this.year==this.curYear?s+='\t\t<td id="cell'+(t+1)+"-"+this.id+'" class="month curMonth selectable"':null!=this.options.min&&(this.year<this.options.min.getFullYear()||this.year==this.options.min.getFullYear()&&t<this.options.min.getMonth())?s+='\t\t<td id="cell'+(t+1)+"-"+this.id+'" class="month unselectable"':null!=this.options.max&&(this.year>this.options.max.getFullYear()||this.year==this.options.max.getFullYear()&&t>this.options.max.getMonth())?s+='\t\t<td id="cell'+(t+1)+"-"+this.id+'" class="month unselectable"':this.options.isMonthDisabled&&this.options.isMonthDisabled(this.year,t+1)?s+='\t\t<td id="cell'+(t+1)+"-"+this.id+'" class="month unselectable"':s+='\t\t<td id="cell'+(t+1)+"-"+this.id+'" class="month selectable"',s+=' data-value="'+t+'"',s+=' title="'+this.locales.month_names[t]+" "+this.year+'"',s+=' aria-label="'+this.locales.month_names[t]+" "+this.year+'"',s+=' role="gridcell" tabindex="-1" aria-selected="false">'+this.locales.month_names_abbreviated[t],s+="</td>",3!=t&&7!=t||(s+='\t</tr>\n\t<tr id="row'+e+"-"+this.id+'" role="row">\n',e++);s+="\t</tr>",a.append(s),this.gridType=1},o.prototype.populateYearsCalendar=function(){this.$calendar.find(".datepicker-bn-prev-label").html(this.options.prevYearButtonLabel),this.$calendar.find(".datepicker-bn-next-label").html(this.options.nextYearButtonLabel),this.hideObject(this.$fastprev),this.hideObject(this.$fastnext),null!=this.options.min&&this.year-20<this.options.min.getFullYear()?(this.$prev.attr("title",""),this.$prev.addClass("disabled"),this.$prev.removeClass("enabled")):(this.$prev.attr("title",this.options.prevYearButtonLabel),this.$prev.addClass("enabled"),this.$prev.removeClass("disabled")),this.$monthObj.attr("title",this.options.changeRangeButtonLabel),null!=this.options.max&&this.year+20>this.options.max.getFullYear()?(this.$next.attr("title",""),this.$next.addClass("disabled"),this.$next.removeClass("enabled")):(this.$next.attr("title",this.options.nextYearButtonLabel),this.$next.addClass("enabled"),this.$next.removeClass("disabled"));var t=10*Math.floor(this.year/10),e=t+19,a=1,s=this.$grid.find("tbody");this.$monthObj.html(t+"-"+e),this.hideObject(this.$grid.find("thead")),s.empty(),g("#datepicker-err-msg-"+this.id).empty();for(var i='\t<tr id="row0-'+this.id+'" role="row">\n',r=t;r<=e;r++){r==this.year?i+='\t\t<td id="cell'+(r-t+1)+"-"+this.id+'" class="year curYear selectable"':null!=this.options.min&&r<this.options.min.getFullYear()?i+='\t\t<td id="cell'+(r-t+1)+"-"+this.id+'" class="year unselectable"':null!=this.options.max&&r>this.options.max.getFullYear()?i+='\t\t<td id="cell'+(r-t+1)+"-"+this.id+'" class="year unselectable"':this.options.isYearDisabled&&this.options.isYearDisabled(r)?i+='\t\t<td id="cell'+(r-t+1)+"-"+this.id+'" class="year unselectable"':i+='\t\t<td id="cell'+(r-t+1)+"-"+this.id+'" class="year selectable"',i+=' data-value="'+r+'"',i+=' title="'+r+'"',i+=' role="gridcell" tabindex="-1" aria-selected="false">'+r,i+="</td>";var n=r-t;4!=n&&9!=n&&14!=n||(i+='\t</tr>\n\t<tr id="row'+a+"-"+this.id+'" role="row">\n',a++)}i+="\t</tr>",s.append(i),this.gridType=2},o.prototype.showDaysOfPrevMonth=function(t){var e=this.previousMonth(this.year,this.month);if(null!=this.options.min&&(e.year<this.options.min.getFullYear()||e.year==this.options.min.getFullYear()&&e.month<this.options.min.getMonth()))return!1;if(this.month=e.month,this.year=e.year,this.populateDaysCalendar(),null!=t){var a="cell"+(this.getDaysInMonth(this.year,this.month)-t)+"-"+this.id;this.$grid.attr("aria-activedescendant",a),this.selectGridCell(a)}return!0},o.prototype.showDaysOfMonth=function(t){if(null!=this.options.min&&(this.year<this.options.min.getFullYear()||this.year==this.options.min.getFullYear()&&t<this.options.min.getMonth()))return!1;if(null!=this.options.max&&(this.year>this.options.max.getFullYear()||this.year==this.options.max.getFullYear()&&t>this.options.max.getMonth()))return!1;this.month=t,this.date=Math.min(this.date,this.getDaysInMonth(this.year,this.month)),this.populateDaysCalendar();var e=this.$grid.find("tbody td[data-value='"+this.date+"']");return this.selectGridCell(e.attr("id")),!0},o.prototype.showMonthsOfPrevYear=function(t){if(null!=this.options.min&&this.year-1<this.options.min.getFullYear())return!1;if(this.year--,this.populateMonthsCalendar(),null!=t){var e="cell"+(12-t)+"-"+this.id;this.$grid.attr("aria-activedescendant",e),this.selectGridCell(e)}return!0},o.prototype.showMonthsOfYear=function(t){if(null!=this.options.min&&t<this.options.min.getFullYear())return!1;if(null!=this.options.max&&t>this.options.max.getFullYear())return!1;this.year=t,this.populateMonthsCalendar();var e=this.$grid.find("tbody td[data-value='"+this.month+"']");return this.$grid.attr("aria-activedescendant",e.attr("id")),this.selectGridCell(e.attr("id")),!0},o.prototype.showYearsOfPrevRange=function(t){if(null!=this.options.min&&this.year-20<this.options.min.getFullYear())return!1;if(this.year-=20,this.populateYearsCalendar(),null!=t){var e="cell"+(20-t)+"-"+this.id;this.$grid.attr("aria-activedescendant",e),this.selectGridCell(e)}return!0},o.prototype.showDaysOfNextMonth=function(t){var e=this.nextMonth(this.year,this.month);if(null!=this.options.max&&(e.year>this.options.max.getFullYear()||e.year==this.options.max.getFullYear()&&e.month>this.options.max.getMonth()))return!1;if(this.month=e.month,this.year=e.year,this.populateDaysCalendar(),null!=t){var a="cell"+t+"-"+this.id;this.$grid.attr("aria-activedescendant",a),this.selectGridCell(a)}return!0},o.prototype.showMonthsOfNextYear=function(t){if(null!=this.options.max&&this.year+1>this.options.max.getFullYear())return!1;if(this.year++,this.populateMonthsCalendar(),null!=t){var e="cell"+t+"-"+this.id;this.$grid.attr("aria-activedescendant",e),this.selectGridCell(e)}return!0},o.prototype.showYearsOfNextRange=function(t){if(null!=this.options.max&&this.year+20>this.options.max.getFullYear())return!1;if(this.year+=20,this.populateYearsCalendar(),null!=t){var e="cell"+t+"-"+this.id;this.$grid.attr("aria-activedescendant",e),this.selectGridCell(e)}return!0},o.prototype.showDaysOfPrevYear=function(){return(null==this.options.min||!(this.year-1<this.options.min.getFullYear()||this.year-1==this.options.min.getFullYear()&&this.month<this.options.min.getMonth()))&&(this.year--,this.populateDaysCalendar(),!0)},o.prototype.showDaysOfNextYear=function(){return(null==this.options.max||!(this.year+1>this.options.max.getFullYear()||this.year+1==this.options.max.getFullYear()&&this.month>this.options.max.getMonth()))&&(this.year++,this.populateDaysCalendar(),!0)},o.prototype.bindHandlers=function(){var a=this;this.$fastprev.click(function(t){return a.handleFastPrevClick(t)}),this.$prev.click(function(t){return a.handlePrevClick(t)}),this.$next.click(function(t){return a.handleNextClick(t)}),this.$fastnext.click(function(t){return a.handleFastNextClick(t)}),this.$monthObj.click(function(t){return a.handleMonthClick(t)}),this.$monthObj.keydown(function(t){return a.handleMonthKeyDown(t)}),this.$fastprev.keydown(function(t){return a.handleFastPrevKeyDown(t)}),this.$prev.keydown(function(t){return a.handlePrevKeyDown(t)}),this.$next.keydown(function(t){return a.handleNextKeyDown(t)}),this.$fastnext.keydown(function(t){return a.handleFastNextKeyDown(t)}),1==this.options.modal&&(this.$close.click(function(t){return a.handleCloseClick(t)}),this.$close.keydown(function(t){return a.handleCloseKeyDown(t)})),this.$grid.keydown(function(t){return a.handleGridKeyDown(t)}),this.$grid.keypress(function(t){return a.handleGridKeyPress(t)}),this.$grid.focus(function(t){return a.handleGridFocus(t)}),this.$grid.blur(function(t){return a.handleGridBlur(t)}),this.$grid.delegate("td","click",function(t){return a.handleGridClick(this,t)}),this.$target.change(function(t){var e=a.parseDate(g(this).val());a.updateLinked(e)})},o.prototype.handleFastPrevClick=function(t){if(this.showDaysOfPrevYear()){var e=this.$grid.attr("aria-activedescendant");this.month!=this.curMonth||this.year!=this.curYear?(this.$grid.attr("aria-activedescendant","cell1-"+this.id),this.selectGridCell("cell1-"+this.id)):(this.$grid.attr("aria-activedescendant",e),this.selectGridCell(e))}return t.stopPropagation(),!1},o.prototype.handlePrevClick=function(t){var e=this.$grid.attr("aria-activedescendant");switch(this.gridType){case 0:(t.ctrlKey?this.showDaysOfPrevYear():this.showDaysOfPrevMonth())&&(this.month!=this.curMonth||this.year!=this.curYear?(this.$grid.attr("aria-activedescendant","cell1-"+this.id),this.selectGridCell("cell1-"+this.id)):(this.$grid.attr("aria-activedescendant",e),this.selectGridCell(e)));break;case 1:this.showMonthsOfPrevYear()&&(this.year!=this.curYear?(this.$grid.attr("aria-activedescendant","cell1-"+this.id),this.selectGridCell("cell1-"+this.id)):(this.$grid.attr("aria-activedescendant",e),this.selectGridCell(e)));break;case 2:this.showYearsOfPrevRange()&&(this.$grid.attr("aria-activedescendant","cell1-"+this.id),this.selectGridCell("cell1-"+this.id))}return t.stopPropagation(),!1},o.prototype.handleMonthClick=function(t){return this.changeGrid(t),t.stopPropagation(),!1},o.prototype.handleNextClick=function(t){var e=this.$grid.attr("aria-activedescendant");switch(this.gridType){case 0:(t.ctrlKey?this.showDaysOfNextYear():this.showDaysOfNextMonth())&&(this.month!=this.curMonth||this.year!=this.curYear?(this.$grid.attr("aria-activedescendant","cell1-"+this.id),this.selectGridCell("cell1-"+this.id)):(this.$grid.attr("aria-activedescendant",e),this.selectGridCell(e)));break;case 1:this.showMonthsOfNextYear()&&(this.year!=this.curYear?(this.$grid.attr("aria-activedescendant","cell1-"+this.id),this.selectGridCell("cell1-"+this.id)):(this.$grid.attr("aria-activedescendant",e),this.selectGridCell(e)));break;case 2:this.showYearsOfNextRange()&&(this.$grid.attr("aria-activedescendant","cell1-"+this.id),this.selectGridCell("cell1-"+this.id))}return t.stopPropagation(),!1},o.prototype.handleFastNextClick=function(t){if(this.showDaysOfNextYear()){var e=this.$grid.attr("aria-activedescendant");this.month!=this.curMonth||this.year!=this.curYear?(this.$grid.attr("aria-activedescendant","cell1-"+this.id),this.selectGridCell("cell1-"+this.id)):(this.$grid.attr("aria-activedescendant",e),this.selectGridCell(e))}return t.stopPropagation(),!1},o.prototype.handleCloseClick=function(t){return this.hide(),t.stopPropagation(),!1},o.prototype.handleFastPrevKeyDown=function(t){if(t.altKey)return!0;switch(t.keyCode){case this.keys.tab:return!(0!=this.options.modal&&!t.ctrlKey)||(t.shiftKey?this.$close.focus():this.$prev.focus(),t.stopPropagation(),!1);case this.keys.enter:case this.keys.space:return!(!t.shiftKey&&!t.ctrlKey)||(this.showDaysOfPrevYear(),t.stopPropagation(),!1);case this.keys.esc:return this.hide(),t.stopPropagation(),!1}return!0},o.prototype.handlePrevKeyDown=function(t){if(t.altKey)return!0;switch(t.keyCode){case this.keys.tab:return!(0!=this.options.modal&&!t.ctrlKey)||(t.shiftKey?0==this.gridType?this.$fastprev.focus():this.$close.focus():this.$monthObj.focus(),t.stopPropagation(),!1);case this.keys.enter:case this.keys.space:if(t.shiftKey)return!0;switch(this.gridType){case 0:t.ctrlKey?this.showDaysOfPrevYear():this.showDaysOfPrevMonth();break;case 1:this.showMonthsOfPrevYear();break;case 2:this.showYearsOfPrevRange()}return t.stopPropagation(),!1;case this.keys.esc:return this.hide(),t.stopPropagation(),!1}return!0},o.prototype.handleMonthKeyDown=function(t){if(t.altKey)return!0;switch(t.keyCode){case this.keys.tab:return!(0!=this.options.modal&&!t.ctrlKey)||(t.shiftKey?this.$prev.focus():this.$next.focus(),t.stopPropagation(),!1);case this.keys.enter:case this.keys.space:return this.changeGrid(t),t.stopPropagation(),!1;case this.keys.esc:return this.hide(),t.stopPropagation(),!1}return!0},o.prototype.handleNextKeyDown=function(t){if(t.altKey)return!0;switch(t.keyCode){case this.keys.tab:return!(0!=this.options.modal&&!t.ctrlKey)||(t.shiftKey?this.$monthObj.focus():0==this.gridType?this.$fastnext.focus():this.$grid.focus(),t.stopPropagation(),!1);case this.keys.enter:case this.keys.space:switch(this.gridType){case 0:t.ctrlKey?this.showDaysOfNextYear():this.showDaysOfNextMonth();break;case 1:this.showMonthsOfNextYear();break;case 2:this.showYearsOfNextRange()}return t.stopPropagation(),!1;case this.keys.esc:return this.hide(),t.stopPropagation(),!1}return!0},o.prototype.handleFastNextKeyDown=function(t){if(t.altKey)return!0;switch(t.keyCode){case this.keys.tab:return!(0!=this.options.modal&&!t.ctrlKey)||(t.shiftKey?this.$next.focus():this.$grid.focus(),t.stopPropagation(),!1);case this.keys.enter:case this.keys.space:return this.showDaysOfNextYear(),t.stopPropagation(),!1;case this.keys.esc:return this.hide(),t.stopPropagation(),!1}return!0},o.prototype.handleCloseKeyDown=function(t){if(t.altKey)return!0;switch(t.keyCode){case this.keys.tab:return!!t.ctrlKey||(t.shiftKey?this.$grid.focus():0==this.gridType?this.$fastprev.focus():this.$prev.focus(),t.stopPropagation(),!1);case this.keys.enter:case this.keys.esc:case this.keys.space:return!(!t.shiftKey&&!t.ctrlKey)||(this.hide(),t.stopPropagation(),!1)}return!0},o.prototype.handleGridKeyDown=function(t){var e=g("#"+this.$grid.attr("aria-activedescendant")),a=this.$grid.find("td.selectable"),s=this.$grid.find("tbody tr").eq(0).find("td").length;if(t.altKey&&t.keyCode!=this.keys.pageup&&t.keyCode!=this.keys.pagedown)return!0;switch(t.keyCode){case this.keys.tab:return 1==this.options.modal?t.shiftKey?0==this.gridType?this.$fastnext.focus():this.$next.focus():this.$close.focus():(this.hide(),this.handleTabOut(t)),t.stopPropagation(),!1;case this.keys.enter:case this.keys.space:if(t.ctrlKey)return!0;switch(this.gridType){case 0:this.update(),this.hide();break;case 1:this.showDaysOfMonth(parseInt(e.attr("data-value"),10));break;case 2:this.showMonthsOfYear(parseInt(e.attr("data-value"),10))}return t.stopPropagation(),!1;case this.keys.esc:return this.hide(),t.stopPropagation(),!1;case this.keys.left:case this.keys.right:if(t.keyCode==this.keys.left&&"LTR"===this.locales.directionality||t.keyCode==this.keys.right&&"RTL"===this.locales.directionality){if(t.ctrlKey||t.shiftKey)return!0;var i=null;if(0<=(n=a.index(e)-1))i=a.eq(n),this.unSelectGridCell(e.attr("id")),this.$grid.attr("aria-activedescendant",i.attr("id")),this.selectGridCell(i.attr("id"));else switch(this.gridType){case 0:this.showDaysOfPrevMonth(0);break;case 1:this.showMonthsOfPrevYear(0);break;case 2:this.showYearsOfPrevRange(0)}return t.stopPropagation(),!1}if(t.ctrlKey||t.shiftKey)return!0;var r=null;if((n=a.index(e)+1)<a.length)r=a.eq(n),this.unSelectGridCell(e.attr("id")),this.$grid.attr("aria-activedescendant",r.attr("id")),this.selectGridCell(r.attr("id"));else switch(this.gridType){case 0:this.showDaysOfNextMonth(1);break;case 1:this.showMonthsOfNextYear(1);break;case 2:this.showYearsOfNextRange(1)}return t.stopPropagation(),!1;case this.keys.up:if(t.ctrlKey||t.shiftKey)return!0;i=null;if(0<=(n=a.index(e)-s))i=a.eq(n),this.unSelectGridCell(e.attr("id")),this.$grid.attr("aria-activedescendant",i.attr("id")),this.selectGridCell(i.attr("id"));else switch(n=s-1-a.index(e),this.gridType){case 0:this.showDaysOfPrevMonth(n);break;case 1:this.showMonthsOfPrevYear(n);break;case 2:this.showYearsOfPrevRange(n)}return t.stopPropagation(),!1;case this.keys.down:if(t.ctrlKey||t.shiftKey)return!0;var n;r=null;if((n=a.index(e)+s)<a.length)r=a.eq(n),this.unSelectGridCell(e.attr("id")),this.$grid.attr("aria-activedescendant",r.attr("id")),this.selectGridCell(r.attr("id"));else switch(n=s+1-(a.length-a.index(e)),this.gridType){case 0:this.showDaysOfNextMonth(n);break;case 1:this.showMonthsOfNextYear(n);break;case 2:this.showYearsOfNextRange(n)}return t.stopPropagation(),!1;case this.keys.pageup:var o=this.$grid.attr("aria-activedescendant");if(t.shiftKey||t.ctrlKey)return!0;t.preventDefault();var l=!1;switch(this.gridType){case 0:t.altKey?(t.stopImmediatePropagation(),l=this.showDaysOfPrevYear()):l=this.showDaysOfPrevMonth();break;case 1:l=this.showMonthsOfPrevYear();break;case 2:l=this.showYearsOfPrevRange()}if(l)if(g("#"+o).attr("id")==c){var h=a.eq(a.length-1);this.$grid.attr("aria-activedescendant",h.attr("id")),this.selectGridCell(h.attr("id"))}else this.selectGridCell(o);return t.stopPropagation(),!1;case this.keys.pagedown:o=this.$grid.attr("aria-activedescendant");if(t.shiftKey||t.ctrlKey)return!0;t.preventDefault();l=!1;switch(this.gridType){case 0:t.altKey?(t.stopImmediatePropagation(),l=this.showDaysOfNextYear()):l=this.showDaysOfNextMonth();break;case 1:l=this.showMonthsOfNextYear();break;case 2:l=this.showYearsOfNextRange()}if(l)if(g("#"+o).attr("id")==c){h=a.eq(a.length-1);this.$grid.attr("aria-activedescendant",h.attr("id")),this.selectGridCell(h.attr("id"))}else this.selectGridCell(o);return t.stopPropagation(),!1;case this.keys.home:if(t.ctrlKey||t.shiftKey)return!0;var d=a.eq(0);return this.unSelectGridCell(e.attr("id")),this.$grid.attr("aria-activedescendant",d.attr("id")),this.selectGridCell(d.attr("id")),t.stopPropagation(),!1;case this.keys.end:if(t.ctrlKey||t.shiftKey)return!0;h=a.eq(a.length-1);return this.unSelectGridCell(e.attr("id")),this.$grid.attr("aria-activedescendant",h.attr("id")),this.selectGridCell(h.attr("id")),t.stopPropagation(),!1}return!0},o.prototype.handleGridKeyPress=function(t){if(t.altKey)return!0;switch(t.keyCode){case this.keys.tab:case this.keys.enter:case this.keys.space:case this.keys.esc:case this.keys.left:case this.keys.right:case this.keys.up:case this.keys.down:case this.keys.pageup:case this.keys.pagedown:case this.keys.home:case this.keys.end:return t.stopPropagation(),!1}return!0},o.prototype.handleGridClick=function(t,e){var a=g(t);if(a.is(".empty")||a.is(".unselectable"))return!0;switch(this.$grid.find(".focus").removeClass("focus").attr("aria-selected","false").attr("tabindex",-1),this.gridType){case 0:this.$grid.attr("aria-activedescendant",a.attr("id")),this.selectGridCell(a.attr("id")),this.update(),this.hide();break;case 1:this.showDaysOfMonth(parseInt(a.attr("data-value"),10));break;case 2:this.showMonthsOfYear(parseInt(a.attr("data-value"),10))}return e.stopPropagation(),!1},o.prototype.handleGridFocus=function(t){var e=this.$grid.attr("aria-activedescendant");if(g("#"+e).attr("id")==c){var a=this.$grid.find("td.selectable"),s=a.eq(a.length-1);this.$grid.attr("aria-activedescendant",s.attr("id")),this.selectGridCell(s.attr("id"))}else this.selectGridCell(e);return!0},o.prototype.handleGridBlur=function(t){return this.unSelectGridCell(this.$grid.attr("aria-activedescendant")),!0},o.prototype.handleTabOut=function(t){var e=g("body").find("input:visible,textarea:visible,select:visible"),a=e.index(this.$target);return-1<a&&a<e.length&&(t.shiftKey?0<a&&a--:a+1<e.length&&a++,e.eq(a).focus()),!0},o.prototype.changeGrid=function(t){switch(this.gridType){case 0:if(this.populateMonthsCalendar(),this.year!=this.curYear){var e=this.$grid.find("td.selectable");this.$grid.attr("aria-activedescendant",e.eq(0).attr("id"))}else this.$grid.attr("aria-activedescendant",this.$grid.find(".curMonth").attr("id"));this.selectGridCell(this.$grid.attr("aria-activedescendant"));break;case 2:t.shiftKey?this.year-=20:this.year+=20;case 1:if(this.populateYearsCalendar(),this.year!=this.curYear){e=this.$grid.find("td.selectable");this.$grid.attr("aria-activedescendant",e.eq(0).attr("id"))}else this.$grid.attr("aria-activedescendant",this.$grid.find(".curYear").attr("id"));this.selectGridCell(this.$grid.attr("aria-activedescendant"))}return!0},o.prototype.selectGridCell=function(t){g("#"+t).addClass("focus").attr("aria-selected","true").attr("tabindex",0).focus()},o.prototype.unSelectGridCell=function(t){g("#"+t).removeClass("focus").attr("aria-selected","false").attr("tabindex",-1)},o.prototype.update=function(){var t=g("#"+this.$grid.attr("aria-activedescendant")),e=new Date(this.year,this.month,parseInt(t.attr("data-value"),10)),a=this.formatDate(e,this.options.outputFormat);this.$target.val(a),this.$target.removeAttr("aria-invalid"),this.$target.parents(".form-group").removeClass("has-error"),this.$target.trigger("change"),this.options.onUpdate&&this.options.onUpdate(a)},o.prototype.updateLinked=function(t){if(null!==this.options.previous&&""!==this.options.previous.val()&&t<this.options.previous.datepicker("getDate")){var e=this.formatDate(t,this.options.previous.datepicker("outputFormat"));this.options.previous.val(e)}if(null!==this.options.next&&""!==this.options.next.val()&&this.options.next.datepicker("getDate")<t){var a=this.formatDate(t,this.options.next.datepicker("outputFormat"));this.options.next.val(a)}},o.prototype.hideObject=function(t){t.attr("aria-hidden",!0),t.hide()},o.prototype.showObject=function(t){t.attr("aria-hidden",!1),t.show()},o.prototype.show=function(){var a=this;if(g(".datepicker-calendar").trigger("ab.datepicker.opening",[a.id]),1==this.options.modal){this.modalEventHandler||(this.modalEventHandler=function(t){return a.$grid.focus(),t.stopPropagation,!1}),g(document).on("click mousedown mouseup",this.modalEventHandler),this.greyOut(!0);var t=parseInt(g("#datepicker-overlay").css("z-index"),10)||40;this.$calendar.css("z-index",t+1)}else g(document).on("click",g.proxy(this.handleDocumentClick,this)),this.$calendar.on("ab.datepicker.opening",function(t,e){e!=a.id?a.hide():a.$grid.focus()});this.$calendar.on("ab.datepicker.opened",function(t,e){e==a.id&&a.$grid.focus()});var e=Math.max(0,Math.floor(this.$group.offset().top-this.$label.offset().top)),s=Math.max(0,Math.floor(this.$group.offset().left-this.$label.offset().left)),i=parseInt(this.$calendar.parent().css("padding-left"),10),r=this.$calendar.outerHeight(),n=this.$group.offset().top,o=(this.$group.offset().left,this.$group.outerHeight(!0)),l=Math.floor(n-g(window).scrollTop()),h=Math.floor(g(window).height()-(n+o-g(window).scrollTop()));h<r&&h<l?(this.$calendar.addClass("above"),this.$calendar.css({top:e-r+"px",left:s+i+"px"})):(this.$calendar.addClass("below"),this.$calendar.css({top:o+e+"px",left:s+i+"px"})),this.$calendar.attr("aria-hidden","false"),this.$calendar.fadeIn(),g(".datepicker-calendar").trigger("ab.datepicker.opened",[a.id])},o.prototype.refresh=function(){switch(this.drawCalendarHeader(),this.gridType){case 0:this.populateDaysCalendar();break;case 1:this.populateMonthsCalendar();break;case 2:this.populateYearsCalendar()}},o.prototype.handleDocumentClick=function(t){return 0==g(t.target).parents("#datepicker-calendar-"+this.id).length?(this.hide(),!0):(this.$grid.focus(),t.stopPropagation,!1)},o.prototype.hide=function(t){if(0==this.options.inline){1==this.options.modal?(this.modalEventHandler&&g(document).off("click mousedown mouseup",this.modalEventHandler),this.greyOut(!1)):(g(document).off("click",this.handleDocumentClick),this.$calendar.off("ab.datepicker.opening")),this.$calendar.removeClass("above below"),this.$calendar.attr("aria-hidden","true"),this.$calendar.fadeOut(),g(".datepicker-calendar").trigger("ab.datepicker.closed",[this.id]),t||this.$target.focus()}},o.prototype.greyOut=function(t){var e=g("#datepicker-overlay");0==e.length&&t&&(g("body").append('<div id="datepicker-overlay" class="datepicker-overlay"></div>'),e=g("#datepicker-overlay")),t?e.fadeIn(500):e.fadeOut(500)},o.prototype.absolutePosition=function(t){var e=0,a=0;if(t.getBoundingClientRect){var s=t.getBoundingClientRect(),i=document.body,r=document.documentElement,n=window.pageYOffset||r.scrollTop||i.scrollTop,o=window.pageXOffset||r.scrollLeft||i.scrollLeft,l=r.clientTop||i.clientTop||0,h=r.clientLeft||i.clientLeft||0;e=Math.round(s.top+n-l),a=Math.round(s.left+o-h)}else for(;t;)e+=parseInt(t.offsetTop,10),a+=parseInt(t.offsetLeft,10),t=t.offsetParent;return{top:e,left:a}},o.prototype.getDaysInMonth=function(t,e){return 32-new Date(t,e,32).getDate()},o.prototype.previousMonth=function(t,e){return 0==e?(e=11,t--):e--,{year:t,month:e}},o.prototype.nextMonth=function(t,e){return 11==e?(e=0,t++):e++,{year:t,month:e}},o.prototype.formatDate=function(t,e){var a,s,i,r,n,o=function(t){return(t<0||9<t?"":"0")+t},l=function(t){var e=new Date(t.getTime());return e.setHours(0),t-e},h=t.getFullYear()+"",d=t.getMonth()+1,c=t.getDate(),p=(a=t,s=new Date(a.getFullYear(),0,0),Math.floor((a-s)/864e5)),u=t.getDay(),f=t.getHours(),y=t.getMinutes(),b=t.getSeconds(),m=(i=t,r=new Date(i.getFullYear(),0,1),Math.ceil(((i-r)/864e5+r.getDay()+1)/7)),g=(n=t,Math.ceil((n.getDate()-1-n.getDay())/7)),v=Math.floor(t.getDate()/7)+1,$=Math.ceil((t.getMonth()+1)/3),k=t.getFullYear()<1?0:1,D={y:""+h,yyyy:h,yy:h.substring(2,4),L:d,LL:o(d),LLL:this.locales.month_names_abbreviated[d-1],LLLL:this.locales.month_names[d-1],LLLLL:this.locales.month_names_narrow[d-1],M:d,MM:o(d),MMM:this.locales.month_names_abbreviated[d-1],MMMM:this.locales.month_names[d-1],MMMMM:this.locales.month_names_narrow[d-1],d:c,dd:o(c),D:p,DD:p,DDD:p,A:Math.round(l(t)*Math.pow(10,-2)),AA:Math.round(l(t)*Math.pow(10,-1)),AAA:Math.round(l(t)*Math.pow(10,0)),AAAA:Math.round(l(t)*Math.pow(10,1)),AAAAA:Math.round(l(t)*Math.pow(10,2)),AAAAAA:Math.round(l(t)*Math.pow(10,3)),E:this.locales.day_names_abbreviated[u],EE:this.locales.day_names_abbreviated[u],EEE:this.locales.day_names_abbreviated[u],EEEE:this.locales.day_names[u],EEEEE:this.locales.day_names_narrow[u],EEEEEE:this.locales.day_names_short[u],e:u,ee:u,eee:this.locales.day_names_abbreviated[u],eeee:this.locales.day_names[u],eeeee:this.locales.day_names_narrow[u],eeeeee:this.locales.day_names_short[u],c:u,cc:u,ccc:this.locales.day_names_abbreviated[u],cccc:this.locales.day_names[u],ccccc:this.locales.day_names_narrow[u],cccccc:this.locales.day_names_short[u],F:v,G:this.locales.era_names_abbreviated[k],GG:this.locales.era_names_abbreviated[k],GGG:this.locales.era_names_abbreviated[k],GGGG:this.locales.era_names[k],GGGGG:this.locales.era_names_narrow[k],Q:$,QQ:o($),QQQ:this.locales.quarter_names_abbreviated[$-1],QQQQ:this.locales.quarter_names[$-1],QQQQQ:this.locales.quarter_names_narrow[$-1],q:$,qq:o($),qqq:this.locales.quarter_names_abbreviated[$-1],qqqq:this.locales.quarter_names[$-1],qqqqq:this.locales.quarter_names_narrow[$-1],H:f,HH:o(f),h:0==f?12:12<f?f-12:f,hh:o(0==f?12:12<f?f-12:f),K:11<f?f-12:f,k:f+1,KK:o(11<f?f-12:f),kk:o(f+1),a:11<f?this.locales.day_periods.pm:this.locales.day_periods.am,m:y,mm:o(y),s:b,ss:o(b),w:m,ww:o(m),W:g};return e.replace(/('[^']+'|y{1,4}|L{1,5}|M{1,5}|c{1,6}|d{1,2}|D{1,3}|E{1,6}|e{1,6}|F{1,1}|G{1,5}|Q{1,5}|q{1,5}|H{1,2}|h{1,2}|K{1,2}|k{1,2}|m{1,2}|s{1,2}|w{1,2}|W{1,1}|A{1,6})/g,function(t){return"'"===t.charAt(0)?t.substr(1,t.length-2):D[t]||t})},o.prototype.createDateFromFormat=function(t,n){var o=function(t,e,a,s){for(var i=s;a<=i;i--){var r=t.substring(e,e+i);if(r.length<a)return null;if(/^\d+$/.test(r))return r}return null},l=function(t,e){for(var a=0;a<t.length;a++){var s=t[a];if(n.substring(e,e+s.length).toLowerCase()==s.toLowerCase())return s.length}return 0},h=0,e=new Date,d=e.getYear(),c=e.getMonth()+1,p=1,u=0,f=0,y=0,b="",m=this;if(g.each(t.match(/(.).*?\1*/g),function(t,e){switch(e){case"yyyy":null!=(d=o(n,h,4,4))&&(h+=d.length);break;case"yy":null!=(d=o(n,h,2,2))&&(h+=d.length);break;case"y":null!=(d=o(n,h,2,4))&&(h+=d.length);break;case"MMM":case"LLL":for(var a=c=0;a<m.locales.month_names_abbreviated.length;a++){var s=m.locales.month_names_abbreviated[a];if(n.substring(h,h+s.length).toLowerCase()==s.toLowerCase()){c=a+1,h+=s.length;break}}break;case"MMMM":case"LLLL":for(a=c=0;a<m.locales.month_names.length;a++){s=m.locales.month_names[a];if(n.substring(h,h+s.length).toLowerCase()==s.toLowerCase()){c=a+1,h+=s.length;break}}break;case"EEE":case"EE":case"E":case"eee":h+=l(m.locales.day_names_abbreviated,h);break;case"EEEE":case"eeee":case"cccc":h+=l(m.locales.day_names,h);break;case"EEEEEE":case"eeeeee":case"cccccc":h+=l(m.locales.day_names_short,h);break;case"MM":case"M":case"LL":case"L":if(null==(c=o(n,h,e.length,2))||c<1||12<c)return null;h+=c.length;break;case"dd":case"d":if(null==(p=o(n,h,e.length,2))||p<1||31<p)return null;h+=p.length;break;case"hh":case"h":if(null==(u=o(n,h,e.length,2))||u<1||12<u)return null;h+=u.length;break;case"HH":case"H":if(null==(u=o(n,h,e.length,2))||u<0||23<u)return null;h+=u.length;break;case"KK":case"K":if(null==(u=o(n,h,e.length,2))||u<0||11<u)return null;h+=u.length;break;case"kk":case"k":if(null==(u=o(n,h,e.length,2))||u<1||24<u)return null;h+=u.length,u--;break;case"mm":case"m":if(null==(f=o(n,h,e.length,2))||f<0||59<f)return null;h+=f.length;break;case"ss":case"s":if(null==(y=o(n,h,e.length,2))||y<0||59<y)return null;h+=y.length;break;case"a":var i=m.locales.day_periods.am.length,r=m.locales.day_periods.pm.length;if(n.substring(h,h+i)==m.locales.day_periods.am)b="AM",h+=i;else{if(n.substring(h,h+r)!=m.locales.day_periods.pm)return null;b="PM",h+=r}break;default:if(n.substring(h,h+e.length)!=e)return null;h+=e.length}}),h!=n.length)return null;if(null==d)return null;if(2==d.length&&(d=50<d?d-0+1900:d-0+2e3),c<1||12<c)return null;if(2==c)if(d%4==0&&d%100!=0||d%400==0){if(29<p)return null}else if(28<p)return null;return(4==c||6==c||9==c||11==c)&&30<p?null:(u<12&&"PM"==b?u=u-0+12:11<u&&"AM"==b&&(u-=12),new Date(d,c-1,p,u,f,y))},o.prototype.parseDate=function(a){var s=null,i=this;return g.each(this.options.inputFormat,function(t,e){if(null!=(s=i.createDateFromFormat(e,a)))return!1}),null==s&&(s=i.createDateFromFormat(this.options.outputFormat,a)),s},o.prototype.min=function(t){return null!=t&&(this.options.min=t instanceof Date?t:this.parseDate(t),null!=this.options.min&&this.dateObj<this.options.min&&(this.$target.attr("aria-invalid",!0),this.$target.parents(".form-group").addClass("has-error"),this.dateObj=this.options.min),0!=this.options.inline&&this.refresh()),this.options.min},o.prototype.max=function(t){return null!=t&&(this.options.max=t instanceof Date?t:this.parseDate(t),null!=this.options.max&&this.dateObj>this.options.max&&(this.$target.attr("aria-invalid",!0),this.$target.parents(".form-group").addClass("has-error"),this.dateObj=this.options.max),0!=this.options.inline&&this.refresh()),this.options.max},o.prototype.theme=function(t){return null!=t&&(this.$button.removeClass(this.options.theme),this.$calendar.removeClass(this.options.theme),this.options.theme=t,this.$button.addClass(this.options.theme),this.$calendar.addClass(this.options.theme)),this.options.theme},o.prototype.firstDayOfWeek=function(t){return null!=t&&(this.options.firstDayOfWeek=parseInt(t,10),0==this.options.inline?this.drawCalendarHeader():this.refresh()),this.options.firstDayOfWeek},o.prototype.daysOfWeekDisabled=function(t){if(null!=t){this.options.daysOfWeekDisabled=[],g.isArray(t)||(t=[t]);var a=this;g.each(t,function(t,e){"number"==typeof e?a.options.daysOfWeekDisabled.push(e):"string"==typeof e&&a.options.daysOfWeekDisabled.push(parseInt(e,10))})}return this.options.daysOfWeekDisabled},o.prototype.weekDayFormat=function(t){return null!=t&&(this.options.weekDayFormat=t,this.drawCalendarHeader()),this.options.weekDayFormat},o.prototype.inputFormat=function(t){return null!=t&&(g.isArray(t)||(t=[t]),this.$target.attr("placeholder")==this.options.inputFormat[0]&&this.$target.attr("placeholder",t[0]),this.options.inputFormat=t),this.options.inputFormat},o.prototype.outputFormat=function(t){return null!=t&&(this.options.outputFormat=t),this.options.outputFormat},o.prototype.modal=function(t){if(null!=t)if(this.options.modal=t,1==this.options.modal){0==this.options.inline&&(this.showObject(this.$calendar.find(".datepicker-close-wrap")),this.showObject(this.$calendar.find(".datepicker-bn-close-label"))),this.$close=this.$calendar.find(".datepicker-close"),this.$close.html(this.options.closeButtonTitle).attr("title",this.options.closeButtonLabel),this.$calendar.find(".datepicker-bn-close-label").html(this.options.closeButtonLabel);var e=this;this.$close.click(function(t){return e.handleCloseClick(t)}),this.$close.keydown(function(t){return e.handleCloseKeyDown(t)})}else this.hideObject(this.$calendar.find(".datepicker-close-wrap")),this.hideObject(this.$calendar.find(".datepicker-bn-close-label"));return this.options.modal},o.prototype.inline=function(t){null!=t&&(0!=t?(this.hideObject(this.$button),this.hideObject(this.$calendar.find(".datepicker-close-wrap")),this.hideObject(this.$calendar.find(".datepicker-bn-close-label")),("string"==typeof t?g("#"+t):t).append(this.$calendar),this.$calendar.css({position:"relative",left:"0px",top:"0px"}),this.options.inline=t,this.initializeDate(),this.showObject(this.$calendar)):(this.$target.parent().after(this.$calendar),this.showObject(this.$button),1==this.options.modal&&(this.showObject(this.$calendar.find(".datepicker-close-wrap")),this.showObject(this.$calendar.find(".datepicker-bn-close-label"))),"static"===this.$calendar.parent().css("position")&&this.$calendar.parent().css("position","relative"),this.$calendar.css({position:"absolute"}),this.options.inline=t,this.hide()));return this.options.inline},o.prototype.format=function(t){return this.formatDate(t,this.options.outputFormat)},o.prototype.enable=function(){this.$button.removeClass("disabled"),this.$button.attr("aria-disabled",!1),this.$button.attr("tabindex",0)},o.prototype.disable=function(){this.hide(),this.$button.addClass("disabled"),this.$button.attr("aria-disabled",!0),this.$button.attr("tabindex",-1)},o.prototype.datesDisabled=function(t){this.options.datesDisabled=[],g.isArray(t)||(t=[t]);var s=this;g.each(t,function(t,e){if("string"==typeof e){var a=s.parseDate(e);null!==a&&s.options.datesDisabled.push(s.format(a))}else e instanceof Date&&!isNaN(e.valueOf())&&s.options.datesDisabled.push(s.format(e))})},o.prototype.startview=function(t){switch(t){case 1:case"months":this.options.startView=1;break;case 2:case"years":this.options.startView=2;break;default:this.options.startView=0}},o.prototype.setLocales=function(t){this.locales=t,this.options.inputFormat=[this.locales.short_format],this.options.outputFormat=this.locales.short_format,this.options.titleFormat=this.locales.full_format,this.options.firstDayOfWeek=this.locales.firstday_of_week,this.options.buttonTitle=this.locales.texts.buttonTitle,this.$button.find("span").attr("title",this.options.buttonTitle),this.options.buttonLabel=this.locales.texts.buttonLabel,this.options.prevButtonLabel=this.locales.texts.prevButtonLabel,this.options.prevMonthButtonLabel=this.locales.texts.prevMonthButtonLabel,this.options.prevYearButtonLabel=this.locales.texts.prevYearButtonLabel,this.options.nextButtonLabel=this.locales.texts.nextButtonLabel,this.options.nextMonthButtonLabel=this.locales.texts.nextMonthButtonLabel,this.options.nextYearButtonLabel=this.locales.texts.nextYearButtonLabel,this.options.changeMonthButtonLabel=this.locales.texts.changeMonthButtonLabel,this.options.changeYearButtonLabel=this.locales.texts.changeYearButtonLabel,this.options.changeRangeButtonLabel=this.locales.texts.changeRangeButtonLabel,this.options.closeButtonTitle=this.locales.texts.closeButtonTitle,this.options.closeButtonLabel=this.locales.texts.closeButtonLabel,this.options.calendarHelp=this.locales.texts.calendarHelp,this.drawCalendarHeader(),"RTL"===this.locales.directionality?this.$grid.addClass("rtl"):this.$grid.removeClass("rtl")};var t=g.fn.datepicker;g.fn.datepicker=function(s,i){if("string"!=typeof s||1!=g(this).length)return this.each(function(){var t=g(this),e=t.data("ab.datepicker"),a=g.extend({},o.DEFAULTS,t.data(),"object"==typeof s&&s);e||t.data("ab.datepicker",e=new o(this,a)),"string"==typeof s&&e[s](i)});var t=g(this).eq(0).data("ab.datepicker");return t?t[s](i):void 0},g.fn.datepicker.Constructor=o,g.fn.datepicker.noConflict=function(){return g.fn.datepicker=t,this}});
-
-/***/ }),
-/* 6 */
-/***/ (function(module, exports) {
-
-/*!
- * Font Awesome Free 5.2.0 by @fontawesome - https://fontawesome.com
- * License - https://fontawesome.com/license (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
- */
-(function () {
-'use strict';
-
-var noop = function noop() {};
-
-var _WINDOW = {};
-var _DOCUMENT = {};
-var _MUTATION_OBSERVER$1 = null;
-var _PERFORMANCE = { mark: noop, measure: noop };
-
-try {
-  if (typeof window !== 'undefined') _WINDOW = window;
-  if (typeof document !== 'undefined') _DOCUMENT = document;
-  if (typeof MutationObserver !== 'undefined') _MUTATION_OBSERVER$1 = MutationObserver;
-  if (typeof performance !== 'undefined') _PERFORMANCE = performance;
-} catch (e) {}
-
-var _ref = _WINDOW.navigator || {};
-var _ref$userAgent = _ref.userAgent;
-var userAgent = _ref$userAgent === undefined ? '' : _ref$userAgent;
-
-var WINDOW = _WINDOW;
-var DOCUMENT = _DOCUMENT;
-var MUTATION_OBSERVER = _MUTATION_OBSERVER$1;
-var PERFORMANCE = _PERFORMANCE;
-var IS_BROWSER = !!WINDOW.document;
-var IS_DOM = !!DOCUMENT.documentElement && !!DOCUMENT.head && typeof DOCUMENT.addEventListener === 'function' && typeof DOCUMENT.createElement === 'function';
-var IS_IE = ~userAgent.indexOf('MSIE') || ~userAgent.indexOf('Trident/');
-
-var NAMESPACE_IDENTIFIER = '___FONT_AWESOME___';
-var UNITS_IN_GRID = 16;
-var DEFAULT_FAMILY_PREFIX = 'fa';
-var DEFAULT_REPLACEMENT_CLASS = 'svg-inline--fa';
-var DATA_FA_I2SVG = 'data-fa-i2svg';
-var DATA_FA_PSEUDO_ELEMENT = 'data-fa-pseudo-element';
-var DATA_PREFIX = 'data-prefix';
-var DATA_ICON = 'data-icon';
-var HTML_CLASS_I2SVG_BASE_CLASS = 'fontawesome-i2svg';
-var TAGNAMES_TO_SKIP_FOR_PSEUDOELEMENTS = ['HTML', 'HEAD', 'STYLE', 'SCRIPT'];
-var PRODUCTION = function () {
-  try {
-    return "production" === 'production';
-  } catch (e) {
-    return false;
-  }
-}();
-
-var oneToTen = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-var oneToTwenty = oneToTen.concat([11, 12, 13, 14, 15, 16, 17, 18, 19, 20]);
-
-var ATTRIBUTES_WATCHED_FOR_MUTATION = ['class', 'data-prefix', 'data-icon', 'data-fa-transform', 'data-fa-mask'];
-
-var RESERVED_CLASSES = ['xs', 'sm', 'lg', 'fw', 'ul', 'li', 'border', 'pull-left', 'pull-right', 'spin', 'pulse', 'rotate-90', 'rotate-180', 'rotate-270', 'flip-horizontal', 'flip-vertical', 'stack', 'stack-1x', 'stack-2x', 'inverse', 'layers', 'layers-text', 'layers-counter'].concat(oneToTen.map(function (n) {
-  return n + 'x';
-})).concat(oneToTwenty.map(function (n) {
-  return 'w-' + n;
-}));
-
-var classCallCheck = function (instance, Constructor) {
-  if (!(instance instanceof Constructor)) {
-    throw new TypeError("Cannot call a class as a function");
-  }
-};
-
-var createClass = function () {
-  function defineProperties(target, props) {
-    for (var i = 0; i < props.length; i++) {
-      var descriptor = props[i];
-      descriptor.enumerable = descriptor.enumerable || false;
-      descriptor.configurable = true;
-      if ("value" in descriptor) descriptor.writable = true;
-      Object.defineProperty(target, descriptor.key, descriptor);
-    }
-  }
-
-  return function (Constructor, protoProps, staticProps) {
-    if (protoProps) defineProperties(Constructor.prototype, protoProps);
-    if (staticProps) defineProperties(Constructor, staticProps);
-    return Constructor;
-  };
-}();
-
-
-
-var _extends = Object.assign || function (target) {
-  for (var i = 1; i < arguments.length; i++) {
-    var source = arguments[i];
-
-    for (var key in source) {
-      if (Object.prototype.hasOwnProperty.call(source, key)) {
-        target[key] = source[key];
-      }
-    }
-  }
-
-  return target;
-};
-
-
-
-var slicedToArray = function () {
-  function sliceIterator(arr, i) {
-    var _arr = [];
-    var _n = true;
-    var _d = false;
-    var _e = undefined;
-
-    try {
-      for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
-        _arr.push(_s.value);
-
-        if (i && _arr.length === i) break;
-      }
-    } catch (err) {
-      _d = true;
-      _e = err;
-    } finally {
-      try {
-        if (!_n && _i["return"]) _i["return"]();
-      } finally {
-        if (_d) throw _e;
-      }
-    }
-
-    return _arr;
-  }
-
-  return function (arr, i) {
-    if (Array.isArray(arr)) {
-      return arr;
-    } else if (Symbol.iterator in Object(arr)) {
-      return sliceIterator(arr, i);
-    } else {
-      throw new TypeError("Invalid attempt to destructure non-iterable instance");
-    }
-  };
-}();
-
-var toConsumableArray = function (arr) {
-  if (Array.isArray(arr)) {
-    for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) arr2[i] = arr[i];
-
-    return arr2;
-  } else {
-    return Array.from(arr);
-  }
-};
-
-var initial = WINDOW.FontAwesomeConfig || {};
-
-function getAttrConfig(attr) {
-  var element = DOCUMENT.querySelector('script[' + attr + ']');
-
-  if (element) {
-    return element.getAttribute(attr);
-  }
-}
-
-function coerce(val) {
-  // Getting an empty string will occur if the attribute is set on the HTML tag but without a value
-  // We'll assume that this is an indication that it should be toggled to true
-  // For example <script data-search-pseudo-elements src="..."></script>
-  if (val === '') return true;
-  if (val === 'false') return false;
-  if (val === 'true') return true;
-  return val;
-}
-
-if (DOCUMENT && typeof DOCUMENT.querySelector === 'function') {
-  var attrs = [['data-family-prefix', 'familyPrefix'], ['data-replacement-class', 'replacementClass'], ['data-auto-replace-svg', 'autoReplaceSvg'], ['data-auto-add-css', 'autoAddCss'], ['data-auto-a11y', 'autoA11y'], ['data-search-pseudo-elements', 'searchPseudoElements'], ['data-observe-mutations', 'observeMutations'], ['data-keep-original-source', 'keepOriginalSource'], ['data-measure-performance', 'measurePerformance'], ['data-show-missing-icons', 'showMissingIcons']];
-
-  attrs.forEach(function (_ref) {
-    var _ref2 = slicedToArray(_ref, 2),
-        attr = _ref2[0],
-        key = _ref2[1];
-
-    var val = coerce(getAttrConfig(attr));
-
-    if (val !== undefined && val !== null) {
-      initial[key] = val;
-    }
-  });
-}
-
-var _default = _extends({
-  familyPrefix: DEFAULT_FAMILY_PREFIX,
-  replacementClass: DEFAULT_REPLACEMENT_CLASS,
-  autoReplaceSvg: true,
-  autoAddCss: true,
-  autoA11y: true,
-  searchPseudoElements: false,
-  observeMutations: true,
-  keepOriginalSource: true,
-  measurePerformance: false,
-  showMissingIcons: true
-}, initial);
-
-if (!_default.autoReplaceSvg) _default.observeMutations = false;
-
-var config = _extends({}, _default);
-
-WINDOW.FontAwesomeConfig = config;
-
-var w = WINDOW || {};
-
-if (!w[NAMESPACE_IDENTIFIER]) w[NAMESPACE_IDENTIFIER] = {};
-if (!w[NAMESPACE_IDENTIFIER].styles) w[NAMESPACE_IDENTIFIER].styles = {};
-if (!w[NAMESPACE_IDENTIFIER].hooks) w[NAMESPACE_IDENTIFIER].hooks = {};
-if (!w[NAMESPACE_IDENTIFIER].shims) w[NAMESPACE_IDENTIFIER].shims = [];
-
-var namespace = w[NAMESPACE_IDENTIFIER];
-
-var functions = [];
-var listener = function listener() {
-  DOCUMENT.removeEventListener('DOMContentLoaded', listener);
-  loaded = 1;
-  functions.map(function (fn) {
-    return fn();
-  });
-};
-
-var loaded = false;
-
-if (IS_DOM) {
-  loaded = (DOCUMENT.documentElement.doScroll ? /^loaded|^c/ : /^loaded|^i|^c/).test(DOCUMENT.readyState);
-
-  if (!loaded) DOCUMENT.addEventListener('DOMContentLoaded', listener);
-}
-
-var domready = function (fn) {
-  if (!IS_DOM) return;
-  loaded ? setTimeout(fn, 0) : functions.push(fn);
-};
-
-var d = UNITS_IN_GRID;
-
-var meaninglessTransform = {
-  size: 16,
-  x: 0,
-  y: 0,
-  rotate: 0,
-  flipX: false,
-  flipY: false
-};
-
-function isReserved(name) {
-  return ~RESERVED_CLASSES.indexOf(name);
-}
-
-function bunker(fn) {
-  try {
-    fn();
-  } catch (e) {
-    if (!PRODUCTION) {
-      throw e;
-    }
-  }
-}
-
-function insertCss(css) {
-  if (!css || !IS_DOM) {
-    return;
-  }
-
-  var style = DOCUMENT.createElement('style');
-  style.setAttribute('type', 'text/css');
-  style.innerHTML = css;
-
-  var headChildren = DOCUMENT.head.childNodes;
-  var beforeChild = null;
-
-  for (var i = headChildren.length - 1; i > -1; i--) {
-    var child = headChildren[i];
-    var tagName = (child.tagName || '').toUpperCase();
-    if (['STYLE', 'LINK'].indexOf(tagName) > -1) {
-      beforeChild = child;
-    }
-  }
-
-  DOCUMENT.head.insertBefore(style, beforeChild);
-
-  return css;
-}
-
-var _uniqueId = 0;
-
-function nextUniqueId() {
-  _uniqueId++;
-
-  return _uniqueId;
-}
-
-function toArray(obj) {
-  var array = [];
-
-  for (var i = (obj || []).length >>> 0; i--;) {
-    array[i] = obj[i];
-  }
-
-  return array;
-}
-
-function classArray(node) {
-  if (node.classList) {
-    return toArray(node.classList);
-  } else {
-    return (node.getAttribute('class') || '').split(' ').filter(function (i) {
-      return i;
-    });
-  }
-}
-
-function getIconName(familyPrefix, cls) {
-  var parts = cls.split('-');
-  var prefix = parts[0];
-  var iconName = parts.slice(1).join('-');
-
-  if (prefix === familyPrefix && iconName !== '' && !isReserved(iconName)) {
-    return iconName;
-  } else {
-    return null;
-  }
-}
-
-function htmlEscape(str) {
-  return ('' + str).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/'/g, '&#39;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-}
-
-function joinAttributes(attributes) {
-  return Object.keys(attributes || {}).reduce(function (acc, attributeName) {
-    return acc + (attributeName + '="' + htmlEscape(attributes[attributeName]) + '" ');
-  }, '').trim();
-}
-
-function joinStyles(styles) {
-  return Object.keys(styles || {}).reduce(function (acc, styleName) {
-    return acc + (styleName + ': ' + styles[styleName] + ';');
-  }, '');
-}
-
-function transformIsMeaningful(transform) {
-  return transform.size !== meaninglessTransform.size || transform.x !== meaninglessTransform.x || transform.y !== meaninglessTransform.y || transform.rotate !== meaninglessTransform.rotate || transform.flipX || transform.flipY;
-}
-
-function transformForSvg(_ref) {
-  var transform = _ref.transform,
-      containerWidth = _ref.containerWidth,
-      iconWidth = _ref.iconWidth;
-
-  var outer = {
-    transform: 'translate(' + containerWidth / 2 + ' 256)'
-  };
-  var innerTranslate = 'translate(' + transform.x * 32 + ', ' + transform.y * 32 + ') ';
-  var innerScale = 'scale(' + transform.size / 16 * (transform.flipX ? -1 : 1) + ', ' + transform.size / 16 * (transform.flipY ? -1 : 1) + ') ';
-  var innerRotate = 'rotate(' + transform.rotate + ' 0 0)';
-  var inner = {
-    transform: innerTranslate + ' ' + innerScale + ' ' + innerRotate
-  };
-  var path = {
-    transform: 'translate(' + iconWidth / 2 * -1 + ' -256)'
-  };
-  return {
-    outer: outer,
-    inner: inner,
-    path: path
-  };
-}
-
-function transformForCss(_ref2) {
-  var transform = _ref2.transform,
-      _ref2$width = _ref2.width,
-      width = _ref2$width === undefined ? UNITS_IN_GRID : _ref2$width,
-      _ref2$height = _ref2.height,
-      height = _ref2$height === undefined ? UNITS_IN_GRID : _ref2$height,
-      _ref2$startCentered = _ref2.startCentered,
-      startCentered = _ref2$startCentered === undefined ? false : _ref2$startCentered;
-
-  var val = '';
-
-  if (startCentered && IS_IE) {
-    val += 'translate(' + (transform.x / d - width / 2) + 'em, ' + (transform.y / d - height / 2) + 'em) ';
-  } else if (startCentered) {
-    val += 'translate(calc(-50% + ' + transform.x / d + 'em), calc(-50% + ' + transform.y / d + 'em)) ';
-  } else {
-    val += 'translate(' + transform.x / d + 'em, ' + transform.y / d + 'em) ';
-  }
-
-  val += 'scale(' + transform.size / d * (transform.flipX ? -1 : 1) + ', ' + transform.size / d * (transform.flipY ? -1 : 1) + ') ';
-  val += 'rotate(' + transform.rotate + 'deg) ';
-
-  return val;
-}
-
-var ALL_SPACE = {
-  x: 0,
-  y: 0,
-  width: '100%',
-  height: '100%'
-};
-
-var makeIconMasking = function (_ref) {
-  var children = _ref.children,
-      attributes = _ref.attributes,
-      main = _ref.main,
-      mask = _ref.mask,
-      transform = _ref.transform;
-  var mainWidth = main.width,
-      mainPath = main.icon;
-  var maskWidth = mask.width,
-      maskPath = mask.icon;
-
-
-  var trans = transformForSvg({ transform: transform, containerWidth: maskWidth, iconWidth: mainWidth });
-
-  var maskRect = {
-    tag: 'rect',
-    attributes: _extends({}, ALL_SPACE, {
-      fill: 'white'
-    })
-  };
-  var maskInnerGroup = {
-    tag: 'g',
-    attributes: _extends({}, trans.inner),
-    children: [{ tag: 'path', attributes: _extends({}, mainPath.attributes, trans.path, { fill: 'black' }) }]
-  };
-  var maskOuterGroup = {
-    tag: 'g',
-    attributes: _extends({}, trans.outer),
-    children: [maskInnerGroup]
-  };
-  var maskId = 'mask-' + nextUniqueId();
-  var clipId = 'clip-' + nextUniqueId();
-  var maskTag = {
-    tag: 'mask',
-    attributes: _extends({}, ALL_SPACE, {
-      id: maskId,
-      maskUnits: 'userSpaceOnUse',
-      maskContentUnits: 'userSpaceOnUse'
-    }),
-    children: [maskRect, maskOuterGroup]
-  };
-  var defs = {
-    tag: 'defs',
-    children: [{ tag: 'clipPath', attributes: { id: clipId }, children: [maskPath] }, maskTag]
-  };
-
-  children.push(defs, { tag: 'rect', attributes: _extends({ fill: 'currentColor', 'clip-path': 'url(#' + clipId + ')', mask: 'url(#' + maskId + ')' }, ALL_SPACE) });
-
-  return {
-    children: children,
-    attributes: attributes
-  };
-};
-
-var makeIconStandard = function (_ref) {
-  var children = _ref.children,
-      attributes = _ref.attributes,
-      main = _ref.main,
-      transform = _ref.transform,
-      styles = _ref.styles;
-
-  var styleString = joinStyles(styles);
-
-  if (styleString.length > 0) {
-    attributes['style'] = styleString;
-  }
-
-  if (transformIsMeaningful(transform)) {
-    var trans = transformForSvg({ transform: transform, containerWidth: main.width, iconWidth: main.width });
-    children.push({
-      tag: 'g',
-      attributes: _extends({}, trans.outer),
-      children: [{
-        tag: 'g',
-        attributes: _extends({}, trans.inner),
-        children: [{
-          tag: main.icon.tag,
-          children: main.icon.children,
-          attributes: _extends({}, main.icon.attributes, trans.path)
-        }]
-      }]
-    });
-  } else {
-    children.push(main.icon);
-  }
-
-  return {
-    children: children,
-    attributes: attributes
-  };
-};
-
-var asIcon = function (_ref) {
-  var children = _ref.children,
-      main = _ref.main,
-      mask = _ref.mask,
-      attributes = _ref.attributes,
-      styles = _ref.styles,
-      transform = _ref.transform;
-
-  if (transformIsMeaningful(transform) && main.found && !mask.found) {
-    var width = main.width,
-        height = main.height;
-
-    var offset = {
-      x: width / height / 2,
-      y: 0.5
-    };
-    attributes['style'] = joinStyles(_extends({}, styles, {
-      'transform-origin': offset.x + transform.x / 16 + 'em ' + (offset.y + transform.y / 16) + 'em'
-    }));
-  }
-
-  return [{
-    tag: 'svg',
-    attributes: attributes,
-    children: children
-  }];
-};
-
-var asSymbol = function (_ref) {
-  var prefix = _ref.prefix,
-      iconName = _ref.iconName,
-      children = _ref.children,
-      attributes = _ref.attributes,
-      symbol = _ref.symbol;
-
-  var id = symbol === true ? prefix + '-' + config.familyPrefix + '-' + iconName : symbol;
-
-  return [{
-    tag: 'svg',
-    attributes: {
-      style: 'display: none;'
-    },
-    children: [{
-      tag: 'symbol',
-      attributes: _extends({}, attributes, { id: id }),
-      children: children
-    }]
-  }];
-};
-
-function makeInlineSvgAbstract(params) {
-  var _params$icons = params.icons,
-      main = _params$icons.main,
-      mask = _params$icons.mask,
-      prefix = params.prefix,
-      iconName = params.iconName,
-      transform = params.transform,
-      symbol = params.symbol,
-      title = params.title,
-      extra = params.extra,
-      _params$watchable = params.watchable,
-      watchable = _params$watchable === undefined ? false : _params$watchable;
-
-  var _ref = mask.found ? mask : main,
-      width = _ref.width,
-      height = _ref.height;
-
-  var widthClass = 'fa-w-' + Math.ceil(width / height * 16);
-  var attrClass = [config.replacementClass, iconName ? config.familyPrefix + '-' + iconName : '', widthClass].filter(function (c) {
-    return extra.classes.indexOf(c) === -1;
-  }).concat(extra.classes).join(' ');
-
-  var content = {
-    children: [],
-    attributes: _extends({}, extra.attributes, {
-      'data-prefix': prefix,
-      'data-icon': iconName,
-      'class': attrClass,
-      'role': 'img',
-      'xmlns': 'http://www.w3.org/2000/svg',
-      'viewBox': '0 0 ' + width + ' ' + height
-    })
-  };
-
-  if (watchable) {
-    content.attributes[DATA_FA_I2SVG] = '';
-  }
-
-  if (title) content.children.push({ tag: 'title', attributes: { id: content.attributes['aria-labelledby'] || 'title-' + nextUniqueId() }, children: [title] });
-
-  var args = _extends({}, content, {
-    prefix: prefix,
-    iconName: iconName,
-    main: main,
-    mask: mask,
-    transform: transform,
-    symbol: symbol,
-    styles: extra.styles
-  });
-
-  var _ref2 = mask.found && main.found ? makeIconMasking(args) : makeIconStandard(args),
-      children = _ref2.children,
-      attributes = _ref2.attributes;
-
-  args.children = children;
-  args.attributes = attributes;
-
-  if (symbol) {
-    return asSymbol(args);
-  } else {
-    return asIcon(args);
-  }
-}
-
-function makeLayersTextAbstract(params) {
-  var content = params.content,
-      width = params.width,
-      height = params.height,
-      transform = params.transform,
-      title = params.title,
-      extra = params.extra,
-      _params$watchable2 = params.watchable,
-      watchable = _params$watchable2 === undefined ? false : _params$watchable2;
-
-
-  var attributes = _extends({}, extra.attributes, title ? { 'title': title } : {}, {
-    'class': extra.classes.join(' ')
-  });
-
-  if (watchable) {
-    attributes[DATA_FA_I2SVG] = '';
-  }
-
-  var styles = _extends({}, extra.styles);
-
-  if (transformIsMeaningful(transform)) {
-    styles['transform'] = transformForCss({ transform: transform, startCentered: true, width: width, height: height });
-    styles['-webkit-transform'] = styles['transform'];
-  }
-
-  var styleString = joinStyles(styles);
-
-  if (styleString.length > 0) {
-    attributes['style'] = styleString;
-  }
-
-  var val = [];
-
-  val.push({
-    tag: 'span',
-    attributes: attributes,
-    children: [content]
-  });
-
-  if (title) {
-    val.push({ tag: 'span', attributes: { class: 'sr-only' }, children: [title] });
-  }
-
-  return val;
-}
-
-function makeLayersCounterAbstract(params) {
-  var content = params.content,
-      title = params.title,
-      extra = params.extra;
-
-
-  var attributes = _extends({}, extra.attributes, title ? { 'title': title } : {}, {
-    'class': extra.classes.join(' ')
-  });
-
-  var styleString = joinStyles(extra.styles);
-
-  if (styleString.length > 0) {
-    attributes['style'] = styleString;
-  }
-
-  var val = [];
-
-  val.push({
-    tag: 'span',
-    attributes: attributes,
-    children: [content]
-  });
-
-  if (title) {
-    val.push({ tag: 'span', attributes: { class: 'sr-only' }, children: [title] });
-  }
-
-  return val;
-}
-
-var noop$2 = function noop() {};
-var p = config.measurePerformance && PERFORMANCE && PERFORMANCE.mark && PERFORMANCE.measure ? PERFORMANCE : { mark: noop$2, measure: noop$2 };
-var preamble = 'FA "5.2.0"';
-
-var begin = function begin(name) {
-  p.mark(preamble + ' ' + name + ' begins');
-  return function () {
-    return end(name);
-  };
-};
-
-var end = function end(name) {
-  p.mark(preamble + ' ' + name + ' ends');
-  p.measure(preamble + ' ' + name, preamble + ' ' + name + ' begins', preamble + ' ' + name + ' ends');
-};
-
-var perf = { begin: begin, end: end };
-
-'use strict';
-
-/**
- * Internal helper to bind a function known to have 4 arguments
- * to a given context.
- */
-var bindInternal4 = function bindInternal4 (func, thisContext) {
-  return function (a, b, c, d) {
-    return func.call(thisContext, a, b, c, d);
-  };
-};
-
-'use strict';
-
-
-
-/**
- * # Reduce
- *
- * A fast object `.reduce()` implementation.
- *
- * @param  {Object}   subject      The object to reduce over.
- * @param  {Function} fn           The reducer function.
- * @param  {mixed}    initialValue The initial value for the reducer, defaults to subject[0].
- * @param  {Object}   thisContext  The context for the reducer.
- * @return {mixed}                 The final result.
- */
-var reduce = function fastReduceObject (subject, fn, initialValue, thisContext) {
-  var keys = Object.keys(subject),
-      length = keys.length,
-      iterator = thisContext !== undefined ? bindInternal4(fn, thisContext) : fn,
-      i, key, result;
-
-  if (initialValue === undefined) {
-    i = 1;
-    result = subject[keys[0]];
-  }
-  else {
-    i = 0;
-    result = initialValue;
-  }
-
-  for (; i < length; i++) {
-    key = keys[i];
-    result = iterator(result, subject[key], key, subject);
-  }
-
-  return result;
-};
-
-var styles$2 = namespace.styles;
-var shims = namespace.shims;
-
-
-var _byUnicode = {};
-var _byLigature = {};
-var _byOldName = {};
-
-var build = function build() {
-  var lookup = function lookup(reducer) {
-    return reduce(styles$2, function (o, style, prefix) {
-      o[prefix] = reduce(style, reducer, {});
-      return o;
-    }, {});
-  };
-
-  _byUnicode = lookup(function (acc, icon, iconName) {
-    acc[icon[3]] = iconName;
-
-    return acc;
-  });
-
-  _byLigature = lookup(function (acc, icon, iconName) {
-    var ligatures = icon[2];
-
-    acc[iconName] = iconName;
-
-    ligatures.forEach(function (ligature) {
-      acc[ligature] = iconName;
-    });
-
-    return acc;
-  });
-
-  var hasRegular = 'far' in styles$2;
-
-  _byOldName = reduce(shims, function (acc, shim) {
-    var oldName = shim[0];
-    var prefix = shim[1];
-    var iconName = shim[2];
-
-    if (prefix === 'far' && !hasRegular) {
-      prefix = 'fas';
-    }
-
-    acc[oldName] = { prefix: prefix, iconName: iconName };
-
-    return acc;
-  }, {});
-};
-
-build();
-
-function byUnicode(prefix, unicode) {
-  return _byUnicode[prefix][unicode];
-}
-
-function byLigature(prefix, ligature) {
-  return _byLigature[prefix][ligature];
-}
-
-function byOldName(name) {
-  return _byOldName[name] || { prefix: null, iconName: null };
-}
-
-var styles$1 = namespace.styles;
-
-
-var emptyCanonicalIcon = function emptyCanonicalIcon() {
-  return { prefix: null, iconName: null, rest: [] };
-};
-
-function getCanonicalIcon(values) {
-  return values.reduce(function (acc, cls) {
-    var iconName = getIconName(config.familyPrefix, cls);
-
-    if (styles$1[cls]) {
-      acc.prefix = cls;
-    } else if (iconName) {
-      var shim = acc.prefix === 'fa' ? byOldName(iconName) : {};
-
-      acc.iconName = shim.iconName || iconName;
-      acc.prefix = shim.prefix || acc.prefix;
-    } else if (cls !== config.replacementClass && cls.indexOf('fa-w-') !== 0) {
-      acc.rest.push(cls);
-    }
-
-    return acc;
-  }, emptyCanonicalIcon());
-}
-
-function iconFromMapping(mapping, prefix, iconName) {
-  if (mapping && mapping[prefix] && mapping[prefix][iconName]) {
-    return {
-      prefix: prefix,
-      iconName: iconName,
-      icon: mapping[prefix][iconName]
-    };
-  }
-}
-
-function toHtml(abstractNodes) {
-  var tag = abstractNodes.tag,
-      _abstractNodes$attrib = abstractNodes.attributes,
-      attributes = _abstractNodes$attrib === undefined ? {} : _abstractNodes$attrib,
-      _abstractNodes$childr = abstractNodes.children,
-      children = _abstractNodes$childr === undefined ? [] : _abstractNodes$childr;
-
-
-  if (typeof abstractNodes === 'string') {
-    return htmlEscape(abstractNodes);
-  } else {
-    return '<' + tag + ' ' + joinAttributes(attributes) + '>' + children.map(toHtml).join('') + '</' + tag + '>';
-  }
-}
-
-var noop$1 = function noop() {};
-
-function isWatched(node) {
-  var i2svg = node.getAttribute ? node.getAttribute(DATA_FA_I2SVG) : null;
-
-  return typeof i2svg === 'string';
-}
-
-function getMutator() {
-  if (config.autoReplaceSvg === true) {
-    return mutators.replace;
-  }
-
-  var mutator = mutators[config.autoReplaceSvg];
-
-  return mutator || mutators.replace;
-}
-
-var mutators = {
-  replace: function replace(mutation) {
-    var node = mutation[0];
-    var abstract = mutation[1];
-    var newOuterHTML = abstract.map(function (a) {
-      return toHtml(a);
-    }).join('\n');
-
-    if (node.parentNode && node.outerHTML) {
-      node.outerHTML = newOuterHTML + (config.keepOriginalSource && node.tagName.toLowerCase() !== 'svg' ? '<!-- ' + node.outerHTML + ' -->' : '');
-    } else if (node.parentNode) {
-      var newNode = document.createElement('span');
-      node.parentNode.replaceChild(newNode, node);
-      newNode.outerHTML = newOuterHTML;
-    }
-  },
-  nest: function nest(mutation) {
-    var node = mutation[0];
-    var abstract = mutation[1];
-
-    // If we already have a replaced node we do not want to continue nesting within it.
-    // Short-circuit to the standard replacement
-    if (~classArray(node).indexOf(config.replacementClass)) {
-      return mutators.replace(mutation);
-    }
-
-    var forSvg = new RegExp(config.familyPrefix + '-.*');
-
-    delete abstract[0].attributes.style;
-
-    var splitClasses = abstract[0].attributes.class.split(' ').reduce(function (acc, cls) {
-      if (cls === config.replacementClass || cls.match(forSvg)) {
-        acc.toSvg.push(cls);
-      } else {
-        acc.toNode.push(cls);
-      }
-
-      return acc;
-    }, { toNode: [], toSvg: [] });
-
-    abstract[0].attributes.class = splitClasses.toSvg.join(' ');
-
-    var newInnerHTML = abstract.map(function (a) {
-      return toHtml(a);
-    }).join('\n');
-    node.setAttribute('class', splitClasses.toNode.join(' '));
-    node.setAttribute(DATA_FA_I2SVG, '');
-    node.innerHTML = newInnerHTML;
-  }
-};
-
-function perform(mutations, callback) {
-  var callbackFunction = typeof callback === 'function' ? callback : noop$1;
-
-  if (mutations.length === 0) {
-    callbackFunction();
-  } else {
-    var frame = WINDOW.requestAnimationFrame || function (op) {
-      return op();
-    };
-
-    frame(function () {
-      var mutator = getMutator();
-      var mark = perf.begin('mutate');
-
-      mutations.map(mutator);
-
-      mark();
-
-      callbackFunction();
-    });
-  }
-}
-
-var disabled = false;
-
-function disableObservation(operation) {
-  disabled = true;
-  operation();
-  disabled = false;
-}
-
-var mo = null;
-
-function observe(options) {
-  if (!MUTATION_OBSERVER) {
-    return;
-  }
-
-  if (!config.observeMutations) {
-    return;
-  }
-
-  var treeCallback = options.treeCallback,
-      nodeCallback = options.nodeCallback,
-      pseudoElementsCallback = options.pseudoElementsCallback,
-      _options$observeMutat = options.observeMutationsRoot,
-      observeMutationsRoot = _options$observeMutat === undefined ? DOCUMENT.body : _options$observeMutat;
-
-
-  mo = new MUTATION_OBSERVER(function (objects) {
-    if (disabled) return;
-
-    toArray(objects).forEach(function (mutationRecord) {
-      if (mutationRecord.type === 'childList' && mutationRecord.addedNodes.length > 0 && !isWatched(mutationRecord.addedNodes[0])) {
-        if (config.searchPseudoElements) {
-          pseudoElementsCallback(mutationRecord.target);
-        }
-
-        treeCallback(mutationRecord.target);
-      }
-
-      if (mutationRecord.type === 'attributes' && mutationRecord.target.parentNode && config.searchPseudoElements) {
-        pseudoElementsCallback(mutationRecord.target.parentNode);
-      }
-
-      if (mutationRecord.type === 'attributes' && isWatched(mutationRecord.target) && ~ATTRIBUTES_WATCHED_FOR_MUTATION.indexOf(mutationRecord.attributeName)) {
-        if (mutationRecord.attributeName === 'class') {
-          var _getCanonicalIcon = getCanonicalIcon(classArray(mutationRecord.target)),
-              prefix = _getCanonicalIcon.prefix,
-              iconName = _getCanonicalIcon.iconName;
-
-          if (prefix) mutationRecord.target.setAttribute('data-prefix', prefix);
-          if (iconName) mutationRecord.target.setAttribute('data-icon', iconName);
-        } else {
-          nodeCallback(mutationRecord.target);
-        }
-      }
-    });
-  });
-
-  if (!IS_DOM) return;
-
-  mo.observe(observeMutationsRoot, {
-    childList: true, attributes: true, characterData: true, subtree: true
-  });
-}
-
-function disconnect() {
-  if (!mo) return;
-
-  mo.disconnect();
-}
-
-var styleParser = function (node) {
-  var style = node.getAttribute('style');
-
-  var val = [];
-
-  if (style) {
-    val = style.split(';').reduce(function (acc, style) {
-      var styles = style.split(':');
-      var prop = styles[0];
-      var value = styles.slice(1);
-
-      if (prop && value.length > 0) {
-        acc[prop] = value.join(':').trim();
-      }
-
-      return acc;
-    }, {});
-  }
-
-  return val;
-};
-
-function toHex(unicode) {
-  var result = '';
-
-  for (var i = 0; i < unicode.length; i++) {
-    var hex = unicode.charCodeAt(i).toString(16);
-    result += ('000' + hex).slice(-4);
-  }
-
-  return result;
-}
-
-var classParser = function (node) {
-  var existingPrefix = node.getAttribute('data-prefix');
-  var existingIconName = node.getAttribute('data-icon');
-  var innerText = node.innerText !== undefined ? node.innerText.trim() : '';
-
-  var val = getCanonicalIcon(classArray(node));
-
-  if (existingPrefix && existingIconName) {
-    val.prefix = existingPrefix;
-    val.iconName = existingIconName;
-  }
-
-  if (val.prefix && innerText.length > 1) {
-    val.iconName = byLigature(val.prefix, node.innerText);
-  } else if (val.prefix && innerText.length === 1) {
-    val.iconName = byUnicode(val.prefix, toHex(node.innerText));
-  }
-
-  return val;
-};
-
-var parseTransformString = function parseTransformString(transformString) {
-  var transform = {
-    size: 16,
-    x: 0,
-    y: 0,
-    flipX: false,
-    flipY: false,
-    rotate: 0
-  };
-
-  if (!transformString) {
-    return transform;
-  } else {
-    return transformString.toLowerCase().split(' ').reduce(function (acc, n) {
-      var parts = n.toLowerCase().split('-');
-      var first = parts[0];
-      var rest = parts.slice(1).join('-');
-
-      if (first && rest === 'h') {
-        acc.flipX = true;
-        return acc;
-      }
-
-      if (first && rest === 'v') {
-        acc.flipY = true;
-        return acc;
-      }
-
-      rest = parseFloat(rest);
-
-      if (isNaN(rest)) {
-        return acc;
-      }
-
-      switch (first) {
-        case 'grow':
-          acc.size = acc.size + rest;
-          break;
-        case 'shrink':
-          acc.size = acc.size - rest;
-          break;
-        case 'left':
-          acc.x = acc.x - rest;
-          break;
-        case 'right':
-          acc.x = acc.x + rest;
-          break;
-        case 'up':
-          acc.y = acc.y - rest;
-          break;
-        case 'down':
-          acc.y = acc.y + rest;
-          break;
-        case 'rotate':
-          acc.rotate = acc.rotate + rest;
-          break;
-      }
-
-      return acc;
-    }, transform);
-  }
-};
-
-var transformParser = function (node) {
-  return parseTransformString(node.getAttribute('data-fa-transform'));
-};
-
-var symbolParser = function (node) {
-  var symbol = node.getAttribute('data-fa-symbol');
-
-  return symbol === null ? false : symbol === '' ? true : symbol;
-};
-
-var attributesParser = function (node) {
-  var extraAttributes = toArray(node.attributes).reduce(function (acc, attr) {
-    if (acc.name !== 'class' && acc.name !== 'style') {
-      acc[attr.name] = attr.value;
-    }
-    return acc;
-  }, {});
-
-  var title = node.getAttribute('title');
-
-  if (config.autoA11y) {
-    if (title) {
-      extraAttributes['aria-labelledby'] = config.replacementClass + '-title-' + nextUniqueId();
-    } else {
-      extraAttributes['aria-hidden'] = 'true';
-    }
-  }
-
-  return extraAttributes;
-};
-
-var maskParser = function (node) {
-  var mask = node.getAttribute('data-fa-mask');
-
-  if (!mask) {
-    return emptyCanonicalIcon();
-  } else {
-    return getCanonicalIcon(mask.split(' ').map(function (i) {
-      return i.trim();
-    }));
-  }
-};
-
-var blankMeta = {
-  iconName: null,
-  title: null,
-  prefix: null,
-  transform: meaninglessTransform,
-  symbol: false,
-  mask: null,
-  extra: { classes: [], styles: {}, attributes: {} }
-};
-
-function parseMeta(node) {
-  var _classParser = classParser(node),
-      iconName = _classParser.iconName,
-      prefix = _classParser.prefix,
-      extraClasses = _classParser.rest;
-
-  var extraStyles = styleParser(node);
-  var transform = transformParser(node);
-  var symbol = symbolParser(node);
-  var extraAttributes = attributesParser(node);
-  var mask = maskParser(node);
-
-  return {
-    iconName: iconName,
-    title: node.getAttribute('title'),
-    prefix: prefix,
-    transform: transform,
-    symbol: symbol,
-    mask: mask,
-    extra: {
-      classes: extraClasses,
-      styles: extraStyles,
-      attributes: extraAttributes
-    }
-  };
-}
-
-function MissingIcon(error) {
-  this.name = 'MissingIcon';
-  this.message = error || 'Icon unavailable';
-  this.stack = new Error().stack;
-}
-
-MissingIcon.prototype = Object.create(Error.prototype);
-MissingIcon.prototype.constructor = MissingIcon;
-
-var FILL = { fill: 'currentColor' };
-var ANIMATION_BASE = {
-  attributeType: 'XML',
-  repeatCount: 'indefinite',
-  dur: '2s'
-};
-var RING = {
-  tag: 'path',
-  attributes: _extends({}, FILL, {
-    d: 'M156.5,447.7l-12.6,29.5c-18.7-9.5-35.9-21.2-51.5-34.9l22.7-22.7C127.6,430.5,141.5,440,156.5,447.7z M40.6,272H8.5 c1.4,21.2,5.4,41.7,11.7,61.1L50,321.2C45.1,305.5,41.8,289,40.6,272z M40.6,240c1.4-18.8,5.2-37,11.1-54.1l-29.5-12.6 C14.7,194.3,10,216.7,8.5,240H40.6z M64.3,156.5c7.8-14.9,17.2-28.8,28.1-41.5L69.7,92.3c-13.7,15.6-25.5,32.8-34.9,51.5 L64.3,156.5z M397,419.6c-13.9,12-29.4,22.3-46.1,30.4l11.9,29.8c20.7-9.9,39.8-22.6,56.9-37.6L397,419.6z M115,92.4 c13.9-12,29.4-22.3,46.1-30.4l-11.9-29.8c-20.7,9.9-39.8,22.6-56.8,37.6L115,92.4z M447.7,355.5c-7.8,14.9-17.2,28.8-28.1,41.5 l22.7,22.7c13.7-15.6,25.5-32.9,34.9-51.5L447.7,355.5z M471.4,272c-1.4,18.8-5.2,37-11.1,54.1l29.5,12.6 c7.5-21.1,12.2-43.5,13.6-66.8H471.4z M321.2,462c-15.7,5-32.2,8.2-49.2,9.4v32.1c21.2-1.4,41.7-5.4,61.1-11.7L321.2,462z M240,471.4c-18.8-1.4-37-5.2-54.1-11.1l-12.6,29.5c21.1,7.5,43.5,12.2,66.8,13.6V471.4z M462,190.8c5,15.7,8.2,32.2,9.4,49.2h32.1 c-1.4-21.2-5.4-41.7-11.7-61.1L462,190.8z M92.4,397c-12-13.9-22.3-29.4-30.4-46.1l-29.8,11.9c9.9,20.7,22.6,39.8,37.6,56.9 L92.4,397z M272,40.6c18.8,1.4,36.9,5.2,54.1,11.1l12.6-29.5C317.7,14.7,295.3,10,272,8.5V40.6z M190.8,50 c15.7-5,32.2-8.2,49.2-9.4V8.5c-21.2,1.4-41.7,5.4-61.1,11.7L190.8,50z M442.3,92.3L419.6,115c12,13.9,22.3,29.4,30.5,46.1 l29.8-11.9C470,128.5,457.3,109.4,442.3,92.3z M397,92.4l22.7-22.7c-15.6-13.7-32.8-25.5-51.5-34.9l-12.6,29.5 C370.4,72.1,384.4,81.5,397,92.4z'
-  })
-};
-var OPACITY_ANIMATE = _extends({}, ANIMATION_BASE, {
-  attributeName: 'opacity'
-});
-var DOT = {
-  tag: 'circle',
-  attributes: _extends({}, FILL, {
-    cx: '256',
-    cy: '364',
-    r: '28'
-  }),
-  children: [{ tag: 'animate', attributes: _extends({}, ANIMATION_BASE, { attributeName: 'r', values: '28;14;28;28;14;28;' }) }, { tag: 'animate', attributes: _extends({}, OPACITY_ANIMATE, { values: '1;0;1;1;0;1;' }) }]
-};
-var QUESTION = {
-  tag: 'path',
-  attributes: _extends({}, FILL, {
-    opacity: '1',
-    d: 'M263.7,312h-16c-6.6,0-12-5.4-12-12c0-71,77.4-63.9,77.4-107.8c0-20-17.8-40.2-57.4-40.2c-29.1,0-44.3,9.6-59.2,28.7 c-3.9,5-11.1,6-16.2,2.4l-13.1-9.2c-5.6-3.9-6.9-11.8-2.6-17.2c21.2-27.2,46.4-44.7,91.2-44.7c52.3,0,97.4,29.8,97.4,80.2 c0,67.6-77.4,63.5-77.4,107.8C275.7,306.6,270.3,312,263.7,312z'
-  }),
-  children: [{ tag: 'animate', attributes: _extends({}, OPACITY_ANIMATE, { values: '1;0;0;0;0;1;' }) }]
-};
-var EXCLAMATION = {
-  tag: 'path',
-  attributes: _extends({}, FILL, {
-    opacity: '0',
-    d: 'M232.5,134.5l7,168c0.3,6.4,5.6,11.5,12,11.5h9c6.4,0,11.7-5.1,12-11.5l7-168c0.3-6.8-5.2-12.5-12-12.5h-23 C237.7,122,232.2,127.7,232.5,134.5z'
-  }),
-  children: [{ tag: 'animate', attributes: _extends({}, OPACITY_ANIMATE, { values: '0;0;1;1;0;0;' }) }]
-};
-
-var missing = { tag: 'g', children: [RING, DOT, QUESTION, EXCLAMATION] };
-
-var styles = namespace.styles;
-
-var LAYERS_TEXT_CLASSNAME = 'fa-layers-text';
-var FONT_FAMILY_PATTERN = /Font Awesome 5 (Solid|Regular|Light|Brands|Free|Pro)/;
-var STYLE_TO_PREFIX = {
-  'Solid': 'fas',
-  'Regular': 'far',
-  'Light': 'fal',
-  'Brands': 'fab'
-};
-var FONT_WEIGHT_TO_PREFIX = {
-  '900': 'fas',
-  '400': 'far',
-  '300': 'fal'
-};
-
-function findIcon(iconName, prefix) {
-  var val = {
-    found: false,
-    width: 512,
-    height: 512,
-    icon: missing
-  };
-
-  if (iconName && prefix && styles[prefix] && styles[prefix][iconName]) {
-    var icon = styles[prefix][iconName];
-    var width = icon[0];
-    var height = icon[1];
-    var vectorData = icon.slice(4);
-
-    val = {
-      found: true,
-      width: width,
-      height: height,
-      icon: { tag: 'path', attributes: { fill: 'currentColor', d: vectorData[0] } }
-    };
-  } else if (iconName && prefix && !config.showMissingIcons) {
-    throw new MissingIcon('Icon is missing for prefix ' + prefix + ' with icon name ' + iconName);
-  }
-
-  return val;
-}
-
-function generateSvgReplacementMutation(node, nodeMeta) {
-  var iconName = nodeMeta.iconName,
-      title = nodeMeta.title,
-      prefix = nodeMeta.prefix,
-      transform = nodeMeta.transform,
-      symbol = nodeMeta.symbol,
-      mask = nodeMeta.mask,
-      extra = nodeMeta.extra;
-
-
-  return [node, makeInlineSvgAbstract({
-    icons: {
-      main: findIcon(iconName, prefix),
-      mask: findIcon(mask.iconName, mask.prefix)
-    },
-    prefix: prefix,
-    iconName: iconName,
-    transform: transform,
-    symbol: symbol,
-    mask: mask,
-    title: title,
-    extra: extra,
-    watchable: true
-  })];
-}
-
-function generateLayersText(node, nodeMeta) {
-  var title = nodeMeta.title,
-      transform = nodeMeta.transform,
-      extra = nodeMeta.extra;
-
-
-  var width = null;
-  var height = null;
-
-  if (IS_IE) {
-    var computedFontSize = parseInt(getComputedStyle(node).fontSize, 10);
-    var boundingClientRect = node.getBoundingClientRect();
-    width = boundingClientRect.width / computedFontSize;
-    height = boundingClientRect.height / computedFontSize;
-  }
-
-  if (config.autoA11y && !title) {
-    extra.attributes['aria-hidden'] = 'true';
-  }
-
-  return [node, makeLayersTextAbstract({
-    content: node.innerHTML,
-    width: width,
-    height: height,
-    transform: transform,
-    title: title,
-    extra: extra,
-    watchable: true
-  })];
-}
-
-function generateMutation(node) {
-  var nodeMeta = parseMeta(node);
-
-  if (~nodeMeta.extra.classes.indexOf(LAYERS_TEXT_CLASSNAME)) {
-    return generateLayersText(node, nodeMeta);
-  } else {
-    return generateSvgReplacementMutation(node, nodeMeta);
-  }
-}
-
-function searchPseudoElements(root) {
-  if (!IS_DOM) return;
-
-  var end = perf.begin('searchPseudoElements');
-
-  disableObservation(function () {
-    toArray(root.querySelectorAll('*')).filter(function (n) {
-      return n.parentNode !== document.head && !~TAGNAMES_TO_SKIP_FOR_PSEUDOELEMENTS.indexOf(n.tagName.toUpperCase()) && !n.getAttribute(DATA_FA_PSEUDO_ELEMENT) && (!n.parentNode || n.parentNode.tagName !== 'svg');
-    }).forEach(function (node) {
-      [':before', ':after'].forEach(function (pos) {
-        var children = toArray(node.children);
-        var alreadyProcessedPseudoElement = children.filter(function (c) {
-          return c.getAttribute(DATA_FA_PSEUDO_ELEMENT) === pos;
-        })[0];
-
-        var styles = WINDOW.getComputedStyle(node, pos);
-        var fontFamily = styles.getPropertyValue('font-family').match(FONT_FAMILY_PATTERN);
-        var fontWeight = styles.getPropertyValue('font-weight');
-
-        if (alreadyProcessedPseudoElement && !fontFamily) {
-          // If we've already processed it but the current computed style does not result in a font-family,
-          // that probably means that a class name that was previously present to make the icon has been
-          // removed. So we now should delete the icon.
-          node.removeChild(alreadyProcessedPseudoElement);
-        } else if (fontFamily) {
-          var content = styles.getPropertyValue('content');
-          var prefix = ~['Light', 'Regular', 'Solid', 'Brands'].indexOf(fontFamily[1]) ? STYLE_TO_PREFIX[fontFamily[1]] : FONT_WEIGHT_TO_PREFIX[fontWeight];
-          var iconName = byUnicode(prefix, toHex(content.length === 3 ? content.substr(1, 1) : content));
-          // Only convert the pseudo element in this :before/:after position into an icon if we haven't
-          // already done so with the same prefix and iconName
-          if (!alreadyProcessedPseudoElement || alreadyProcessedPseudoElement.getAttribute(DATA_PREFIX) !== prefix || alreadyProcessedPseudoElement.getAttribute(DATA_ICON) !== iconName) {
-            if (alreadyProcessedPseudoElement) {
-              // Delete the old one, since we're replacing it with a new one
-              node.removeChild(alreadyProcessedPseudoElement);
-            }
-
-            var extra = blankMeta.extra;
-
-            extra.attributes[DATA_FA_PSEUDO_ELEMENT] = pos;
-            var abstract = makeInlineSvgAbstract(_extends({}, blankMeta, {
-              icons: {
-                main: findIcon(iconName, prefix),
-                mask: emptyCanonicalIcon()
-              },
-              prefix: prefix,
-              iconName: iconName,
-              extra: extra,
-              watchable: true
-            }));
-
-            var element = DOCUMENT.createElement('svg');
-
-            if (pos === ':before') {
-              node.insertBefore(element, node.firstChild);
-            } else {
-              node.appendChild(element);
-            }
-
-            element.outerHTML = abstract.map(function (a) {
-              return toHtml(a);
-            }).join('\n');
-          }
-        }
-      });
-    });
-  });
-
-  end();
-}
-
-function onTree(root) {
-  var callback = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-
-  if (!IS_DOM) return;
-
-  var htmlClassList = DOCUMENT.documentElement.classList;
-  var hclAdd = function hclAdd(suffix) {
-    return htmlClassList.add(HTML_CLASS_I2SVG_BASE_CLASS + '-' + suffix);
-  };
-  var hclRemove = function hclRemove(suffix) {
-    return htmlClassList.remove(HTML_CLASS_I2SVG_BASE_CLASS + '-' + suffix);
-  };
-  var prefixes = Object.keys(styles);
-  var prefixesDomQuery = ['.' + LAYERS_TEXT_CLASSNAME + ':not([' + DATA_FA_I2SVG + '])'].concat(prefixes.map(function (p) {
-    return '.' + p + ':not([' + DATA_FA_I2SVG + '])';
-  })).join(', ');
-
-  if (prefixesDomQuery.length === 0) {
-    return;
-  }
-
-  var candidates = toArray(root.querySelectorAll(prefixesDomQuery));
-
-  if (candidates.length > 0) {
-    hclAdd('pending');
-    hclRemove('complete');
-  } else {
-    return;
-  }
-
-  var mark = perf.begin('onTree');
-
-  var mutations = candidates.reduce(function (acc, node) {
-    try {
-      var mutation = generateMutation(node);
-
-      if (mutation) {
-        acc.push(mutation);
-      }
-    } catch (e) {
-      if (!PRODUCTION) {
-        if (e instanceof MissingIcon) {
-          console.error(e);
-        }
-      }
-    }
-
-    return acc;
-  }, []);
-
-  mark();
-
-  perform(mutations, function () {
-    hclAdd('active');
-    hclAdd('complete');
-    hclRemove('pending');
-
-    if (typeof callback === 'function') callback();
-  });
-}
-
-function onNode(node) {
-  var callback = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-
-  var mutation = generateMutation(node);
-
-  if (mutation) {
-    perform([mutation], callback);
-  }
-}
-
-var baseStyles = "svg:not(:root).svg-inline--fa{overflow:visible}.svg-inline--fa{display:inline-block;font-size:inherit;height:1em;overflow:visible;vertical-align:-.125em}.svg-inline--fa.fa-lg{vertical-align:-.225em}.svg-inline--fa.fa-w-1{width:.0625em}.svg-inline--fa.fa-w-2{width:.125em}.svg-inline--fa.fa-w-3{width:.1875em}.svg-inline--fa.fa-w-4{width:.25em}.svg-inline--fa.fa-w-5{width:.3125em}.svg-inline--fa.fa-w-6{width:.375em}.svg-inline--fa.fa-w-7{width:.4375em}.svg-inline--fa.fa-w-8{width:.5em}.svg-inline--fa.fa-w-9{width:.5625em}.svg-inline--fa.fa-w-10{width:.625em}.svg-inline--fa.fa-w-11{width:.6875em}.svg-inline--fa.fa-w-12{width:.75em}.svg-inline--fa.fa-w-13{width:.8125em}.svg-inline--fa.fa-w-14{width:.875em}.svg-inline--fa.fa-w-15{width:.9375em}.svg-inline--fa.fa-w-16{width:1em}.svg-inline--fa.fa-w-17{width:1.0625em}.svg-inline--fa.fa-w-18{width:1.125em}.svg-inline--fa.fa-w-19{width:1.1875em}.svg-inline--fa.fa-w-20{width:1.25em}.svg-inline--fa.fa-pull-left{margin-right:.3em;width:auto}.svg-inline--fa.fa-pull-right{margin-left:.3em;width:auto}.svg-inline--fa.fa-border{height:1.5em}.svg-inline--fa.fa-li{width:2em}.svg-inline--fa.fa-fw{width:1.25em}.fa-layers svg.svg-inline--fa{bottom:0;left:0;margin:auto;position:absolute;right:0;top:0}.fa-layers{display:inline-block;height:1em;position:relative;text-align:center;vertical-align:-.125em;width:1em}.fa-layers svg.svg-inline--fa{-webkit-transform-origin:center center;transform-origin:center center}.fa-layers-counter,.fa-layers-text{display:inline-block;position:absolute;text-align:center}.fa-layers-text{left:50%;top:50%;-webkit-transform:translate(-50%,-50%);transform:translate(-50%,-50%);-webkit-transform-origin:center center;transform-origin:center center}.fa-layers-counter{background-color:#ff253a;border-radius:1em;-webkit-box-sizing:border-box;box-sizing:border-box;color:#fff;height:1.5em;line-height:1;max-width:5em;min-width:1.5em;overflow:hidden;padding:.25em;right:0;text-overflow:ellipsis;top:0;-webkit-transform:scale(.25);transform:scale(.25);-webkit-transform-origin:top right;transform-origin:top right}.fa-layers-bottom-right{bottom:0;right:0;top:auto;-webkit-transform:scale(.25);transform:scale(.25);-webkit-transform-origin:bottom right;transform-origin:bottom right}.fa-layers-bottom-left{bottom:0;left:0;right:auto;top:auto;-webkit-transform:scale(.25);transform:scale(.25);-webkit-transform-origin:bottom left;transform-origin:bottom left}.fa-layers-top-right{right:0;top:0;-webkit-transform:scale(.25);transform:scale(.25);-webkit-transform-origin:top right;transform-origin:top right}.fa-layers-top-left{left:0;right:auto;top:0;-webkit-transform:scale(.25);transform:scale(.25);-webkit-transform-origin:top left;transform-origin:top left}.fa-lg{font-size:1.33333em;line-height:.75em;vertical-align:-.0667em}.fa-xs{font-size:.75em}.fa-sm{font-size:.875em}.fa-1x{font-size:1em}.fa-2x{font-size:2em}.fa-3x{font-size:3em}.fa-4x{font-size:4em}.fa-5x{font-size:5em}.fa-6x{font-size:6em}.fa-7x{font-size:7em}.fa-8x{font-size:8em}.fa-9x{font-size:9em}.fa-10x{font-size:10em}.fa-fw{text-align:center;width:1.25em}.fa-ul{list-style-type:none;margin-left:2.5em;padding-left:0}.fa-ul>li{position:relative}.fa-li{left:-2em;position:absolute;text-align:center;width:2em;line-height:inherit}.fa-border{border:solid .08em #eee;border-radius:.1em;padding:.2em .25em .15em}.fa-pull-left{float:left}.fa-pull-right{float:right}.fa.fa-pull-left,.fab.fa-pull-left,.fal.fa-pull-left,.far.fa-pull-left,.fas.fa-pull-left{margin-right:.3em}.fa.fa-pull-right,.fab.fa-pull-right,.fal.fa-pull-right,.far.fa-pull-right,.fas.fa-pull-right{margin-left:.3em}.fa-spin{-webkit-animation:fa-spin 2s infinite linear;animation:fa-spin 2s infinite linear}.fa-pulse{-webkit-animation:fa-spin 1s infinite steps(8);animation:fa-spin 1s infinite steps(8)}@-webkit-keyframes fa-spin{0%{-webkit-transform:rotate(0);transform:rotate(0)}100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}@keyframes fa-spin{0%{-webkit-transform:rotate(0);transform:rotate(0)}100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}.fa-rotate-90{-webkit-transform:rotate(90deg);transform:rotate(90deg)}.fa-rotate-180{-webkit-transform:rotate(180deg);transform:rotate(180deg)}.fa-rotate-270{-webkit-transform:rotate(270deg);transform:rotate(270deg)}.fa-flip-horizontal{-webkit-transform:scale(-1,1);transform:scale(-1,1)}.fa-flip-vertical{-webkit-transform:scale(1,-1);transform:scale(1,-1)}.fa-flip-horizontal.fa-flip-vertical{-webkit-transform:scale(-1,-1);transform:scale(-1,-1)}:root .fa-flip-horizontal,:root .fa-flip-vertical,:root .fa-rotate-180,:root .fa-rotate-270,:root .fa-rotate-90{-webkit-filter:none;filter:none}.fa-stack{display:inline-block;height:2em;position:relative;width:2em}.fa-stack-1x,.fa-stack-2x{bottom:0;left:0;margin:auto;position:absolute;right:0;top:0}.svg-inline--fa.fa-stack-1x{height:1em;width:1em}.svg-inline--fa.fa-stack-2x{height:2em;width:2em}.fa-inverse{color:#fff}.sr-only{border:0;clip:rect(0,0,0,0);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px}.sr-only-focusable:active,.sr-only-focusable:focus{clip:auto;height:auto;margin:0;overflow:visible;position:static;width:auto}";
-
-var css = function () {
-  var dfp = DEFAULT_FAMILY_PREFIX;
-  var drc = DEFAULT_REPLACEMENT_CLASS;
-  var fp = config.familyPrefix;
-  var rc = config.replacementClass;
-  var s = baseStyles;
-
-  if (fp !== dfp || rc !== drc) {
-    var dPatt = new RegExp('\\.' + dfp + '\\-', 'g');
-    var rPatt = new RegExp('\\.' + drc, 'g');
-
-    s = s.replace(dPatt, '.' + fp + '-').replace(rPatt, '.' + rc);
-  }
-
-  return s;
-};
-
-function define(prefix, icons) {
-  var normalized = Object.keys(icons).reduce(function (acc, iconName) {
-    var icon = icons[iconName];
-    var expanded = !!icon.icon;
-
-    if (expanded) {
-      acc[icon.iconName] = icon.icon;
-    } else {
-      acc[iconName] = icon;
-    }
-    return acc;
-  }, {});
-
-  if (typeof namespace.hooks.addPack === 'function') {
-    namespace.hooks.addPack(prefix, normalized);
-  } else {
-    namespace.styles[prefix] = _extends({}, namespace.styles[prefix] || {}, normalized);
-  }
-
-  /**
-   * Font Awesome 4 used the prefix of `fa` for all icons. With the introduction
-   * of new styles we needed to differentiate between them. Prefix `fa` is now an alias
-   * for `fas` so we'll easy the upgrade process for our users by automatically defining
-   * this as well.
-   */
-  if (prefix === 'fas') {
-    define('fa', icons);
-  }
-}
-
-var Library = function () {
-  function Library() {
-    classCallCheck(this, Library);
-
-    this.definitions = {};
-  }
-
-  createClass(Library, [{
-    key: 'add',
-    value: function add() {
-      var _this = this;
-
-      for (var _len = arguments.length, definitions = Array(_len), _key = 0; _key < _len; _key++) {
-        definitions[_key] = arguments[_key];
-      }
-
-      var additions = definitions.reduce(this._pullDefinitions, {});
-
-      Object.keys(additions).forEach(function (key) {
-        _this.definitions[key] = _extends({}, _this.definitions[key] || {}, additions[key]);
-        define(key, additions[key]);
-        build();
-      });
-    }
-  }, {
-    key: 'reset',
-    value: function reset() {
-      this.definitions = {};
-    }
-  }, {
-    key: '_pullDefinitions',
-    value: function _pullDefinitions(additions, definition) {
-      var normalized = definition.prefix && definition.iconName && definition.icon ? { 0: definition } : definition;
-
-      Object.keys(normalized).map(function (key) {
-        var _normalized$key = normalized[key],
-            prefix = _normalized$key.prefix,
-            iconName = _normalized$key.iconName,
-            icon = _normalized$key.icon;
-
-
-        if (!additions[prefix]) additions[prefix] = {};
-
-        additions[prefix][iconName] = icon;
-      });
-
-      return additions;
-    }
-  }]);
-  return Library;
-}();
-
-function prepIcon(icon) {
-  var width = icon[0];
-  var height = icon[1];
-  var vectorData = icon.slice(4);
-
-  return {
-    found: true,
-    width: width,
-    height: height,
-    icon: { tag: 'path', attributes: { fill: 'currentColor', d: vectorData[0] } }
-  };
-}
-
-function ensureCss() {
-  if (config.autoAddCss && !_cssInserted) {
-    insertCss(css());
-    _cssInserted = true;
-  }
-}
-
-function apiObject(val, abstractCreator) {
-  Object.defineProperty(val, 'abstract', {
-    get: abstractCreator
-  });
-
-  Object.defineProperty(val, 'html', {
-    get: function get() {
-      return val.abstract.map(function (a) {
-        return toHtml(a);
-      });
-    }
-  });
-
-  Object.defineProperty(val, 'node', {
-    get: function get() {
-      if (!IS_DOM) return;
-
-      var container = DOCUMENT.createElement('div');
-      container.innerHTML = val.html;
-      return container.children;
-    }
-  });
-
-  return val;
-}
-
-function findIconDefinition(params) {
-  var _params$prefix = params.prefix,
-      prefix = _params$prefix === undefined ? 'fa' : _params$prefix,
-      iconName = params.iconName;
-
-
-  if (!iconName) return;
-
-  return iconFromMapping(library.definitions, prefix, iconName) || iconFromMapping(namespace.styles, prefix, iconName);
-}
-
-function resolveIcons(next) {
-  return function (maybeIconDefinition) {
-    var params = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-
-    var iconDefinition = (maybeIconDefinition || {}).icon ? maybeIconDefinition : findIconDefinition(maybeIconDefinition || {});
-
-    var mask = params.mask;
-
-
-    if (mask) {
-      mask = (mask || {}).icon ? mask : findIconDefinition(mask || {});
-    }
-
-    return next(iconDefinition, _extends({}, params, { mask: mask }));
-  };
-}
-
-var library = new Library();
-
-var noAuto = function noAuto() {
-  config.autoReplaceSvg = false;
-  config.observeMutations = false;
-
-  disconnect();
-};
-
-var _cssInserted = false;
-
-var dom = {
-  i2svg: function i2svg() {
-    var params = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-
-    if (IS_DOM) {
-      ensureCss();
-
-      var _params$node = params.node,
-          node = _params$node === undefined ? DOCUMENT : _params$node,
-          _params$callback = params.callback,
-          callback = _params$callback === undefined ? function () {} : _params$callback;
-
-
-      if (config.searchPseudoElements) {
-        searchPseudoElements(node);
-      }
-
-      onTree(node, callback);
-    }
-  },
-
-  css: css,
-
-  insertCss: function insertCss$$1() {
-    if (!_cssInserted) {
-      insertCss(css());
-      _cssInserted = true;
-    }
-  },
-
-  watch: function watch() {
-    var params = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-    var autoReplaceSvgRoot = params.autoReplaceSvgRoot,
-        observeMutationsRoot = params.observeMutationsRoot;
-
-
-    if (config.autoReplaceSvg === false) {
-      config.autoReplaceSvg = true;
-    }
-
-    config.observeMutations = true;
-
-    domready(function () {
-      autoReplace({
-        autoReplaceSvgRoot: autoReplaceSvgRoot
-      });
-
-      observe({
-        treeCallback: onTree,
-        nodeCallback: onNode,
-        pseudoElementsCallback: searchPseudoElements,
-        observeMutationsRoot: observeMutationsRoot
-      });
-    });
-  }
-};
-
-var parse = {
-  transform: function transform(transformString) {
-    return parseTransformString(transformString);
-  }
-};
-
-var icon = resolveIcons(function (iconDefinition) {
-  var params = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-  var _params$transform = params.transform,
-      transform = _params$transform === undefined ? meaninglessTransform : _params$transform,
-      _params$symbol = params.symbol,
-      symbol = _params$symbol === undefined ? false : _params$symbol,
-      _params$mask = params.mask,
-      mask = _params$mask === undefined ? null : _params$mask,
-      _params$title = params.title,
-      title = _params$title === undefined ? null : _params$title,
-      _params$classes = params.classes,
-      classes = _params$classes === undefined ? [] : _params$classes,
-      _params$attributes = params.attributes,
-      attributes = _params$attributes === undefined ? {} : _params$attributes,
-      _params$styles = params.styles,
-      styles = _params$styles === undefined ? {} : _params$styles;
-
-
-  if (!iconDefinition) return;
-
-  var prefix = iconDefinition.prefix,
-      iconName = iconDefinition.iconName,
-      icon = iconDefinition.icon;
-
-
-  return apiObject(_extends({ type: 'icon' }, iconDefinition), function () {
-    ensureCss();
-
-    if (config.autoA11y) {
-      if (title) {
-        attributes['aria-labelledby'] = config.replacementClass + '-title-' + nextUniqueId();
-      } else {
-        attributes['aria-hidden'] = 'true';
-      }
-    }
-
-    return makeInlineSvgAbstract({
-      icons: {
-        main: prepIcon(icon),
-        mask: mask ? prepIcon(mask.icon) : { found: false, width: null, height: null, icon: {} }
-      },
-      prefix: prefix,
-      iconName: iconName,
-      transform: _extends({}, meaninglessTransform, transform),
-      symbol: symbol,
-      title: title,
-      extra: {
-        attributes: attributes,
-        styles: styles,
-        classes: classes
-      }
-    });
-  });
-});
-
-var text = function text(content) {
-  var params = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-  var _params$transform2 = params.transform,
-      transform = _params$transform2 === undefined ? meaninglessTransform : _params$transform2,
-      _params$title2 = params.title,
-      title = _params$title2 === undefined ? null : _params$title2,
-      _params$classes2 = params.classes,
-      classes = _params$classes2 === undefined ? [] : _params$classes2,
-      _params$attributes2 = params.attributes,
-      attributes = _params$attributes2 === undefined ? {} : _params$attributes2,
-      _params$styles2 = params.styles,
-      styles = _params$styles2 === undefined ? {} : _params$styles2;
-
-
-  return apiObject({ type: 'text', content: content }, function () {
-    ensureCss();
-
-    return makeLayersTextAbstract({
-      content: content,
-      transform: _extends({}, meaninglessTransform, transform),
-      title: title,
-      extra: {
-        attributes: attributes,
-        styles: styles,
-        classes: [config.familyPrefix + '-layers-text'].concat(toConsumableArray(classes))
-      }
-    });
-  });
-};
-
-var counter = function counter(content) {
-  var params = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-  var _params$title3 = params.title,
-      title = _params$title3 === undefined ? null : _params$title3,
-      _params$classes3 = params.classes,
-      classes = _params$classes3 === undefined ? [] : _params$classes3,
-      _params$attributes3 = params.attributes,
-      attributes = _params$attributes3 === undefined ? {} : _params$attributes3,
-      _params$styles3 = params.styles,
-      styles = _params$styles3 === undefined ? {} : _params$styles3;
-
-
-  return apiObject({ type: 'counter', content: content }, function () {
-    ensureCss();
-
-    return makeLayersCounterAbstract({
-      content: content.toString(),
-      title: title,
-      extra: {
-        attributes: attributes,
-        styles: styles,
-        classes: [config.familyPrefix + '-layers-counter'].concat(toConsumableArray(classes))
-      }
-    });
-  });
-};
-
-var layer = function layer(assembler) {
-  return apiObject({ type: 'layer' }, function () {
-    ensureCss();
-
-    var children = [];
-
-    assembler(function (args) {
-      Array.isArray(args) ? args.map(function (a) {
-        children = children.concat(a.abstract);
-      }) : children = children.concat(args.abstract);
-    });
-
-    return [{
-      tag: 'span',
-      attributes: { class: config.familyPrefix + '-layers' },
-      children: children
-    }];
-  });
-};
-
-var api = {
-  noAuto: noAuto,
-  config: config,
-  dom: dom,
-  library: library,
-  parse: parse,
-  findIconDefinition: findIconDefinition,
-  icon: icon,
-  text: text,
-  counter: counter,
-  layer: layer,
-  toHtml: toHtml
-};
-
-var autoReplace = function autoReplace() {
-  var params = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-  var _params$autoReplaceSv = params.autoReplaceSvgRoot,
-      autoReplaceSvgRoot = _params$autoReplaceSv === undefined ? DOCUMENT : _params$autoReplaceSv;
-
-
-  if (Object.keys(namespace.styles).length > 0 && IS_DOM && config.autoReplaceSvg) api.dom.i2svg({ node: autoReplaceSvgRoot });
-};
-
-function bootstrap() {
-  if (IS_BROWSER) {
-    if (!WINDOW.FontAwesome) {
-      WINDOW.FontAwesome = api;
-    }
-
-    domready(function () {
-      autoReplace();
-
-      observe({
-        treeCallback: onTree,
-        nodeCallback: onNode,
-        pseudoElementsCallback: searchPseudoElements
-      });
-    });
-  }
-
-  namespace.hooks = _extends({}, namespace.hooks, {
-
-    addPack: function addPack(prefix, icons) {
-      namespace.styles[prefix] = _extends({}, namespace.styles[prefix] || {}, icons);
-
-      build();
-      autoReplace();
-    },
-
-    addShims: function addShims(shims) {
-      var _namespace$shims;
-
-      (_namespace$shims = namespace.shims).push.apply(_namespace$shims, toConsumableArray(shims));
-
-      build();
-      autoReplace();
-    }
-  });
-}
-
-bunker(bootstrap);
-
-}());
-
-
-/***/ }),
-/* 7 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(21);
-
-/***/ }),
-/* 8 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-module.exports = function bind(fn, thisArg) {
-  return function wrap() {
-    var args = new Array(arguments.length);
-    for (var i = 0; i < args.length; i++) {
-      args[i] = arguments[i];
-    }
-    return fn.apply(thisArg, args);
-  };
-};
-
-
-/***/ }),
-/* 9 */
-/***/ (function(module, exports) {
-
-// shim for using process in browser
-var process = module.exports = {};
-
-// cached from whatever global is present so that test runners that stub it
-// don't break things.  But we need to wrap it in a try catch in case it is
-// wrapped in strict mode code which doesn't define any globals.  It's inside a
-// function because try/catches deoptimize in certain engines.
-
-var cachedSetTimeout;
-var cachedClearTimeout;
-
-function defaultSetTimout() {
-    throw new Error('setTimeout has not been defined');
-}
-function defaultClearTimeout () {
-    throw new Error('clearTimeout has not been defined');
-}
-(function () {
-    try {
-        if (typeof setTimeout === 'function') {
-            cachedSetTimeout = setTimeout;
-        } else {
-            cachedSetTimeout = defaultSetTimout;
-        }
-    } catch (e) {
-        cachedSetTimeout = defaultSetTimout;
-    }
-    try {
-        if (typeof clearTimeout === 'function') {
-            cachedClearTimeout = clearTimeout;
-        } else {
-            cachedClearTimeout = defaultClearTimeout;
-        }
-    } catch (e) {
-        cachedClearTimeout = defaultClearTimeout;
-    }
-} ())
-function runTimeout(fun) {
-    if (cachedSetTimeout === setTimeout) {
-        //normal enviroments in sane situations
-        return setTimeout(fun, 0);
-    }
-    // if setTimeout wasn't available but was latter defined
-    if ((cachedSetTimeout === defaultSetTimout || !cachedSetTimeout) && setTimeout) {
-        cachedSetTimeout = setTimeout;
-        return setTimeout(fun, 0);
-    }
-    try {
-        // when when somebody has screwed with setTimeout but no I.E. maddness
-        return cachedSetTimeout(fun, 0);
-    } catch(e){
-        try {
-            // When we are in I.E. but the script has been evaled so I.E. doesn't trust the global object when called normally
-            return cachedSetTimeout.call(null, fun, 0);
-        } catch(e){
-            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error
-            return cachedSetTimeout.call(this, fun, 0);
-        }
-    }
-
-
-}
-function runClearTimeout(marker) {
-    if (cachedClearTimeout === clearTimeout) {
-        //normal enviroments in sane situations
-        return clearTimeout(marker);
-    }
-    // if clearTimeout wasn't available but was latter defined
-    if ((cachedClearTimeout === defaultClearTimeout || !cachedClearTimeout) && clearTimeout) {
-        cachedClearTimeout = clearTimeout;
-        return clearTimeout(marker);
-    }
-    try {
-        // when when somebody has screwed with setTimeout but no I.E. maddness
-        return cachedClearTimeout(marker);
-    } catch (e){
-        try {
-            // When we are in I.E. but the script has been evaled so I.E. doesn't  trust the global object when called normally
-            return cachedClearTimeout.call(null, marker);
-        } catch (e){
-            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error.
-            // Some versions of I.E. have different rules for clearTimeout vs setTimeout
-            return cachedClearTimeout.call(this, marker);
-        }
-    }
-
-
-
-}
-var queue = [];
-var draining = false;
-var currentQueue;
-var queueIndex = -1;
-
-function cleanUpNextTick() {
-    if (!draining || !currentQueue) {
-        return;
-    }
-    draining = false;
-    if (currentQueue.length) {
-        queue = currentQueue.concat(queue);
-    } else {
-        queueIndex = -1;
-    }
-    if (queue.length) {
-        drainQueue();
-    }
-}
-
-function drainQueue() {
-    if (draining) {
-        return;
-    }
-    var timeout = runTimeout(cleanUpNextTick);
-    draining = true;
-
-    var len = queue.length;
-    while(len) {
-        currentQueue = queue;
-        queue = [];
-        while (++queueIndex < len) {
-            if (currentQueue) {
-                currentQueue[queueIndex].run();
-            }
-        }
-        queueIndex = -1;
-        len = queue.length;
-    }
-    currentQueue = null;
-    draining = false;
-    runClearTimeout(timeout);
-}
-
-process.nextTick = function (fun) {
-    var args = new Array(arguments.length - 1);
-    if (arguments.length > 1) {
-        for (var i = 1; i < arguments.length; i++) {
-            args[i - 1] = arguments[i];
-        }
-    }
-    queue.push(new Item(fun, args));
-    if (queue.length === 1 && !draining) {
-        runTimeout(drainQueue);
-    }
-};
-
-// v8 likes predictible objects
-function Item(fun, array) {
-    this.fun = fun;
-    this.array = array;
-}
-Item.prototype.run = function () {
-    this.fun.apply(null, this.array);
-};
-process.title = 'browser';
-process.browser = true;
-process.env = {};
-process.argv = [];
-process.version = ''; // empty string to avoid regexp issues
-process.versions = {};
-
-function noop() {}
-
-process.on = noop;
-process.addListener = noop;
-process.once = noop;
-process.off = noop;
-process.removeListener = noop;
-process.removeAllListeners = noop;
-process.emit = noop;
-process.prependListener = noop;
-process.prependOnceListener = noop;
-
-process.listeners = function (name) { return [] }
-
-process.binding = function (name) {
-    throw new Error('process.binding is not supported');
-};
-
-process.cwd = function () { return '/' };
-process.chdir = function (dir) {
-    throw new Error('process.chdir is not supported');
-};
-process.umask = function() { return 0; };
-
-
-/***/ }),
-/* 10 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var utils = __webpack_require__(0);
-var settle = __webpack_require__(25);
-var buildURL = __webpack_require__(27);
-var parseHeaders = __webpack_require__(28);
-var isURLSameOrigin = __webpack_require__(29);
-var createError = __webpack_require__(11);
-var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(30);
-
-module.exports = function xhrAdapter(config) {
-  return new Promise(function dispatchXhrRequest(resolve, reject) {
-    var requestData = config.data;
-    var requestHeaders = config.headers;
-
-    if (utils.isFormData(requestData)) {
-      delete requestHeaders['Content-Type']; // Let the browser set it
-    }
-
-    var request = new XMLHttpRequest();
-    var loadEvent = 'onreadystatechange';
-    var xDomain = false;
-
-    // For IE 8/9 CORS support
-    // Only supports POST and GET calls and doesn't returns the response headers.
-    // DON'T do this for testing b/c XMLHttpRequest is mocked, not XDomainRequest.
-    if ("development" !== 'test' &&
-        typeof window !== 'undefined' &&
-        window.XDomainRequest && !('withCredentials' in request) &&
-        !isURLSameOrigin(config.url)) {
-      request = new window.XDomainRequest();
-      loadEvent = 'onload';
-      xDomain = true;
-      request.onprogress = function handleProgress() {};
-      request.ontimeout = function handleTimeout() {};
-    }
-
-    // HTTP basic authentication
-    if (config.auth) {
-      var username = config.auth.username || '';
-      var password = config.auth.password || '';
-      requestHeaders.Authorization = 'Basic ' + btoa(username + ':' + password);
-    }
-
-    request.open(config.method.toUpperCase(), buildURL(config.url, config.params, config.paramsSerializer), true);
-
-    // Set the request timeout in MS
-    request.timeout = config.timeout;
-
-    // Listen for ready state
-    request[loadEvent] = function handleLoad() {
-      if (!request || (request.readyState !== 4 && !xDomain)) {
-        return;
-      }
-
-      // The request errored out and we didn't get a response, this will be
-      // handled by onerror instead
-      // With one exception: request that using file: protocol, most browsers
-      // will return status as 0 even though it's a successful request
-      if (request.status === 0 && !(request.responseURL && request.responseURL.indexOf('file:') === 0)) {
-        return;
-      }
-
-      // Prepare the response
-      var responseHeaders = 'getAllResponseHeaders' in request ? parseHeaders(request.getAllResponseHeaders()) : null;
-      var responseData = !config.responseType || config.responseType === 'text' ? request.responseText : request.response;
-      var response = {
-        data: responseData,
-        // IE sends 1223 instead of 204 (https://github.com/axios/axios/issues/201)
-        status: request.status === 1223 ? 204 : request.status,
-        statusText: request.status === 1223 ? 'No Content' : request.statusText,
-        headers: responseHeaders,
-        config: config,
-        request: request
-      };
-
-      settle(resolve, reject, response);
-
-      // Clean up request
-      request = null;
-    };
-
-    // Handle low level network errors
-    request.onerror = function handleError() {
-      // Real errors are hidden from us by the browser
-      // onerror should only fire if it's a network error
-      reject(createError('Network Error', config, null, request));
-
-      // Clean up request
-      request = null;
-    };
-
-    // Handle timeout
-    request.ontimeout = function handleTimeout() {
-      reject(createError('timeout of ' + config.timeout + 'ms exceeded', config, 'ECONNABORTED',
-        request));
-
-      // Clean up request
-      request = null;
-    };
-
-    // Add xsrf header
-    // This is only done if running in a standard browser environment.
-    // Specifically not if we're in a web worker, or react-native.
-    if (utils.isStandardBrowserEnv()) {
-      var cookies = __webpack_require__(31);
-
-      // Add xsrf header
-      var xsrfValue = (config.withCredentials || isURLSameOrigin(config.url)) && config.xsrfCookieName ?
-          cookies.read(config.xsrfCookieName) :
-          undefined;
-
-      if (xsrfValue) {
-        requestHeaders[config.xsrfHeaderName] = xsrfValue;
-      }
-    }
-
-    // Add headers to the request
-    if ('setRequestHeader' in request) {
-      utils.forEach(requestHeaders, function setRequestHeader(val, key) {
-        if (typeof requestData === 'undefined' && key.toLowerCase() === 'content-type') {
-          // Remove Content-Type if data is undefined
-          delete requestHeaders[key];
-        } else {
-          // Otherwise add header to the request
-          request.setRequestHeader(key, val);
-        }
-      });
-    }
-
-    // Add withCredentials to request if needed
-    if (config.withCredentials) {
-      request.withCredentials = true;
-    }
-
-    // Add responseType to request if needed
-    if (config.responseType) {
-      try {
-        request.responseType = config.responseType;
-      } catch (e) {
-        // Expected DOMException thrown by browsers not compatible XMLHttpRequest Level 2.
-        // But, this can be suppressed for 'json' type as it can be parsed by default 'transformResponse' function.
-        if (config.responseType !== 'json') {
-          throw e;
-        }
-      }
-    }
-
-    // Handle progress if needed
-    if (typeof config.onDownloadProgress === 'function') {
-      request.addEventListener('progress', config.onDownloadProgress);
-    }
-
-    // Not all browsers support upload events
-    if (typeof config.onUploadProgress === 'function' && request.upload) {
-      request.upload.addEventListener('progress', config.onUploadProgress);
-    }
-
-    if (config.cancelToken) {
-      // Handle cancellation
-      config.cancelToken.promise.then(function onCanceled(cancel) {
-        if (!request) {
-          return;
-        }
-
-        request.abort();
-        reject(cancel);
-        // Clean up request
-        request = null;
-      });
-    }
-
-    if (requestData === undefined) {
-      requestData = null;
-    }
-
-    // Send the request
-    request.send(requestData);
-  });
-};
-
-
-/***/ }),
-/* 11 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var enhanceError = __webpack_require__(26);
-
-/**
- * Create an Error with the specified message, config, error code, request and response.
- *
- * @param {string} message The error message.
- * @param {Object} config The config.
- * @param {string} [code] The error code (for example, 'ECONNABORTED').
- * @param {Object} [request] The request.
- * @param {Object} [response] The response.
- * @returns {Error} The created error.
- */
-module.exports = function createError(message, config, code, request, response) {
-  var error = new Error(message);
-  return enhanceError(error, config, code, request, response);
-};
-
-
-/***/ }),
-/* 12 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-module.exports = function isCancel(value) {
-  return !!(value && value.__CANCEL__);
-};
-
-
-/***/ }),
-/* 13 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/**
- * A `Cancel` is an object that is thrown when an operation is canceled.
- *
- * @class
- * @param {string=} message The message.
- */
-function Cancel(message) {
-  this.message = message;
-}
-
-Cancel.prototype.toString = function toString() {
-  return 'Cancel' + (this.message ? ': ' + this.message : '');
-};
-
-Cancel.prototype.__CANCEL__ = true;
-
-module.exports = Cancel;
-
-
-/***/ }),
-/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -26772,24 +24315,2482 @@ Vue.compile = compileToFunctions;
 
 module.exports = Vue;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(39).setImmediate))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(40).setImmediate))
 
 /***/ }),
-/* 15 */,
-/* 16 */,
-/* 17 */,
-/* 18 */,
-/* 19 */,
-/* 20 */,
-/* 21 */
+/* 6 */,
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!function(){"use strict";void 0===Date.dp_locales&&(Date.dp_locales={texts:{buttonTitle:"Select date ...",buttonLabel:"Click or press the Enter key or the spacebar to open the calendar",prevButtonLabel:"Go to previous month",prevMonthButtonLabel:"Go to the previous year",prevYearButtonLabel:"Go to the previous twenty years",nextButtonLabel:"Go to next month",nextMonthButtonLabel:"Go to the next year",nextYearButtonLabel:"Go to the next twenty years",changeMonthButtonLabel:"Click or press the Enter key or the spacebar to change the month",changeYearButtonLabel:"Click or press the Enter key or the spacebar to change the year",changeRangeButtonLabel:"Click or press the Enter key or the spacebar to go to the next twenty years",closeButtonTitle:"Close",closeButtonLabel:"Close the calendar",calendarHelp:"- Up Arrow and Down Arrow - goes to the same day of the week in the previous or next week respectively. If the end of the month is reached, continues into the next or previous month as appropriate.\r\n- Left Arrow and Right Arrow - advances one day to the next, also in a continuum. Visually focus is moved from day to day and wraps from row to row in the grid of days.\r\n- Control+Page Up - Moves to the same date in the previous year.\r\n- Control+Page Down - Moves to the same date in the next year.\r\n- Home - Moves to the first day of the current month.\r\n- End - Moves to the last day of the current month.\r\n- Page Up - Moves to the same date in the previous month.\r\n- Page Down - Moves to the same date in the next month.\r\n- Enter or Espace - closes the calendar, and the selected date is shown in the associated text box.\r\n- Escape - closes the calendar without any action."},directionality:"LTR",month_names:["January","February","March","April","May","June","July","August","September","October","November","December"],month_names_abbreviated:["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],month_names_narrow:["J","F","M","A","M","J","J","A","S","O","N","D"],day_names:["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],day_names_abbreviated:["Sun","Mon","Tue","Wed","Thu","Fri","Sat"],day_names_short:["Su","Mo","Tu","We","Th","Fr","Sa"],day_names_narrow:["S","M","T","W","T","F","S"],day_periods:{am:"AM",noon:"noon",pm:"PM"},day_periods_abbreviated:{am:"AM",noon:"noon",pm:"PM"},day_periods_narrow:{am:"a",noon:"n",pm:"p"},quarter_names:["1st quarter","2nd quarter","3rd quarter","4th quarter"],quarter_names_abbreviated:["Q1","Q2","Q3","Q4"],quarter_names_narrow:["1","2","3","4"],era_names:["Before Christ","Anno Domini"],era_names_abbreviated:["BC","AD"],era_names_narrow:["B","A"],full_format:"EEEE, MMMM d, y",long_format:"MMMM d, y",medium_format:"MMM d, y",short_format:"M/d/yy",firstday_of_week:0})}(),function(t){if(true)!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(2)], __WEBPACK_AMD_DEFINE_FACTORY__ = (t),
+				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
+				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));else if("object"==typeof exports)t(require("jquery"));else{if("undefined"==typeof jQuery)throw new Error("Datepicker's JavaScript requires jQuery");t(jQuery)}}(function(g,c){"use strict";var r=['<a class="datepicker-button input-group-append" role="button" aria-haspopup="true" tabindex="0" aria-labelledby="datepicker-bn-open-label-CALENDARID">','\t<span class="input-group-text"><i class="fas fa-calendar-alt" title="Select Date..."></i></span>',"</a>"],n=['<div class="datepicker-calendar" id="datepicker-calendar-CALENDARID" aria-hidden="false">','\t<div class="datepicker-month-wrap">','\t\t<div class="datepicker-month-fast-next float-right" role="button" aria-labelledby="datepicker-bn-fast-next-label-CALENDARID" tabindex="0"><i class="fas fa-angle-double-right"></i></div>','\t\t<div class="datepicker-month-next float-right" role="button" aria-labelledby="datepicker-bn-next-label-CALENDARID" tabindex="0"><i class="fas fa-angle-right"></i></div>','\t\t<div class="datepicker-month-fast-prev float-left" role="button" aria-labelledby="datepicker-bn-fast-prev-label-CALENDARID" tabindex="0"><i class="fas fa-angle-double-left"></i></div>','\t\t<div class="datepicker-month-prev float-left" role="button" aria-labelledby="datepicker-bn-prev-label-CALENDARID" tabindex="0"><i class="fas fa-angle-left"></i></div>','\t\t<div id="datepicker-month-CALENDARID" class="datepicker-month" tabindex="0" role="heading" aria-live="assertive" aria-atomic="true" title="Click or press the Enter key or the spacebar to change the month">July 2015</div>',"\t</div>",'\t<table class="datepicker-grid" role="grid" aria-readonly="true" aria-activedescendant="datepicker-err-msg-CALENDARID" aria-labelledby="datepicker-month-CALENDARID" tabindex="0">','\t\t<thead role="presentation">','\t\t\t<tr class="datepicker-weekdays" role="row">','\t\t\t\t<th scope="col" id="day0-header-CALENDARID" class="datepicker-day" role="columnheader" aria-label="Sunday"><abbr title="Sunday">Su</abbr></th>','\t\t\t\t<th scope="col" id="day1-header-CALENDARID" class="datepicker-day" role="columnheader" aria-label="Monday"><abbr title="Monday">Mo</abbr></th>','\t\t\t\t<th scope="col" id="day2-header-CALENDARID" class="datepicker-day" role="columnheader" aria-label="Tuesday"><abbr title="Tuesday">Tu</abbr></th>','\t\t\t\t<th scope="col" id="day3-header-CALENDARID" class="datepicker-day" role="columnheader" aria-label="Wednesday"><abbr title="Wednesday">We</abbr></th>','\t\t\t\t<th scope="col" id="day4-header-CALENDARID" class="datepicker-day" role="columnheader" aria-label="Thursday"><abbr title="Thursday">Th</abbr></th>','\t\t\t\t<th scope="col" id="day5-header-CALENDARID" class="datepicker-day" role="columnheader" aria-label="Friday"><abbr title="Friday">Fr</abbr></th>','\t\t\t\t<th scope="col" id="day6-header-CALENDARID" class="datepicker-day" role="columnheader" aria-label="Saturday"><abbr title="Saturday">Sa</abbr></th>',"\t\t\t</tr>","\t\t</thead>",'\t\t<tbody role="presentation">',"\t\t\t<tr>",'\t\t\t\t<td id="datepicker-err-msg-CALENDARID" colspan="7">Javascript must be enabled</td>',"\t\t\t</tr>","\t\t</tbody>","\t</table>",'\t<div class="datepicker-close-wrap">','\t\t<button class="datepicker-close" id="datepicker-close-CALENDARID" aria-labelledby="datepicker-bn-close-label-CALENDARID">Close</button>',"\t</div>",'\t<div id="datepicker-bn-open-label-CALENDARID" class="datepicker-bn-open-label offscreen">Click or press the Enter key or the spacebar to open the calendar</div>','\t<div id="datepicker-bn-prev-label-CALENDARID" class="datepicker-bn-prev-label offscreen">Go to previous month</div>','\t<div id="datepicker-bn-next-label-CALENDARID" class="datepicker-bn-next-label offscreen">Go to next month</div>','\t<div id="datepicker-bn-fast-prev-label-CALENDARID" class="datepicker-bn-fast-prev-label offscreen">Go to previous year</div>','\t<div id="datepicker-bn-fast-next-label-CALENDARID" class="datepicker-bn-fast-next-label offscreen">Go to next year</div>','\t<div id="datepicker-bn-close-label-CALENDARID" class="datepicker-bn-close-label offscreen">Close the date picker</div>',"</div>"],o=function(t,e){var s=this;this.$target=g(t),this.options=g.extend({},o.DEFAULTS,e),this.locales=Date.dp_locales,this.startview(this.options.startView),"string"==typeof this.options.inputFormat&&(this.options.inputFormat=[this.options.inputFormat]),g.isArray(this.options.datesDisabled)||(this.options.datesDisabled=[this.options.datesDisabled]),g.each(this.options.datesDisabled,function(t,e){if("string"==typeof e){var a=s.parseDate(e);s.options.datesDisabled[t]=null===a?null:s.format(a)}else e instanceof Date&&!isNaN(e.valueOf())?s.options.datesDisabled[t]=s.format(e):s.options.datesDisabled[t]=null}),null!=this.options.min?this.options.min=this.parseDate(this.options.min):this.$target.attr("min")&&(this.options.min=this.parseDate(this.$target.attr("min"))),null!=this.options.max?this.options.max=this.parseDate(this.options.max):this.$target.attr("max")&&(this.options.max=this.parseDate(this.$target.attr("max"))),"string"==typeof this.options.previous?this.options.previous=g(this.options.previous):this.options.previous instanceof jQuery||(this.options.previous=null),"string"==typeof this.options.next?this.options.next=g(this.options.next):this.options.next instanceof jQuery||(this.options.next=null),this.id=this.$target.attr("id")||"datepicker-"+Math.floor(1e5*Math.random());var a=n.join("");a=a.replace(/CALENDARID/g,this.id+""),0==this.$target.parent(".input-group").length&&this.$target.wrap('<div class="input-group"></div>'),this.$label=this.$target.parents().find("label[for="+this.id+"]"),this.$group=this.$target.parent(".input-group"),this.$target.attr("aria-autocomplete","none"),this.$target.css("min-width","7em"),this.$target.addClass("form-control"),this.$target.attr("placeholder")||this.$target.attr("placeholder",this.options.inputFormat[0]);var i=r.join("");i=i.replace(/CALENDARID/g,this.id+""),this.$button=g(i),this.$button.addClass(this.options.theme),this.$calendar=g(a),this.$calendar.addClass(this.options.theme),this.$target.after(this.$button),"static"===this.$calendar.parent().css("position")&&this.$calendar.parent().css("position","relative"),this.$calendar.find(".datepicker-bn-open-label").html(this.options.buttonLabel),this.$target.attr("id")&&this.$calendar.attr("aria-controls",this.$target.attr("id")),this.$button.find("span").attr("title",this.options.buttonTitle),this.$calendar.css("left",this.$target.parent().position().left+"px"),this.$monthObj=this.$calendar.find(".datepicker-month"),this.$prev=this.$calendar.find(".datepicker-month-prev"),this.$next=this.$calendar.find(".datepicker-month-next"),this.$fastprev=this.$calendar.find(".datepicker-month-fast-prev"),this.$fastnext=this.$calendar.find(".datepicker-month-fast-next"),this.$grid=this.$calendar.find(".datepicker-grid"),"RTL"===this.locales.directionality&&this.$grid.addClass("rtl");this.$grid.find("th.datepicker-day abbr");(this.drawCalendarHeader(),0==this.options.inline&&1==this.options.modal?(this.$close=this.$calendar.find(".datepicker-close"),this.$close.html(this.options.closeButtonTitle).attr("title",this.options.closeButtonLabel),this.$calendar.find(".datepicker-bn-close-label").html(this.options.closeButtonLabel)):(this.hideObject(this.$calendar.find(".datepicker-close-wrap")),this.hideObject(this.$calendar.find(".datepicker-bn-close-label"))),0!=this.options.inline)?(this.hideObject(this.$button),("string"==typeof this.options.inline?g("#"+this.options.inline):this.options.inline).append(this.$calendar),this.$calendar.css({position:"relative",left:"0px"}),this.initializeDate()):(this.$calendar.css({display:"none"}),this.$target.parent().after(this.$calendar),this.hide(!this.options.gainFocusOnConstruction));this.keys={tab:9,enter:13,esc:27,space:32,pageup:33,pagedown:34,end:35,home:36,left:37,up:38,right:39,down:40},this.bindHandlers(),this.$button.click(function(t){return g(this).hasClass("disabled")||("true"===s.$calendar.attr("aria-hidden")?(s.initializeDate(),s.show()):s.hide(),s.selectGridCell(s.$grid.attr("aria-activedescendant"))),t.stopPropagation(),!1}),this.$button.keydown(function(t){var e=t||event;if(e.keyCode==s.keys.enter||e.keyCode==s.keys.space)return g(this).trigger("click"),!1}),this.$calendar.on("blur",function(t){"false"===s.$calendar.attr("aria-hidden")&&s.hide()})};o.VERSION="2.1.10",o.DEFAULTS={firstDayOfWeek:Date.dp_locales.firstday_of_week,weekDayFormat:"short",startView:0,daysOfWeekDisabled:[],datesDisabled:[],isDateDisabled:null,isMonthDisabled:null,isYearDisabled:null,inputFormat:[Date.dp_locales.short_format],outputFormat:Date.dp_locales.short_format,titleFormat:Date.dp_locales.full_format,buttonTitle:Date.dp_locales.texts.buttonTitle,buttonLabel:Date.dp_locales.texts.buttonLabel,prevButtonLabel:Date.dp_locales.texts.prevButtonLabel,prevMonthButtonLabel:Date.dp_locales.texts.prevMonthButtonLabel,prevYearButtonLabel:Date.dp_locales.texts.prevYearButtonLabel,nextButtonLabel:Date.dp_locales.texts.nextButtonLabel,nextMonthButtonLabel:Date.dp_locales.texts.nextMonthButtonLabel,nextYearButtonLabel:Date.dp_locales.texts.nextYearButtonLabel,changeMonthButtonLabel:Date.dp_locales.texts.changeMonthButtonLabel,changeYearButtonLabel:Date.dp_locales.texts.changeYearButtonLabel,changeRangeButtonLabel:Date.dp_locales.texts.changeRangeButtonLabel,closeButtonTitle:Date.dp_locales.texts.closeButtonTitle,closeButtonLabel:Date.dp_locales.texts.closeButtonLabel,onUpdate:function(t){},previous:null,next:null,theme:"default",modal:!1,inline:!1,gainFocusOnConstruction:!1,min:null,max:null},o.prototype.initializeDate=function(){var t=this.$target.val(),e=""===t?new Date:this.parseDate(t);this.setDate(e,!0)},o.prototype.getDate=function(){var t=this.$target.val();return""===t?new Date:this.parseDate(t)},o.prototype.setDate=function(t,e){switch(this.dateObj=t,e=void 0!==e&&e,null==this.dateObj&&(this.$target.attr("aria-invalid",!0),this.$target.parents(".form-group").addClass("has-error"),this.dateObj=new Date,this.dateObj.setHours(0,0,0,0)),null!=this.options.min&&this.dateObj<this.options.min?(this.$target.attr("aria-invalid",!0),this.$target.parents(".form-group").addClass("has-error"),this.dateObj=this.options.min):null!=this.options.max&&this.dateObj>this.options.max&&(this.$target.attr("aria-invalid",!0),this.$target.parents(".form-group").addClass("has-error"),this.dateObj=this.options.max),e&&""==this.$target.val()||this.$target.val(this.format(this.dateObj)),this.curYear=this.dateObj.getFullYear(),this.year=this.curYear,this.curMonth=this.dateObj.getMonth(),this.month=this.curMonth,this.date=this.dateObj.getDate(),this.options.startView){case 1:this.populateMonthsCalendar(),this.$grid.attr("aria-activedescendant",this.$grid.find(".curMonth").attr("id"));break;case 2:this.populateYearsCalendar(),this.$grid.attr("aria-activedescendant",this.$grid.find(".curYear").attr("id"));break;default:this.populateDaysCalendar(),this.$grid.attr("aria-activedescendant",this.$grid.find(".curDay").attr("id"))}},o.prototype.drawCalendarHeader=function(){for(var t=this.$grid.find("th.datepicker-day"),e=this.options.firstDayOfWeek,a=0;a<7;a++)t.eq(a).attr("aria-label",this.locales.day_names[e]),t.children("abbr").eq(a).attr("title",this.locales.day_names[e]).text("short"===this.options.weekDayFormat?this.locales.day_names_short[e]:this.locales.day_names_narrow[e]),e=(e+1)%7},o.prototype.populateDaysCalendar=function(){this.$calendar.find(".datepicker-bn-prev-label").html(this.options.prevButtonLabel),this.$calendar.find(".datepicker-bn-next-label").html(this.options.nextButtonLabel),this.$calendar.find(".datepicker-bn-fast-prev-label").html(this.options.prevMonthButtonLabel),this.$calendar.find(".datepicker-bn-fast-next-label").html(this.options.nextMonthButtonLabel),null!=this.options.min&&(this.year-1<this.options.min.getFullYear()||this.year-1==this.options.min.getFullYear()&&this.month<this.options.min.getMonth())?(this.$fastprev.attr("title",""),this.$fastprev.addClass("disabled"),this.$fastprev.removeClass("enabled")):(this.$fastprev.attr("title",this.options.prevMonthButtonLabel),this.$fastprev.addClass("enabled"),this.$fastprev.removeClass("disabled"));var t=this.previousMonth(this.year,this.month);null!=this.options.min&&(t.year<this.options.min.getFullYear()||t.year==this.options.min.getFullYear()&&t.month<this.options.min.getMonth())?(this.$prev.attr("title",""),this.$prev.addClass("disabled"),this.$prev.removeClass("enabled")):(this.$prev.attr("title",this.options.prevButtonLabel),this.$prev.addClass("enabled"),this.$prev.removeClass("disabled")),this.$monthObj.attr("title",this.options.changeMonthButtonLabel);var e=this.nextMonth(this.year,this.month);null!=this.options.max&&(e.year>this.options.max.getFullYear()||e.year==this.options.max.getFullYear()&&e.month>this.options.max.getMonth())?(this.$next.attr("title",""),this.$next.addClass("disabled"),this.$next.removeClass("enabled")):(this.$next.attr("title",this.options.nextButtonLabel),this.$next.addClass("enabled"),this.$next.removeClass("disabled")),null!=this.options.max&&(this.year+1>this.options.max.getFullYear()||this.year+1==this.options.max.getFullYear()&&this.month>this.options.max.getMonth())?(this.$fastnext.attr("title",""),this.$fastnext.addClass("disabled"),this.$fastnext.removeClass("enabled")):(this.$fastnext.attr("title",this.options.nextMonthButtonLabel),this.$fastnext.addClass("enabled"),this.$fastnext.removeClass("disabled")),this.showObject(this.$fastprev),this.showObject(this.$fastnext);var a=this.getDaysInMonth(this.year,this.month),s=this.getDaysInMonth(t.year,t.month),i=new Date(this.year,this.month,1).getDay(),r=(this.options.firstDayOfWeek+6)%7,n=1,o=1;this.$monthObj.html(this.locales.month_names[this.month]+" "+this.year),this.showObject(this.$grid.find("thead"));for(var l='\t<tr id="row0-'+this.id+'" role="row">\n',h=0,d=this.options.firstDayOfWeek;d!=i;)h++,d=(d+1)%7;for(;0<h;h--)l+='\t\t<td class="empty">'+(s-h+1)+"</td>\n";var c=this.options.isYearDisabled&&this.options.isYearDisabled(this.year),p=this.options.isMonthDisabled&&this.options.isMonthDisabled(this.year,this.month+1);for(n=1;n<=a;n++){var u=new Date(this.year,this.month,n,0,0,0,0),f=this.formatDate(u,this.options.titleFormat),y=n==this.date&&this.month==this.curMonth&&this.year==this.curYear?" curDay":"";c||p?l+='\t\t<td id="cell'+n+"-"+this.id+'" class="day unselectable'+y+'"':-1<g.inArray(d,this.options.daysOfWeekDisabled)?l+='\t\t<td id="cell'+n+"-"+this.id+'" class="day unselectable'+y+'"':null!=this.options.min&&u<this.options.min?l+='\t\t<td id="cell'+n+"-"+this.id+'" class="day unselectable'+y+'"':null!=this.options.max&&u>this.options.max?l+='\t\t<td id="cell'+n+"-"+this.id+'" class="day unselectable'+y+'"':-1<g.inArray(this.format(u),this.options.datesDisabled)?l+='\t\t<td id="cell'+n+"-"+this.id+'" class="day unselectable'+y+'"':this.options.isDateDisabled&&this.options.isDateDisabled(u)?l+='\t\t<td id="cell'+n+"-"+this.id+'" class="day unselectable'+y+'"':l+='\t\t<td id="cell'+n+"-"+this.id+'" class="day selectable'+y+'"',l+=' data-value="'+n+'"',l+=' title="'+f+'"',l+=' aria-label="'+f+'"',l+=' headers="day'+d+"-header-"+this.id+'" role="gridcell" tabindex="-1" aria-selected="false">'+n,l+="</td>",d==r&&n<a&&(l+='\t</tr>\n\t<tr id="row'+o+"-"+this.id+'" role="row">\n',o++),n<a&&(d=(d+1)%7)}for(;d!=r;)l+='\t\t<td class="empty">'+ ++h+"</td>\n",d=(d+1)%7;l+="\t</tr>";var b=this.$grid.find("tbody");b.empty(),b.append(l),this.gridType=0},o.prototype.populateMonthsCalendar=function(){this.$calendar.find(".datepicker-bn-prev-label").html(this.options.prevMonthButtonLabel),this.$calendar.find(".datepicker-bn-next-label").html(this.options.nextMonthButtonLabel),this.hideObject(this.$fastprev),this.hideObject(this.$fastnext),null!=this.options.min&&this.year-1<this.options.min.getFullYear()?(this.$prev.attr("title",""),this.$prev.addClass("disabled"),this.$prev.removeClass("enabled")):(this.$prev.attr("title",this.options.prevMonthButtonLabel),this.$prev.addClass("enabled"),this.$prev.removeClass("disabled")),this.$monthObj.attr("title",this.options.changeYearButtonLabel),null!=this.options.max&&this.year+1>this.options.max.getFullYear()?(this.$next.attr("title",""),this.$next.addClass("disabled"),this.$next.removeClass("enabled")):(this.$next.attr("title",this.options.nextMonthButtonLabel),this.$next.addClass("enabled"),this.$next.removeClass("disabled"));var t=0,e=1,a=this.$grid.find("tbody");this.$monthObj.html(this.year),this.hideObject(this.$grid.find("thead")),a.empty(),g("#datepicker-err-msg-"+this.id).empty();var s='\t<tr id="row0-'+this.id+'" role="row">\n',i=this.options.isYearDisabled&&this.options.isYearDisabled(this.year);for(t=0;t<12;t++)i?s+='\t\t<td id="cell'+(t+1)+"-"+this.id+'" class="month unselectable"':t==this.month&&this.year==this.curYear?s+='\t\t<td id="cell'+(t+1)+"-"+this.id+'" class="month curMonth selectable"':null!=this.options.min&&(this.year<this.options.min.getFullYear()||this.year==this.options.min.getFullYear()&&t<this.options.min.getMonth())?s+='\t\t<td id="cell'+(t+1)+"-"+this.id+'" class="month unselectable"':null!=this.options.max&&(this.year>this.options.max.getFullYear()||this.year==this.options.max.getFullYear()&&t>this.options.max.getMonth())?s+='\t\t<td id="cell'+(t+1)+"-"+this.id+'" class="month unselectable"':this.options.isMonthDisabled&&this.options.isMonthDisabled(this.year,t+1)?s+='\t\t<td id="cell'+(t+1)+"-"+this.id+'" class="month unselectable"':s+='\t\t<td id="cell'+(t+1)+"-"+this.id+'" class="month selectable"',s+=' data-value="'+t+'"',s+=' title="'+this.locales.month_names[t]+" "+this.year+'"',s+=' aria-label="'+this.locales.month_names[t]+" "+this.year+'"',s+=' role="gridcell" tabindex="-1" aria-selected="false">'+this.locales.month_names_abbreviated[t],s+="</td>",3!=t&&7!=t||(s+='\t</tr>\n\t<tr id="row'+e+"-"+this.id+'" role="row">\n',e++);s+="\t</tr>",a.append(s),this.gridType=1},o.prototype.populateYearsCalendar=function(){this.$calendar.find(".datepicker-bn-prev-label").html(this.options.prevYearButtonLabel),this.$calendar.find(".datepicker-bn-next-label").html(this.options.nextYearButtonLabel),this.hideObject(this.$fastprev),this.hideObject(this.$fastnext),null!=this.options.min&&this.year-20<this.options.min.getFullYear()?(this.$prev.attr("title",""),this.$prev.addClass("disabled"),this.$prev.removeClass("enabled")):(this.$prev.attr("title",this.options.prevYearButtonLabel),this.$prev.addClass("enabled"),this.$prev.removeClass("disabled")),this.$monthObj.attr("title",this.options.changeRangeButtonLabel),null!=this.options.max&&this.year+20>this.options.max.getFullYear()?(this.$next.attr("title",""),this.$next.addClass("disabled"),this.$next.removeClass("enabled")):(this.$next.attr("title",this.options.nextYearButtonLabel),this.$next.addClass("enabled"),this.$next.removeClass("disabled"));var t=10*Math.floor(this.year/10),e=t+19,a=1,s=this.$grid.find("tbody");this.$monthObj.html(t+"-"+e),this.hideObject(this.$grid.find("thead")),s.empty(),g("#datepicker-err-msg-"+this.id).empty();for(var i='\t<tr id="row0-'+this.id+'" role="row">\n',r=t;r<=e;r++){r==this.year?i+='\t\t<td id="cell'+(r-t+1)+"-"+this.id+'" class="year curYear selectable"':null!=this.options.min&&r<this.options.min.getFullYear()?i+='\t\t<td id="cell'+(r-t+1)+"-"+this.id+'" class="year unselectable"':null!=this.options.max&&r>this.options.max.getFullYear()?i+='\t\t<td id="cell'+(r-t+1)+"-"+this.id+'" class="year unselectable"':this.options.isYearDisabled&&this.options.isYearDisabled(r)?i+='\t\t<td id="cell'+(r-t+1)+"-"+this.id+'" class="year unselectable"':i+='\t\t<td id="cell'+(r-t+1)+"-"+this.id+'" class="year selectable"',i+=' data-value="'+r+'"',i+=' title="'+r+'"',i+=' role="gridcell" tabindex="-1" aria-selected="false">'+r,i+="</td>";var n=r-t;4!=n&&9!=n&&14!=n||(i+='\t</tr>\n\t<tr id="row'+a+"-"+this.id+'" role="row">\n',a++)}i+="\t</tr>",s.append(i),this.gridType=2},o.prototype.showDaysOfPrevMonth=function(t){var e=this.previousMonth(this.year,this.month);if(null!=this.options.min&&(e.year<this.options.min.getFullYear()||e.year==this.options.min.getFullYear()&&e.month<this.options.min.getMonth()))return!1;if(this.month=e.month,this.year=e.year,this.populateDaysCalendar(),null!=t){var a="cell"+(this.getDaysInMonth(this.year,this.month)-t)+"-"+this.id;this.$grid.attr("aria-activedescendant",a),this.selectGridCell(a)}return!0},o.prototype.showDaysOfMonth=function(t){if(null!=this.options.min&&(this.year<this.options.min.getFullYear()||this.year==this.options.min.getFullYear()&&t<this.options.min.getMonth()))return!1;if(null!=this.options.max&&(this.year>this.options.max.getFullYear()||this.year==this.options.max.getFullYear()&&t>this.options.max.getMonth()))return!1;this.month=t,this.date=Math.min(this.date,this.getDaysInMonth(this.year,this.month)),this.populateDaysCalendar();var e=this.$grid.find("tbody td[data-value='"+this.date+"']");return this.selectGridCell(e.attr("id")),!0},o.prototype.showMonthsOfPrevYear=function(t){if(null!=this.options.min&&this.year-1<this.options.min.getFullYear())return!1;if(this.year--,this.populateMonthsCalendar(),null!=t){var e="cell"+(12-t)+"-"+this.id;this.$grid.attr("aria-activedescendant",e),this.selectGridCell(e)}return!0},o.prototype.showMonthsOfYear=function(t){if(null!=this.options.min&&t<this.options.min.getFullYear())return!1;if(null!=this.options.max&&t>this.options.max.getFullYear())return!1;this.year=t,this.populateMonthsCalendar();var e=this.$grid.find("tbody td[data-value='"+this.month+"']");return this.$grid.attr("aria-activedescendant",e.attr("id")),this.selectGridCell(e.attr("id")),!0},o.prototype.showYearsOfPrevRange=function(t){if(null!=this.options.min&&this.year-20<this.options.min.getFullYear())return!1;if(this.year-=20,this.populateYearsCalendar(),null!=t){var e="cell"+(20-t)+"-"+this.id;this.$grid.attr("aria-activedescendant",e),this.selectGridCell(e)}return!0},o.prototype.showDaysOfNextMonth=function(t){var e=this.nextMonth(this.year,this.month);if(null!=this.options.max&&(e.year>this.options.max.getFullYear()||e.year==this.options.max.getFullYear()&&e.month>this.options.max.getMonth()))return!1;if(this.month=e.month,this.year=e.year,this.populateDaysCalendar(),null!=t){var a="cell"+t+"-"+this.id;this.$grid.attr("aria-activedescendant",a),this.selectGridCell(a)}return!0},o.prototype.showMonthsOfNextYear=function(t){if(null!=this.options.max&&this.year+1>this.options.max.getFullYear())return!1;if(this.year++,this.populateMonthsCalendar(),null!=t){var e="cell"+t+"-"+this.id;this.$grid.attr("aria-activedescendant",e),this.selectGridCell(e)}return!0},o.prototype.showYearsOfNextRange=function(t){if(null!=this.options.max&&this.year+20>this.options.max.getFullYear())return!1;if(this.year+=20,this.populateYearsCalendar(),null!=t){var e="cell"+t+"-"+this.id;this.$grid.attr("aria-activedescendant",e),this.selectGridCell(e)}return!0},o.prototype.showDaysOfPrevYear=function(){return(null==this.options.min||!(this.year-1<this.options.min.getFullYear()||this.year-1==this.options.min.getFullYear()&&this.month<this.options.min.getMonth()))&&(this.year--,this.populateDaysCalendar(),!0)},o.prototype.showDaysOfNextYear=function(){return(null==this.options.max||!(this.year+1>this.options.max.getFullYear()||this.year+1==this.options.max.getFullYear()&&this.month>this.options.max.getMonth()))&&(this.year++,this.populateDaysCalendar(),!0)},o.prototype.bindHandlers=function(){var a=this;this.$fastprev.click(function(t){return a.handleFastPrevClick(t)}),this.$prev.click(function(t){return a.handlePrevClick(t)}),this.$next.click(function(t){return a.handleNextClick(t)}),this.$fastnext.click(function(t){return a.handleFastNextClick(t)}),this.$monthObj.click(function(t){return a.handleMonthClick(t)}),this.$monthObj.keydown(function(t){return a.handleMonthKeyDown(t)}),this.$fastprev.keydown(function(t){return a.handleFastPrevKeyDown(t)}),this.$prev.keydown(function(t){return a.handlePrevKeyDown(t)}),this.$next.keydown(function(t){return a.handleNextKeyDown(t)}),this.$fastnext.keydown(function(t){return a.handleFastNextKeyDown(t)}),1==this.options.modal&&(this.$close.click(function(t){return a.handleCloseClick(t)}),this.$close.keydown(function(t){return a.handleCloseKeyDown(t)})),this.$grid.keydown(function(t){return a.handleGridKeyDown(t)}),this.$grid.keypress(function(t){return a.handleGridKeyPress(t)}),this.$grid.focus(function(t){return a.handleGridFocus(t)}),this.$grid.blur(function(t){return a.handleGridBlur(t)}),this.$grid.delegate("td","click",function(t){return a.handleGridClick(this,t)}),this.$target.change(function(t){var e=a.parseDate(g(this).val());a.updateLinked(e)})},o.prototype.handleFastPrevClick=function(t){if(this.showDaysOfPrevYear()){var e=this.$grid.attr("aria-activedescendant");this.month!=this.curMonth||this.year!=this.curYear?(this.$grid.attr("aria-activedescendant","cell1-"+this.id),this.selectGridCell("cell1-"+this.id)):(this.$grid.attr("aria-activedescendant",e),this.selectGridCell(e))}return t.stopPropagation(),!1},o.prototype.handlePrevClick=function(t){var e=this.$grid.attr("aria-activedescendant");switch(this.gridType){case 0:(t.ctrlKey?this.showDaysOfPrevYear():this.showDaysOfPrevMonth())&&(this.month!=this.curMonth||this.year!=this.curYear?(this.$grid.attr("aria-activedescendant","cell1-"+this.id),this.selectGridCell("cell1-"+this.id)):(this.$grid.attr("aria-activedescendant",e),this.selectGridCell(e)));break;case 1:this.showMonthsOfPrevYear()&&(this.year!=this.curYear?(this.$grid.attr("aria-activedescendant","cell1-"+this.id),this.selectGridCell("cell1-"+this.id)):(this.$grid.attr("aria-activedescendant",e),this.selectGridCell(e)));break;case 2:this.showYearsOfPrevRange()&&(this.$grid.attr("aria-activedescendant","cell1-"+this.id),this.selectGridCell("cell1-"+this.id))}return t.stopPropagation(),!1},o.prototype.handleMonthClick=function(t){return this.changeGrid(t),t.stopPropagation(),!1},o.prototype.handleNextClick=function(t){var e=this.$grid.attr("aria-activedescendant");switch(this.gridType){case 0:(t.ctrlKey?this.showDaysOfNextYear():this.showDaysOfNextMonth())&&(this.month!=this.curMonth||this.year!=this.curYear?(this.$grid.attr("aria-activedescendant","cell1-"+this.id),this.selectGridCell("cell1-"+this.id)):(this.$grid.attr("aria-activedescendant",e),this.selectGridCell(e)));break;case 1:this.showMonthsOfNextYear()&&(this.year!=this.curYear?(this.$grid.attr("aria-activedescendant","cell1-"+this.id),this.selectGridCell("cell1-"+this.id)):(this.$grid.attr("aria-activedescendant",e),this.selectGridCell(e)));break;case 2:this.showYearsOfNextRange()&&(this.$grid.attr("aria-activedescendant","cell1-"+this.id),this.selectGridCell("cell1-"+this.id))}return t.stopPropagation(),!1},o.prototype.handleFastNextClick=function(t){if(this.showDaysOfNextYear()){var e=this.$grid.attr("aria-activedescendant");this.month!=this.curMonth||this.year!=this.curYear?(this.$grid.attr("aria-activedescendant","cell1-"+this.id),this.selectGridCell("cell1-"+this.id)):(this.$grid.attr("aria-activedescendant",e),this.selectGridCell(e))}return t.stopPropagation(),!1},o.prototype.handleCloseClick=function(t){return this.hide(),t.stopPropagation(),!1},o.prototype.handleFastPrevKeyDown=function(t){if(t.altKey)return!0;switch(t.keyCode){case this.keys.tab:return!(0!=this.options.modal&&!t.ctrlKey)||(t.shiftKey?this.$close.focus():this.$prev.focus(),t.stopPropagation(),!1);case this.keys.enter:case this.keys.space:return!(!t.shiftKey&&!t.ctrlKey)||(this.showDaysOfPrevYear(),t.stopPropagation(),!1);case this.keys.esc:return this.hide(),t.stopPropagation(),!1}return!0},o.prototype.handlePrevKeyDown=function(t){if(t.altKey)return!0;switch(t.keyCode){case this.keys.tab:return!(0!=this.options.modal&&!t.ctrlKey)||(t.shiftKey?0==this.gridType?this.$fastprev.focus():this.$close.focus():this.$monthObj.focus(),t.stopPropagation(),!1);case this.keys.enter:case this.keys.space:if(t.shiftKey)return!0;switch(this.gridType){case 0:t.ctrlKey?this.showDaysOfPrevYear():this.showDaysOfPrevMonth();break;case 1:this.showMonthsOfPrevYear();break;case 2:this.showYearsOfPrevRange()}return t.stopPropagation(),!1;case this.keys.esc:return this.hide(),t.stopPropagation(),!1}return!0},o.prototype.handleMonthKeyDown=function(t){if(t.altKey)return!0;switch(t.keyCode){case this.keys.tab:return!(0!=this.options.modal&&!t.ctrlKey)||(t.shiftKey?this.$prev.focus():this.$next.focus(),t.stopPropagation(),!1);case this.keys.enter:case this.keys.space:return this.changeGrid(t),t.stopPropagation(),!1;case this.keys.esc:return this.hide(),t.stopPropagation(),!1}return!0},o.prototype.handleNextKeyDown=function(t){if(t.altKey)return!0;switch(t.keyCode){case this.keys.tab:return!(0!=this.options.modal&&!t.ctrlKey)||(t.shiftKey?this.$monthObj.focus():0==this.gridType?this.$fastnext.focus():this.$grid.focus(),t.stopPropagation(),!1);case this.keys.enter:case this.keys.space:switch(this.gridType){case 0:t.ctrlKey?this.showDaysOfNextYear():this.showDaysOfNextMonth();break;case 1:this.showMonthsOfNextYear();break;case 2:this.showYearsOfNextRange()}return t.stopPropagation(),!1;case this.keys.esc:return this.hide(),t.stopPropagation(),!1}return!0},o.prototype.handleFastNextKeyDown=function(t){if(t.altKey)return!0;switch(t.keyCode){case this.keys.tab:return!(0!=this.options.modal&&!t.ctrlKey)||(t.shiftKey?this.$next.focus():this.$grid.focus(),t.stopPropagation(),!1);case this.keys.enter:case this.keys.space:return this.showDaysOfNextYear(),t.stopPropagation(),!1;case this.keys.esc:return this.hide(),t.stopPropagation(),!1}return!0},o.prototype.handleCloseKeyDown=function(t){if(t.altKey)return!0;switch(t.keyCode){case this.keys.tab:return!!t.ctrlKey||(t.shiftKey?this.$grid.focus():0==this.gridType?this.$fastprev.focus():this.$prev.focus(),t.stopPropagation(),!1);case this.keys.enter:case this.keys.esc:case this.keys.space:return!(!t.shiftKey&&!t.ctrlKey)||(this.hide(),t.stopPropagation(),!1)}return!0},o.prototype.handleGridKeyDown=function(t){var e=g("#"+this.$grid.attr("aria-activedescendant")),a=this.$grid.find("td.selectable"),s=this.$grid.find("tbody tr").eq(0).find("td").length;if(t.altKey&&t.keyCode!=this.keys.pageup&&t.keyCode!=this.keys.pagedown)return!0;switch(t.keyCode){case this.keys.tab:return 1==this.options.modal?t.shiftKey?0==this.gridType?this.$fastnext.focus():this.$next.focus():this.$close.focus():(this.hide(),this.handleTabOut(t)),t.stopPropagation(),!1;case this.keys.enter:case this.keys.space:if(t.ctrlKey)return!0;switch(this.gridType){case 0:this.update(),this.hide();break;case 1:this.showDaysOfMonth(parseInt(e.attr("data-value"),10));break;case 2:this.showMonthsOfYear(parseInt(e.attr("data-value"),10))}return t.stopPropagation(),!1;case this.keys.esc:return this.hide(),t.stopPropagation(),!1;case this.keys.left:case this.keys.right:if(t.keyCode==this.keys.left&&"LTR"===this.locales.directionality||t.keyCode==this.keys.right&&"RTL"===this.locales.directionality){if(t.ctrlKey||t.shiftKey)return!0;var i=null;if(0<=(n=a.index(e)-1))i=a.eq(n),this.unSelectGridCell(e.attr("id")),this.$grid.attr("aria-activedescendant",i.attr("id")),this.selectGridCell(i.attr("id"));else switch(this.gridType){case 0:this.showDaysOfPrevMonth(0);break;case 1:this.showMonthsOfPrevYear(0);break;case 2:this.showYearsOfPrevRange(0)}return t.stopPropagation(),!1}if(t.ctrlKey||t.shiftKey)return!0;var r=null;if((n=a.index(e)+1)<a.length)r=a.eq(n),this.unSelectGridCell(e.attr("id")),this.$grid.attr("aria-activedescendant",r.attr("id")),this.selectGridCell(r.attr("id"));else switch(this.gridType){case 0:this.showDaysOfNextMonth(1);break;case 1:this.showMonthsOfNextYear(1);break;case 2:this.showYearsOfNextRange(1)}return t.stopPropagation(),!1;case this.keys.up:if(t.ctrlKey||t.shiftKey)return!0;i=null;if(0<=(n=a.index(e)-s))i=a.eq(n),this.unSelectGridCell(e.attr("id")),this.$grid.attr("aria-activedescendant",i.attr("id")),this.selectGridCell(i.attr("id"));else switch(n=s-1-a.index(e),this.gridType){case 0:this.showDaysOfPrevMonth(n);break;case 1:this.showMonthsOfPrevYear(n);break;case 2:this.showYearsOfPrevRange(n)}return t.stopPropagation(),!1;case this.keys.down:if(t.ctrlKey||t.shiftKey)return!0;var n;r=null;if((n=a.index(e)+s)<a.length)r=a.eq(n),this.unSelectGridCell(e.attr("id")),this.$grid.attr("aria-activedescendant",r.attr("id")),this.selectGridCell(r.attr("id"));else switch(n=s+1-(a.length-a.index(e)),this.gridType){case 0:this.showDaysOfNextMonth(n);break;case 1:this.showMonthsOfNextYear(n);break;case 2:this.showYearsOfNextRange(n)}return t.stopPropagation(),!1;case this.keys.pageup:var o=this.$grid.attr("aria-activedescendant");if(t.shiftKey||t.ctrlKey)return!0;t.preventDefault();var l=!1;switch(this.gridType){case 0:t.altKey?(t.stopImmediatePropagation(),l=this.showDaysOfPrevYear()):l=this.showDaysOfPrevMonth();break;case 1:l=this.showMonthsOfPrevYear();break;case 2:l=this.showYearsOfPrevRange()}if(l)if(g("#"+o).attr("id")==c){var h=a.eq(a.length-1);this.$grid.attr("aria-activedescendant",h.attr("id")),this.selectGridCell(h.attr("id"))}else this.selectGridCell(o);return t.stopPropagation(),!1;case this.keys.pagedown:o=this.$grid.attr("aria-activedescendant");if(t.shiftKey||t.ctrlKey)return!0;t.preventDefault();l=!1;switch(this.gridType){case 0:t.altKey?(t.stopImmediatePropagation(),l=this.showDaysOfNextYear()):l=this.showDaysOfNextMonth();break;case 1:l=this.showMonthsOfNextYear();break;case 2:l=this.showYearsOfNextRange()}if(l)if(g("#"+o).attr("id")==c){h=a.eq(a.length-1);this.$grid.attr("aria-activedescendant",h.attr("id")),this.selectGridCell(h.attr("id"))}else this.selectGridCell(o);return t.stopPropagation(),!1;case this.keys.home:if(t.ctrlKey||t.shiftKey)return!0;var d=a.eq(0);return this.unSelectGridCell(e.attr("id")),this.$grid.attr("aria-activedescendant",d.attr("id")),this.selectGridCell(d.attr("id")),t.stopPropagation(),!1;case this.keys.end:if(t.ctrlKey||t.shiftKey)return!0;h=a.eq(a.length-1);return this.unSelectGridCell(e.attr("id")),this.$grid.attr("aria-activedescendant",h.attr("id")),this.selectGridCell(h.attr("id")),t.stopPropagation(),!1}return!0},o.prototype.handleGridKeyPress=function(t){if(t.altKey)return!0;switch(t.keyCode){case this.keys.tab:case this.keys.enter:case this.keys.space:case this.keys.esc:case this.keys.left:case this.keys.right:case this.keys.up:case this.keys.down:case this.keys.pageup:case this.keys.pagedown:case this.keys.home:case this.keys.end:return t.stopPropagation(),!1}return!0},o.prototype.handleGridClick=function(t,e){var a=g(t);if(a.is(".empty")||a.is(".unselectable"))return!0;switch(this.$grid.find(".focus").removeClass("focus").attr("aria-selected","false").attr("tabindex",-1),this.gridType){case 0:this.$grid.attr("aria-activedescendant",a.attr("id")),this.selectGridCell(a.attr("id")),this.update(),this.hide();break;case 1:this.showDaysOfMonth(parseInt(a.attr("data-value"),10));break;case 2:this.showMonthsOfYear(parseInt(a.attr("data-value"),10))}return e.stopPropagation(),!1},o.prototype.handleGridFocus=function(t){var e=this.$grid.attr("aria-activedescendant");if(g("#"+e).attr("id")==c){var a=this.$grid.find("td.selectable"),s=a.eq(a.length-1);this.$grid.attr("aria-activedescendant",s.attr("id")),this.selectGridCell(s.attr("id"))}else this.selectGridCell(e);return!0},o.prototype.handleGridBlur=function(t){return this.unSelectGridCell(this.$grid.attr("aria-activedescendant")),!0},o.prototype.handleTabOut=function(t){var e=g("body").find("input:visible,textarea:visible,select:visible"),a=e.index(this.$target);return-1<a&&a<e.length&&(t.shiftKey?0<a&&a--:a+1<e.length&&a++,e.eq(a).focus()),!0},o.prototype.changeGrid=function(t){switch(this.gridType){case 0:if(this.populateMonthsCalendar(),this.year!=this.curYear){var e=this.$grid.find("td.selectable");this.$grid.attr("aria-activedescendant",e.eq(0).attr("id"))}else this.$grid.attr("aria-activedescendant",this.$grid.find(".curMonth").attr("id"));this.selectGridCell(this.$grid.attr("aria-activedescendant"));break;case 2:t.shiftKey?this.year-=20:this.year+=20;case 1:if(this.populateYearsCalendar(),this.year!=this.curYear){e=this.$grid.find("td.selectable");this.$grid.attr("aria-activedescendant",e.eq(0).attr("id"))}else this.$grid.attr("aria-activedescendant",this.$grid.find(".curYear").attr("id"));this.selectGridCell(this.$grid.attr("aria-activedescendant"))}return!0},o.prototype.selectGridCell=function(t){g("#"+t).addClass("focus").attr("aria-selected","true").attr("tabindex",0).focus()},o.prototype.unSelectGridCell=function(t){g("#"+t).removeClass("focus").attr("aria-selected","false").attr("tabindex",-1)},o.prototype.update=function(){var t=g("#"+this.$grid.attr("aria-activedescendant")),e=new Date(this.year,this.month,parseInt(t.attr("data-value"),10)),a=this.formatDate(e,this.options.outputFormat);this.$target.val(a),this.$target.removeAttr("aria-invalid"),this.$target.parents(".form-group").removeClass("has-error"),this.$target.trigger("change"),this.options.onUpdate&&this.options.onUpdate(a)},o.prototype.updateLinked=function(t){if(null!==this.options.previous&&""!==this.options.previous.val()&&t<this.options.previous.datepicker("getDate")){var e=this.formatDate(t,this.options.previous.datepicker("outputFormat"));this.options.previous.val(e)}if(null!==this.options.next&&""!==this.options.next.val()&&this.options.next.datepicker("getDate")<t){var a=this.formatDate(t,this.options.next.datepicker("outputFormat"));this.options.next.val(a)}},o.prototype.hideObject=function(t){t.attr("aria-hidden",!0),t.hide()},o.prototype.showObject=function(t){t.attr("aria-hidden",!1),t.show()},o.prototype.show=function(){var a=this;if(g(".datepicker-calendar").trigger("ab.datepicker.opening",[a.id]),1==this.options.modal){this.modalEventHandler||(this.modalEventHandler=function(t){return a.$grid.focus(),t.stopPropagation,!1}),g(document).on("click mousedown mouseup",this.modalEventHandler),this.greyOut(!0);var t=parseInt(g("#datepicker-overlay").css("z-index"),10)||40;this.$calendar.css("z-index",t+1)}else g(document).on("click",g.proxy(this.handleDocumentClick,this)),this.$calendar.on("ab.datepicker.opening",function(t,e){e!=a.id?a.hide():a.$grid.focus()});this.$calendar.on("ab.datepicker.opened",function(t,e){e==a.id&&a.$grid.focus()});var e=Math.max(0,Math.floor(this.$group.offset().top-this.$label.offset().top)),s=Math.max(0,Math.floor(this.$group.offset().left-this.$label.offset().left)),i=parseInt(this.$calendar.parent().css("padding-left"),10),r=this.$calendar.outerHeight(),n=this.$group.offset().top,o=(this.$group.offset().left,this.$group.outerHeight(!0)),l=Math.floor(n-g(window).scrollTop()),h=Math.floor(g(window).height()-(n+o-g(window).scrollTop()));h<r&&h<l?(this.$calendar.addClass("above"),this.$calendar.css({top:e-r+"px",left:s+i+"px"})):(this.$calendar.addClass("below"),this.$calendar.css({top:o+e+"px",left:s+i+"px"})),this.$calendar.attr("aria-hidden","false"),this.$calendar.fadeIn(),g(".datepicker-calendar").trigger("ab.datepicker.opened",[a.id])},o.prototype.refresh=function(){switch(this.drawCalendarHeader(),this.gridType){case 0:this.populateDaysCalendar();break;case 1:this.populateMonthsCalendar();break;case 2:this.populateYearsCalendar()}},o.prototype.handleDocumentClick=function(t){return 0==g(t.target).parents("#datepicker-calendar-"+this.id).length?(this.hide(),!0):(this.$grid.focus(),t.stopPropagation,!1)},o.prototype.hide=function(t){if(0==this.options.inline){1==this.options.modal?(this.modalEventHandler&&g(document).off("click mousedown mouseup",this.modalEventHandler),this.greyOut(!1)):(g(document).off("click",this.handleDocumentClick),this.$calendar.off("ab.datepicker.opening")),this.$calendar.removeClass("above below"),this.$calendar.attr("aria-hidden","true"),this.$calendar.fadeOut(),g(".datepicker-calendar").trigger("ab.datepicker.closed",[this.id]),t||this.$target.focus()}},o.prototype.greyOut=function(t){var e=g("#datepicker-overlay");0==e.length&&t&&(g("body").append('<div id="datepicker-overlay" class="datepicker-overlay"></div>'),e=g("#datepicker-overlay")),t?e.fadeIn(500):e.fadeOut(500)},o.prototype.absolutePosition=function(t){var e=0,a=0;if(t.getBoundingClientRect){var s=t.getBoundingClientRect(),i=document.body,r=document.documentElement,n=window.pageYOffset||r.scrollTop||i.scrollTop,o=window.pageXOffset||r.scrollLeft||i.scrollLeft,l=r.clientTop||i.clientTop||0,h=r.clientLeft||i.clientLeft||0;e=Math.round(s.top+n-l),a=Math.round(s.left+o-h)}else for(;t;)e+=parseInt(t.offsetTop,10),a+=parseInt(t.offsetLeft,10),t=t.offsetParent;return{top:e,left:a}},o.prototype.getDaysInMonth=function(t,e){return 32-new Date(t,e,32).getDate()},o.prototype.previousMonth=function(t,e){return 0==e?(e=11,t--):e--,{year:t,month:e}},o.prototype.nextMonth=function(t,e){return 11==e?(e=0,t++):e++,{year:t,month:e}},o.prototype.formatDate=function(t,e){var a,s,i,r,n,o=function(t){return(t<0||9<t?"":"0")+t},l=function(t){var e=new Date(t.getTime());return e.setHours(0),t-e},h=t.getFullYear()+"",d=t.getMonth()+1,c=t.getDate(),p=(a=t,s=new Date(a.getFullYear(),0,0),Math.floor((a-s)/864e5)),u=t.getDay(),f=t.getHours(),y=t.getMinutes(),b=t.getSeconds(),m=(i=t,r=new Date(i.getFullYear(),0,1),Math.ceil(((i-r)/864e5+r.getDay()+1)/7)),g=(n=t,Math.ceil((n.getDate()-1-n.getDay())/7)),v=Math.floor(t.getDate()/7)+1,$=Math.ceil((t.getMonth()+1)/3),k=t.getFullYear()<1?0:1,D={y:""+h,yyyy:h,yy:h.substring(2,4),L:d,LL:o(d),LLL:this.locales.month_names_abbreviated[d-1],LLLL:this.locales.month_names[d-1],LLLLL:this.locales.month_names_narrow[d-1],M:d,MM:o(d),MMM:this.locales.month_names_abbreviated[d-1],MMMM:this.locales.month_names[d-1],MMMMM:this.locales.month_names_narrow[d-1],d:c,dd:o(c),D:p,DD:p,DDD:p,A:Math.round(l(t)*Math.pow(10,-2)),AA:Math.round(l(t)*Math.pow(10,-1)),AAA:Math.round(l(t)*Math.pow(10,0)),AAAA:Math.round(l(t)*Math.pow(10,1)),AAAAA:Math.round(l(t)*Math.pow(10,2)),AAAAAA:Math.round(l(t)*Math.pow(10,3)),E:this.locales.day_names_abbreviated[u],EE:this.locales.day_names_abbreviated[u],EEE:this.locales.day_names_abbreviated[u],EEEE:this.locales.day_names[u],EEEEE:this.locales.day_names_narrow[u],EEEEEE:this.locales.day_names_short[u],e:u,ee:u,eee:this.locales.day_names_abbreviated[u],eeee:this.locales.day_names[u],eeeee:this.locales.day_names_narrow[u],eeeeee:this.locales.day_names_short[u],c:u,cc:u,ccc:this.locales.day_names_abbreviated[u],cccc:this.locales.day_names[u],ccccc:this.locales.day_names_narrow[u],cccccc:this.locales.day_names_short[u],F:v,G:this.locales.era_names_abbreviated[k],GG:this.locales.era_names_abbreviated[k],GGG:this.locales.era_names_abbreviated[k],GGGG:this.locales.era_names[k],GGGGG:this.locales.era_names_narrow[k],Q:$,QQ:o($),QQQ:this.locales.quarter_names_abbreviated[$-1],QQQQ:this.locales.quarter_names[$-1],QQQQQ:this.locales.quarter_names_narrow[$-1],q:$,qq:o($),qqq:this.locales.quarter_names_abbreviated[$-1],qqqq:this.locales.quarter_names[$-1],qqqqq:this.locales.quarter_names_narrow[$-1],H:f,HH:o(f),h:0==f?12:12<f?f-12:f,hh:o(0==f?12:12<f?f-12:f),K:11<f?f-12:f,k:f+1,KK:o(11<f?f-12:f),kk:o(f+1),a:11<f?this.locales.day_periods.pm:this.locales.day_periods.am,m:y,mm:o(y),s:b,ss:o(b),w:m,ww:o(m),W:g};return e.replace(/('[^']+'|y{1,4}|L{1,5}|M{1,5}|c{1,6}|d{1,2}|D{1,3}|E{1,6}|e{1,6}|F{1,1}|G{1,5}|Q{1,5}|q{1,5}|H{1,2}|h{1,2}|K{1,2}|k{1,2}|m{1,2}|s{1,2}|w{1,2}|W{1,1}|A{1,6})/g,function(t){return"'"===t.charAt(0)?t.substr(1,t.length-2):D[t]||t})},o.prototype.createDateFromFormat=function(t,n){var o=function(t,e,a,s){for(var i=s;a<=i;i--){var r=t.substring(e,e+i);if(r.length<a)return null;if(/^\d+$/.test(r))return r}return null},l=function(t,e){for(var a=0;a<t.length;a++){var s=t[a];if(n.substring(e,e+s.length).toLowerCase()==s.toLowerCase())return s.length}return 0},h=0,e=new Date,d=e.getYear(),c=e.getMonth()+1,p=1,u=0,f=0,y=0,b="",m=this;if(g.each(t.match(/(.).*?\1*/g),function(t,e){switch(e){case"yyyy":null!=(d=o(n,h,4,4))&&(h+=d.length);break;case"yy":null!=(d=o(n,h,2,2))&&(h+=d.length);break;case"y":null!=(d=o(n,h,2,4))&&(h+=d.length);break;case"MMM":case"LLL":for(var a=c=0;a<m.locales.month_names_abbreviated.length;a++){var s=m.locales.month_names_abbreviated[a];if(n.substring(h,h+s.length).toLowerCase()==s.toLowerCase()){c=a+1,h+=s.length;break}}break;case"MMMM":case"LLLL":for(a=c=0;a<m.locales.month_names.length;a++){s=m.locales.month_names[a];if(n.substring(h,h+s.length).toLowerCase()==s.toLowerCase()){c=a+1,h+=s.length;break}}break;case"EEE":case"EE":case"E":case"eee":h+=l(m.locales.day_names_abbreviated,h);break;case"EEEE":case"eeee":case"cccc":h+=l(m.locales.day_names,h);break;case"EEEEEE":case"eeeeee":case"cccccc":h+=l(m.locales.day_names_short,h);break;case"MM":case"M":case"LL":case"L":if(null==(c=o(n,h,e.length,2))||c<1||12<c)return null;h+=c.length;break;case"dd":case"d":if(null==(p=o(n,h,e.length,2))||p<1||31<p)return null;h+=p.length;break;case"hh":case"h":if(null==(u=o(n,h,e.length,2))||u<1||12<u)return null;h+=u.length;break;case"HH":case"H":if(null==(u=o(n,h,e.length,2))||u<0||23<u)return null;h+=u.length;break;case"KK":case"K":if(null==(u=o(n,h,e.length,2))||u<0||11<u)return null;h+=u.length;break;case"kk":case"k":if(null==(u=o(n,h,e.length,2))||u<1||24<u)return null;h+=u.length,u--;break;case"mm":case"m":if(null==(f=o(n,h,e.length,2))||f<0||59<f)return null;h+=f.length;break;case"ss":case"s":if(null==(y=o(n,h,e.length,2))||y<0||59<y)return null;h+=y.length;break;case"a":var i=m.locales.day_periods.am.length,r=m.locales.day_periods.pm.length;if(n.substring(h,h+i)==m.locales.day_periods.am)b="AM",h+=i;else{if(n.substring(h,h+r)!=m.locales.day_periods.pm)return null;b="PM",h+=r}break;default:if(n.substring(h,h+e.length)!=e)return null;h+=e.length}}),h!=n.length)return null;if(null==d)return null;if(2==d.length&&(d=50<d?d-0+1900:d-0+2e3),c<1||12<c)return null;if(2==c)if(d%4==0&&d%100!=0||d%400==0){if(29<p)return null}else if(28<p)return null;return(4==c||6==c||9==c||11==c)&&30<p?null:(u<12&&"PM"==b?u=u-0+12:11<u&&"AM"==b&&(u-=12),new Date(d,c-1,p,u,f,y))},o.prototype.parseDate=function(a){var s=null,i=this;return g.each(this.options.inputFormat,function(t,e){if(null!=(s=i.createDateFromFormat(e,a)))return!1}),null==s&&(s=i.createDateFromFormat(this.options.outputFormat,a)),s},o.prototype.min=function(t){return null!=t&&(this.options.min=t instanceof Date?t:this.parseDate(t),null!=this.options.min&&this.dateObj<this.options.min&&(this.$target.attr("aria-invalid",!0),this.$target.parents(".form-group").addClass("has-error"),this.dateObj=this.options.min),0!=this.options.inline&&this.refresh()),this.options.min},o.prototype.max=function(t){return null!=t&&(this.options.max=t instanceof Date?t:this.parseDate(t),null!=this.options.max&&this.dateObj>this.options.max&&(this.$target.attr("aria-invalid",!0),this.$target.parents(".form-group").addClass("has-error"),this.dateObj=this.options.max),0!=this.options.inline&&this.refresh()),this.options.max},o.prototype.theme=function(t){return null!=t&&(this.$button.removeClass(this.options.theme),this.$calendar.removeClass(this.options.theme),this.options.theme=t,this.$button.addClass(this.options.theme),this.$calendar.addClass(this.options.theme)),this.options.theme},o.prototype.firstDayOfWeek=function(t){return null!=t&&(this.options.firstDayOfWeek=parseInt(t,10),0==this.options.inline?this.drawCalendarHeader():this.refresh()),this.options.firstDayOfWeek},o.prototype.daysOfWeekDisabled=function(t){if(null!=t){this.options.daysOfWeekDisabled=[],g.isArray(t)||(t=[t]);var a=this;g.each(t,function(t,e){"number"==typeof e?a.options.daysOfWeekDisabled.push(e):"string"==typeof e&&a.options.daysOfWeekDisabled.push(parseInt(e,10))})}return this.options.daysOfWeekDisabled},o.prototype.weekDayFormat=function(t){return null!=t&&(this.options.weekDayFormat=t,this.drawCalendarHeader()),this.options.weekDayFormat},o.prototype.inputFormat=function(t){return null!=t&&(g.isArray(t)||(t=[t]),this.$target.attr("placeholder")==this.options.inputFormat[0]&&this.$target.attr("placeholder",t[0]),this.options.inputFormat=t),this.options.inputFormat},o.prototype.outputFormat=function(t){return null!=t&&(this.options.outputFormat=t),this.options.outputFormat},o.prototype.modal=function(t){if(null!=t)if(this.options.modal=t,1==this.options.modal){0==this.options.inline&&(this.showObject(this.$calendar.find(".datepicker-close-wrap")),this.showObject(this.$calendar.find(".datepicker-bn-close-label"))),this.$close=this.$calendar.find(".datepicker-close"),this.$close.html(this.options.closeButtonTitle).attr("title",this.options.closeButtonLabel),this.$calendar.find(".datepicker-bn-close-label").html(this.options.closeButtonLabel);var e=this;this.$close.click(function(t){return e.handleCloseClick(t)}),this.$close.keydown(function(t){return e.handleCloseKeyDown(t)})}else this.hideObject(this.$calendar.find(".datepicker-close-wrap")),this.hideObject(this.$calendar.find(".datepicker-bn-close-label"));return this.options.modal},o.prototype.inline=function(t){null!=t&&(0!=t?(this.hideObject(this.$button),this.hideObject(this.$calendar.find(".datepicker-close-wrap")),this.hideObject(this.$calendar.find(".datepicker-bn-close-label")),("string"==typeof t?g("#"+t):t).append(this.$calendar),this.$calendar.css({position:"relative",left:"0px",top:"0px"}),this.options.inline=t,this.initializeDate(),this.showObject(this.$calendar)):(this.$target.parent().after(this.$calendar),this.showObject(this.$button),1==this.options.modal&&(this.showObject(this.$calendar.find(".datepicker-close-wrap")),this.showObject(this.$calendar.find(".datepicker-bn-close-label"))),"static"===this.$calendar.parent().css("position")&&this.$calendar.parent().css("position","relative"),this.$calendar.css({position:"absolute"}),this.options.inline=t,this.hide()));return this.options.inline},o.prototype.format=function(t){return this.formatDate(t,this.options.outputFormat)},o.prototype.enable=function(){this.$button.removeClass("disabled"),this.$button.attr("aria-disabled",!1),this.$button.attr("tabindex",0)},o.prototype.disable=function(){this.hide(),this.$button.addClass("disabled"),this.$button.attr("aria-disabled",!0),this.$button.attr("tabindex",-1)},o.prototype.datesDisabled=function(t){this.options.datesDisabled=[],g.isArray(t)||(t=[t]);var s=this;g.each(t,function(t,e){if("string"==typeof e){var a=s.parseDate(e);null!==a&&s.options.datesDisabled.push(s.format(a))}else e instanceof Date&&!isNaN(e.valueOf())&&s.options.datesDisabled.push(s.format(e))})},o.prototype.startview=function(t){switch(t){case 1:case"months":this.options.startView=1;break;case 2:case"years":this.options.startView=2;break;default:this.options.startView=0}},o.prototype.setLocales=function(t){this.locales=t,this.options.inputFormat=[this.locales.short_format],this.options.outputFormat=this.locales.short_format,this.options.titleFormat=this.locales.full_format,this.options.firstDayOfWeek=this.locales.firstday_of_week,this.options.buttonTitle=this.locales.texts.buttonTitle,this.$button.find("span").attr("title",this.options.buttonTitle),this.options.buttonLabel=this.locales.texts.buttonLabel,this.options.prevButtonLabel=this.locales.texts.prevButtonLabel,this.options.prevMonthButtonLabel=this.locales.texts.prevMonthButtonLabel,this.options.prevYearButtonLabel=this.locales.texts.prevYearButtonLabel,this.options.nextButtonLabel=this.locales.texts.nextButtonLabel,this.options.nextMonthButtonLabel=this.locales.texts.nextMonthButtonLabel,this.options.nextYearButtonLabel=this.locales.texts.nextYearButtonLabel,this.options.changeMonthButtonLabel=this.locales.texts.changeMonthButtonLabel,this.options.changeYearButtonLabel=this.locales.texts.changeYearButtonLabel,this.options.changeRangeButtonLabel=this.locales.texts.changeRangeButtonLabel,this.options.closeButtonTitle=this.locales.texts.closeButtonTitle,this.options.closeButtonLabel=this.locales.texts.closeButtonLabel,this.options.calendarHelp=this.locales.texts.calendarHelp,this.drawCalendarHeader(),"RTL"===this.locales.directionality?this.$grid.addClass("rtl"):this.$grid.removeClass("rtl")};var t=g.fn.datepicker;g.fn.datepicker=function(s,i){if("string"!=typeof s||1!=g(this).length)return this.each(function(){var t=g(this),e=t.data("ab.datepicker"),a=g.extend({},o.DEFAULTS,t.data(),"object"==typeof s&&s);e||t.data("ab.datepicker",e=new o(this,a)),"string"==typeof s&&e[s](i)});var t=g(this).eq(0).data("ab.datepicker");return t?t[s](i):void 0},g.fn.datepicker.Constructor=o,g.fn.datepicker.noConflict=function(){return g.fn.datepicker=t,this}});
+
+/***/ }),
+/* 8 */
+/***/ (function(module, exports) {
+
+/*!
+ * Font Awesome Free 5.2.0 by @fontawesome - https://fontawesome.com
+ * License - https://fontawesome.com/license (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
+ */
+(function () {
+'use strict';
+
+var noop = function noop() {};
+
+var _WINDOW = {};
+var _DOCUMENT = {};
+var _MUTATION_OBSERVER$1 = null;
+var _PERFORMANCE = { mark: noop, measure: noop };
+
+try {
+  if (typeof window !== 'undefined') _WINDOW = window;
+  if (typeof document !== 'undefined') _DOCUMENT = document;
+  if (typeof MutationObserver !== 'undefined') _MUTATION_OBSERVER$1 = MutationObserver;
+  if (typeof performance !== 'undefined') _PERFORMANCE = performance;
+} catch (e) {}
+
+var _ref = _WINDOW.navigator || {};
+var _ref$userAgent = _ref.userAgent;
+var userAgent = _ref$userAgent === undefined ? '' : _ref$userAgent;
+
+var WINDOW = _WINDOW;
+var DOCUMENT = _DOCUMENT;
+var MUTATION_OBSERVER = _MUTATION_OBSERVER$1;
+var PERFORMANCE = _PERFORMANCE;
+var IS_BROWSER = !!WINDOW.document;
+var IS_DOM = !!DOCUMENT.documentElement && !!DOCUMENT.head && typeof DOCUMENT.addEventListener === 'function' && typeof DOCUMENT.createElement === 'function';
+var IS_IE = ~userAgent.indexOf('MSIE') || ~userAgent.indexOf('Trident/');
+
+var NAMESPACE_IDENTIFIER = '___FONT_AWESOME___';
+var UNITS_IN_GRID = 16;
+var DEFAULT_FAMILY_PREFIX = 'fa';
+var DEFAULT_REPLACEMENT_CLASS = 'svg-inline--fa';
+var DATA_FA_I2SVG = 'data-fa-i2svg';
+var DATA_FA_PSEUDO_ELEMENT = 'data-fa-pseudo-element';
+var DATA_PREFIX = 'data-prefix';
+var DATA_ICON = 'data-icon';
+var HTML_CLASS_I2SVG_BASE_CLASS = 'fontawesome-i2svg';
+var TAGNAMES_TO_SKIP_FOR_PSEUDOELEMENTS = ['HTML', 'HEAD', 'STYLE', 'SCRIPT'];
+var PRODUCTION = function () {
+  try {
+    return "production" === 'production';
+  } catch (e) {
+    return false;
+  }
+}();
+
+var oneToTen = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+var oneToTwenty = oneToTen.concat([11, 12, 13, 14, 15, 16, 17, 18, 19, 20]);
+
+var ATTRIBUTES_WATCHED_FOR_MUTATION = ['class', 'data-prefix', 'data-icon', 'data-fa-transform', 'data-fa-mask'];
+
+var RESERVED_CLASSES = ['xs', 'sm', 'lg', 'fw', 'ul', 'li', 'border', 'pull-left', 'pull-right', 'spin', 'pulse', 'rotate-90', 'rotate-180', 'rotate-270', 'flip-horizontal', 'flip-vertical', 'stack', 'stack-1x', 'stack-2x', 'inverse', 'layers', 'layers-text', 'layers-counter'].concat(oneToTen.map(function (n) {
+  return n + 'x';
+})).concat(oneToTwenty.map(function (n) {
+  return 'w-' + n;
+}));
+
+var classCallCheck = function (instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+};
+
+var createClass = function () {
+  function defineProperties(target, props) {
+    for (var i = 0; i < props.length; i++) {
+      var descriptor = props[i];
+      descriptor.enumerable = descriptor.enumerable || false;
+      descriptor.configurable = true;
+      if ("value" in descriptor) descriptor.writable = true;
+      Object.defineProperty(target, descriptor.key, descriptor);
+    }
+  }
+
+  return function (Constructor, protoProps, staticProps) {
+    if (protoProps) defineProperties(Constructor.prototype, protoProps);
+    if (staticProps) defineProperties(Constructor, staticProps);
+    return Constructor;
+  };
+}();
+
+
+
+var _extends = Object.assign || function (target) {
+  for (var i = 1; i < arguments.length; i++) {
+    var source = arguments[i];
+
+    for (var key in source) {
+      if (Object.prototype.hasOwnProperty.call(source, key)) {
+        target[key] = source[key];
+      }
+    }
+  }
+
+  return target;
+};
+
+
+
+var slicedToArray = function () {
+  function sliceIterator(arr, i) {
+    var _arr = [];
+    var _n = true;
+    var _d = false;
+    var _e = undefined;
+
+    try {
+      for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
+        _arr.push(_s.value);
+
+        if (i && _arr.length === i) break;
+      }
+    } catch (err) {
+      _d = true;
+      _e = err;
+    } finally {
+      try {
+        if (!_n && _i["return"]) _i["return"]();
+      } finally {
+        if (_d) throw _e;
+      }
+    }
+
+    return _arr;
+  }
+
+  return function (arr, i) {
+    if (Array.isArray(arr)) {
+      return arr;
+    } else if (Symbol.iterator in Object(arr)) {
+      return sliceIterator(arr, i);
+    } else {
+      throw new TypeError("Invalid attempt to destructure non-iterable instance");
+    }
+  };
+}();
+
+var toConsumableArray = function (arr) {
+  if (Array.isArray(arr)) {
+    for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) arr2[i] = arr[i];
+
+    return arr2;
+  } else {
+    return Array.from(arr);
+  }
+};
+
+var initial = WINDOW.FontAwesomeConfig || {};
+
+function getAttrConfig(attr) {
+  var element = DOCUMENT.querySelector('script[' + attr + ']');
+
+  if (element) {
+    return element.getAttribute(attr);
+  }
+}
+
+function coerce(val) {
+  // Getting an empty string will occur if the attribute is set on the HTML tag but without a value
+  // We'll assume that this is an indication that it should be toggled to true
+  // For example <script data-search-pseudo-elements src="..."></script>
+  if (val === '') return true;
+  if (val === 'false') return false;
+  if (val === 'true') return true;
+  return val;
+}
+
+if (DOCUMENT && typeof DOCUMENT.querySelector === 'function') {
+  var attrs = [['data-family-prefix', 'familyPrefix'], ['data-replacement-class', 'replacementClass'], ['data-auto-replace-svg', 'autoReplaceSvg'], ['data-auto-add-css', 'autoAddCss'], ['data-auto-a11y', 'autoA11y'], ['data-search-pseudo-elements', 'searchPseudoElements'], ['data-observe-mutations', 'observeMutations'], ['data-keep-original-source', 'keepOriginalSource'], ['data-measure-performance', 'measurePerformance'], ['data-show-missing-icons', 'showMissingIcons']];
+
+  attrs.forEach(function (_ref) {
+    var _ref2 = slicedToArray(_ref, 2),
+        attr = _ref2[0],
+        key = _ref2[1];
+
+    var val = coerce(getAttrConfig(attr));
+
+    if (val !== undefined && val !== null) {
+      initial[key] = val;
+    }
+  });
+}
+
+var _default = _extends({
+  familyPrefix: DEFAULT_FAMILY_PREFIX,
+  replacementClass: DEFAULT_REPLACEMENT_CLASS,
+  autoReplaceSvg: true,
+  autoAddCss: true,
+  autoA11y: true,
+  searchPseudoElements: false,
+  observeMutations: true,
+  keepOriginalSource: true,
+  measurePerformance: false,
+  showMissingIcons: true
+}, initial);
+
+if (!_default.autoReplaceSvg) _default.observeMutations = false;
+
+var config = _extends({}, _default);
+
+WINDOW.FontAwesomeConfig = config;
+
+var w = WINDOW || {};
+
+if (!w[NAMESPACE_IDENTIFIER]) w[NAMESPACE_IDENTIFIER] = {};
+if (!w[NAMESPACE_IDENTIFIER].styles) w[NAMESPACE_IDENTIFIER].styles = {};
+if (!w[NAMESPACE_IDENTIFIER].hooks) w[NAMESPACE_IDENTIFIER].hooks = {};
+if (!w[NAMESPACE_IDENTIFIER].shims) w[NAMESPACE_IDENTIFIER].shims = [];
+
+var namespace = w[NAMESPACE_IDENTIFIER];
+
+var functions = [];
+var listener = function listener() {
+  DOCUMENT.removeEventListener('DOMContentLoaded', listener);
+  loaded = 1;
+  functions.map(function (fn) {
+    return fn();
+  });
+};
+
+var loaded = false;
+
+if (IS_DOM) {
+  loaded = (DOCUMENT.documentElement.doScroll ? /^loaded|^c/ : /^loaded|^i|^c/).test(DOCUMENT.readyState);
+
+  if (!loaded) DOCUMENT.addEventListener('DOMContentLoaded', listener);
+}
+
+var domready = function (fn) {
+  if (!IS_DOM) return;
+  loaded ? setTimeout(fn, 0) : functions.push(fn);
+};
+
+var d = UNITS_IN_GRID;
+
+var meaninglessTransform = {
+  size: 16,
+  x: 0,
+  y: 0,
+  rotate: 0,
+  flipX: false,
+  flipY: false
+};
+
+function isReserved(name) {
+  return ~RESERVED_CLASSES.indexOf(name);
+}
+
+function bunker(fn) {
+  try {
+    fn();
+  } catch (e) {
+    if (!PRODUCTION) {
+      throw e;
+    }
+  }
+}
+
+function insertCss(css) {
+  if (!css || !IS_DOM) {
+    return;
+  }
+
+  var style = DOCUMENT.createElement('style');
+  style.setAttribute('type', 'text/css');
+  style.innerHTML = css;
+
+  var headChildren = DOCUMENT.head.childNodes;
+  var beforeChild = null;
+
+  for (var i = headChildren.length - 1; i > -1; i--) {
+    var child = headChildren[i];
+    var tagName = (child.tagName || '').toUpperCase();
+    if (['STYLE', 'LINK'].indexOf(tagName) > -1) {
+      beforeChild = child;
+    }
+  }
+
+  DOCUMENT.head.insertBefore(style, beforeChild);
+
+  return css;
+}
+
+var _uniqueId = 0;
+
+function nextUniqueId() {
+  _uniqueId++;
+
+  return _uniqueId;
+}
+
+function toArray(obj) {
+  var array = [];
+
+  for (var i = (obj || []).length >>> 0; i--;) {
+    array[i] = obj[i];
+  }
+
+  return array;
+}
+
+function classArray(node) {
+  if (node.classList) {
+    return toArray(node.classList);
+  } else {
+    return (node.getAttribute('class') || '').split(' ').filter(function (i) {
+      return i;
+    });
+  }
+}
+
+function getIconName(familyPrefix, cls) {
+  var parts = cls.split('-');
+  var prefix = parts[0];
+  var iconName = parts.slice(1).join('-');
+
+  if (prefix === familyPrefix && iconName !== '' && !isReserved(iconName)) {
+    return iconName;
+  } else {
+    return null;
+  }
+}
+
+function htmlEscape(str) {
+  return ('' + str).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/'/g, '&#39;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
+function joinAttributes(attributes) {
+  return Object.keys(attributes || {}).reduce(function (acc, attributeName) {
+    return acc + (attributeName + '="' + htmlEscape(attributes[attributeName]) + '" ');
+  }, '').trim();
+}
+
+function joinStyles(styles) {
+  return Object.keys(styles || {}).reduce(function (acc, styleName) {
+    return acc + (styleName + ': ' + styles[styleName] + ';');
+  }, '');
+}
+
+function transformIsMeaningful(transform) {
+  return transform.size !== meaninglessTransform.size || transform.x !== meaninglessTransform.x || transform.y !== meaninglessTransform.y || transform.rotate !== meaninglessTransform.rotate || transform.flipX || transform.flipY;
+}
+
+function transformForSvg(_ref) {
+  var transform = _ref.transform,
+      containerWidth = _ref.containerWidth,
+      iconWidth = _ref.iconWidth;
+
+  var outer = {
+    transform: 'translate(' + containerWidth / 2 + ' 256)'
+  };
+  var innerTranslate = 'translate(' + transform.x * 32 + ', ' + transform.y * 32 + ') ';
+  var innerScale = 'scale(' + transform.size / 16 * (transform.flipX ? -1 : 1) + ', ' + transform.size / 16 * (transform.flipY ? -1 : 1) + ') ';
+  var innerRotate = 'rotate(' + transform.rotate + ' 0 0)';
+  var inner = {
+    transform: innerTranslate + ' ' + innerScale + ' ' + innerRotate
+  };
+  var path = {
+    transform: 'translate(' + iconWidth / 2 * -1 + ' -256)'
+  };
+  return {
+    outer: outer,
+    inner: inner,
+    path: path
+  };
+}
+
+function transformForCss(_ref2) {
+  var transform = _ref2.transform,
+      _ref2$width = _ref2.width,
+      width = _ref2$width === undefined ? UNITS_IN_GRID : _ref2$width,
+      _ref2$height = _ref2.height,
+      height = _ref2$height === undefined ? UNITS_IN_GRID : _ref2$height,
+      _ref2$startCentered = _ref2.startCentered,
+      startCentered = _ref2$startCentered === undefined ? false : _ref2$startCentered;
+
+  var val = '';
+
+  if (startCentered && IS_IE) {
+    val += 'translate(' + (transform.x / d - width / 2) + 'em, ' + (transform.y / d - height / 2) + 'em) ';
+  } else if (startCentered) {
+    val += 'translate(calc(-50% + ' + transform.x / d + 'em), calc(-50% + ' + transform.y / d + 'em)) ';
+  } else {
+    val += 'translate(' + transform.x / d + 'em, ' + transform.y / d + 'em) ';
+  }
+
+  val += 'scale(' + transform.size / d * (transform.flipX ? -1 : 1) + ', ' + transform.size / d * (transform.flipY ? -1 : 1) + ') ';
+  val += 'rotate(' + transform.rotate + 'deg) ';
+
+  return val;
+}
+
+var ALL_SPACE = {
+  x: 0,
+  y: 0,
+  width: '100%',
+  height: '100%'
+};
+
+var makeIconMasking = function (_ref) {
+  var children = _ref.children,
+      attributes = _ref.attributes,
+      main = _ref.main,
+      mask = _ref.mask,
+      transform = _ref.transform;
+  var mainWidth = main.width,
+      mainPath = main.icon;
+  var maskWidth = mask.width,
+      maskPath = mask.icon;
+
+
+  var trans = transformForSvg({ transform: transform, containerWidth: maskWidth, iconWidth: mainWidth });
+
+  var maskRect = {
+    tag: 'rect',
+    attributes: _extends({}, ALL_SPACE, {
+      fill: 'white'
+    })
+  };
+  var maskInnerGroup = {
+    tag: 'g',
+    attributes: _extends({}, trans.inner),
+    children: [{ tag: 'path', attributes: _extends({}, mainPath.attributes, trans.path, { fill: 'black' }) }]
+  };
+  var maskOuterGroup = {
+    tag: 'g',
+    attributes: _extends({}, trans.outer),
+    children: [maskInnerGroup]
+  };
+  var maskId = 'mask-' + nextUniqueId();
+  var clipId = 'clip-' + nextUniqueId();
+  var maskTag = {
+    tag: 'mask',
+    attributes: _extends({}, ALL_SPACE, {
+      id: maskId,
+      maskUnits: 'userSpaceOnUse',
+      maskContentUnits: 'userSpaceOnUse'
+    }),
+    children: [maskRect, maskOuterGroup]
+  };
+  var defs = {
+    tag: 'defs',
+    children: [{ tag: 'clipPath', attributes: { id: clipId }, children: [maskPath] }, maskTag]
+  };
+
+  children.push(defs, { tag: 'rect', attributes: _extends({ fill: 'currentColor', 'clip-path': 'url(#' + clipId + ')', mask: 'url(#' + maskId + ')' }, ALL_SPACE) });
+
+  return {
+    children: children,
+    attributes: attributes
+  };
+};
+
+var makeIconStandard = function (_ref) {
+  var children = _ref.children,
+      attributes = _ref.attributes,
+      main = _ref.main,
+      transform = _ref.transform,
+      styles = _ref.styles;
+
+  var styleString = joinStyles(styles);
+
+  if (styleString.length > 0) {
+    attributes['style'] = styleString;
+  }
+
+  if (transformIsMeaningful(transform)) {
+    var trans = transformForSvg({ transform: transform, containerWidth: main.width, iconWidth: main.width });
+    children.push({
+      tag: 'g',
+      attributes: _extends({}, trans.outer),
+      children: [{
+        tag: 'g',
+        attributes: _extends({}, trans.inner),
+        children: [{
+          tag: main.icon.tag,
+          children: main.icon.children,
+          attributes: _extends({}, main.icon.attributes, trans.path)
+        }]
+      }]
+    });
+  } else {
+    children.push(main.icon);
+  }
+
+  return {
+    children: children,
+    attributes: attributes
+  };
+};
+
+var asIcon = function (_ref) {
+  var children = _ref.children,
+      main = _ref.main,
+      mask = _ref.mask,
+      attributes = _ref.attributes,
+      styles = _ref.styles,
+      transform = _ref.transform;
+
+  if (transformIsMeaningful(transform) && main.found && !mask.found) {
+    var width = main.width,
+        height = main.height;
+
+    var offset = {
+      x: width / height / 2,
+      y: 0.5
+    };
+    attributes['style'] = joinStyles(_extends({}, styles, {
+      'transform-origin': offset.x + transform.x / 16 + 'em ' + (offset.y + transform.y / 16) + 'em'
+    }));
+  }
+
+  return [{
+    tag: 'svg',
+    attributes: attributes,
+    children: children
+  }];
+};
+
+var asSymbol = function (_ref) {
+  var prefix = _ref.prefix,
+      iconName = _ref.iconName,
+      children = _ref.children,
+      attributes = _ref.attributes,
+      symbol = _ref.symbol;
+
+  var id = symbol === true ? prefix + '-' + config.familyPrefix + '-' + iconName : symbol;
+
+  return [{
+    tag: 'svg',
+    attributes: {
+      style: 'display: none;'
+    },
+    children: [{
+      tag: 'symbol',
+      attributes: _extends({}, attributes, { id: id }),
+      children: children
+    }]
+  }];
+};
+
+function makeInlineSvgAbstract(params) {
+  var _params$icons = params.icons,
+      main = _params$icons.main,
+      mask = _params$icons.mask,
+      prefix = params.prefix,
+      iconName = params.iconName,
+      transform = params.transform,
+      symbol = params.symbol,
+      title = params.title,
+      extra = params.extra,
+      _params$watchable = params.watchable,
+      watchable = _params$watchable === undefined ? false : _params$watchable;
+
+  var _ref = mask.found ? mask : main,
+      width = _ref.width,
+      height = _ref.height;
+
+  var widthClass = 'fa-w-' + Math.ceil(width / height * 16);
+  var attrClass = [config.replacementClass, iconName ? config.familyPrefix + '-' + iconName : '', widthClass].filter(function (c) {
+    return extra.classes.indexOf(c) === -1;
+  }).concat(extra.classes).join(' ');
+
+  var content = {
+    children: [],
+    attributes: _extends({}, extra.attributes, {
+      'data-prefix': prefix,
+      'data-icon': iconName,
+      'class': attrClass,
+      'role': 'img',
+      'xmlns': 'http://www.w3.org/2000/svg',
+      'viewBox': '0 0 ' + width + ' ' + height
+    })
+  };
+
+  if (watchable) {
+    content.attributes[DATA_FA_I2SVG] = '';
+  }
+
+  if (title) content.children.push({ tag: 'title', attributes: { id: content.attributes['aria-labelledby'] || 'title-' + nextUniqueId() }, children: [title] });
+
+  var args = _extends({}, content, {
+    prefix: prefix,
+    iconName: iconName,
+    main: main,
+    mask: mask,
+    transform: transform,
+    symbol: symbol,
+    styles: extra.styles
+  });
+
+  var _ref2 = mask.found && main.found ? makeIconMasking(args) : makeIconStandard(args),
+      children = _ref2.children,
+      attributes = _ref2.attributes;
+
+  args.children = children;
+  args.attributes = attributes;
+
+  if (symbol) {
+    return asSymbol(args);
+  } else {
+    return asIcon(args);
+  }
+}
+
+function makeLayersTextAbstract(params) {
+  var content = params.content,
+      width = params.width,
+      height = params.height,
+      transform = params.transform,
+      title = params.title,
+      extra = params.extra,
+      _params$watchable2 = params.watchable,
+      watchable = _params$watchable2 === undefined ? false : _params$watchable2;
+
+
+  var attributes = _extends({}, extra.attributes, title ? { 'title': title } : {}, {
+    'class': extra.classes.join(' ')
+  });
+
+  if (watchable) {
+    attributes[DATA_FA_I2SVG] = '';
+  }
+
+  var styles = _extends({}, extra.styles);
+
+  if (transformIsMeaningful(transform)) {
+    styles['transform'] = transformForCss({ transform: transform, startCentered: true, width: width, height: height });
+    styles['-webkit-transform'] = styles['transform'];
+  }
+
+  var styleString = joinStyles(styles);
+
+  if (styleString.length > 0) {
+    attributes['style'] = styleString;
+  }
+
+  var val = [];
+
+  val.push({
+    tag: 'span',
+    attributes: attributes,
+    children: [content]
+  });
+
+  if (title) {
+    val.push({ tag: 'span', attributes: { class: 'sr-only' }, children: [title] });
+  }
+
+  return val;
+}
+
+function makeLayersCounterAbstract(params) {
+  var content = params.content,
+      title = params.title,
+      extra = params.extra;
+
+
+  var attributes = _extends({}, extra.attributes, title ? { 'title': title } : {}, {
+    'class': extra.classes.join(' ')
+  });
+
+  var styleString = joinStyles(extra.styles);
+
+  if (styleString.length > 0) {
+    attributes['style'] = styleString;
+  }
+
+  var val = [];
+
+  val.push({
+    tag: 'span',
+    attributes: attributes,
+    children: [content]
+  });
+
+  if (title) {
+    val.push({ tag: 'span', attributes: { class: 'sr-only' }, children: [title] });
+  }
+
+  return val;
+}
+
+var noop$2 = function noop() {};
+var p = config.measurePerformance && PERFORMANCE && PERFORMANCE.mark && PERFORMANCE.measure ? PERFORMANCE : { mark: noop$2, measure: noop$2 };
+var preamble = 'FA "5.2.0"';
+
+var begin = function begin(name) {
+  p.mark(preamble + ' ' + name + ' begins');
+  return function () {
+    return end(name);
+  };
+};
+
+var end = function end(name) {
+  p.mark(preamble + ' ' + name + ' ends');
+  p.measure(preamble + ' ' + name, preamble + ' ' + name + ' begins', preamble + ' ' + name + ' ends');
+};
+
+var perf = { begin: begin, end: end };
+
+'use strict';
+
+/**
+ * Internal helper to bind a function known to have 4 arguments
+ * to a given context.
+ */
+var bindInternal4 = function bindInternal4 (func, thisContext) {
+  return function (a, b, c, d) {
+    return func.call(thisContext, a, b, c, d);
+  };
+};
+
+'use strict';
+
+
+
+/**
+ * # Reduce
+ *
+ * A fast object `.reduce()` implementation.
+ *
+ * @param  {Object}   subject      The object to reduce over.
+ * @param  {Function} fn           The reducer function.
+ * @param  {mixed}    initialValue The initial value for the reducer, defaults to subject[0].
+ * @param  {Object}   thisContext  The context for the reducer.
+ * @return {mixed}                 The final result.
+ */
+var reduce = function fastReduceObject (subject, fn, initialValue, thisContext) {
+  var keys = Object.keys(subject),
+      length = keys.length,
+      iterator = thisContext !== undefined ? bindInternal4(fn, thisContext) : fn,
+      i, key, result;
+
+  if (initialValue === undefined) {
+    i = 1;
+    result = subject[keys[0]];
+  }
+  else {
+    i = 0;
+    result = initialValue;
+  }
+
+  for (; i < length; i++) {
+    key = keys[i];
+    result = iterator(result, subject[key], key, subject);
+  }
+
+  return result;
+};
+
+var styles$2 = namespace.styles;
+var shims = namespace.shims;
+
+
+var _byUnicode = {};
+var _byLigature = {};
+var _byOldName = {};
+
+var build = function build() {
+  var lookup = function lookup(reducer) {
+    return reduce(styles$2, function (o, style, prefix) {
+      o[prefix] = reduce(style, reducer, {});
+      return o;
+    }, {});
+  };
+
+  _byUnicode = lookup(function (acc, icon, iconName) {
+    acc[icon[3]] = iconName;
+
+    return acc;
+  });
+
+  _byLigature = lookup(function (acc, icon, iconName) {
+    var ligatures = icon[2];
+
+    acc[iconName] = iconName;
+
+    ligatures.forEach(function (ligature) {
+      acc[ligature] = iconName;
+    });
+
+    return acc;
+  });
+
+  var hasRegular = 'far' in styles$2;
+
+  _byOldName = reduce(shims, function (acc, shim) {
+    var oldName = shim[0];
+    var prefix = shim[1];
+    var iconName = shim[2];
+
+    if (prefix === 'far' && !hasRegular) {
+      prefix = 'fas';
+    }
+
+    acc[oldName] = { prefix: prefix, iconName: iconName };
+
+    return acc;
+  }, {});
+};
+
+build();
+
+function byUnicode(prefix, unicode) {
+  return _byUnicode[prefix][unicode];
+}
+
+function byLigature(prefix, ligature) {
+  return _byLigature[prefix][ligature];
+}
+
+function byOldName(name) {
+  return _byOldName[name] || { prefix: null, iconName: null };
+}
+
+var styles$1 = namespace.styles;
+
+
+var emptyCanonicalIcon = function emptyCanonicalIcon() {
+  return { prefix: null, iconName: null, rest: [] };
+};
+
+function getCanonicalIcon(values) {
+  return values.reduce(function (acc, cls) {
+    var iconName = getIconName(config.familyPrefix, cls);
+
+    if (styles$1[cls]) {
+      acc.prefix = cls;
+    } else if (iconName) {
+      var shim = acc.prefix === 'fa' ? byOldName(iconName) : {};
+
+      acc.iconName = shim.iconName || iconName;
+      acc.prefix = shim.prefix || acc.prefix;
+    } else if (cls !== config.replacementClass && cls.indexOf('fa-w-') !== 0) {
+      acc.rest.push(cls);
+    }
+
+    return acc;
+  }, emptyCanonicalIcon());
+}
+
+function iconFromMapping(mapping, prefix, iconName) {
+  if (mapping && mapping[prefix] && mapping[prefix][iconName]) {
+    return {
+      prefix: prefix,
+      iconName: iconName,
+      icon: mapping[prefix][iconName]
+    };
+  }
+}
+
+function toHtml(abstractNodes) {
+  var tag = abstractNodes.tag,
+      _abstractNodes$attrib = abstractNodes.attributes,
+      attributes = _abstractNodes$attrib === undefined ? {} : _abstractNodes$attrib,
+      _abstractNodes$childr = abstractNodes.children,
+      children = _abstractNodes$childr === undefined ? [] : _abstractNodes$childr;
+
+
+  if (typeof abstractNodes === 'string') {
+    return htmlEscape(abstractNodes);
+  } else {
+    return '<' + tag + ' ' + joinAttributes(attributes) + '>' + children.map(toHtml).join('') + '</' + tag + '>';
+  }
+}
+
+var noop$1 = function noop() {};
+
+function isWatched(node) {
+  var i2svg = node.getAttribute ? node.getAttribute(DATA_FA_I2SVG) : null;
+
+  return typeof i2svg === 'string';
+}
+
+function getMutator() {
+  if (config.autoReplaceSvg === true) {
+    return mutators.replace;
+  }
+
+  var mutator = mutators[config.autoReplaceSvg];
+
+  return mutator || mutators.replace;
+}
+
+var mutators = {
+  replace: function replace(mutation) {
+    var node = mutation[0];
+    var abstract = mutation[1];
+    var newOuterHTML = abstract.map(function (a) {
+      return toHtml(a);
+    }).join('\n');
+
+    if (node.parentNode && node.outerHTML) {
+      node.outerHTML = newOuterHTML + (config.keepOriginalSource && node.tagName.toLowerCase() !== 'svg' ? '<!-- ' + node.outerHTML + ' -->' : '');
+    } else if (node.parentNode) {
+      var newNode = document.createElement('span');
+      node.parentNode.replaceChild(newNode, node);
+      newNode.outerHTML = newOuterHTML;
+    }
+  },
+  nest: function nest(mutation) {
+    var node = mutation[0];
+    var abstract = mutation[1];
+
+    // If we already have a replaced node we do not want to continue nesting within it.
+    // Short-circuit to the standard replacement
+    if (~classArray(node).indexOf(config.replacementClass)) {
+      return mutators.replace(mutation);
+    }
+
+    var forSvg = new RegExp(config.familyPrefix + '-.*');
+
+    delete abstract[0].attributes.style;
+
+    var splitClasses = abstract[0].attributes.class.split(' ').reduce(function (acc, cls) {
+      if (cls === config.replacementClass || cls.match(forSvg)) {
+        acc.toSvg.push(cls);
+      } else {
+        acc.toNode.push(cls);
+      }
+
+      return acc;
+    }, { toNode: [], toSvg: [] });
+
+    abstract[0].attributes.class = splitClasses.toSvg.join(' ');
+
+    var newInnerHTML = abstract.map(function (a) {
+      return toHtml(a);
+    }).join('\n');
+    node.setAttribute('class', splitClasses.toNode.join(' '));
+    node.setAttribute(DATA_FA_I2SVG, '');
+    node.innerHTML = newInnerHTML;
+  }
+};
+
+function perform(mutations, callback) {
+  var callbackFunction = typeof callback === 'function' ? callback : noop$1;
+
+  if (mutations.length === 0) {
+    callbackFunction();
+  } else {
+    var frame = WINDOW.requestAnimationFrame || function (op) {
+      return op();
+    };
+
+    frame(function () {
+      var mutator = getMutator();
+      var mark = perf.begin('mutate');
+
+      mutations.map(mutator);
+
+      mark();
+
+      callbackFunction();
+    });
+  }
+}
+
+var disabled = false;
+
+function disableObservation(operation) {
+  disabled = true;
+  operation();
+  disabled = false;
+}
+
+var mo = null;
+
+function observe(options) {
+  if (!MUTATION_OBSERVER) {
+    return;
+  }
+
+  if (!config.observeMutations) {
+    return;
+  }
+
+  var treeCallback = options.treeCallback,
+      nodeCallback = options.nodeCallback,
+      pseudoElementsCallback = options.pseudoElementsCallback,
+      _options$observeMutat = options.observeMutationsRoot,
+      observeMutationsRoot = _options$observeMutat === undefined ? DOCUMENT.body : _options$observeMutat;
+
+
+  mo = new MUTATION_OBSERVER(function (objects) {
+    if (disabled) return;
+
+    toArray(objects).forEach(function (mutationRecord) {
+      if (mutationRecord.type === 'childList' && mutationRecord.addedNodes.length > 0 && !isWatched(mutationRecord.addedNodes[0])) {
+        if (config.searchPseudoElements) {
+          pseudoElementsCallback(mutationRecord.target);
+        }
+
+        treeCallback(mutationRecord.target);
+      }
+
+      if (mutationRecord.type === 'attributes' && mutationRecord.target.parentNode && config.searchPseudoElements) {
+        pseudoElementsCallback(mutationRecord.target.parentNode);
+      }
+
+      if (mutationRecord.type === 'attributes' && isWatched(mutationRecord.target) && ~ATTRIBUTES_WATCHED_FOR_MUTATION.indexOf(mutationRecord.attributeName)) {
+        if (mutationRecord.attributeName === 'class') {
+          var _getCanonicalIcon = getCanonicalIcon(classArray(mutationRecord.target)),
+              prefix = _getCanonicalIcon.prefix,
+              iconName = _getCanonicalIcon.iconName;
+
+          if (prefix) mutationRecord.target.setAttribute('data-prefix', prefix);
+          if (iconName) mutationRecord.target.setAttribute('data-icon', iconName);
+        } else {
+          nodeCallback(mutationRecord.target);
+        }
+      }
+    });
+  });
+
+  if (!IS_DOM) return;
+
+  mo.observe(observeMutationsRoot, {
+    childList: true, attributes: true, characterData: true, subtree: true
+  });
+}
+
+function disconnect() {
+  if (!mo) return;
+
+  mo.disconnect();
+}
+
+var styleParser = function (node) {
+  var style = node.getAttribute('style');
+
+  var val = [];
+
+  if (style) {
+    val = style.split(';').reduce(function (acc, style) {
+      var styles = style.split(':');
+      var prop = styles[0];
+      var value = styles.slice(1);
+
+      if (prop && value.length > 0) {
+        acc[prop] = value.join(':').trim();
+      }
+
+      return acc;
+    }, {});
+  }
+
+  return val;
+};
+
+function toHex(unicode) {
+  var result = '';
+
+  for (var i = 0; i < unicode.length; i++) {
+    var hex = unicode.charCodeAt(i).toString(16);
+    result += ('000' + hex).slice(-4);
+  }
+
+  return result;
+}
+
+var classParser = function (node) {
+  var existingPrefix = node.getAttribute('data-prefix');
+  var existingIconName = node.getAttribute('data-icon');
+  var innerText = node.innerText !== undefined ? node.innerText.trim() : '';
+
+  var val = getCanonicalIcon(classArray(node));
+
+  if (existingPrefix && existingIconName) {
+    val.prefix = existingPrefix;
+    val.iconName = existingIconName;
+  }
+
+  if (val.prefix && innerText.length > 1) {
+    val.iconName = byLigature(val.prefix, node.innerText);
+  } else if (val.prefix && innerText.length === 1) {
+    val.iconName = byUnicode(val.prefix, toHex(node.innerText));
+  }
+
+  return val;
+};
+
+var parseTransformString = function parseTransformString(transformString) {
+  var transform = {
+    size: 16,
+    x: 0,
+    y: 0,
+    flipX: false,
+    flipY: false,
+    rotate: 0
+  };
+
+  if (!transformString) {
+    return transform;
+  } else {
+    return transformString.toLowerCase().split(' ').reduce(function (acc, n) {
+      var parts = n.toLowerCase().split('-');
+      var first = parts[0];
+      var rest = parts.slice(1).join('-');
+
+      if (first && rest === 'h') {
+        acc.flipX = true;
+        return acc;
+      }
+
+      if (first && rest === 'v') {
+        acc.flipY = true;
+        return acc;
+      }
+
+      rest = parseFloat(rest);
+
+      if (isNaN(rest)) {
+        return acc;
+      }
+
+      switch (first) {
+        case 'grow':
+          acc.size = acc.size + rest;
+          break;
+        case 'shrink':
+          acc.size = acc.size - rest;
+          break;
+        case 'left':
+          acc.x = acc.x - rest;
+          break;
+        case 'right':
+          acc.x = acc.x + rest;
+          break;
+        case 'up':
+          acc.y = acc.y - rest;
+          break;
+        case 'down':
+          acc.y = acc.y + rest;
+          break;
+        case 'rotate':
+          acc.rotate = acc.rotate + rest;
+          break;
+      }
+
+      return acc;
+    }, transform);
+  }
+};
+
+var transformParser = function (node) {
+  return parseTransformString(node.getAttribute('data-fa-transform'));
+};
+
+var symbolParser = function (node) {
+  var symbol = node.getAttribute('data-fa-symbol');
+
+  return symbol === null ? false : symbol === '' ? true : symbol;
+};
+
+var attributesParser = function (node) {
+  var extraAttributes = toArray(node.attributes).reduce(function (acc, attr) {
+    if (acc.name !== 'class' && acc.name !== 'style') {
+      acc[attr.name] = attr.value;
+    }
+    return acc;
+  }, {});
+
+  var title = node.getAttribute('title');
+
+  if (config.autoA11y) {
+    if (title) {
+      extraAttributes['aria-labelledby'] = config.replacementClass + '-title-' + nextUniqueId();
+    } else {
+      extraAttributes['aria-hidden'] = 'true';
+    }
+  }
+
+  return extraAttributes;
+};
+
+var maskParser = function (node) {
+  var mask = node.getAttribute('data-fa-mask');
+
+  if (!mask) {
+    return emptyCanonicalIcon();
+  } else {
+    return getCanonicalIcon(mask.split(' ').map(function (i) {
+      return i.trim();
+    }));
+  }
+};
+
+var blankMeta = {
+  iconName: null,
+  title: null,
+  prefix: null,
+  transform: meaninglessTransform,
+  symbol: false,
+  mask: null,
+  extra: { classes: [], styles: {}, attributes: {} }
+};
+
+function parseMeta(node) {
+  var _classParser = classParser(node),
+      iconName = _classParser.iconName,
+      prefix = _classParser.prefix,
+      extraClasses = _classParser.rest;
+
+  var extraStyles = styleParser(node);
+  var transform = transformParser(node);
+  var symbol = symbolParser(node);
+  var extraAttributes = attributesParser(node);
+  var mask = maskParser(node);
+
+  return {
+    iconName: iconName,
+    title: node.getAttribute('title'),
+    prefix: prefix,
+    transform: transform,
+    symbol: symbol,
+    mask: mask,
+    extra: {
+      classes: extraClasses,
+      styles: extraStyles,
+      attributes: extraAttributes
+    }
+  };
+}
+
+function MissingIcon(error) {
+  this.name = 'MissingIcon';
+  this.message = error || 'Icon unavailable';
+  this.stack = new Error().stack;
+}
+
+MissingIcon.prototype = Object.create(Error.prototype);
+MissingIcon.prototype.constructor = MissingIcon;
+
+var FILL = { fill: 'currentColor' };
+var ANIMATION_BASE = {
+  attributeType: 'XML',
+  repeatCount: 'indefinite',
+  dur: '2s'
+};
+var RING = {
+  tag: 'path',
+  attributes: _extends({}, FILL, {
+    d: 'M156.5,447.7l-12.6,29.5c-18.7-9.5-35.9-21.2-51.5-34.9l22.7-22.7C127.6,430.5,141.5,440,156.5,447.7z M40.6,272H8.5 c1.4,21.2,5.4,41.7,11.7,61.1L50,321.2C45.1,305.5,41.8,289,40.6,272z M40.6,240c1.4-18.8,5.2-37,11.1-54.1l-29.5-12.6 C14.7,194.3,10,216.7,8.5,240H40.6z M64.3,156.5c7.8-14.9,17.2-28.8,28.1-41.5L69.7,92.3c-13.7,15.6-25.5,32.8-34.9,51.5 L64.3,156.5z M397,419.6c-13.9,12-29.4,22.3-46.1,30.4l11.9,29.8c20.7-9.9,39.8-22.6,56.9-37.6L397,419.6z M115,92.4 c13.9-12,29.4-22.3,46.1-30.4l-11.9-29.8c-20.7,9.9-39.8,22.6-56.8,37.6L115,92.4z M447.7,355.5c-7.8,14.9-17.2,28.8-28.1,41.5 l22.7,22.7c13.7-15.6,25.5-32.9,34.9-51.5L447.7,355.5z M471.4,272c-1.4,18.8-5.2,37-11.1,54.1l29.5,12.6 c7.5-21.1,12.2-43.5,13.6-66.8H471.4z M321.2,462c-15.7,5-32.2,8.2-49.2,9.4v32.1c21.2-1.4,41.7-5.4,61.1-11.7L321.2,462z M240,471.4c-18.8-1.4-37-5.2-54.1-11.1l-12.6,29.5c21.1,7.5,43.5,12.2,66.8,13.6V471.4z M462,190.8c5,15.7,8.2,32.2,9.4,49.2h32.1 c-1.4-21.2-5.4-41.7-11.7-61.1L462,190.8z M92.4,397c-12-13.9-22.3-29.4-30.4-46.1l-29.8,11.9c9.9,20.7,22.6,39.8,37.6,56.9 L92.4,397z M272,40.6c18.8,1.4,36.9,5.2,54.1,11.1l12.6-29.5C317.7,14.7,295.3,10,272,8.5V40.6z M190.8,50 c15.7-5,32.2-8.2,49.2-9.4V8.5c-21.2,1.4-41.7,5.4-61.1,11.7L190.8,50z M442.3,92.3L419.6,115c12,13.9,22.3,29.4,30.5,46.1 l29.8-11.9C470,128.5,457.3,109.4,442.3,92.3z M397,92.4l22.7-22.7c-15.6-13.7-32.8-25.5-51.5-34.9l-12.6,29.5 C370.4,72.1,384.4,81.5,397,92.4z'
+  })
+};
+var OPACITY_ANIMATE = _extends({}, ANIMATION_BASE, {
+  attributeName: 'opacity'
+});
+var DOT = {
+  tag: 'circle',
+  attributes: _extends({}, FILL, {
+    cx: '256',
+    cy: '364',
+    r: '28'
+  }),
+  children: [{ tag: 'animate', attributes: _extends({}, ANIMATION_BASE, { attributeName: 'r', values: '28;14;28;28;14;28;' }) }, { tag: 'animate', attributes: _extends({}, OPACITY_ANIMATE, { values: '1;0;1;1;0;1;' }) }]
+};
+var QUESTION = {
+  tag: 'path',
+  attributes: _extends({}, FILL, {
+    opacity: '1',
+    d: 'M263.7,312h-16c-6.6,0-12-5.4-12-12c0-71,77.4-63.9,77.4-107.8c0-20-17.8-40.2-57.4-40.2c-29.1,0-44.3,9.6-59.2,28.7 c-3.9,5-11.1,6-16.2,2.4l-13.1-9.2c-5.6-3.9-6.9-11.8-2.6-17.2c21.2-27.2,46.4-44.7,91.2-44.7c52.3,0,97.4,29.8,97.4,80.2 c0,67.6-77.4,63.5-77.4,107.8C275.7,306.6,270.3,312,263.7,312z'
+  }),
+  children: [{ tag: 'animate', attributes: _extends({}, OPACITY_ANIMATE, { values: '1;0;0;0;0;1;' }) }]
+};
+var EXCLAMATION = {
+  tag: 'path',
+  attributes: _extends({}, FILL, {
+    opacity: '0',
+    d: 'M232.5,134.5l7,168c0.3,6.4,5.6,11.5,12,11.5h9c6.4,0,11.7-5.1,12-11.5l7-168c0.3-6.8-5.2-12.5-12-12.5h-23 C237.7,122,232.2,127.7,232.5,134.5z'
+  }),
+  children: [{ tag: 'animate', attributes: _extends({}, OPACITY_ANIMATE, { values: '0;0;1;1;0;0;' }) }]
+};
+
+var missing = { tag: 'g', children: [RING, DOT, QUESTION, EXCLAMATION] };
+
+var styles = namespace.styles;
+
+var LAYERS_TEXT_CLASSNAME = 'fa-layers-text';
+var FONT_FAMILY_PATTERN = /Font Awesome 5 (Solid|Regular|Light|Brands|Free|Pro)/;
+var STYLE_TO_PREFIX = {
+  'Solid': 'fas',
+  'Regular': 'far',
+  'Light': 'fal',
+  'Brands': 'fab'
+};
+var FONT_WEIGHT_TO_PREFIX = {
+  '900': 'fas',
+  '400': 'far',
+  '300': 'fal'
+};
+
+function findIcon(iconName, prefix) {
+  var val = {
+    found: false,
+    width: 512,
+    height: 512,
+    icon: missing
+  };
+
+  if (iconName && prefix && styles[prefix] && styles[prefix][iconName]) {
+    var icon = styles[prefix][iconName];
+    var width = icon[0];
+    var height = icon[1];
+    var vectorData = icon.slice(4);
+
+    val = {
+      found: true,
+      width: width,
+      height: height,
+      icon: { tag: 'path', attributes: { fill: 'currentColor', d: vectorData[0] } }
+    };
+  } else if (iconName && prefix && !config.showMissingIcons) {
+    throw new MissingIcon('Icon is missing for prefix ' + prefix + ' with icon name ' + iconName);
+  }
+
+  return val;
+}
+
+function generateSvgReplacementMutation(node, nodeMeta) {
+  var iconName = nodeMeta.iconName,
+      title = nodeMeta.title,
+      prefix = nodeMeta.prefix,
+      transform = nodeMeta.transform,
+      symbol = nodeMeta.symbol,
+      mask = nodeMeta.mask,
+      extra = nodeMeta.extra;
+
+
+  return [node, makeInlineSvgAbstract({
+    icons: {
+      main: findIcon(iconName, prefix),
+      mask: findIcon(mask.iconName, mask.prefix)
+    },
+    prefix: prefix,
+    iconName: iconName,
+    transform: transform,
+    symbol: symbol,
+    mask: mask,
+    title: title,
+    extra: extra,
+    watchable: true
+  })];
+}
+
+function generateLayersText(node, nodeMeta) {
+  var title = nodeMeta.title,
+      transform = nodeMeta.transform,
+      extra = nodeMeta.extra;
+
+
+  var width = null;
+  var height = null;
+
+  if (IS_IE) {
+    var computedFontSize = parseInt(getComputedStyle(node).fontSize, 10);
+    var boundingClientRect = node.getBoundingClientRect();
+    width = boundingClientRect.width / computedFontSize;
+    height = boundingClientRect.height / computedFontSize;
+  }
+
+  if (config.autoA11y && !title) {
+    extra.attributes['aria-hidden'] = 'true';
+  }
+
+  return [node, makeLayersTextAbstract({
+    content: node.innerHTML,
+    width: width,
+    height: height,
+    transform: transform,
+    title: title,
+    extra: extra,
+    watchable: true
+  })];
+}
+
+function generateMutation(node) {
+  var nodeMeta = parseMeta(node);
+
+  if (~nodeMeta.extra.classes.indexOf(LAYERS_TEXT_CLASSNAME)) {
+    return generateLayersText(node, nodeMeta);
+  } else {
+    return generateSvgReplacementMutation(node, nodeMeta);
+  }
+}
+
+function searchPseudoElements(root) {
+  if (!IS_DOM) return;
+
+  var end = perf.begin('searchPseudoElements');
+
+  disableObservation(function () {
+    toArray(root.querySelectorAll('*')).filter(function (n) {
+      return n.parentNode !== document.head && !~TAGNAMES_TO_SKIP_FOR_PSEUDOELEMENTS.indexOf(n.tagName.toUpperCase()) && !n.getAttribute(DATA_FA_PSEUDO_ELEMENT) && (!n.parentNode || n.parentNode.tagName !== 'svg');
+    }).forEach(function (node) {
+      [':before', ':after'].forEach(function (pos) {
+        var children = toArray(node.children);
+        var alreadyProcessedPseudoElement = children.filter(function (c) {
+          return c.getAttribute(DATA_FA_PSEUDO_ELEMENT) === pos;
+        })[0];
+
+        var styles = WINDOW.getComputedStyle(node, pos);
+        var fontFamily = styles.getPropertyValue('font-family').match(FONT_FAMILY_PATTERN);
+        var fontWeight = styles.getPropertyValue('font-weight');
+
+        if (alreadyProcessedPseudoElement && !fontFamily) {
+          // If we've already processed it but the current computed style does not result in a font-family,
+          // that probably means that a class name that was previously present to make the icon has been
+          // removed. So we now should delete the icon.
+          node.removeChild(alreadyProcessedPseudoElement);
+        } else if (fontFamily) {
+          var content = styles.getPropertyValue('content');
+          var prefix = ~['Light', 'Regular', 'Solid', 'Brands'].indexOf(fontFamily[1]) ? STYLE_TO_PREFIX[fontFamily[1]] : FONT_WEIGHT_TO_PREFIX[fontWeight];
+          var iconName = byUnicode(prefix, toHex(content.length === 3 ? content.substr(1, 1) : content));
+          // Only convert the pseudo element in this :before/:after position into an icon if we haven't
+          // already done so with the same prefix and iconName
+          if (!alreadyProcessedPseudoElement || alreadyProcessedPseudoElement.getAttribute(DATA_PREFIX) !== prefix || alreadyProcessedPseudoElement.getAttribute(DATA_ICON) !== iconName) {
+            if (alreadyProcessedPseudoElement) {
+              // Delete the old one, since we're replacing it with a new one
+              node.removeChild(alreadyProcessedPseudoElement);
+            }
+
+            var extra = blankMeta.extra;
+
+            extra.attributes[DATA_FA_PSEUDO_ELEMENT] = pos;
+            var abstract = makeInlineSvgAbstract(_extends({}, blankMeta, {
+              icons: {
+                main: findIcon(iconName, prefix),
+                mask: emptyCanonicalIcon()
+              },
+              prefix: prefix,
+              iconName: iconName,
+              extra: extra,
+              watchable: true
+            }));
+
+            var element = DOCUMENT.createElement('svg');
+
+            if (pos === ':before') {
+              node.insertBefore(element, node.firstChild);
+            } else {
+              node.appendChild(element);
+            }
+
+            element.outerHTML = abstract.map(function (a) {
+              return toHtml(a);
+            }).join('\n');
+          }
+        }
+      });
+    });
+  });
+
+  end();
+}
+
+function onTree(root) {
+  var callback = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+
+  if (!IS_DOM) return;
+
+  var htmlClassList = DOCUMENT.documentElement.classList;
+  var hclAdd = function hclAdd(suffix) {
+    return htmlClassList.add(HTML_CLASS_I2SVG_BASE_CLASS + '-' + suffix);
+  };
+  var hclRemove = function hclRemove(suffix) {
+    return htmlClassList.remove(HTML_CLASS_I2SVG_BASE_CLASS + '-' + suffix);
+  };
+  var prefixes = Object.keys(styles);
+  var prefixesDomQuery = ['.' + LAYERS_TEXT_CLASSNAME + ':not([' + DATA_FA_I2SVG + '])'].concat(prefixes.map(function (p) {
+    return '.' + p + ':not([' + DATA_FA_I2SVG + '])';
+  })).join(', ');
+
+  if (prefixesDomQuery.length === 0) {
+    return;
+  }
+
+  var candidates = toArray(root.querySelectorAll(prefixesDomQuery));
+
+  if (candidates.length > 0) {
+    hclAdd('pending');
+    hclRemove('complete');
+  } else {
+    return;
+  }
+
+  var mark = perf.begin('onTree');
+
+  var mutations = candidates.reduce(function (acc, node) {
+    try {
+      var mutation = generateMutation(node);
+
+      if (mutation) {
+        acc.push(mutation);
+      }
+    } catch (e) {
+      if (!PRODUCTION) {
+        if (e instanceof MissingIcon) {
+          console.error(e);
+        }
+      }
+    }
+
+    return acc;
+  }, []);
+
+  mark();
+
+  perform(mutations, function () {
+    hclAdd('active');
+    hclAdd('complete');
+    hclRemove('pending');
+
+    if (typeof callback === 'function') callback();
+  });
+}
+
+function onNode(node) {
+  var callback = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+
+  var mutation = generateMutation(node);
+
+  if (mutation) {
+    perform([mutation], callback);
+  }
+}
+
+var baseStyles = "svg:not(:root).svg-inline--fa{overflow:visible}.svg-inline--fa{display:inline-block;font-size:inherit;height:1em;overflow:visible;vertical-align:-.125em}.svg-inline--fa.fa-lg{vertical-align:-.225em}.svg-inline--fa.fa-w-1{width:.0625em}.svg-inline--fa.fa-w-2{width:.125em}.svg-inline--fa.fa-w-3{width:.1875em}.svg-inline--fa.fa-w-4{width:.25em}.svg-inline--fa.fa-w-5{width:.3125em}.svg-inline--fa.fa-w-6{width:.375em}.svg-inline--fa.fa-w-7{width:.4375em}.svg-inline--fa.fa-w-8{width:.5em}.svg-inline--fa.fa-w-9{width:.5625em}.svg-inline--fa.fa-w-10{width:.625em}.svg-inline--fa.fa-w-11{width:.6875em}.svg-inline--fa.fa-w-12{width:.75em}.svg-inline--fa.fa-w-13{width:.8125em}.svg-inline--fa.fa-w-14{width:.875em}.svg-inline--fa.fa-w-15{width:.9375em}.svg-inline--fa.fa-w-16{width:1em}.svg-inline--fa.fa-w-17{width:1.0625em}.svg-inline--fa.fa-w-18{width:1.125em}.svg-inline--fa.fa-w-19{width:1.1875em}.svg-inline--fa.fa-w-20{width:1.25em}.svg-inline--fa.fa-pull-left{margin-right:.3em;width:auto}.svg-inline--fa.fa-pull-right{margin-left:.3em;width:auto}.svg-inline--fa.fa-border{height:1.5em}.svg-inline--fa.fa-li{width:2em}.svg-inline--fa.fa-fw{width:1.25em}.fa-layers svg.svg-inline--fa{bottom:0;left:0;margin:auto;position:absolute;right:0;top:0}.fa-layers{display:inline-block;height:1em;position:relative;text-align:center;vertical-align:-.125em;width:1em}.fa-layers svg.svg-inline--fa{-webkit-transform-origin:center center;transform-origin:center center}.fa-layers-counter,.fa-layers-text{display:inline-block;position:absolute;text-align:center}.fa-layers-text{left:50%;top:50%;-webkit-transform:translate(-50%,-50%);transform:translate(-50%,-50%);-webkit-transform-origin:center center;transform-origin:center center}.fa-layers-counter{background-color:#ff253a;border-radius:1em;-webkit-box-sizing:border-box;box-sizing:border-box;color:#fff;height:1.5em;line-height:1;max-width:5em;min-width:1.5em;overflow:hidden;padding:.25em;right:0;text-overflow:ellipsis;top:0;-webkit-transform:scale(.25);transform:scale(.25);-webkit-transform-origin:top right;transform-origin:top right}.fa-layers-bottom-right{bottom:0;right:0;top:auto;-webkit-transform:scale(.25);transform:scale(.25);-webkit-transform-origin:bottom right;transform-origin:bottom right}.fa-layers-bottom-left{bottom:0;left:0;right:auto;top:auto;-webkit-transform:scale(.25);transform:scale(.25);-webkit-transform-origin:bottom left;transform-origin:bottom left}.fa-layers-top-right{right:0;top:0;-webkit-transform:scale(.25);transform:scale(.25);-webkit-transform-origin:top right;transform-origin:top right}.fa-layers-top-left{left:0;right:auto;top:0;-webkit-transform:scale(.25);transform:scale(.25);-webkit-transform-origin:top left;transform-origin:top left}.fa-lg{font-size:1.33333em;line-height:.75em;vertical-align:-.0667em}.fa-xs{font-size:.75em}.fa-sm{font-size:.875em}.fa-1x{font-size:1em}.fa-2x{font-size:2em}.fa-3x{font-size:3em}.fa-4x{font-size:4em}.fa-5x{font-size:5em}.fa-6x{font-size:6em}.fa-7x{font-size:7em}.fa-8x{font-size:8em}.fa-9x{font-size:9em}.fa-10x{font-size:10em}.fa-fw{text-align:center;width:1.25em}.fa-ul{list-style-type:none;margin-left:2.5em;padding-left:0}.fa-ul>li{position:relative}.fa-li{left:-2em;position:absolute;text-align:center;width:2em;line-height:inherit}.fa-border{border:solid .08em #eee;border-radius:.1em;padding:.2em .25em .15em}.fa-pull-left{float:left}.fa-pull-right{float:right}.fa.fa-pull-left,.fab.fa-pull-left,.fal.fa-pull-left,.far.fa-pull-left,.fas.fa-pull-left{margin-right:.3em}.fa.fa-pull-right,.fab.fa-pull-right,.fal.fa-pull-right,.far.fa-pull-right,.fas.fa-pull-right{margin-left:.3em}.fa-spin{-webkit-animation:fa-spin 2s infinite linear;animation:fa-spin 2s infinite linear}.fa-pulse{-webkit-animation:fa-spin 1s infinite steps(8);animation:fa-spin 1s infinite steps(8)}@-webkit-keyframes fa-spin{0%{-webkit-transform:rotate(0);transform:rotate(0)}100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}@keyframes fa-spin{0%{-webkit-transform:rotate(0);transform:rotate(0)}100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}.fa-rotate-90{-webkit-transform:rotate(90deg);transform:rotate(90deg)}.fa-rotate-180{-webkit-transform:rotate(180deg);transform:rotate(180deg)}.fa-rotate-270{-webkit-transform:rotate(270deg);transform:rotate(270deg)}.fa-flip-horizontal{-webkit-transform:scale(-1,1);transform:scale(-1,1)}.fa-flip-vertical{-webkit-transform:scale(1,-1);transform:scale(1,-1)}.fa-flip-horizontal.fa-flip-vertical{-webkit-transform:scale(-1,-1);transform:scale(-1,-1)}:root .fa-flip-horizontal,:root .fa-flip-vertical,:root .fa-rotate-180,:root .fa-rotate-270,:root .fa-rotate-90{-webkit-filter:none;filter:none}.fa-stack{display:inline-block;height:2em;position:relative;width:2em}.fa-stack-1x,.fa-stack-2x{bottom:0;left:0;margin:auto;position:absolute;right:0;top:0}.svg-inline--fa.fa-stack-1x{height:1em;width:1em}.svg-inline--fa.fa-stack-2x{height:2em;width:2em}.fa-inverse{color:#fff}.sr-only{border:0;clip:rect(0,0,0,0);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px}.sr-only-focusable:active,.sr-only-focusable:focus{clip:auto;height:auto;margin:0;overflow:visible;position:static;width:auto}";
+
+var css = function () {
+  var dfp = DEFAULT_FAMILY_PREFIX;
+  var drc = DEFAULT_REPLACEMENT_CLASS;
+  var fp = config.familyPrefix;
+  var rc = config.replacementClass;
+  var s = baseStyles;
+
+  if (fp !== dfp || rc !== drc) {
+    var dPatt = new RegExp('\\.' + dfp + '\\-', 'g');
+    var rPatt = new RegExp('\\.' + drc, 'g');
+
+    s = s.replace(dPatt, '.' + fp + '-').replace(rPatt, '.' + rc);
+  }
+
+  return s;
+};
+
+function define(prefix, icons) {
+  var normalized = Object.keys(icons).reduce(function (acc, iconName) {
+    var icon = icons[iconName];
+    var expanded = !!icon.icon;
+
+    if (expanded) {
+      acc[icon.iconName] = icon.icon;
+    } else {
+      acc[iconName] = icon;
+    }
+    return acc;
+  }, {});
+
+  if (typeof namespace.hooks.addPack === 'function') {
+    namespace.hooks.addPack(prefix, normalized);
+  } else {
+    namespace.styles[prefix] = _extends({}, namespace.styles[prefix] || {}, normalized);
+  }
+
+  /**
+   * Font Awesome 4 used the prefix of `fa` for all icons. With the introduction
+   * of new styles we needed to differentiate between them. Prefix `fa` is now an alias
+   * for `fas` so we'll easy the upgrade process for our users by automatically defining
+   * this as well.
+   */
+  if (prefix === 'fas') {
+    define('fa', icons);
+  }
+}
+
+var Library = function () {
+  function Library() {
+    classCallCheck(this, Library);
+
+    this.definitions = {};
+  }
+
+  createClass(Library, [{
+    key: 'add',
+    value: function add() {
+      var _this = this;
+
+      for (var _len = arguments.length, definitions = Array(_len), _key = 0; _key < _len; _key++) {
+        definitions[_key] = arguments[_key];
+      }
+
+      var additions = definitions.reduce(this._pullDefinitions, {});
+
+      Object.keys(additions).forEach(function (key) {
+        _this.definitions[key] = _extends({}, _this.definitions[key] || {}, additions[key]);
+        define(key, additions[key]);
+        build();
+      });
+    }
+  }, {
+    key: 'reset',
+    value: function reset() {
+      this.definitions = {};
+    }
+  }, {
+    key: '_pullDefinitions',
+    value: function _pullDefinitions(additions, definition) {
+      var normalized = definition.prefix && definition.iconName && definition.icon ? { 0: definition } : definition;
+
+      Object.keys(normalized).map(function (key) {
+        var _normalized$key = normalized[key],
+            prefix = _normalized$key.prefix,
+            iconName = _normalized$key.iconName,
+            icon = _normalized$key.icon;
+
+
+        if (!additions[prefix]) additions[prefix] = {};
+
+        additions[prefix][iconName] = icon;
+      });
+
+      return additions;
+    }
+  }]);
+  return Library;
+}();
+
+function prepIcon(icon) {
+  var width = icon[0];
+  var height = icon[1];
+  var vectorData = icon.slice(4);
+
+  return {
+    found: true,
+    width: width,
+    height: height,
+    icon: { tag: 'path', attributes: { fill: 'currentColor', d: vectorData[0] } }
+  };
+}
+
+function ensureCss() {
+  if (config.autoAddCss && !_cssInserted) {
+    insertCss(css());
+    _cssInserted = true;
+  }
+}
+
+function apiObject(val, abstractCreator) {
+  Object.defineProperty(val, 'abstract', {
+    get: abstractCreator
+  });
+
+  Object.defineProperty(val, 'html', {
+    get: function get() {
+      return val.abstract.map(function (a) {
+        return toHtml(a);
+      });
+    }
+  });
+
+  Object.defineProperty(val, 'node', {
+    get: function get() {
+      if (!IS_DOM) return;
+
+      var container = DOCUMENT.createElement('div');
+      container.innerHTML = val.html;
+      return container.children;
+    }
+  });
+
+  return val;
+}
+
+function findIconDefinition(params) {
+  var _params$prefix = params.prefix,
+      prefix = _params$prefix === undefined ? 'fa' : _params$prefix,
+      iconName = params.iconName;
+
+
+  if (!iconName) return;
+
+  return iconFromMapping(library.definitions, prefix, iconName) || iconFromMapping(namespace.styles, prefix, iconName);
+}
+
+function resolveIcons(next) {
+  return function (maybeIconDefinition) {
+    var params = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
+    var iconDefinition = (maybeIconDefinition || {}).icon ? maybeIconDefinition : findIconDefinition(maybeIconDefinition || {});
+
+    var mask = params.mask;
+
+
+    if (mask) {
+      mask = (mask || {}).icon ? mask : findIconDefinition(mask || {});
+    }
+
+    return next(iconDefinition, _extends({}, params, { mask: mask }));
+  };
+}
+
+var library = new Library();
+
+var noAuto = function noAuto() {
+  config.autoReplaceSvg = false;
+  config.observeMutations = false;
+
+  disconnect();
+};
+
+var _cssInserted = false;
+
+var dom = {
+  i2svg: function i2svg() {
+    var params = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+    if (IS_DOM) {
+      ensureCss();
+
+      var _params$node = params.node,
+          node = _params$node === undefined ? DOCUMENT : _params$node,
+          _params$callback = params.callback,
+          callback = _params$callback === undefined ? function () {} : _params$callback;
+
+
+      if (config.searchPseudoElements) {
+        searchPseudoElements(node);
+      }
+
+      onTree(node, callback);
+    }
+  },
+
+  css: css,
+
+  insertCss: function insertCss$$1() {
+    if (!_cssInserted) {
+      insertCss(css());
+      _cssInserted = true;
+    }
+  },
+
+  watch: function watch() {
+    var params = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+    var autoReplaceSvgRoot = params.autoReplaceSvgRoot,
+        observeMutationsRoot = params.observeMutationsRoot;
+
+
+    if (config.autoReplaceSvg === false) {
+      config.autoReplaceSvg = true;
+    }
+
+    config.observeMutations = true;
+
+    domready(function () {
+      autoReplace({
+        autoReplaceSvgRoot: autoReplaceSvgRoot
+      });
+
+      observe({
+        treeCallback: onTree,
+        nodeCallback: onNode,
+        pseudoElementsCallback: searchPseudoElements,
+        observeMutationsRoot: observeMutationsRoot
+      });
+    });
+  }
+};
+
+var parse = {
+  transform: function transform(transformString) {
+    return parseTransformString(transformString);
+  }
+};
+
+var icon = resolveIcons(function (iconDefinition) {
+  var params = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+  var _params$transform = params.transform,
+      transform = _params$transform === undefined ? meaninglessTransform : _params$transform,
+      _params$symbol = params.symbol,
+      symbol = _params$symbol === undefined ? false : _params$symbol,
+      _params$mask = params.mask,
+      mask = _params$mask === undefined ? null : _params$mask,
+      _params$title = params.title,
+      title = _params$title === undefined ? null : _params$title,
+      _params$classes = params.classes,
+      classes = _params$classes === undefined ? [] : _params$classes,
+      _params$attributes = params.attributes,
+      attributes = _params$attributes === undefined ? {} : _params$attributes,
+      _params$styles = params.styles,
+      styles = _params$styles === undefined ? {} : _params$styles;
+
+
+  if (!iconDefinition) return;
+
+  var prefix = iconDefinition.prefix,
+      iconName = iconDefinition.iconName,
+      icon = iconDefinition.icon;
+
+
+  return apiObject(_extends({ type: 'icon' }, iconDefinition), function () {
+    ensureCss();
+
+    if (config.autoA11y) {
+      if (title) {
+        attributes['aria-labelledby'] = config.replacementClass + '-title-' + nextUniqueId();
+      } else {
+        attributes['aria-hidden'] = 'true';
+      }
+    }
+
+    return makeInlineSvgAbstract({
+      icons: {
+        main: prepIcon(icon),
+        mask: mask ? prepIcon(mask.icon) : { found: false, width: null, height: null, icon: {} }
+      },
+      prefix: prefix,
+      iconName: iconName,
+      transform: _extends({}, meaninglessTransform, transform),
+      symbol: symbol,
+      title: title,
+      extra: {
+        attributes: attributes,
+        styles: styles,
+        classes: classes
+      }
+    });
+  });
+});
+
+var text = function text(content) {
+  var params = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+  var _params$transform2 = params.transform,
+      transform = _params$transform2 === undefined ? meaninglessTransform : _params$transform2,
+      _params$title2 = params.title,
+      title = _params$title2 === undefined ? null : _params$title2,
+      _params$classes2 = params.classes,
+      classes = _params$classes2 === undefined ? [] : _params$classes2,
+      _params$attributes2 = params.attributes,
+      attributes = _params$attributes2 === undefined ? {} : _params$attributes2,
+      _params$styles2 = params.styles,
+      styles = _params$styles2 === undefined ? {} : _params$styles2;
+
+
+  return apiObject({ type: 'text', content: content }, function () {
+    ensureCss();
+
+    return makeLayersTextAbstract({
+      content: content,
+      transform: _extends({}, meaninglessTransform, transform),
+      title: title,
+      extra: {
+        attributes: attributes,
+        styles: styles,
+        classes: [config.familyPrefix + '-layers-text'].concat(toConsumableArray(classes))
+      }
+    });
+  });
+};
+
+var counter = function counter(content) {
+  var params = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+  var _params$title3 = params.title,
+      title = _params$title3 === undefined ? null : _params$title3,
+      _params$classes3 = params.classes,
+      classes = _params$classes3 === undefined ? [] : _params$classes3,
+      _params$attributes3 = params.attributes,
+      attributes = _params$attributes3 === undefined ? {} : _params$attributes3,
+      _params$styles3 = params.styles,
+      styles = _params$styles3 === undefined ? {} : _params$styles3;
+
+
+  return apiObject({ type: 'counter', content: content }, function () {
+    ensureCss();
+
+    return makeLayersCounterAbstract({
+      content: content.toString(),
+      title: title,
+      extra: {
+        attributes: attributes,
+        styles: styles,
+        classes: [config.familyPrefix + '-layers-counter'].concat(toConsumableArray(classes))
+      }
+    });
+  });
+};
+
+var layer = function layer(assembler) {
+  return apiObject({ type: 'layer' }, function () {
+    ensureCss();
+
+    var children = [];
+
+    assembler(function (args) {
+      Array.isArray(args) ? args.map(function (a) {
+        children = children.concat(a.abstract);
+      }) : children = children.concat(args.abstract);
+    });
+
+    return [{
+      tag: 'span',
+      attributes: { class: config.familyPrefix + '-layers' },
+      children: children
+    }];
+  });
+};
+
+var api = {
+  noAuto: noAuto,
+  config: config,
+  dom: dom,
+  library: library,
+  parse: parse,
+  findIconDefinition: findIconDefinition,
+  icon: icon,
+  text: text,
+  counter: counter,
+  layer: layer,
+  toHtml: toHtml
+};
+
+var autoReplace = function autoReplace() {
+  var params = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var _params$autoReplaceSv = params.autoReplaceSvgRoot,
+      autoReplaceSvgRoot = _params$autoReplaceSv === undefined ? DOCUMENT : _params$autoReplaceSv;
+
+
+  if (Object.keys(namespace.styles).length > 0 && IS_DOM && config.autoReplaceSvg) api.dom.i2svg({ node: autoReplaceSvgRoot });
+};
+
+function bootstrap() {
+  if (IS_BROWSER) {
+    if (!WINDOW.FontAwesome) {
+      WINDOW.FontAwesome = api;
+    }
+
+    domready(function () {
+      autoReplace();
+
+      observe({
+        treeCallback: onTree,
+        nodeCallback: onNode,
+        pseudoElementsCallback: searchPseudoElements
+      });
+    });
+  }
+
+  namespace.hooks = _extends({}, namespace.hooks, {
+
+    addPack: function addPack(prefix, icons) {
+      namespace.styles[prefix] = _extends({}, namespace.styles[prefix] || {}, icons);
+
+      build();
+      autoReplace();
+    },
+
+    addShims: function addShims(shims) {
+      var _namespace$shims;
+
+      (_namespace$shims = namespace.shims).push.apply(_namespace$shims, toConsumableArray(shims));
+
+      build();
+      autoReplace();
+    }
+  });
+}
+
+bunker(bootstrap);
+
+}());
+
+
+/***/ }),
+/* 9 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(22);
+
+/***/ }),
+/* 10 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = function bind(fn, thisArg) {
+  return function wrap() {
+    var args = new Array(arguments.length);
+    for (var i = 0; i < args.length; i++) {
+      args[i] = arguments[i];
+    }
+    return fn.apply(thisArg, args);
+  };
+};
+
+
+/***/ }),
+/* 11 */
+/***/ (function(module, exports) {
+
+// shim for using process in browser
+var process = module.exports = {};
+
+// cached from whatever global is present so that test runners that stub it
+// don't break things.  But we need to wrap it in a try catch in case it is
+// wrapped in strict mode code which doesn't define any globals.  It's inside a
+// function because try/catches deoptimize in certain engines.
+
+var cachedSetTimeout;
+var cachedClearTimeout;
+
+function defaultSetTimout() {
+    throw new Error('setTimeout has not been defined');
+}
+function defaultClearTimeout () {
+    throw new Error('clearTimeout has not been defined');
+}
+(function () {
+    try {
+        if (typeof setTimeout === 'function') {
+            cachedSetTimeout = setTimeout;
+        } else {
+            cachedSetTimeout = defaultSetTimout;
+        }
+    } catch (e) {
+        cachedSetTimeout = defaultSetTimout;
+    }
+    try {
+        if (typeof clearTimeout === 'function') {
+            cachedClearTimeout = clearTimeout;
+        } else {
+            cachedClearTimeout = defaultClearTimeout;
+        }
+    } catch (e) {
+        cachedClearTimeout = defaultClearTimeout;
+    }
+} ())
+function runTimeout(fun) {
+    if (cachedSetTimeout === setTimeout) {
+        //normal enviroments in sane situations
+        return setTimeout(fun, 0);
+    }
+    // if setTimeout wasn't available but was latter defined
+    if ((cachedSetTimeout === defaultSetTimout || !cachedSetTimeout) && setTimeout) {
+        cachedSetTimeout = setTimeout;
+        return setTimeout(fun, 0);
+    }
+    try {
+        // when when somebody has screwed with setTimeout but no I.E. maddness
+        return cachedSetTimeout(fun, 0);
+    } catch(e){
+        try {
+            // When we are in I.E. but the script has been evaled so I.E. doesn't trust the global object when called normally
+            return cachedSetTimeout.call(null, fun, 0);
+        } catch(e){
+            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error
+            return cachedSetTimeout.call(this, fun, 0);
+        }
+    }
+
+
+}
+function runClearTimeout(marker) {
+    if (cachedClearTimeout === clearTimeout) {
+        //normal enviroments in sane situations
+        return clearTimeout(marker);
+    }
+    // if clearTimeout wasn't available but was latter defined
+    if ((cachedClearTimeout === defaultClearTimeout || !cachedClearTimeout) && clearTimeout) {
+        cachedClearTimeout = clearTimeout;
+        return clearTimeout(marker);
+    }
+    try {
+        // when when somebody has screwed with setTimeout but no I.E. maddness
+        return cachedClearTimeout(marker);
+    } catch (e){
+        try {
+            // When we are in I.E. but the script has been evaled so I.E. doesn't  trust the global object when called normally
+            return cachedClearTimeout.call(null, marker);
+        } catch (e){
+            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error.
+            // Some versions of I.E. have different rules for clearTimeout vs setTimeout
+            return cachedClearTimeout.call(this, marker);
+        }
+    }
+
+
+
+}
+var queue = [];
+var draining = false;
+var currentQueue;
+var queueIndex = -1;
+
+function cleanUpNextTick() {
+    if (!draining || !currentQueue) {
+        return;
+    }
+    draining = false;
+    if (currentQueue.length) {
+        queue = currentQueue.concat(queue);
+    } else {
+        queueIndex = -1;
+    }
+    if (queue.length) {
+        drainQueue();
+    }
+}
+
+function drainQueue() {
+    if (draining) {
+        return;
+    }
+    var timeout = runTimeout(cleanUpNextTick);
+    draining = true;
+
+    var len = queue.length;
+    while(len) {
+        currentQueue = queue;
+        queue = [];
+        while (++queueIndex < len) {
+            if (currentQueue) {
+                currentQueue[queueIndex].run();
+            }
+        }
+        queueIndex = -1;
+        len = queue.length;
+    }
+    currentQueue = null;
+    draining = false;
+    runClearTimeout(timeout);
+}
+
+process.nextTick = function (fun) {
+    var args = new Array(arguments.length - 1);
+    if (arguments.length > 1) {
+        for (var i = 1; i < arguments.length; i++) {
+            args[i - 1] = arguments[i];
+        }
+    }
+    queue.push(new Item(fun, args));
+    if (queue.length === 1 && !draining) {
+        runTimeout(drainQueue);
+    }
+};
+
+// v8 likes predictible objects
+function Item(fun, array) {
+    this.fun = fun;
+    this.array = array;
+}
+Item.prototype.run = function () {
+    this.fun.apply(null, this.array);
+};
+process.title = 'browser';
+process.browser = true;
+process.env = {};
+process.argv = [];
+process.version = ''; // empty string to avoid regexp issues
+process.versions = {};
+
+function noop() {}
+
+process.on = noop;
+process.addListener = noop;
+process.once = noop;
+process.off = noop;
+process.removeListener = noop;
+process.removeAllListeners = noop;
+process.emit = noop;
+process.prependListener = noop;
+process.prependOnceListener = noop;
+
+process.listeners = function (name) { return [] }
+
+process.binding = function (name) {
+    throw new Error('process.binding is not supported');
+};
+
+process.cwd = function () { return '/' };
+process.chdir = function (dir) {
+    throw new Error('process.chdir is not supported');
+};
+process.umask = function() { return 0; };
+
+
+/***/ }),
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var utils = __webpack_require__(0);
-var bind = __webpack_require__(8);
-var Axios = __webpack_require__(23);
+var settle = __webpack_require__(26);
+var buildURL = __webpack_require__(28);
+var parseHeaders = __webpack_require__(29);
+var isURLSameOrigin = __webpack_require__(30);
+var createError = __webpack_require__(13);
+var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(31);
+
+module.exports = function xhrAdapter(config) {
+  return new Promise(function dispatchXhrRequest(resolve, reject) {
+    var requestData = config.data;
+    var requestHeaders = config.headers;
+
+    if (utils.isFormData(requestData)) {
+      delete requestHeaders['Content-Type']; // Let the browser set it
+    }
+
+    var request = new XMLHttpRequest();
+    var loadEvent = 'onreadystatechange';
+    var xDomain = false;
+
+    // For IE 8/9 CORS support
+    // Only supports POST and GET calls and doesn't returns the response headers.
+    // DON'T do this for testing b/c XMLHttpRequest is mocked, not XDomainRequest.
+    if ("development" !== 'test' &&
+        typeof window !== 'undefined' &&
+        window.XDomainRequest && !('withCredentials' in request) &&
+        !isURLSameOrigin(config.url)) {
+      request = new window.XDomainRequest();
+      loadEvent = 'onload';
+      xDomain = true;
+      request.onprogress = function handleProgress() {};
+      request.ontimeout = function handleTimeout() {};
+    }
+
+    // HTTP basic authentication
+    if (config.auth) {
+      var username = config.auth.username || '';
+      var password = config.auth.password || '';
+      requestHeaders.Authorization = 'Basic ' + btoa(username + ':' + password);
+    }
+
+    request.open(config.method.toUpperCase(), buildURL(config.url, config.params, config.paramsSerializer), true);
+
+    // Set the request timeout in MS
+    request.timeout = config.timeout;
+
+    // Listen for ready state
+    request[loadEvent] = function handleLoad() {
+      if (!request || (request.readyState !== 4 && !xDomain)) {
+        return;
+      }
+
+      // The request errored out and we didn't get a response, this will be
+      // handled by onerror instead
+      // With one exception: request that using file: protocol, most browsers
+      // will return status as 0 even though it's a successful request
+      if (request.status === 0 && !(request.responseURL && request.responseURL.indexOf('file:') === 0)) {
+        return;
+      }
+
+      // Prepare the response
+      var responseHeaders = 'getAllResponseHeaders' in request ? parseHeaders(request.getAllResponseHeaders()) : null;
+      var responseData = !config.responseType || config.responseType === 'text' ? request.responseText : request.response;
+      var response = {
+        data: responseData,
+        // IE sends 1223 instead of 204 (https://github.com/axios/axios/issues/201)
+        status: request.status === 1223 ? 204 : request.status,
+        statusText: request.status === 1223 ? 'No Content' : request.statusText,
+        headers: responseHeaders,
+        config: config,
+        request: request
+      };
+
+      settle(resolve, reject, response);
+
+      // Clean up request
+      request = null;
+    };
+
+    // Handle low level network errors
+    request.onerror = function handleError() {
+      // Real errors are hidden from us by the browser
+      // onerror should only fire if it's a network error
+      reject(createError('Network Error', config, null, request));
+
+      // Clean up request
+      request = null;
+    };
+
+    // Handle timeout
+    request.ontimeout = function handleTimeout() {
+      reject(createError('timeout of ' + config.timeout + 'ms exceeded', config, 'ECONNABORTED',
+        request));
+
+      // Clean up request
+      request = null;
+    };
+
+    // Add xsrf header
+    // This is only done if running in a standard browser environment.
+    // Specifically not if we're in a web worker, or react-native.
+    if (utils.isStandardBrowserEnv()) {
+      var cookies = __webpack_require__(32);
+
+      // Add xsrf header
+      var xsrfValue = (config.withCredentials || isURLSameOrigin(config.url)) && config.xsrfCookieName ?
+          cookies.read(config.xsrfCookieName) :
+          undefined;
+
+      if (xsrfValue) {
+        requestHeaders[config.xsrfHeaderName] = xsrfValue;
+      }
+    }
+
+    // Add headers to the request
+    if ('setRequestHeader' in request) {
+      utils.forEach(requestHeaders, function setRequestHeader(val, key) {
+        if (typeof requestData === 'undefined' && key.toLowerCase() === 'content-type') {
+          // Remove Content-Type if data is undefined
+          delete requestHeaders[key];
+        } else {
+          // Otherwise add header to the request
+          request.setRequestHeader(key, val);
+        }
+      });
+    }
+
+    // Add withCredentials to request if needed
+    if (config.withCredentials) {
+      request.withCredentials = true;
+    }
+
+    // Add responseType to request if needed
+    if (config.responseType) {
+      try {
+        request.responseType = config.responseType;
+      } catch (e) {
+        // Expected DOMException thrown by browsers not compatible XMLHttpRequest Level 2.
+        // But, this can be suppressed for 'json' type as it can be parsed by default 'transformResponse' function.
+        if (config.responseType !== 'json') {
+          throw e;
+        }
+      }
+    }
+
+    // Handle progress if needed
+    if (typeof config.onDownloadProgress === 'function') {
+      request.addEventListener('progress', config.onDownloadProgress);
+    }
+
+    // Not all browsers support upload events
+    if (typeof config.onUploadProgress === 'function' && request.upload) {
+      request.upload.addEventListener('progress', config.onUploadProgress);
+    }
+
+    if (config.cancelToken) {
+      // Handle cancellation
+      config.cancelToken.promise.then(function onCanceled(cancel) {
+        if (!request) {
+          return;
+        }
+
+        request.abort();
+        reject(cancel);
+        // Clean up request
+        request = null;
+      });
+    }
+
+    if (requestData === undefined) {
+      requestData = null;
+    }
+
+    // Send the request
+    request.send(requestData);
+  });
+};
+
+
+/***/ }),
+/* 13 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var enhanceError = __webpack_require__(27);
+
+/**
+ * Create an Error with the specified message, config, error code, request and response.
+ *
+ * @param {string} message The error message.
+ * @param {Object} config The config.
+ * @param {string} [code] The error code (for example, 'ECONNABORTED').
+ * @param {Object} [request] The request.
+ * @param {Object} [response] The response.
+ * @returns {Error} The created error.
+ */
+module.exports = function createError(message, config, code, request, response) {
+  var error = new Error(message);
+  return enhanceError(error, config, code, request, response);
+};
+
+
+/***/ }),
+/* 14 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = function isCancel(value) {
+  return !!(value && value.__CANCEL__);
+};
+
+
+/***/ }),
+/* 15 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/**
+ * A `Cancel` is an object that is thrown when an operation is canceled.
+ *
+ * @class
+ * @param {string=} message The message.
+ */
+function Cancel(message) {
+  this.message = message;
+}
+
+Cancel.prototype.toString = function toString() {
+  return 'Cancel' + (this.message ? ': ' + this.message : '');
+};
+
+Cancel.prototype.__CANCEL__ = true;
+
+module.exports = Cancel;
+
+
+/***/ }),
+/* 16 */,
+/* 17 */,
+/* 18 */,
+/* 19 */,
+/* 20 */,
+/* 21 */,
+/* 22 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var utils = __webpack_require__(0);
+var bind = __webpack_require__(10);
+var Axios = __webpack_require__(24);
 var defaults = __webpack_require__(4);
 
 /**
@@ -26823,15 +26824,15 @@ axios.create = function create(instanceConfig) {
 };
 
 // Expose Cancel & CancelToken
-axios.Cancel = __webpack_require__(13);
-axios.CancelToken = __webpack_require__(37);
-axios.isCancel = __webpack_require__(12);
+axios.Cancel = __webpack_require__(15);
+axios.CancelToken = __webpack_require__(38);
+axios.isCancel = __webpack_require__(14);
 
 // Expose all/spread
 axios.all = function all(promises) {
   return Promise.all(promises);
 };
-axios.spread = __webpack_require__(38);
+axios.spread = __webpack_require__(39);
 
 module.exports = axios;
 
@@ -26840,7 +26841,7 @@ module.exports.default = axios;
 
 
 /***/ }),
-/* 22 */
+/* 23 */
 /***/ (function(module, exports) {
 
 /*!
@@ -26867,7 +26868,7 @@ function isSlowBuffer (obj) {
 
 
 /***/ }),
-/* 23 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -26875,8 +26876,8 @@ function isSlowBuffer (obj) {
 
 var defaults = __webpack_require__(4);
 var utils = __webpack_require__(0);
-var InterceptorManager = __webpack_require__(32);
-var dispatchRequest = __webpack_require__(33);
+var InterceptorManager = __webpack_require__(33);
+var dispatchRequest = __webpack_require__(34);
 
 /**
  * Create a new instance of Axios
@@ -26953,7 +26954,7 @@ module.exports = Axios;
 
 
 /***/ }),
-/* 24 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -26972,13 +26973,13 @@ module.exports = function normalizeHeaderName(headers, normalizedName) {
 
 
 /***/ }),
-/* 25 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var createError = __webpack_require__(11);
+var createError = __webpack_require__(13);
 
 /**
  * Resolve or reject a Promise based on response status.
@@ -27005,7 +27006,7 @@ module.exports = function settle(resolve, reject, response) {
 
 
 /***/ }),
-/* 26 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -27033,7 +27034,7 @@ module.exports = function enhanceError(error, config, code, request, response) {
 
 
 /***/ }),
-/* 27 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -27106,7 +27107,7 @@ module.exports = function buildURL(url, params, paramsSerializer) {
 
 
 /***/ }),
-/* 28 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -27166,7 +27167,7 @@ module.exports = function parseHeaders(headers) {
 
 
 /***/ }),
-/* 29 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -27241,7 +27242,7 @@ module.exports = (
 
 
 /***/ }),
-/* 30 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -27284,7 +27285,7 @@ module.exports = btoa;
 
 
 /***/ }),
-/* 31 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -27344,7 +27345,7 @@ module.exports = (
 
 
 /***/ }),
-/* 32 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -27403,18 +27404,18 @@ module.exports = InterceptorManager;
 
 
 /***/ }),
-/* 33 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var utils = __webpack_require__(0);
-var transformData = __webpack_require__(34);
-var isCancel = __webpack_require__(12);
+var transformData = __webpack_require__(35);
+var isCancel = __webpack_require__(14);
 var defaults = __webpack_require__(4);
-var isAbsoluteURL = __webpack_require__(35);
-var combineURLs = __webpack_require__(36);
+var isAbsoluteURL = __webpack_require__(36);
+var combineURLs = __webpack_require__(37);
 
 /**
  * Throws a `Cancel` if cancellation has been requested.
@@ -27496,7 +27497,7 @@ module.exports = function dispatchRequest(config) {
 
 
 /***/ }),
-/* 34 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -27523,7 +27524,7 @@ module.exports = function transformData(data, headers, fns) {
 
 
 /***/ }),
-/* 35 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -27544,7 +27545,7 @@ module.exports = function isAbsoluteURL(url) {
 
 
 /***/ }),
-/* 36 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -27565,13 +27566,13 @@ module.exports = function combineURLs(baseURL, relativeURL) {
 
 
 /***/ }),
-/* 37 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var Cancel = __webpack_require__(13);
+var Cancel = __webpack_require__(15);
 
 /**
  * A `CancelToken` is an object that can be used to request cancellation of an operation.
@@ -27629,7 +27630,7 @@ module.exports = CancelToken;
 
 
 /***/ }),
-/* 38 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -27663,7 +27664,7 @@ module.exports = function spread(callback) {
 
 
 /***/ }),
-/* 39 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global) {var scope = (typeof global !== "undefined" && global) ||
@@ -27719,7 +27720,7 @@ exports._unrefActive = exports.active = function(item) {
 };
 
 // setimmediate attaches itself to the global object
-__webpack_require__(40);
+__webpack_require__(41);
 // On some exotic environments, it's not clear which object `setimmediate` was
 // able to install onto.  Search each possibility in the same order as the
 // `setimmediate` library.
@@ -27733,7 +27734,7 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 40 */
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, process) {(function (global, undefined) {
@@ -27923,28 +27924,35 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
     attachTo.clearImmediate = clearImmediate;
 }(typeof self === "undefined" ? typeof global === "undefined" ? this : global : self));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(9)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(11)))
 
 /***/ }),
-/* 41 */,
 /* 42 */,
 /* 43 */,
 /* 44 */,
 /* 45 */,
-/* 46 */
+/* 46 */,
+/* 47 */,
+/* 48 */,
+/* 49 */,
+/* 50 */,
+/* 51 */,
+/* 52 */,
+/* 53 */,
+/* 54 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(14);
-__webpack_require__(7);
-__webpack_require__(6);
+__webpack_require__(5);
+__webpack_require__(9);
+__webpack_require__(8);
 __webpack_require__(3);
 __webpack_require__(2);
-__webpack_require__(47);
-module.exports = __webpack_require__(5);
+__webpack_require__(55);
+module.exports = __webpack_require__(7);
 
 
 /***/ }),
-/* 47 */
+/* 55 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*!
@@ -27956,4 +27964,4 @@ module.exports = __webpack_require__(5);
 //# sourceMappingURL=bootstrap.min.js.map
 
 /***/ })
-],[46]);
+],[54]);
