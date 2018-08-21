@@ -14,6 +14,9 @@ class User extends Authenticatable
     // this must be set for models that do not use an auto-incrementing PK
     public $incrementing = false;
 
+    protected $hidden = ['user_id', 'created_at', 'updated_at', 'connections', 'departments'];
+    protected $appends = ['is_csun_alum', 'primary_connection', 'primary_department', 'uri'];
+
     /**
      * Retrieves a BelongsToMany representing the set of Connectable instances
      * associated with this user. This only retrieves instances that should
@@ -50,7 +53,8 @@ class User extends Authenticatable
      * @return HasMany
      */
     public function degrees() {
-        return $this->hasMany('App\Models\Degree', 'user_id');
+        return $this->hasMany('App\Models\Degree', 'user_id')
+            ->orderBy('year', 'DESC');
     }
 
     /**
@@ -152,5 +156,14 @@ class User extends Authenticatable
     		return $this->departments->first();
     	}
     	return null;
+    }
+
+    /**
+     * Returns the URI for this user. Currently this is the email address
+     * but this method can be modified in the future to retrieve a URI from
+     * a different source.
+     */
+    public function getUriAttribute() {
+        return $this->email_uri;
     }
 }

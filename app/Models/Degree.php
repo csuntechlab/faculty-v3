@@ -8,4 +8,6 @@ class Degree extends Model
 {
 	protected $table = 'degrees';
     protected $primaryKey = 'degrees_id';
+
+    protected $hidden = ['degrees_id', 'user_id'];
 }
