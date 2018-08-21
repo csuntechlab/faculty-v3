@@ -27,14 +27,8 @@
 
 		{{-- FACULTY CONTENT --}}
 		@include('layouts.partials.header')
-			<div class="wrapper-main">
-				<div class="wrapper" id="main-content">
-					@yield('content')
-				</div>
-				@include('layouts.partials.csun-footer')
-			</div>
-
-		@include('layouts.partials.meta-footer')
+			@yield('content')
+		@include('layouts.partials.footer')
 
 		{{-- SCRIPTS --}}
 		{!! HTML::script('/js/manifest.js') !!}

@@ -15974,6 +15974,79 @@ p {
   }
 }
 
+footer {
+  height: 175px;
+  background: white;
+  width: 100%;
+  margin-top: 3rem;
+  font-size: 12px;
+}
+
+footer a {
+  color: black;
+}
+
+footer a:hover {
+  color: black;
+}
+
+footer .FACcsunEmblem {
+  width: 75px;
+}
+
+footer .FAC-metaLabFooter {
+  height: auto;
+  background: #272727;
+  color: #ebebeb;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  padding-left: 10px;
+}
+
+footer .FAC-metaLabFooter .FAC-metaLabLogo {
+  font-size: 1rem;
+  padding-bottom: 3px;
+  letter-spacing: 2px;
+}
+
+footer .FAC-metaLabFooter .FAC-metaLabLogo span {
+  color: red;
+  font-size: 1.4rem;
+  font-weight: 100;
+}
+
+footer .FAC-metaLabFooter .FAC-metaLabLink a {
+  color: #a7a7a7;
+  font-weight: 100;
+  font-size: .9rem;
+}
+
+footer .FAC-metaLabFooter .FAC-metaLabMotto {
+  color: #727272;
+  font-size: .9rem;
+  font-weight: 200;
+  float: right;
+}
+
+@media (max-width: 767.98px) {
+  footer {
+    text-align: center;
+    padding-bottom: 300px;
+  }
+  footer .FACcsunEmblem {
+    width: 100px;
+  }
+  footer .col-12 {
+    padding-bottom: 15px;
+  }
+  footer .FAC-metaLabFooter .FAC-metaLabMotto {
+    color: #505050;
+    font-size: .9rem;
+    padding-top: 20px;
+    float: none;
+  }
+}
+
 .FAC-banner {
   /* this class is for the section that holds the csun image, profile image, and titles. */
   position: relative;

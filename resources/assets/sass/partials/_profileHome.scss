@@ -96,4 +96,74 @@
             display:none;
         }
     }
+
+    footer{
+        height:175px;
+        background:white;
+        width:100%;
+        margin-top:3rem;
+        font-size:12px;
+        a{
+            color:black;
+            &:hover{
+                color:black;
+            }
+        }
+        .FACcsunEmblem{
+            width:75px;
+        }
+        .FAC-metaLabFooter{
+            height: auto;
+            background:rgb(39, 39, 39);
+            color:rgb(235, 235, 235);
+            padding-top:15px;
+            padding-bottom:15px;
+            padding-left:10px;
+            .FAC-metaLabLogo{
+                font-size:1rem;
+                padding-bottom:3px;
+                letter-spacing:2px;
+                span{
+                    color:red;
+                    font-size:1.4rem;
+                    font-weight:100;
+                }
+            }
+            .FAC-metaLabLink a{
+                color:rgb(167, 167, 167);
+                font-weight:100;
+                font-size:.9rem;
+            }
+            .FAC-metaLabMotto{
+                color:rgb(114, 114, 114);
+                font-size:.9rem;
+                font-weight:200;
+                float:right;
+            }
+        }
+    }
+
+//************* MEDIA QUERIES ******************
+
+    @include media-breakpoint-down(sm){
+        footer{
+            text-align: center;
+            .FACcsunEmblem{
+                width:100px;
+                
+            }
+            padding-bottom:300px;
+            .col-12{
+                padding-bottom:15px;
+            }
+            .FAC-metaLabFooter{
+                .FAC-metaLabMotto{
+                    color:rgb(80, 80, 80);
+                    font-size:.9rem;
+                    padding-top:20px;
+                    float:none;
+                }
+            } 
+        }
+    }
     
