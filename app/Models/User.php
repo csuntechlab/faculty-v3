@@ -98,7 +98,14 @@ class User extends Authenticatable
      * @return string
      */
     public function getEmailUriAttribute() {
-        $parts = explode('@', $this->email);
+        $email = $this->email;
+        if(app()->environment() == 'production') {
+            if(starts_with($email, 'nr_')) {
+                $email = substr($email, 3);
+            }
+        }
+
+        $parts = explode('@', $email);
         return $parts[0];
     }
 

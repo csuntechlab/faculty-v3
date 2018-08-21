@@ -51,7 +51,7 @@ class ProfileController extends Controller
             // there is a "success" key in the result; if it's present it
             // means that we got back some kind of JSON error response
             $check = $this->guzzle->resolveResponseBody($response, 'json');
-            if(property_exists($check, 'success')) {
+            if(gettype($check) == 'object' && property_exists($check, 'success')) {
                 $imageData = null;
             }
             else
