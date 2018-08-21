@@ -1,0 +1,132 @@
+.FAC-banner{ /* this class is for the section that holds the csun image, profile image, and titles. */
+    position: relative;
+    background: url(https://www.csun.edu/faculty/imgs/9.jpg) no-repeat center ;
+    height:297px;
+    width:100%;
+    object-fit: cover; 
+    background-size: cover;
+    z-index:1;
+    #FAC-banner__content{
+        padding-top:40px;
+        ul li{
+            
+            &:not(:last-child){
+                margin-right:10px;
+            }
+        }
+        .FAC-banner__icons{
+            font-size:1.1rem;
+            padding-top:20px;
+        }
+    }
+
+    a{
+        color:white;
+        text-decoration: underline;
+    }
+    .FAC-banner__image{ /* this is the profile pic of the faculty member */
+        margin-top:25px;
+        display:block;
+        margin-left:auto;
+        margin-right:auto;
+        width: 200px;
+        border-radius:50%;
+        border: solid 5px white;       
+    }
+    .FAC-banner__department{ /* this is the faculty's department in the homepage profile header */
+        color:red;
+    }
+    #FAC-banner__overlay { /* this is overlay for the csun image */
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+        display: block;
+    }
+    .FAC-banner__name{  /* this is the faculty's name in the homepage profile header */
+        font-size:38px;
+        color:white;
+        letter-spacing: 3px;
+        padding-top:10px;
+    }
+    .FAC-banner__title{ /* the is the faculty's title in the homepage profile header */
+        color:white;
+        font-size:16px;
+        padding-top:10px;
+        font-weight:300;
+    }
+    .FAC-banner__name--sm{  /* this is the faculty's name in the homepage profile header */
+        font-size:38px;
+        color:white;
+        letter-spacing: 3px;
+        display:none;
+    }
+    .FAC-banner__department--sm, .FAC-banner__badge--sm{
+        display:none;
+    }
+}
+
+@include media-breakpoint-down(sm){
+    .FAC-banner {
+        height:auto;
+        #FAC-banner__content{
+            padding-top:10px;
+            .FAC-banner__icons{
+                text-align:center;
+                width:100%;
+                padding-top:5px;
+                padding-bottom:20px;
+                margin-right:5px;
+                font-size:1.5rem;
+            }
+        }
+        .FAC-banner__department, .FAC-banner__badge{
+            display:none;
+        }
+        .FAC-banner__badge--sm{
+            display:block;
+            text-align:center;
+        }
+        .FAC-banner__department--sm{
+            display:block;
+            text-align:center;
+            color:red;
+        }
+        
+        .FAC-banner__name,
+        .FAC-banner__title,
+        .FAC-banner__department{
+            text-align: center;
+            width:100%;
+            padding-top:3px;
+        }  
+        .FAC-banner__name{
+            display:none;
+        }
+        .FAC-banner__name--sm{
+            display:block;
+            text-align:center;
+        }
+        .FAC-banner__image{
+            width: 180px;
+            margin: 0 auto;
+            display:block;
+            margin-top:20px;
+        }
+    }
+    .FAC-degrees, .FAC-interests{
+        display:none;
+    }
+    .FAC-degrees-sm, .FAC-interests-sm{
+        display:block;
+    }
+    .FAC-degrees-sm{
+        padding-top:20px;
+        border-top:solid 0.3px rgb(236, 236, 236);    
+    }
+
+}

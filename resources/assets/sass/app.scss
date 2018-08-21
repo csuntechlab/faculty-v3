@@ -9,3 +9,14 @@
 
 // Metaphor SASS
 @import '~metaphor-theme/src/scss/metaphor-v2';
+
+// Application-specific SASS
+@import "partials/variables";
+@import "partials/header";
+@import "partials/profileClasses";
+@import "partials/home";
+@import "partials/searchPage";
+@import "partials/searchByDept";
+@import "partials/profileHome";
+@import "partials/profileBanner";
+@import "partials/departmentFaculty";

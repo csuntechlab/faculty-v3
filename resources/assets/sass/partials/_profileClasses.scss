@@ -1,0 +1,93 @@
+.btn-outline-secondary{
+    width:25%;
+    float:right;
+    color:white;
+    background:$csunred;
+    font-size:13px;
+    
+ }
+
+ #classes .btn{
+    font-size:13px;
+ }
+ .fa-caret-down{
+     color:black;
+ }
+ .FAC-semester-divider{
+    background:$csunred;
+    height:5px;
+ }
+ .FAC-class-wrapper{
+     height:auto;
+     background:#F0F0F0;
+     border-top:solid 1px #707070;
+     border-bottom:solid 1px #707070;
+
+ }
+ .FAC-officeHours-wrapper{
+    border-top:solid 1px #707070;
+    border-bottom:solid 1px #707070;
+ }
+ .FAC-darkStriped{
+    height:auto;
+    background:#F0F0F0;
+ }
+ .FAC-whiteStriped{
+    height:auto;
+ }
+ .FAC-downloadBtn{
+    width:100%;
+    display:inline-block;
+    overflow: auto;
+    white-space: nowrap;
+    margin:0px auto;
+ }
+
+ .FAC-downloadBtn__orientation {
+    float:right;
+  }
+
+  .FAC-location-icons{
+    font-size:1.4rem;
+  }
+  .FAC-info-icons{
+    font-size:1rem;
+  }
+
+  #classes {
+    // font-size:.75rem;
+    a{
+        text-decoration: underline;
+        color:$csunred;
+    }
+  }
+
+  #inputGroupSelect01{
+      width:30%;
+      float:right;
+     
+  }
+
+// ***************** MEDIA QUERIES ****************
+
+  @include media-breakpoint-down(xs){
+    #inputGroupSelect01{
+        width:100%;
+        float:none;
+        margin-top:15px;
+    }
+    .FAC-font-size{
+        font-size:18px;
+    }
+    .FAC-info-icons{
+        font-size: 3.6rem;
+        padding-right:20px;
+    }
+    .FAC-location-icons{
+        font-size:2rem;
+    }
+    .FAC-pastCourses-width{
+        width:50%;
+    }
+  }
+ 
