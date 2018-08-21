@@ -15,6 +15,22 @@ class User extends Authenticatable
     public $incrementing = false;
 
     /**
+     * Retrieves a BelongsToMany representing the set of Connectable instances
+     * associated with this user. This only retrieves instances that should
+     * be displayed.
+     *
+     * @return BelongsToMany
+     */
+    public function connections() {
+        return $this->belongsToMany('App\Models\Connectable', 'contacts', 'user_id', 'connectable_id')
+            ->withPivot(
+                'role_position', 'precedence', 'title', 'email', 'telephone',
+                'facsimile_telephone', 'website', 'location', 'office', 'mail_drop'
+            )
+            ->wherePivot('is_displayed', 1);
+    }
+
+    /**
      * Retrieves a BelongsToMany representing the set of AcademicDepartment instances 
      * associated with this user. This only retrieves active instances.
      *
@@ -74,6 +90,38 @@ class User extends Authenticatable
             return in_array(strtolower($degree->institute), $institutes);
         });
         return ($degrees->count() > 0);
+    }
+
+    /**
+     * Retrieves the part of the email address before the @ symbol.
+     *
+     * @return string
+     */
+    public function getEmailUriAttribute() {
+        $parts = explode('@', $this->email);
+        return $parts[0];
+    }
+
+    /**
+     * Returns an instance of the primary connection for an individual.
+     *
+     * @return Connectable|null
+     */
+    public function getPrimaryConnectionAttribute() {
+        if(!isset($this->connections)) {
+            $this->load('connections');
+        }
+
+        if($this->connections->count() == 0) {
+            return null;
+        }
+
+        // sort the connections in ascending order by precedence
+        $connections = $this->connections->sortBy(function($connection) {
+            return $connection->pivot->precedence;
+        })->values();
+
+        return $connections->first();
     }
 
     /**

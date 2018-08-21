@@ -71,6 +71,26 @@ function helixUrl($uri) {
 }
 
 /**
+ * Generates a URL for the Media Web Service based upon the URI. The URI
+ * should NOT have a leading slash.
+ *
+ * @param string $uri The URI within the Media web service to link to
+ * @return string
+ */
+function mediaWsUrl($uri) {
+	$base = generateBaseUrl('MEDIA_WEB_SERVICE');
+	if($uri == '/') {
+		return $base;
+	}
+	else if(starts_with($uri, '/')) {
+		// we may receive something with a leading slash, so take its
+		// substring beginning at the second character instead
+		$uri = substr($uri, 1);
+	}
+	return $base . $uri;
+}
+
+/**
  * Generates a URL for the Stories application based upon the URI. The URI
  * should NOT have a leading slash.
  *

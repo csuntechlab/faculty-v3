@@ -18,7 +18,11 @@
         <div class="container">
             <div class="row align-items-center pt-3">
                 <div class="col-12 col-md-4">
-                     <img class="FAC-banner__image" src="https://cdn.metalab.csun.edu/media/faculty/steven.fitzgerald/avatar.jpg" alt="Photo of {{ $user->display_name }}">
+                	 @if(!empty($imageData))
+                     	<img class="FAC-banner__image" src="data:image/png;base64,{{ $imageData }}" alt="Photo of {{ $user->display_name }}">
+                     @else
+                     	<img class="FAC-banner__image" src="{{ asset('imgs/profile-default.png') }}" alt="Photo of {{ $user->display_name }}">
+                     @endif
                 </div>
                 <div class="col-12 col-md-8">
                     <div id="FAC-banner__content">
@@ -34,7 +38,9 @@
                         
                         <h1 class="FAC-banner__name">{{ $user->display_name }}</h1> 
                         
-                        <div class="FAC-banner__title">Faculty Director - META+LAB</div>
+                        @if($user->primary_connection)
+                        	<div class="FAC-banner__title">{{ $user->primary_connection->pivot->title }}</div>
+                        @endif
                                                 
                         {{--
                         <ul class="FAC-banner__icons">
