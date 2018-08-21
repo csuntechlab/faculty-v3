@@ -19,7 +19,7 @@
             <div class="row align-items-center pt-3">
                 <div class="col-12 col-md-4">
                 	 @if(!empty($imageData))
-                     	<img class="FAC-banner__image" src="data:image/png;base64,{{ $imageData }}" alt="Photo of {{ $user->display_name }}">
+                     	<img class="FAC-banner__image" src="{{ $imageData }}" alt="Photo of {{ $user->display_name }}">
                      @else
                      	<img class="FAC-banner__image" src="{{ asset('imgs/profile-default.png') }}" alt="Photo of {{ $user->display_name }}">
                      @endif

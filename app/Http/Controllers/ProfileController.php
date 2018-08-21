@@ -36,29 +36,27 @@ class ProfileController extends Controller
     		->firstOrFail();
 
         try {
+            // Media WS works based upon redirects to file data but if we allow
+            // the redirect to take place then Guzzle will interpret the response
+            // as a binary stream
+            $this->guzzle->setRequestOption('allow_redirects', false);
             $response = $this->guzzle->get(mediaWsUrl($user->email_uri . '/avatar'));
-            $imageData = $this->guzzle->resolveResponseBody($response);
+
+            // if the response was a redirect, retrieve its Location header
+            if($response->hasHeader('Location')) {
+                $imageData = $response->getHeader('Location')[0];
+            }
+            else
+            {
+                // no Location response so something has probably gone wrong
+                // with the Media WS but it wasn't a 500 error; it was probably
+                // a JSON response instead
+                $imageData = null;
+            }
         }
         catch(\Exception $e) {
             // web service probably threw a 500 error
             $imageData = null;
-        }
-
-        // if we got back an object with keys, then we have an issue with the
-        // web service
-        if(!empty($imageData)) {
-            // attempt to resolve the response as JSON and check to see if
-            // there is a "success" key in the result; if it's present it
-            // means that we got back some kind of JSON error response
-            $check = $this->guzzle->resolveResponseBody($response, 'json');
-            if(gettype($check) == 'object' && property_exists($check, 'success')) {
-                $imageData = null;
-            }
-            else
-            {
-                // turn the binary image data into its base64 representation
-                $imageData = base64_encode($this->guzzle->resolveResponseBody($response));
-            }
         }
 
     	return view('pages.profile.show', compact('user', 'imageData'));
