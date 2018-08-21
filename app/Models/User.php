@@ -28,6 +28,16 @@ class User extends Authenticatable
     }
 
     /**
+     * Retrieves a HasMany representing the set of Degree instances associated with
+     * this user.
+     *
+     * @return HasMany
+     */
+    public function degrees() {
+        return $this->hasMany('App\Models\Degree', 'user_id');
+    }
+
+    /**
      * Scopes the query to a specific URI. Currently this is the email address
      * but this method can be modified in the future to retrieve a URI from
      * a different source.
@@ -39,6 +49,31 @@ class User extends Authenticatable
      */
     public function scopeWhereUri($query, $uri) {
     	return $query->where('email', 'LIKE', $uri . '@%csun.edu');
+    }
+
+    /**
+     * Returns whether this individual has graduated from CSUN at some point.
+     *
+     * @return bool
+     */
+    public function getIsCsunAlumAttribute() {
+        if(!isset($this->degrees)) {
+            $this->load('degrees');
+        }
+
+        $institutes = [
+            'csun',
+            'cal state northridge',
+            'cal state university northridge',
+            'cal state university, northridge',
+            'california state university northridge',
+            'california state univeristy, northridge'
+        ];
+
+        $degrees = $this->degrees->filter(function($degree) use ($institutes) {
+            return in_array(strtolower($degree->institute), $institutes);
+        });
+        return ($degrees->count() > 0);
     }
 
     /**
