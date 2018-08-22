@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html class="no-js" data-url="{{ url('/') }}" data-waldo-url="{{env('WALDO_WEB_SERVICE')}}" lang="en">
+<html class="no-js" data-url="{{ url('/') }}" lang="en">
 	<head>
 		@if ( config('app.google_site_id') )
 		<meta name="google-site-verification" content="{{ config('app.google_site_id') }}">
@@ -16,9 +16,6 @@
 		<link rel="icon" href="//www.csun.edu/sites/default/themes/csun/favicon.ico" type="image/x-icon" />
 
 		{{-- STYLESHEETS --}}
-		<script src="//use.typekit.net/gfb2mjm.js"></script>
-  		<script>try{Typekit.load();}catch(e){}</script>
-		{!! HTML::style('//fonts.googleapis.com/css?family=Open+Sans:400,700')  !!}
 		{!! HTML::style('css/app.css') !!}
 
 		@yield('page-specific-headers')

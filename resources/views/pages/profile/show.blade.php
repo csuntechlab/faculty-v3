@@ -1,12 +1,21 @@
 @extends('layouts.master')
 
+@section('page-specific-headers')
+<meta name="curriculum-url" content="{{ env('CURRICULUM_WEB_SERVICE') }}">
+<meta name="degrees-url" content="{{ env('DEGREES_WEB_SERVICE') }}">
+<meta name="directory-url" content="{{ env('DIRECTORY_WEB_SERVICE') }}">
+<meta name="media-url" content="{{ env('MEDIA_WEB_SERVICE') }}">
+<meta name="waldo-url" content="{{ env('WALDO_WEB_SERVICE') }}">
+<meta name="person-uri" content="{{ $user->uri }}">
+@stop
+
 {{-- META TAGS 4 SEO --}}
 @section('title')
-	{{ $user->display_name }}
+{{ $user->display_name }}
 @stop
 
 @section('description')
-	{{ $user->biography }}
+{{ $user->biography }}
 @stop
 
 @section('content')
@@ -18,11 +27,7 @@
         <div class="container">
             <div class="row align-items-center pt-3">
                 <div class="col-12 col-md-4">
-                	 @if(!empty($imageData))
-                     	<img class="FAC-banner__image" src="{{ $imageData }}" alt="Photo of {{ $user->display_name }}">
-                     @else
-                     	<img class="FAC-banner__image" src="{{ asset('imgs/profile-default.png') }}" alt="Photo of {{ $user->display_name }}">
-                     @endif
+                    <img class="FAC-banner__image" src="{{ asset('imgs/profile-default.png') }}" alt="Photo of {{ $user->display_name }}" id="profile-image">
                 </div>
                 <div class="col-12 col-md-8">
                     <div id="FAC-banner__content">
@@ -68,4 +73,28 @@
 {{-- VUE PORTION OF THE PROFILE --}}
 <div id="profile_app">
 </div>
+@stop
+
+{{-- LOAD PROFILE IMAGE ASYNCHRONOUSLY (OUTSIDE OF VUE) --}}
+@section('page-specific-scripts')
+<script>
+$(function() {
+    var mediaWsUrl = $("meta[name=media-url]").attr('content');
+    var profileImgUri = $("meta[name=person-uri]").attr('content') +
+        '/avatar';
+    axios.get(
+        profileImgUri,
+        {
+            baseURL: mediaWsUrl
+        }
+    ).then(function(response) {
+        // Media WS results in a redirect when it returns the proper image
+        // so we can use that as the "src" attribute in the profile image
+        // placeholder
+        $("#profile-image").attr('src', response.request.responseURL);
+    }).catch(function(error) {
+        console.error(error);
+    });
+});
+</script>
 @stop
