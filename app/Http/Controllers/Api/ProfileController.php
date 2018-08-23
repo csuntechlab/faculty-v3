@@ -19,6 +19,11 @@ class ProfileController extends Controller
     		->whereUri($uri)
     		->firstOrFail();
 
+        if($user->primary_connection) {
+            $user->primary_connection->pivot->formatted_telephone =
+                formatPhoneNumber($user->primary_connection->pivot->telephone);
+        }
+
     	return $user;
     }
 }

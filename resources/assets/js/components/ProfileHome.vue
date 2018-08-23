@@ -3,135 +3,176 @@
         <div class="container pt-4">
             <div class="row">                 
                 <div class="col-md-4">
+                    
                     <div class="FAC-contact FACborder-line-wrapper">
                         <h6>CONTACT</h6>
                         <ul>
-                            <li> <i class="far fa-envelope fa-lg pr-2"></i><a href="#">steven.fitzgerald@csun.edu</a></li>
-                            <li> <i class="fas fa-globe-americas fa-lg pr-2"></i><a href="#">http://www.csun.edu/~steve</a></li>
-                            <li> <i class="fas fa-phone fa-lg pl-2"></i><a href="#">818-677-4655</a></li>
-                            <li> <i class="fas fa-map-marker-alt fa-lg px-1"></i> <a href="#">META+LAB: 9423 Reseda Blvd</a></li>
+                            <template v-if='contact'>
+                                <template v-if='contact.email'>
+                                    <li>
+                                        <i class="far fa-envelope fa-lg pr-2"></i>
+                                        <a :href="email_href">
+                                            {{ contact.email }}
+                                        </a>
+                                    </li>
+                                </template>
+                                <template v-if='contact.website'>
+                                    <li>
+                                        <i class="fas fa-globe-americas fa-lg pr-2"></i>
+                                        <a :href="contact.website" target="_blank">
+                                            {{ contact.website }}
+                                        </a>
+                                    </li>
+                                </template>
+                                <template v-if='contact.telephone'>
+                                    <li>
+                                        <i class="fas fa-phone fa-lg pl-2"></i>
+                                        <a :href="telephone_href">
+                                            {{ contact.formatted_telephone }}
+                                        </a>
+                                    </li>
+                                </template>
+                                <template v-if='contact.location'>
+                                    <li>
+                                        <i class="fas fa-map-marker-alt fa-lg px-1"></i>
+                                        <a href="#">
+                                            {{ contact.location }}
+                                        </a>
+                                    </li>
+                                </template>
+                            </template>
+                            <template v-else>
+                                <li>
+                                    <i class="far fa-envelope fa-lg pr-2"></i>
+                                    <a :href="email_href">
+                                        {{ user.email }}
+                                    </a>
+                                </li>
+                            </template>
                         </ul>
                     </div>
-                    <div class="FAC-degrees FACborder-line-wrapper">
-                        <h6>DEGREES</h6>
-                        <ul class="timeline">
-                            <li class="timeline__header pb-3"><strong>D.Sc. Computer Science</strong> 1995, University of Massachusetts Lowell</li>
-                            <li class="timeline__header pb-3"><strong>M.S. Computer Science</strong> 1990, University of Massachusetts Lowell</li>
-                            <li class="timeline__header pb-3"><strong>B.S. Computer Science</strong> 1986, Lowell University</li>
-                        </ul>
-                    </div>
-                    <div class="FAC-interests FACborder-line-wrapper ">
-                        <h6>INTERESTS</h6>
-                        <a class="badge badge-primary py-2 px-2 my-1" href="#">Cloud Computing (laas)</a>
-                        <a class="badge badge-primary py-2 px-2 my-1" href="#">Web Technology</a>
-                        <a class="badge badge-primary py-2 px-2 my-1" href="#">Compilers</a>
-                        <a class="badge badge-primary py-2 px-2 my-1" href="#">Web Development</a>
-                        <a class="badge badge-primary py-2 px-2 my-1" href="#">Programming Languages</a>
-                        <a class="badge badge-primary py-2 px-2 my-1" href="#">Parallel and Distributed Programming</a>
-                    </div>
+
+                    <template v-if='degrees.length'>
+                        <div class="FAC-degrees FACborder-line-wrapper">
+                            <h6>DEGREES</h6>
+                            <ul class="timeline">
+                                <template v-for='_degree in degrees'>
+                                    <li class="timeline__header pb-3">
+                                        <strong>{{ _degree.degree }}</strong> {{ _degree.discipline }} {{ _degree.year }}, {{ _degree.institute }}
+                                    </li>
+                                </template>
+                            </ul>
+                        </div>
+                    </template>
+
+                    <template v-if='interests.length'>
+                        <div class="FAC-interests FACborder-line-wrapper ">
+                            <h6>INTERESTS</h6>
+                            <template v-for='_interest in interests'>
+                                <a class="badge badge-primary py-2 px-2 my-1" href="#">
+                                    {{ _interest.title }}
+                                </a>
+                            </template>
+                        </div>
+                    </template>
                 </div>
+
                 <div class="col-md-8 pr-3">
-                    <div class="FAC-contact-sm FACborder-line-wrapper">
-                        <h6>CONTACT</h6>
-                        <ul>
-                            <li> <i class="far fa-envelope fa-lg pr-2"></i><a href="#">steven.fitzgerald@csun.edu</a></li>
-                            <li> <i class="fas fa-globe-americas fa-lg pr-2"></i><a href="#">http://www.csun.edu/~steve</a></li>
-                            <li> <i class="fas fa-phone fa-lg pl-2"></i><a href="#">818-677-4655</a></li>
-                            <li> <i class="fas fa-map-marker-alt fa-lg px-1"></i> <a href="#">META+LAB: 9423 Reseda Blvd</a></li>
-                        </ul>
-                    </div>
+                    <template v-if='contact'>
+                        <div class="FAC-contact-sm FACborder-line-wrapper">
+                            <h6>CONTACT</h6>
+                            <ul>
+                                <template v-if='contact.email'>
+                                    <li>
+                                        <i class="far fa-envelope fa-lg pr-2"></i>
+                                        <a :href="email_href">
+                                            {{ contact.email }}
+                                        </a>
+                                    </li>
+                                </template>
+                                <template v-if='contact.website'>
+                                    <li>
+                                        <i class="fas fa-globe-americas fa-lg pr-2"></i>
+                                        <a :href="contact.website" target="_blank">
+                                            {{ contact.website }}
+                                        </a>
+                                    </li>
+                                </template>
+                                <template v-if='contact.telephone'>
+                                    <li>
+                                        <i class="fas fa-phone fa-lg pl-2"></i>
+                                        <a :href="telephone_href">
+                                            {{ contact.formatted_telephone }}
+                                        </a>
+                                    </li>
+                                </template>
+                                <template v-if='contact.location'>
+                                    <li>
+                                        <i class="fas fa-map-marker-alt fa-lg px-1"></i>
+                                        <a href="#">
+                                            {{ contact.location }}
+                                        </a>
+                                    </li>
+                                </template>
+                            </ul>
+                        </div>
+                    </template>
                     
-                    <h2>Overview</h2>
-                    <div class="FAC-Overview__content">
-                        <p>Steven Fitzgerald is a Professor of Computer Science at California State University, Northridge, and his teaching focus is on operating systems, compilers, and networking. During his tenure, Steve has also held several administrative positions including: Information Security Officer, Director of Academic Technology, and Chief Technology Officer.</p>
+                    <template v-if='biography'>
+                        <h2>Overview</h2>
+                        <div class="FAC-Overview__content">
+                            {{ biography }}
+                        </div>
+                    </template>
 
-                        <p>Steve's research interests include high performance computing, identity management, grid computing, and cloud computing. Steve has participated in a number of research projects associated with Lawrence Livermore National Laboratory and the University of Southern California's Information Sciences Institute. During Steve's recent sabbatical, he worked for Eucalyptus Systems, a startup company producing Cloud Computing software. Eucalypus Systems was subsequenlty purchased by Hewlett Packard Enterprise, and is now refer to as HPE Helion Eucalyptus . Steve was responsible for developing and expanding their customer support services and for building out their IT infrastructure.</p>
-                        
-                        <p>In his current role, Steve also serves as the Faculty Co-Director of the Matador Emerging Technology and Arts Laboratory (META+LAB). This group is composed of a team of students, mentored by faculty members, that develop web applications and engages in other activities to improve campus services via the use of leading-edge technologies.</p>
-                    </div>
-                    <h2>Badges & Awards</h2>
+                    <template v-if='badges.length'>
+                        <h2>Badges & Awards</h2>
+                        <div class="container">
+                            <div class="row pt-2 pb-4">
+                                <template v-for='_badge in badges'>
+                                    <div class="col-lg-4 col-12 pl-0">
+                                         <div class="media">
+                                            <div class="media-left pr-3 pb-3">
+                                                <img :src="_badge.url_image" class="media-object" style="width:60px">
+                                            </div>
+                                            <div class="media-body align-self-center">
+                                                <template v-if='_badge.url_web'>
+                                                    <a :href="_badge.url_web">
+                                                        <p>{{ _badge.name }} ({{ _badge.award_date }})</p>
+                                                    </a>
+                                                </template>
+                                                <p v-else>{{ _badge.name }} ({{ _badge.award_date }})</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </template>
+                            </div> 
+                        </div>
+                    </template>
 
-                    <div class="container">
-                        <div class="row pt-2 pb-4">
-                            <div class="col-lg-4 col-12 pl-0">
-                                 <div class="media">
-                                    <div class="media-left pr-3 pb-3">
-                                        <img src="http://via.placeholder.com/50x65" class="media-object " style="width:60px">
-                                    </div>
-                                    <div class="media-body align-self-center">
-                                        <p>Probationary<br>Faculty Grant (2014)</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-12 pl-0">
-                                 <div class="media">
-                                    <div class="media-left pr-3 pb-3">
-                                        <img src="http://via.placeholder.com/50x65" class="media-object" style="width:60px">
-                                    </div>
-                                    <div class="media-body align-self-center">
-                                        <p>Probationary<br>Faculty Grant (2014)</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-12 pl-0">
-                                 <div class="media">
-                                    <div class="media-left pr-3 pb-3">
-                                        <img src="http://via.placeholder.com/50x65" class="media-object" style="width:60px">
-                                    </div>
-                                    <div class="media-body align-self-center">
-                                        <p>Probationary<br>Faculty Grant (2014)</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-12 pl-0">
-                                 <div class="media">
-                                    <div class="media-left pr-3 pb-3">
-                                        <img src="http://via.placeholder.com/50x65" class="media-object" style="width:60px">
-                                    </div>
-                                    <div class="media-body align-self-center">
-                                        <p>Teaching Conference<br>Grant (2015)</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-12 pl-0">
-                                 <div class="media">
-                                    <div class="media-left pr-3 pb-3">
-                                        <img src="http://via.placeholder.com/50x65" class="media-object" style="width:60px">
-                                    </div>
-                                    <div class="media-body align-self-center">
-                                        <p>Teaching Conference<br>Grant (2015)</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-12 pl-0">
-                                 <div class="media">
-                                    <div class="media-left pr-3 pb-3">
-                                        <img src="http://via.placeholder.com/50x65" class="media-object" style="width:60px">
-                                    </div>
-                                    <div class="media-body align-self-center">
-                                        <p>Teaching Conference<br>Grant (2015)</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> 
-                    </div>
-                    <div class="FAC-degrees-sm FACborder-line-wrapper">
-                        <h6>DEGREES</h6>
-                        <ul class="timeline">
-                            <li class="timeline__header pb-3"><strong>D.Sc. Computer Science</strong> 1995, University of Massachusetts Lowell</li>
-                            <li class="timeline__header pb-3"><strong>M.S. Computer Science</strong> 1990, University of Massachusetts Lowell</li>
-                            <li class="timeline__header pb-3"><strong>B.S. Computer Science</strong> 1986, Lowell University</li>
-                        </ul>
-                    </div>
-                    <div class="FAC-interests-sm FACborder-line-wrapper ">
-                        <h6>INTERESTS</h6>
-                        <a class="badge badge-primary py-2 px-2 my-1" href="#">Cloud Computing (laas)</a>
-                        <a class="badge badge-primary py-2 px-2 my-1" href="#">Web Technology</a>
-                        <a class="badge badge-primary py-2 px-2 my-1" href="#">Compilers</a>
-                        <a class="badge badge-primary py-2 px-2 my-1" href="#">Web Development</a>
-                        <a class="badge badge-primary py-2 px-2 my-1" href="#">Programming Languages</a>
-                        <a class="badge badge-primary py-2 px-2 my-1" href="#">Parallel and Distributed Programming</a>
-                    </div>
+                    <template v-if='degrees.length'>
+                        <div class="FAC-degrees-sm FACborder-line-wrapper">
+                            <h6>DEGREES</h6>
+                            <ul class="timeline">
+                                <template v-for='_degree in degrees'>
+                                    <li class="timeline__header pb-3">
+                                        <strong>{{ _degree.degree }}</strong> {{ _degree.discipline }} {{ _degree.year }}, {{ _degree.institute }}
+                                    </li>
+                                </template>
+                            </ul>
+                        </div>
+                    </template>
+
+                    <template v-if='interests.length'>
+                        <div class="FAC-interests-sm FACborder-line-wrapper ">
+                            <h6>INTERESTS</h6>
+                            <template v-for='_interest in interests'>
+                                <a class="badge badge-primary py-2 px-2 my-1" href="#">
+                                    {{ _interest.title }}
+                                </a>
+                            </template>
+                        </div>
+                    </template>
                 </div>
             </div>
         </div>
@@ -140,6 +181,82 @@
 
 <script>
 export default {
-  name: 'ProfileHome'
+  name: 'ProfileHome',
+  data() {
+    return {
+        user: null,
+        contact: null,
+        degrees: [],
+        interests: [],
+        biography: null,
+        badges: []
+    }
+  },
+  computed: {
+    email_href: function() {
+        if(this.contact) {
+            return "mailto:" + this.contact.email;
+        }
+        return "mailto:" + this.user.email;
+    },
+    telephone_href: function() {
+        return "tel:" + this.contact.telephone;
+    }
+  },
+  methods: {
+    loadMetadata: function() {
+        return axios.get(
+            'people/' + $("meta[name=person-uri]").attr('content'),
+            {
+                baseURL: $('html').attr('data-api-url')
+            }
+        );
+    },
+    loadInterests: function() {
+        return axios.get(
+            'interests/personal',
+            {
+                baseURL: $("meta[name=affinity-url]").attr('content'),
+                params: {
+                    email: $("meta[name=person-email]").attr('content')
+                }
+            }
+        );
+    },
+    loadBadges: function() {
+        return axios.get(
+            'badges',
+            {
+                baseURL: $("meta[name=affinity-url]").attr('content'),
+                params: {
+                    email: $("meta[name=person-email]").attr('content')
+                }
+            }
+        );
+    }
+  },
+  mounted() {
+    // make the Axios calls concurrently and wait for all of them to return
+    // before applying the reactive data
+    axios.all([this.loadMetadata(), this.loadInterests(), this.loadBadges()])
+        .then(axios.spread((metadata,interests,badges) => {
+            // apply the profile metadata
+            var person_data = metadata.data;
+            this.user = person_data;
+            this.contact = person_data.primary_connection.pivot;
+            this.degrees = person_data.degrees;
+            this.biography = person_data.biography;
+
+            // apply the interests
+            var interest_data = interests.data;
+            this.interests = interest_data.interests;
+            console.log(interests.data);
+
+            // apply the badges
+            var badges_data = badges.data;
+            this.badges = badges_data.badges;
+            console.log(badges.data);
+        }));
+  }
 }
 </script>

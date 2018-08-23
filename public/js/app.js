@@ -24329,9 +24329,119 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'ProfileHome'
+    name: 'ProfileHome',
+    data: function data() {
+        return {
+            user: null,
+            contact: null,
+            degrees: [],
+            interests: [],
+            biography: null,
+            badges: []
+        };
+    },
+
+    computed: {
+        email_href: function email_href() {
+            if (this.contact) {
+                return "mailto:" + this.contact.email;
+            }
+            return "mailto:" + this.user.email;
+        },
+        telephone_href: function telephone_href() {
+            return "tel:" + this.contact.telephone;
+        }
+    },
+    methods: {
+        loadMetadata: function loadMetadata() {
+            return axios.get('people/' + $("meta[name=person-uri]").attr('content'), {
+                baseURL: $('html').attr('data-api-url')
+            });
+        },
+        loadInterests: function loadInterests() {
+            return axios.get('interests/personal', {
+                baseURL: $("meta[name=affinity-url]").attr('content'),
+                params: {
+                    email: $("meta[name=person-email]").attr('content')
+                }
+            });
+        },
+        loadBadges: function loadBadges() {
+            return axios.get('badges', {
+                baseURL: $("meta[name=affinity-url]").attr('content'),
+                params: {
+                    email: $("meta[name=person-email]").attr('content')
+                }
+            });
+        }
+    },
+    mounted: function mounted() {
+        var _this = this;
+
+        // make the Axios calls concurrently and wait for all of them to return
+        // before applying the reactive data
+        axios.all([this.loadMetadata(), this.loadInterests(), this.loadBadges()]).then(axios.spread(function (metadata, interests, badges) {
+            // apply the profile metadata
+            var person_data = metadata.data;
+            _this.user = person_data;
+            _this.contact = person_data.primary_connection.pivot;
+            _this.degrees = person_data.degrees;
+            _this.biography = person_data.biography;
+
+            // apply the interests
+            var interest_data = interests.data;
+            _this.interests = interest_data.interests;
+            console.log(interests.data);
+
+            // apply the badges
+            var badges_data = badges.data;
+            _this.badges = badges_data.badges;
+            console.log(badges.data);
+        }));
+    }
 });
 
 /***/ }),
@@ -24342,416 +24452,483 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { attrs: { id: "home" } }, [
-      _c("div", { staticClass: "container pt-4" }, [
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-md-4" }, [
+  return _c("div", { attrs: { id: "home" } }, [
+    _c("div", { staticClass: "container pt-4" }, [
+      _c("div", { staticClass: "row" }, [
+        _c(
+          "div",
+          { staticClass: "col-md-4" },
+          [
             _c("div", { staticClass: "FAC-contact FACborder-line-wrapper" }, [
               _c("h6", [_vm._v("CONTACT")]),
               _vm._v(" "),
-              _c("ul", [
-                _c("li", [
-                  _c("i", { staticClass: "far fa-envelope fa-lg pr-2" }),
-                  _c("a", { attrs: { href: "#" } }, [
-                    _vm._v("steven.fitzgerald@csun.edu")
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("li", [
-                  _c("i", { staticClass: "fas fa-globe-americas fa-lg pr-2" }),
-                  _c("a", { attrs: { href: "#" } }, [
-                    _vm._v("http://www.csun.edu/~steve")
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("li", [
-                  _c("i", { staticClass: "fas fa-phone fa-lg pl-2" }),
-                  _c("a", { attrs: { href: "#" } }, [_vm._v("818-677-4655")])
-                ]),
-                _vm._v(" "),
-                _c("li", [
-                  _c("i", { staticClass: "fas fa-map-marker-alt fa-lg px-1" }),
-                  _vm._v(" "),
-                  _c("a", { attrs: { href: "#" } }, [
-                    _vm._v("META+LAB: 9423 Reseda Blvd")
-                  ])
-                ])
-              ])
+              _c(
+                "ul",
+                [
+                  _vm.contact
+                    ? [
+                        _vm.contact.email
+                          ? [
+                              _c("li", [
+                                _c("i", {
+                                  staticClass: "far fa-envelope fa-lg pr-2"
+                                }),
+                                _vm._v(" "),
+                                _c("a", { attrs: { href: _vm.email_href } }, [
+                                  _vm._v(
+                                    "\n                                        " +
+                                      _vm._s(_vm.contact.email) +
+                                      "\n                                    "
+                                  )
+                                ])
+                              ])
+                            ]
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _vm.contact.website
+                          ? [
+                              _c("li", [
+                                _c("i", {
+                                  staticClass:
+                                    "fas fa-globe-americas fa-lg pr-2"
+                                }),
+                                _vm._v(" "),
+                                _c(
+                                  "a",
+                                  {
+                                    attrs: {
+                                      href: _vm.contact.website,
+                                      target: "_blank"
+                                    }
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                                        " +
+                                        _vm._s(_vm.contact.website) +
+                                        "\n                                    "
+                                    )
+                                  ]
+                                )
+                              ])
+                            ]
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _vm.contact.telephone
+                          ? [
+                              _c("li", [
+                                _c("i", {
+                                  staticClass: "fas fa-phone fa-lg pl-2"
+                                }),
+                                _vm._v(" "),
+                                _c(
+                                  "a",
+                                  { attrs: { href: _vm.telephone_href } },
+                                  [
+                                    _vm._v(
+                                      "\n                                        " +
+                                        _vm._s(
+                                          _vm.contact.formatted_telephone
+                                        ) +
+                                        "\n                                    "
+                                    )
+                                  ]
+                                )
+                              ])
+                            ]
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _vm.contact.location
+                          ? [
+                              _c("li", [
+                                _c("i", {
+                                  staticClass:
+                                    "fas fa-map-marker-alt fa-lg px-1"
+                                }),
+                                _vm._v(" "),
+                                _c("a", { attrs: { href: "#" } }, [
+                                  _vm._v(
+                                    "\n                                        " +
+                                      _vm._s(_vm.contact.location) +
+                                      "\n                                    "
+                                  )
+                                ])
+                              ])
+                            ]
+                          : _vm._e()
+                      ]
+                    : [
+                        _c("li", [
+                          _c("i", {
+                            staticClass: "far fa-envelope fa-lg pr-2"
+                          }),
+                          _vm._v(" "),
+                          _c("a", { attrs: { href: _vm.email_href } }, [
+                            _vm._v(
+                              "\n                                    " +
+                                _vm._s(_vm.user.email) +
+                                "\n                                "
+                            )
+                          ])
+                        ])
+                      ]
+                ],
+                2
+              )
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "FAC-degrees FACborder-line-wrapper" }, [
-              _c("h6", [_vm._v("DEGREES")]),
-              _vm._v(" "),
-              _c("ul", { staticClass: "timeline" }, [
-                _c("li", { staticClass: "timeline__header pb-3" }, [
-                  _c("strong", [_vm._v("D.Sc. Computer Science")]),
-                  _vm._v(" 1995, University of Massachusetts Lowell")
-                ]),
-                _vm._v(" "),
-                _c("li", { staticClass: "timeline__header pb-3" }, [
-                  _c("strong", [_vm._v("M.S. Computer Science")]),
-                  _vm._v(" 1990, University of Massachusetts Lowell")
-                ]),
-                _vm._v(" "),
-                _c("li", { staticClass: "timeline__header pb-3" }, [
-                  _c("strong", [_vm._v("B.S. Computer Science")]),
-                  _vm._v(" 1986, Lowell University")
-                ])
-              ])
-            ]),
+            _vm.degrees.length
+              ? [
+                  _c(
+                    "div",
+                    { staticClass: "FAC-degrees FACborder-line-wrapper" },
+                    [
+                      _c("h6", [_vm._v("DEGREES")]),
+                      _vm._v(" "),
+                      _c(
+                        "ul",
+                        { staticClass: "timeline" },
+                        [
+                          _vm._l(_vm.degrees, function(_degree) {
+                            return [
+                              _c(
+                                "li",
+                                { staticClass: "timeline__header pb-3" },
+                                [
+                                  _c("strong", [
+                                    _vm._v(_vm._s(_degree.degree))
+                                  ]),
+                                  _vm._v(
+                                    " " +
+                                      _vm._s(_degree.discipline) +
+                                      " " +
+                                      _vm._s(_degree.year) +
+                                      ", " +
+                                      _vm._s(_degree.institute) +
+                                      "\n                                "
+                                  )
+                                ]
+                              )
+                            ]
+                          })
+                        ],
+                        2
+                      )
+                    ]
+                  )
+                ]
+              : _vm._e(),
             _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "FAC-interests FACborder-line-wrapper " },
-              [
-                _c("h6", [_vm._v("INTERESTS")]),
-                _vm._v(" "),
-                _c(
-                  "a",
-                  {
-                    staticClass: "badge badge-primary py-2 px-2 my-1",
-                    attrs: { href: "#" }
-                  },
-                  [_vm._v("Cloud Computing (laas)")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "a",
-                  {
-                    staticClass: "badge badge-primary py-2 px-2 my-1",
-                    attrs: { href: "#" }
-                  },
-                  [_vm._v("Web Technology")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "a",
-                  {
-                    staticClass: "badge badge-primary py-2 px-2 my-1",
-                    attrs: { href: "#" }
-                  },
-                  [_vm._v("Compilers")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "a",
-                  {
-                    staticClass: "badge badge-primary py-2 px-2 my-1",
-                    attrs: { href: "#" }
-                  },
-                  [_vm._v("Web Development")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "a",
-                  {
-                    staticClass: "badge badge-primary py-2 px-2 my-1",
-                    attrs: { href: "#" }
-                  },
-                  [_vm._v("Programming Languages")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "a",
-                  {
-                    staticClass: "badge badge-primary py-2 px-2 my-1",
-                    attrs: { href: "#" }
-                  },
-                  [_vm._v("Parallel and Distributed Programming")]
-                )
-              ]
-            )
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-md-8 pr-3" }, [
-            _c(
-              "div",
-              { staticClass: "FAC-contact-sm FACborder-line-wrapper" },
-              [
-                _c("h6", [_vm._v("CONTACT")]),
-                _vm._v(" "),
-                _c("ul", [
-                  _c("li", [
-                    _c("i", { staticClass: "far fa-envelope fa-lg pr-2" }),
-                    _c("a", { attrs: { href: "#" } }, [
-                      _vm._v("steven.fitzgerald@csun.edu")
-                    ])
-                  ]),
+            _vm.interests.length
+              ? [
+                  _c(
+                    "div",
+                    { staticClass: "FAC-interests FACborder-line-wrapper " },
+                    [
+                      _c("h6", [_vm._v("INTERESTS")]),
+                      _vm._v(" "),
+                      _vm._l(_vm.interests, function(_interest) {
+                        return [
+                          _c(
+                            "a",
+                            {
+                              staticClass: "badge badge-primary py-2 px-2 my-1",
+                              attrs: { href: "#" }
+                            },
+                            [
+                              _vm._v(
+                                "\n                                " +
+                                  _vm._s(_interest.title) +
+                                  "\n                            "
+                              )
+                            ]
+                          )
+                        ]
+                      })
+                    ],
+                    2
+                  )
+                ]
+              : _vm._e()
+          ],
+          2
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "col-md-8 pr-3" },
+          [
+            _vm.contact
+              ? [
+                  _c(
+                    "div",
+                    { staticClass: "FAC-contact-sm FACborder-line-wrapper" },
+                    [
+                      _c("h6", [_vm._v("CONTACT")]),
+                      _vm._v(" "),
+                      _c(
+                        "ul",
+                        [
+                          _vm.contact.email
+                            ? [
+                                _c("li", [
+                                  _c("i", {
+                                    staticClass: "far fa-envelope fa-lg pr-2"
+                                  }),
+                                  _vm._v(" "),
+                                  _c("a", { attrs: { href: _vm.email_href } }, [
+                                    _vm._v(
+                                      "\n                                        " +
+                                        _vm._s(_vm.contact.email) +
+                                        "\n                                    "
+                                    )
+                                  ])
+                                ])
+                              ]
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.contact.website
+                            ? [
+                                _c("li", [
+                                  _c("i", {
+                                    staticClass:
+                                      "fas fa-globe-americas fa-lg pr-2"
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "a",
+                                    {
+                                      attrs: {
+                                        href: _vm.contact.website,
+                                        target: "_blank"
+                                      }
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                                        " +
+                                          _vm._s(_vm.contact.website) +
+                                          "\n                                    "
+                                      )
+                                    ]
+                                  )
+                                ])
+                              ]
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.contact.telephone
+                            ? [
+                                _c("li", [
+                                  _c("i", {
+                                    staticClass: "fas fa-phone fa-lg pl-2"
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "a",
+                                    { attrs: { href: _vm.telephone_href } },
+                                    [
+                                      _vm._v(
+                                        "\n                                        " +
+                                          _vm._s(
+                                            _vm.contact.formatted_telephone
+                                          ) +
+                                          "\n                                    "
+                                      )
+                                    ]
+                                  )
+                                ])
+                              ]
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.contact.location
+                            ? [
+                                _c("li", [
+                                  _c("i", {
+                                    staticClass:
+                                      "fas fa-map-marker-alt fa-lg px-1"
+                                  }),
+                                  _vm._v(" "),
+                                  _c("a", { attrs: { href: "#" } }, [
+                                    _vm._v(
+                                      "\n                                        " +
+                                        _vm._s(_vm.contact.location) +
+                                        "\n                                    "
+                                    )
+                                  ])
+                                ])
+                              ]
+                            : _vm._e()
+                        ],
+                        2
+                      )
+                    ]
+                  )
+                ]
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.biography
+              ? [
+                  _c("h2", [_vm._v("Overview")]),
                   _vm._v(" "),
-                  _c("li", [
-                    _c("i", {
-                      staticClass: "fas fa-globe-americas fa-lg pr-2"
-                    }),
-                    _c("a", { attrs: { href: "#" } }, [
-                      _vm._v("http://www.csun.edu/~steve")
-                    ])
-                  ]),
+                  _c("div", { staticClass: "FAC-Overview__content" }, [
+                    _vm._v(
+                      "\n                        " +
+                        _vm._s(_vm.biography) +
+                        "\n                    "
+                    )
+                  ])
+                ]
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.badges.length
+              ? [
+                  _c("h2", [_vm._v("Badges & Awards")]),
                   _vm._v(" "),
-                  _c("li", [
-                    _c("i", { staticClass: "fas fa-phone fa-lg pl-2" }),
-                    _c("a", { attrs: { href: "#" } }, [_vm._v("818-677-4655")])
-                  ]),
-                  _vm._v(" "),
-                  _c("li", [
-                    _c("i", {
-                      staticClass: "fas fa-map-marker-alt fa-lg px-1"
-                    }),
-                    _vm._v(" "),
-                    _c("a", { attrs: { href: "#" } }, [
-                      _vm._v("META+LAB: 9423 Reseda Blvd")
-                    ])
+                  _c("div", { staticClass: "container" }, [
+                    _c(
+                      "div",
+                      { staticClass: "row pt-2 pb-4" },
+                      [
+                        _vm._l(_vm.badges, function(_badge) {
+                          return [
+                            _c("div", { staticClass: "col-lg-4 col-12 pl-0" }, [
+                              _c("div", { staticClass: "media" }, [
+                                _c(
+                                  "div",
+                                  { staticClass: "media-left pr-3 pb-3" },
+                                  [
+                                    _c("img", {
+                                      staticClass: "media-object",
+                                      staticStyle: { width: "60px" },
+                                      attrs: { src: _badge.url_image }
+                                    })
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass: "media-body align-self-center"
+                                  },
+                                  [
+                                    _badge.url_web
+                                      ? [
+                                          _c(
+                                            "a",
+                                            { attrs: { href: _badge.url_web } },
+                                            [
+                                              _c("p", [
+                                                _vm._v(
+                                                  _vm._s(_badge.name) +
+                                                    " (" +
+                                                    _vm._s(_badge.award_date) +
+                                                    ")"
+                                                )
+                                              ])
+                                            ]
+                                          )
+                                        ]
+                                      : _c("p", [
+                                          _vm._v(
+                                            _vm._s(_badge.name) +
+                                              " (" +
+                                              _vm._s(_badge.award_date) +
+                                              ")"
+                                          )
+                                        ])
+                                  ],
+                                  2
+                                )
+                              ])
+                            ])
+                          ]
+                        })
+                      ],
+                      2
+                    )
                   ])
-                ])
-              ]
-            ),
+                ]
+              : _vm._e(),
             _vm._v(" "),
-            _c("h2", [_vm._v("Overview")]),
+            _vm.degrees.length
+              ? [
+                  _c(
+                    "div",
+                    { staticClass: "FAC-degrees-sm FACborder-line-wrapper" },
+                    [
+                      _c("h6", [_vm._v("DEGREES")]),
+                      _vm._v(" "),
+                      _c(
+                        "ul",
+                        { staticClass: "timeline" },
+                        [
+                          _vm._l(_vm.degrees, function(_degree) {
+                            return [
+                              _c(
+                                "li",
+                                { staticClass: "timeline__header pb-3" },
+                                [
+                                  _c("strong", [
+                                    _vm._v(_vm._s(_degree.degree))
+                                  ]),
+                                  _vm._v(
+                                    " " +
+                                      _vm._s(_degree.discipline) +
+                                      " " +
+                                      _vm._s(_degree.year) +
+                                      ", " +
+                                      _vm._s(_degree.institute) +
+                                      "\n                                "
+                                  )
+                                ]
+                              )
+                            ]
+                          })
+                        ],
+                        2
+                      )
+                    ]
+                  )
+                ]
+              : _vm._e(),
             _vm._v(" "),
-            _c("div", { staticClass: "FAC-Overview__content" }, [
-              _c("p", [
-                _vm._v(
-                  "Steven Fitzgerald is a Professor of Computer Science at California State University, Northridge, and his teaching focus is on operating systems, compilers, and networking. During his tenure, Steve has also held several administrative positions including: Information Security Officer, Director of Academic Technology, and Chief Technology Officer."
-                )
-              ]),
-              _vm._v(" "),
-              _c("p", [
-                _vm._v(
-                  "Steve's research interests include high performance computing, identity management, grid computing, and cloud computing. Steve has participated in a number of research projects associated with Lawrence Livermore National Laboratory and the University of Southern California's Information Sciences Institute. During Steve's recent sabbatical, he worked for Eucalyptus Systems, a startup company producing Cloud Computing software. Eucalypus Systems was subsequenlty purchased by Hewlett Packard Enterprise, and is now refer to as HPE Helion Eucalyptus . Steve was responsible for developing and expanding their customer support services and for building out their IT infrastructure."
-                )
-              ]),
-              _vm._v(" "),
-              _c("p", [
-                _vm._v(
-                  "In his current role, Steve also serves as the Faculty Co-Director of the Matador Emerging Technology and Arts Laboratory (META+LAB). This group is composed of a team of students, mentored by faculty members, that develop web applications and engages in other activities to improve campus services via the use of leading-edge technologies."
-                )
-              ])
-            ]),
-            _vm._v(" "),
-            _c("h2", [_vm._v("Badges & Awards")]),
-            _vm._v(" "),
-            _c("div", { staticClass: "container" }, [
-              _c("div", { staticClass: "row pt-2 pb-4" }, [
-                _c("div", { staticClass: "col-lg-4 col-12 pl-0" }, [
-                  _c("div", { staticClass: "media" }, [
-                    _c("div", { staticClass: "media-left pr-3 pb-3" }, [
-                      _c("img", {
-                        staticClass: "media-object ",
-                        staticStyle: { width: "60px" },
-                        attrs: { src: "http://via.placeholder.com/50x65" }
+            _vm.interests.length
+              ? [
+                  _c(
+                    "div",
+                    { staticClass: "FAC-interests-sm FACborder-line-wrapper " },
+                    [
+                      _c("h6", [_vm._v("INTERESTS")]),
+                      _vm._v(" "),
+                      _vm._l(_vm.interests, function(_interest) {
+                        return [
+                          _c(
+                            "a",
+                            {
+                              staticClass: "badge badge-primary py-2 px-2 my-1",
+                              attrs: { href: "#" }
+                            },
+                            [
+                              _vm._v(
+                                "\n                                " +
+                                  _vm._s(_interest.title) +
+                                  "\n                            "
+                              )
+                            ]
+                          )
+                        ]
                       })
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "media-body align-self-center" }, [
-                      _c("p", [
-                        _vm._v("Probationary"),
-                        _c("br"),
-                        _vm._v("Faculty Grant (2014)")
-                      ])
-                    ])
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-lg-4 col-12 pl-0" }, [
-                  _c("div", { staticClass: "media" }, [
-                    _c("div", { staticClass: "media-left pr-3 pb-3" }, [
-                      _c("img", {
-                        staticClass: "media-object",
-                        staticStyle: { width: "60px" },
-                        attrs: { src: "http://via.placeholder.com/50x65" }
-                      })
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "media-body align-self-center" }, [
-                      _c("p", [
-                        _vm._v("Probationary"),
-                        _c("br"),
-                        _vm._v("Faculty Grant (2014)")
-                      ])
-                    ])
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-lg-4 col-12 pl-0" }, [
-                  _c("div", { staticClass: "media" }, [
-                    _c("div", { staticClass: "media-left pr-3 pb-3" }, [
-                      _c("img", {
-                        staticClass: "media-object",
-                        staticStyle: { width: "60px" },
-                        attrs: { src: "http://via.placeholder.com/50x65" }
-                      })
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "media-body align-self-center" }, [
-                      _c("p", [
-                        _vm._v("Probationary"),
-                        _c("br"),
-                        _vm._v("Faculty Grant (2014)")
-                      ])
-                    ])
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-lg-4 col-12 pl-0" }, [
-                  _c("div", { staticClass: "media" }, [
-                    _c("div", { staticClass: "media-left pr-3 pb-3" }, [
-                      _c("img", {
-                        staticClass: "media-object",
-                        staticStyle: { width: "60px" },
-                        attrs: { src: "http://via.placeholder.com/50x65" }
-                      })
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "media-body align-self-center" }, [
-                      _c("p", [
-                        _vm._v("Teaching Conference"),
-                        _c("br"),
-                        _vm._v("Grant (2015)")
-                      ])
-                    ])
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-lg-4 col-12 pl-0" }, [
-                  _c("div", { staticClass: "media" }, [
-                    _c("div", { staticClass: "media-left pr-3 pb-3" }, [
-                      _c("img", {
-                        staticClass: "media-object",
-                        staticStyle: { width: "60px" },
-                        attrs: { src: "http://via.placeholder.com/50x65" }
-                      })
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "media-body align-self-center" }, [
-                      _c("p", [
-                        _vm._v("Teaching Conference"),
-                        _c("br"),
-                        _vm._v("Grant (2015)")
-                      ])
-                    ])
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-lg-4 col-12 pl-0" }, [
-                  _c("div", { staticClass: "media" }, [
-                    _c("div", { staticClass: "media-left pr-3 pb-3" }, [
-                      _c("img", {
-                        staticClass: "media-object",
-                        staticStyle: { width: "60px" },
-                        attrs: { src: "http://via.placeholder.com/50x65" }
-                      })
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "media-body align-self-center" }, [
-                      _c("p", [
-                        _vm._v("Teaching Conference"),
-                        _c("br"),
-                        _vm._v("Grant (2015)")
-                      ])
-                    ])
-                  ])
-                ])
-              ])
-            ]),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "FAC-degrees-sm FACborder-line-wrapper" },
-              [
-                _c("h6", [_vm._v("DEGREES")]),
-                _vm._v(" "),
-                _c("ul", { staticClass: "timeline" }, [
-                  _c("li", { staticClass: "timeline__header pb-3" }, [
-                    _c("strong", [_vm._v("D.Sc. Computer Science")]),
-                    _vm._v(" 1995, University of Massachusetts Lowell")
-                  ]),
-                  _vm._v(" "),
-                  _c("li", { staticClass: "timeline__header pb-3" }, [
-                    _c("strong", [_vm._v("M.S. Computer Science")]),
-                    _vm._v(" 1990, University of Massachusetts Lowell")
-                  ]),
-                  _vm._v(" "),
-                  _c("li", { staticClass: "timeline__header pb-3" }, [
-                    _c("strong", [_vm._v("B.S. Computer Science")]),
-                    _vm._v(" 1986, Lowell University")
-                  ])
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "FAC-interests-sm FACborder-line-wrapper " },
-              [
-                _c("h6", [_vm._v("INTERESTS")]),
-                _vm._v(" "),
-                _c(
-                  "a",
-                  {
-                    staticClass: "badge badge-primary py-2 px-2 my-1",
-                    attrs: { href: "#" }
-                  },
-                  [_vm._v("Cloud Computing (laas)")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "a",
-                  {
-                    staticClass: "badge badge-primary py-2 px-2 my-1",
-                    attrs: { href: "#" }
-                  },
-                  [_vm._v("Web Technology")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "a",
-                  {
-                    staticClass: "badge badge-primary py-2 px-2 my-1",
-                    attrs: { href: "#" }
-                  },
-                  [_vm._v("Compilers")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "a",
-                  {
-                    staticClass: "badge badge-primary py-2 px-2 my-1",
-                    attrs: { href: "#" }
-                  },
-                  [_vm._v("Web Development")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "a",
-                  {
-                    staticClass: "badge badge-primary py-2 px-2 my-1",
-                    attrs: { href: "#" }
-                  },
-                  [_vm._v("Programming Languages")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "a",
-                  {
-                    staticClass: "badge badge-primary py-2 px-2 my-1",
-                    attrs: { href: "#" }
-                  },
-                  [_vm._v("Parallel and Distributed Programming")]
-                )
-              ]
-            )
-          ])
-        ])
+                    ],
+                    2
+                  )
+                ]
+              : _vm._e()
+          ],
+          2
+        )
       ])
     ])
-  }
-]
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {

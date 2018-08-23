@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html class="no-js" data-url="{{ url('/') }}" lang="en">
+<html class="no-js" data-url="{{ url('/') }}" data-api-url="{{ url('/api') }}" lang="en">
 	<head>
 		@if ( config('app.google_site_id') )
 		<meta name="google-site-verification" content="{{ config('app.google_site_id') }}">

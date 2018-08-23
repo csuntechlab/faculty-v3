@@ -109,3 +109,30 @@ function storiesUrl($uri) {
 	}
 	return $base . $uri;
 }
+
+/**
+ * Returns a formatted string taking a phone-like string parameter containing
+ * ten digits. If the parameter is empty this method does nothing and just
+ * returns the parameter back. If the parameter does not have ten characters
+ * this method will just return the parameter back.
+ *
+ * @param string $phone The ten-digit phone-like string
+ * @return string
+ */
+function formatPhoneNumber($phone) {
+    if(empty($phone)) return $phone;
+    if(strlen($phone) != 10) return $phone;
+
+    // first rip out any non-phone characters to be safe; this will take care
+    // of any potential case where phone numbers come in that were not entered
+    // through the Faculty application
+    $phone = preg_replace('/[^A-Z0-9]/', '', $phone);
+
+    // grab the area code and the relevant digits
+    $areaCode = substr($phone, 0, 3);
+    $centralOfficeCode = substr($phone, 3, 3);
+    $lineNumber = substr($phone, 6, 4);
+
+    // format and return
+    return "{$areaCode}-{$centralOfficeCode}-{$lineNumber}";
+}
