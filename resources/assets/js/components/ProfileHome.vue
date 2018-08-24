@@ -41,7 +41,7 @@
                                     </li>
                                 </template>
                             </template>
-                            <template v-else>
+                            <template v-else-if='user'>
                                 <li>
                                     <i class="far fa-envelope fa-lg pr-2"></i>
                                     <a :href="email_href">
@@ -250,12 +250,10 @@ export default {
             // apply the interests
             var interest_data = interests.data;
             this.interests = interest_data.interests;
-            console.log(interests.data);
 
             // apply the badges
             var badges_data = badges.data;
             this.badges = badges_data.badges;
-            console.log(badges.data);
         }));
   }
 }

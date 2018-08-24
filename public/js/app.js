@@ -24434,12 +24434,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             // apply the interests
             var interest_data = interests.data;
             _this.interests = interest_data.interests;
-            console.log(interests.data);
 
             // apply the badges
             var badges_data = badges.data;
             _this.badges = badges_data.badges;
-            console.log(badges.data);
         }));
     }
 });
@@ -24556,21 +24554,23 @@ var render = function() {
                             ]
                           : _vm._e()
                       ]
-                    : [
-                        _c("li", [
-                          _c("i", {
-                            staticClass: "far fa-envelope fa-lg pr-2"
-                          }),
-                          _vm._v(" "),
-                          _c("a", { attrs: { href: _vm.email_href } }, [
-                            _vm._v(
-                              "\n                                    " +
-                                _vm._s(_vm.user.email) +
-                                "\n                                "
-                            )
+                    : _vm.user
+                      ? [
+                          _c("li", [
+                            _c("i", {
+                              staticClass: "far fa-envelope fa-lg pr-2"
+                            }),
+                            _vm._v(" "),
+                            _c("a", { attrs: { href: _vm.email_href } }, [
+                              _vm._v(
+                                "\n                                    " +
+                                  _vm._s(_vm.user.email) +
+                                  "\n                                "
+                              )
+                            ])
                           ])
-                        ])
-                      ]
+                        ]
+                      : _vm._e()
                 ],
                 2
               )
