@@ -1,6 +1,7 @@
 @extends('layouts.master')
 
 @section('page-specific-headers')
+<meta name="faculty-url" content="{{ env('FACULTY_APP_URL') }}">
 <meta name="affinity-url" content="{{ env('AFFINITY_WEB_SERVICE') }}">
 <meta name="curriculum-url" content="{{ env('CURRICULUM_WEB_SERVICE') }}">
 <meta name="degrees-url" content="{{ env('DEGREES_WEB_SERVICE') }}">

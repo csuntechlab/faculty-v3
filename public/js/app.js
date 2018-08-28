@@ -25231,6 +25231,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: 'ProfileClasses',
@@ -25240,6 +25242,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         };
     },
 
+    computed: {
+        faculty_url: function faculty_url() {
+            return $("meta[name=faculty-url]").attr('content');
+        },
+        person_uri: function person_uri() {
+            return $("meta[name=person-uri]").attr('content');
+        },
+        faculty_profile_url: function faculty_profile_url() {
+            return this.faculty_url + this.person_uri;
+        }
+    },
     methods: {
         loadPastCourses: function loadPastCourses() {
             return axios.get('people/' + $("meta[name=person-uri]").attr('content') + '/classes/history', {
@@ -25249,6 +25262,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     mounted: function mounted() {
         var _this = this;
+
+        // set the base URL for Faculty so we can still link out to it
+
 
         // make the Axios calls concurrently and wait for all of them to return
         // before applying the reactive data
@@ -25343,7 +25359,46 @@ var render = function() {
               ]
             : _vm._e(),
           _vm._v(" "),
-          _vm._m(0)
+          _c(
+            "div",
+            { staticClass: "order-md-last order-first col-12 col-md-8 pr-3" },
+            [
+              _c("h2", [_vm._v("My Academic Schedule")]),
+              _vm._v(" "),
+              _c("div", [
+                _c("h3", { staticClass: "list-inline-item" }, [
+                  _vm._v("Fall 2018")
+                ]),
+                _vm._v(" "),
+                _c(
+                  "a",
+                  {
+                    staticClass: "btn btn-outline-primary",
+                    attrs: {
+                      href: _vm.faculty_profile_url + "/printout",
+                      role: "button"
+                    }
+                  },
+                  [
+                    _c("i", { staticClass: "fas fa-print fa-xs" }),
+                    _vm._v(" Printer Friendly Door Sign\n                    ")
+                  ]
+                ),
+                _vm._v(" "),
+                _vm._m(0)
+              ]),
+              _vm._v(" "),
+              _c("hr", { staticClass: "FAC-semester-divider" }),
+              _vm._v(" "),
+              _vm._m(1),
+              _vm._v(" "),
+              _vm._m(2),
+              _vm._v(" "),
+              _vm._m(3),
+              _vm._v(" "),
+              _vm._m(4)
+            ]
+          )
         ],
         2
       )
@@ -25356,404 +25411,359 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c(
-      "div",
-      { staticClass: "order-md-last order-first col-12 col-md-8 pr-3" },
+      "select",
+      { staticClass: "custom-select", attrs: { id: "inputGroupSelect01" } },
       [
-        _c("h2", [_vm._v("My Academic Schedule")]),
+        _c("option", { attrs: { selected: "" } }, [_vm._v("Choose Semester")]),
         _vm._v(" "),
-        _c("div", [
-          _c("h3", { staticClass: "list-inline-item" }, [_vm._v("Fall 2018")]),
+        _c("option", { attrs: { value: "1" } }, [_vm._v("One")]),
+        _vm._v(" "),
+        _c("option", { attrs: { value: "2" } }, [_vm._v("Two")]),
+        _vm._v(" "),
+        _c("option", { attrs: { value: "3" } }, [_vm._v("Three")]),
+        _vm._v(" "),
+        _c("i", { staticClass: "fas fa-caret-down" })
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "FAC-downloadBtn" }, [
+      _c("div", { staticClass: "FAC-downloadBtn__orientation" }, [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-outline-primary mt-2",
+            attrs: { type: "button" }
+          },
+          [
+            _c("i", { staticClass: "fas fa-calendar-alt fa-xs" }),
+            _vm._v(" Download Classes Schedule")
+          ]
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", [
+      _c("h3", { staticClass: "list-inline-item" }, [_vm._v("Classes")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "container" }, [
+        _c("div", { staticClass: "row d-none d-sm-flex" }, [
+          _c("div", { staticClass: "col-4 pl-0" }, [_vm._v("DESCRIPTION")]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-1 pl-0" }, [_vm._v("DAYS")]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-3" }, [_vm._v("TIME")]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-2" }, [_vm._v("LOCATION")]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-2 text-center" }, [_vm._v("INFO")])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "row FAC-class-wrapper py-3" }, [
+          _c("div", { staticClass: "col-sm-4 col-12" }, [
+            _c("div", { staticClass: "FAC-font-size" }, [
+              _c("strong", [_vm._v("CIT 160 ")]),
+              _vm._v("(20433)")
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "FAC-font-size font-italic" }, [
+              _vm._v("Internet Technologies")
+            ])
+          ]),
           _vm._v(" "),
           _c(
-            "button",
+            "div",
+            { staticClass: "FAC-font-size col-sm-1 col-12 pl-3 pl-sm-0 pr-0" },
+            [_vm._v("M W")]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "FAC-font-size col-sm-3 col-12 pr-0" }, [
+            _vm._v("1:00 p.m - 1:50 p.m.")
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
             {
-              staticClass: "btn btn-outline-primary",
-              attrs: { type: "button" }
+              staticClass: "FAC-font-size col-sm-2 col-12 pl-2 pr-0 text-nowrap"
             },
             [
-              _c("i", { staticClass: "fas fa-print fa-xs" }),
-              _vm._v(" Printer Friendly Door Sign")
+              _c("a", { attrs: { href: "#" } }, [
+                _c("i", {
+                  staticClass: "fas fa-map-marker-alt px-1 FAC-location-icons"
+                }),
+                _vm._v("JD3520")
+              ])
             ]
           ),
           _vm._v(" "),
           _c(
-            "select",
+            "div",
             {
-              staticClass: "custom-select",
-              attrs: { id: "inputGroupSelect01" }
+              staticClass:
+                "FAC-font-size col-sm-2 col-12 text-sm-center text-left"
             },
             [
-              _c("option", { attrs: { selected: "" } }, [
-                _vm._v("Choose Semester")
-              ]),
+              _c("i", { staticClass: "fas fa-file-pdf FAC-info-icons" }),
               _vm._v(" "),
-              _c("option", { attrs: { value: "1" } }, [_vm._v("One")]),
+              _c("i", { staticClass: "fas fa-book FAC-info-icons" }),
               _vm._v(" "),
-              _c("option", { attrs: { value: "2" } }, [_vm._v("Two")]),
-              _vm._v(" "),
-              _c("option", { attrs: { value: "3" } }, [_vm._v("Three")]),
-              _vm._v(" "),
-              _c("i", { staticClass: "fas fa-caret-down" })
+              _c("i", { staticClass: "fas fa-calendar-alt FAC-info-icons " })
             ]
+          )
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "FAC-downloadBtn" }, [
+      _c("div", { staticClass: "FAC-downloadBtn__orientation" }, [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-outline-primary mt-4",
+            attrs: { type: "button" }
+          },
+          [
+            _c("i", { staticClass: "fas fa-calendar-alt fa-xs" }),
+            _vm._v(" Download Office Hours")
+          ]
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", [
+      _c("h3", { staticClass: "list-inline-item" }, [_vm._v("Office Hours")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "container" }, [
+        _c("div", { staticClass: "row d-none d-sm-flex" }, [
+          _c("div", { staticClass: "col-4 pl-0" }, [_vm._v("DESCRIPTION")]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-1 pl-0" }, [_vm._v("DAYS")]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-3" }, [_vm._v("TIME")]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-2" }, [_vm._v("LOCATION")]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-2 text-center" }, [_vm._v("iCAL")])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "container FAC-officeHours-wrapper" }, [
+        _c("div", { staticClass: "row FAC-darkStriped py-3" }, [
+          _c("div", { staticClass: "col-sm-4 col-12" }, [
+            _c("div", { staticClass: "FAC-font-size" }, [
+              _c("strong", [_vm._v("General Office Hours")])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "FAC-font-size font-italic" }, [
+              _vm._v("Walk-In & Appointment")
+            ])
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "FAC-font-size col-sm-1 col-12 pl-3 pl-sm-0 pr-0" },
+            [_vm._v("M T")]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "FAC-font-size col-sm-3 col-12 pr-0" }, [
+            _c("div", [_vm._v("1:00 p.m - 1:50 p.m.")]),
+            _vm._v(" "),
+            _c("div", [
+              _c("a", { attrs: { href: "#" } }, [_vm._v("Book an Appointment")])
+            ])
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "FAC-font-size col-sm-2 col-12 pl-2 pr-0 text-nowrap"
+            },
+            [
+              _c("a", { attrs: { href: "#" } }, [
+                _c("i", {
+                  staticClass: "fas fa-map-marker-alt px-1 FAC-location-icons"
+                }),
+                _vm._v("META+LAB")
+              ])
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass:
+                "FAC-font-size col-sm-2 col-12 text-sm-center text-left"
+            },
+            [_c("i", { staticClass: "fas fa-calendar-alt FAC-info-icons" })]
           )
         ]),
         _vm._v(" "),
-        _c("hr", { staticClass: "FAC-semester-divider" }),
-        _vm._v(" "),
-        _c("div", { staticClass: "FAC-downloadBtn" }, [
-          _c("div", { staticClass: "FAC-downloadBtn__orientation" }, [
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-outline-primary mt-2",
-                attrs: { type: "button" }
-              },
-              [
-                _c("i", { staticClass: "fas fa-calendar-alt fa-xs" }),
-                _vm._v(" Download Classes Schedule")
-              ]
-            )
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", [
-          _c("h3", { staticClass: "list-inline-item" }, [_vm._v("Classes")]),
-          _vm._v(" "),
-          _c("div", { staticClass: "container" }, [
-            _c("div", { staticClass: "row d-none d-sm-flex" }, [
-              _c("div", { staticClass: "col-4 pl-0" }, [_vm._v("DESCRIPTION")]),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-1 pl-0" }, [_vm._v("DAYS")]),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-3" }, [_vm._v("TIME")]),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-2" }, [_vm._v("LOCATION")]),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-2 text-center" }, [_vm._v("INFO")])
+        _c("div", { staticClass: "row FAC-whiteStriped py-3" }, [
+          _c("div", { staticClass: "col-sm-4 col-12" }, [
+            _c("div", { staticClass: "FAC-font-size" }, [
+              _c("strong", [_vm._v("Graduate Advisement")])
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "row FAC-class-wrapper py-3" }, [
-              _c("div", { staticClass: "col-sm-4 col-12" }, [
-                _c("div", { staticClass: "FAC-font-size" }, [
-                  _c("strong", [_vm._v("CIT 160 ")]),
-                  _vm._v("(20433)")
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "FAC-font-size font-italic" }, [
-                  _vm._v("Internet Technologies")
-                ])
-              ]),
-              _vm._v(" "),
-              _c(
-                "div",
-                {
-                  staticClass: "FAC-font-size col-sm-1 col-12 pl-3 pl-sm-0 pr-0"
-                },
-                [_vm._v("M W")]
-              ),
-              _vm._v(" "),
-              _c("div", { staticClass: "FAC-font-size col-sm-3 col-12 pr-0" }, [
-                _vm._v("1:00 p.m - 1:50 p.m.")
-              ]),
-              _vm._v(" "),
-              _c(
-                "div",
-                {
-                  staticClass:
-                    "FAC-font-size col-sm-2 col-12 pl-2 pr-0 text-nowrap"
-                },
-                [
-                  _c("a", { attrs: { href: "#" } }, [
-                    _c("i", {
-                      staticClass:
-                        "fas fa-map-marker-alt px-1 FAC-location-icons"
-                    }),
-                    _vm._v("JD3520")
-                  ])
-                ]
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                {
-                  staticClass:
-                    "FAC-font-size col-sm-2 col-12 text-sm-center text-left"
-                },
-                [
-                  _c("i", { staticClass: "fas fa-file-pdf FAC-info-icons" }),
-                  _vm._v(" "),
-                  _c("i", { staticClass: "fas fa-book FAC-info-icons" }),
-                  _vm._v(" "),
-                  _c("i", {
-                    staticClass: "fas fa-calendar-alt FAC-info-icons "
-                  })
-                ]
-              )
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "FAC-downloadBtn" }, [
-          _c("div", { staticClass: "FAC-downloadBtn__orientation" }, [
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-outline-primary mt-4",
-                attrs: { type: "button" }
-              },
-              [
-                _c("i", { staticClass: "fas fa-calendar-alt fa-xs" }),
-                _vm._v(" Download Office Hours")
-              ]
-            )
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", [
-          _c("h3", { staticClass: "list-inline-item" }, [
-            _vm._v("Office Hours")
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "container" }, [
-            _c("div", { staticClass: "row d-none d-sm-flex" }, [
-              _c("div", { staticClass: "col-4 pl-0" }, [_vm._v("DESCRIPTION")]),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-1 pl-0" }, [_vm._v("DAYS")]),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-3" }, [_vm._v("TIME")]),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-2" }, [_vm._v("LOCATION")]),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-2 text-center" }, [_vm._v("iCAL")])
+            _c("div", { staticClass: "FAC-font-size font-italic" }, [
+              _vm._v("Appointment Only")
             ])
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "container FAC-officeHours-wrapper" }, [
-            _c("div", { staticClass: "row FAC-darkStriped py-3" }, [
-              _c("div", { staticClass: "col-sm-4 col-12" }, [
-                _c("div", { staticClass: "FAC-font-size" }, [
-                  _c("strong", [_vm._v("General Office Hours")])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "FAC-font-size font-italic" }, [
-                  _vm._v("Walk-In & Appointment")
-                ])
-              ]),
-              _vm._v(" "),
-              _c(
-                "div",
-                {
-                  staticClass: "FAC-font-size col-sm-1 col-12 pl-3 pl-sm-0 pr-0"
-                },
-                [_vm._v("M T")]
-              ),
-              _vm._v(" "),
-              _c("div", { staticClass: "FAC-font-size col-sm-3 col-12 pr-0" }, [
-                _c("div", [_vm._v("1:00 p.m - 1:50 p.m.")]),
-                _vm._v(" "),
-                _c("div", [
-                  _c("a", { attrs: { href: "#" } }, [
-                    _vm._v("Book an Appointment")
-                  ])
-                ])
-              ]),
-              _vm._v(" "),
-              _c(
-                "div",
-                {
-                  staticClass:
-                    "FAC-font-size col-sm-2 col-12 pl-2 pr-0 text-nowrap"
-                },
-                [
-                  _c("a", { attrs: { href: "#" } }, [
-                    _c("i", {
-                      staticClass:
-                        "fas fa-map-marker-alt px-1 FAC-location-icons"
-                    }),
-                    _vm._v("META+LAB")
-                  ])
-                ]
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                {
-                  staticClass:
-                    "FAC-font-size col-sm-2 col-12 text-sm-center text-left"
-                },
-                [_c("i", { staticClass: "fas fa-calendar-alt FAC-info-icons" })]
-              )
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "row FAC-whiteStriped py-3" }, [
-              _c("div", { staticClass: "col-sm-4 col-12" }, [
-                _c("div", { staticClass: "FAC-font-size" }, [
-                  _c("strong", [_vm._v("Graduate Advisement")])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "FAC-font-size font-italic" }, [
-                  _vm._v("Appointment Only")
-                ])
-              ]),
-              _vm._v(" "),
-              _c(
-                "div",
-                {
-                  staticClass: "FAC-font-size col-sm-1 col-12 pl-3 pl-sm-0 pr-0"
-                },
-                [_vm._v("T R")]
-              ),
-              _vm._v(" "),
-              _c("div", { staticClass: "FAC-font-size col-sm-3 col-12 pr-0" }, [
-                _c("div", [
-                  _c("a", { attrs: { href: "#" } }, [
-                    _vm._v("Book an Appointment")
-                  ])
-                ])
-              ]),
-              _vm._v(" "),
-              _c(
-                "div",
-                {
-                  staticClass:
-                    "FAC-font-size col-sm-2 col-12 pl-2 pr-0 text-nowrap"
-                },
-                [
-                  _c("a", { attrs: { href: "#" } }, [
-                    _c("i", {
-                      staticClass:
-                        "fas fa-map-marker-alt px-1 FAC-location-icons"
-                    }),
-                    _vm._v("JD3520")
-                  ])
-                ]
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                {
-                  staticClass:
-                    "FAC-font-size col-sm-2 col-12 text-sm-center text-left"
-                },
-                [_c("i", { staticClass: "fas fa-calendar-alt FAC-info-icons" })]
-              )
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "row FAC-darkStriped py-3" }, [
-              _c("div", { staticClass: "col-sm-4 col-12" }, [
-                _c("div", { staticClass: "FAC-font-size" }, [
-                  _c("strong", [_vm._v("CIT 160")])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "FAC-font-size font-italic" }, [
-                  _vm._v("Walk-In & Appointment")
-                ])
-              ]),
-              _vm._v(" "),
-              _c(
-                "div",
-                {
-                  staticClass: "FAC-font-size col-sm-1 col-12 pl-3 pl-sm-0 pr-0"
-                },
-                [_vm._v("W")]
-              ),
-              _vm._v(" "),
-              _c("div", { staticClass: "FAC-font-size col-sm-3 col-12 pr-0" }, [
-                _c("div", [_vm._v("2:00 p.m - 3:00 p.m.")]),
-                _vm._v(" "),
-                _c("div", [
-                  _c("a", { attrs: { href: "#" } }, [
-                    _vm._v("Request an Appointment")
-                  ])
-                ])
-              ]),
-              _vm._v(" "),
-              _c(
-                "div",
-                {
-                  staticClass:
-                    "FAC-font-size col-sm-2 col-12 pl-2 pr-0 text-nowrap"
-                },
-                [
-                  _c("a", { attrs: { href: "#" } }, [
-                    _c("i", {
-                      staticClass:
-                        "fas fa-map-marker-alt px-1 FAC-location-icons"
-                    }),
-                    _vm._v("META+LAB")
-                  ])
-                ]
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                {
-                  staticClass:
-                    "FAC-font-size col-sm-2 col-12 text-sm-center text-left"
-                },
-                [_c("i", { staticClass: "fas fa-calendar-alt FAC-info-icons" })]
-              )
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "row FAC-whiteStriped py-3" }, [
-              _c("div", { staticClass: "col-sm-4 col-12" }, [
-                _c("div", { staticClass: "FAC-font-size" }, [
-                  _c("strong", [_vm._v("Appointment Only")])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "FAC-font-size font-italic" }, [
-                  _vm._v("Walk-In & Appointment")
-                ])
-              ]),
-              _vm._v(" "),
-              _c(
-                "div",
-                {
-                  staticClass: "FAC-font-size col-sm-1 col-12 pl-3 pl-sm-0 pr-0"
-                },
-                [_vm._v("F")]
-              ),
-              _vm._v(" "),
-              _c("div", { staticClass: "FAC-font-size col-sm-3 col-12 pr-0" }, [
-                _c("div", [_vm._v("1:00 p.m - 1:50 p.m.")]),
-                _vm._v(" "),
-                _c("div", [
-                  _c("a", { attrs: { href: "#" } }, [
-                    _vm._v("Book an Appointment")
-                  ])
-                ])
-              ]),
-              _vm._v(" "),
-              _c(
-                "div",
-                {
-                  staticClass:
-                    "FAC-font-size col-sm-2 col-12 pl-2 pr-0 text-nowrap"
-                },
-                [
-                  _c("a", { attrs: { href: "#" } }, [
-                    _c("i", {
-                      staticClass:
-                        "fas fa-map-marker-alt px-1 FAC-location-icons"
-                    }),
-                    _vm._v("META+LAB")
-                  ])
-                ]
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                {
-                  staticClass:
-                    "FAC-font-size col-sm-2 col-12 text-sm-center text-left"
-                },
-                [_c("i", { staticClass: "fas fa-calendar-alt FAC-info-icons" })]
-              )
+          _c(
+            "div",
+            { staticClass: "FAC-font-size col-sm-1 col-12 pl-3 pl-sm-0 pr-0" },
+            [_vm._v("T R")]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "FAC-font-size col-sm-3 col-12 pr-0" }, [
+            _c("div", [
+              _c("a", { attrs: { href: "#" } }, [_vm._v("Book an Appointment")])
             ])
-          ])
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "FAC-font-size col-sm-2 col-12 pl-2 pr-0 text-nowrap"
+            },
+            [
+              _c("a", { attrs: { href: "#" } }, [
+                _c("i", {
+                  staticClass: "fas fa-map-marker-alt px-1 FAC-location-icons"
+                }),
+                _vm._v("JD3520")
+              ])
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass:
+                "FAC-font-size col-sm-2 col-12 text-sm-center text-left"
+            },
+            [_c("i", { staticClass: "fas fa-calendar-alt FAC-info-icons" })]
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "row FAC-darkStriped py-3" }, [
+          _c("div", { staticClass: "col-sm-4 col-12" }, [
+            _c("div", { staticClass: "FAC-font-size" }, [
+              _c("strong", [_vm._v("CIT 160")])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "FAC-font-size font-italic" }, [
+              _vm._v("Walk-In & Appointment")
+            ])
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "FAC-font-size col-sm-1 col-12 pl-3 pl-sm-0 pr-0" },
+            [_vm._v("W")]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "FAC-font-size col-sm-3 col-12 pr-0" }, [
+            _c("div", [_vm._v("2:00 p.m - 3:00 p.m.")]),
+            _vm._v(" "),
+            _c("div", [
+              _c("a", { attrs: { href: "#" } }, [
+                _vm._v("Request an Appointment")
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "FAC-font-size col-sm-2 col-12 pl-2 pr-0 text-nowrap"
+            },
+            [
+              _c("a", { attrs: { href: "#" } }, [
+                _c("i", {
+                  staticClass: "fas fa-map-marker-alt px-1 FAC-location-icons"
+                }),
+                _vm._v("META+LAB")
+              ])
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass:
+                "FAC-font-size col-sm-2 col-12 text-sm-center text-left"
+            },
+            [_c("i", { staticClass: "fas fa-calendar-alt FAC-info-icons" })]
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "row FAC-whiteStriped py-3" }, [
+          _c("div", { staticClass: "col-sm-4 col-12" }, [
+            _c("div", { staticClass: "FAC-font-size" }, [
+              _c("strong", [_vm._v("Appointment Only")])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "FAC-font-size font-italic" }, [
+              _vm._v("Walk-In & Appointment")
+            ])
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "FAC-font-size col-sm-1 col-12 pl-3 pl-sm-0 pr-0" },
+            [_vm._v("F")]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "FAC-font-size col-sm-3 col-12 pr-0" }, [
+            _c("div", [_vm._v("1:00 p.m - 1:50 p.m.")]),
+            _vm._v(" "),
+            _c("div", [
+              _c("a", { attrs: { href: "#" } }, [_vm._v("Book an Appointment")])
+            ])
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "FAC-font-size col-sm-2 col-12 pl-2 pr-0 text-nowrap"
+            },
+            [
+              _c("a", { attrs: { href: "#" } }, [
+                _c("i", {
+                  staticClass: "fas fa-map-marker-alt px-1 FAC-location-icons"
+                }),
+                _vm._v("META+LAB")
+              ])
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass:
+                "FAC-font-size col-sm-2 col-12 text-sm-center text-left"
+            },
+            [_c("i", { staticClass: "fas fa-calendar-alt FAC-info-icons" })]
+          )
         ])
-      ]
-    )
+      ])
+    ])
   }
 ]
 render._withStripped = true

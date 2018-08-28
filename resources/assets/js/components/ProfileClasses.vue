@@ -28,7 +28,9 @@
                     <h2>My Academic Schedule</h2>
                     <div>
                         <h3 class="list-inline-item">Fall 2018</h3>
-                        <button type="button" class="btn btn-outline-primary"><i class="fas fa-print fa-xs"></i> Printer Friendly Door Sign</button>
+                        <a :href="faculty_profile_url + '/printout'" class="btn btn-outline-primary" role="button">
+                            <i class="fas fa-print fa-xs"></i> Printer Friendly Door Sign
+                        </a>
                         <!-- <button type="button" class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Choose Semester <span class="sr-only">Toggle Dropdown</span></button> -->
                         <!-- <div class="dropdown-menu">
                             <a class="dropdown-item" href="#">Action</a>
@@ -225,6 +227,17 @@ export default {
             past_courses: []
         }
     },
+    computed: {
+        faculty_url: function() {
+            return $("meta[name=faculty-url]").attr('content');
+        },
+        person_uri: function() {
+            return $("meta[name=person-uri]").attr('content');
+        },
+        faculty_profile_url: function() {
+            return this.faculty_url + this.person_uri;
+        }
+    },
     methods: {
         loadPastCourses: function() {
             return axios.get(
@@ -236,6 +249,9 @@ export default {
         }
     },
     mounted() {
+        // set the base URL for Faculty so we can still link out to it
+
+
         // make the Axios calls concurrently and wait for all of them to return
         // before applying the reactive data
         axios.all([this.loadPastCourses()])
