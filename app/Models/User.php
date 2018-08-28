@@ -18,6 +18,19 @@ class User extends Authenticatable
     protected $appends = ['is_csun_alum', 'primary_connection', 'primary_department', 'uri'];
 
     /**
+     * Retrieves a BelongsToMany representing the set of Classes instances
+     * associated with this user. This only retrieves instances where the
+     * user has an active designation.
+     *
+     * @return BelongsToMany
+     */
+    public function classes() {
+        return $this->belongsToMany('App\Models\Classes', 'nemo.classInstructors', 'members_id', 'classes_id')
+            ->wherePivot('member_status', 'Active')
+            ->orderBy('term_id', 'DESC');
+    }
+
+    /**
      * Retrieves a BelongsToMany representing the set of Connectable instances
      * associated with this user. This only retrieves instances that should
      * be displayed.

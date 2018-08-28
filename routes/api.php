@@ -2,6 +2,10 @@
 
 use Illuminate\Http\Request;
 
+// All routes in this file use the controller(s) under the
+// App\Http\Controllers\Api namespace. This namespace is set
+// in the RouteServiceProvider class.
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -17,6 +21,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+// this route group drives the profile API functionality
 Route::prefix('people')->group(function() {
 	Route::get('{uri}', 'ProfileController@getMetadata');
+	Route::get('{uri}/classes/history', 'ProfileController@getClassHistory');
 });
