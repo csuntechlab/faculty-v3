@@ -24371,6 +24371,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: 'ProfileHome',
@@ -24650,10 +24660,10 @@ var render = function() {
                       _vm._l(_vm.interests, function(_interest) {
                         return [
                           _c(
-                            "a",
+                            "span",
                             {
-                              staticClass: "badge badge-primary py-2 px-2 my-1",
-                              attrs: { href: "#" }
+                              staticClass:
+                                "badge badge-primary py-2 px-2 my-1 mr-1"
                             },
                             [
                               _vm._v(
@@ -24678,7 +24688,7 @@ var render = function() {
           "div",
           { staticClass: "col-md-8 pr-3" },
           [
-            _vm.contact
+            _vm.contact || _vm.user
               ? [
                   _c(
                     "div",
@@ -24689,94 +24699,126 @@ var render = function() {
                       _c(
                         "ul",
                         [
-                          _vm.contact.email
+                          _vm.contact
                             ? [
-                                _c("li", [
-                                  _c("i", {
-                                    staticClass: "far fa-envelope fa-lg pr-2"
-                                  }),
-                                  _vm._v(" "),
-                                  _c("a", { attrs: { href: _vm.email_href } }, [
-                                    _vm._v(
-                                      "\n                                        " +
-                                        _vm._s(_vm.contact.email) +
-                                        "\n                                    "
+                                _vm.contact.email
+                                  ? [
+                                      _c("li", [
+                                        _c("i", {
+                                          staticClass:
+                                            "far fa-envelope fa-lg pr-2"
+                                        }),
+                                        _vm._v(" "),
+                                        _c(
+                                          "a",
+                                          { attrs: { href: _vm.email_href } },
+                                          [
+                                            _vm._v(
+                                              "\n                                            " +
+                                                _vm._s(_vm.contact.email) +
+                                                "\n                                        "
+                                            )
+                                          ]
+                                        )
+                                      ])
+                                    ]
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                _vm.contact.website
+                                  ? [
+                                      _c("li", [
+                                        _c("i", {
+                                          staticClass:
+                                            "fas fa-globe-americas fa-lg pr-2"
+                                        }),
+                                        _vm._v(" "),
+                                        _c(
+                                          "a",
+                                          {
+                                            attrs: {
+                                              href: _vm.contact.website,
+                                              target: "_blank"
+                                            }
+                                          },
+                                          [
+                                            _vm._v(
+                                              "\n                                            " +
+                                                _vm._s(_vm.contact.website) +
+                                                "\n                                        "
+                                            )
+                                          ]
+                                        )
+                                      ])
+                                    ]
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                _vm.contact.telephone
+                                  ? [
+                                      _c("li", [
+                                        _c("i", {
+                                          staticClass: "fas fa-phone fa-lg pl-2"
+                                        }),
+                                        _vm._v(" "),
+                                        _c(
+                                          "a",
+                                          {
+                                            attrs: { href: _vm.telephone_href }
+                                          },
+                                          [
+                                            _vm._v(
+                                              "\n                                            " +
+                                                _vm._s(
+                                                  _vm.contact
+                                                    .formatted_telephone
+                                                ) +
+                                                "\n                                        "
+                                            )
+                                          ]
+                                        )
+                                      ])
+                                    ]
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                _vm.contact.location
+                                  ? [
+                                      _c("li", [
+                                        _c("i", {
+                                          staticClass:
+                                            "fas fa-map-marker-alt fa-lg px-1"
+                                        }),
+                                        _vm._v(" "),
+                                        _c("a", { attrs: { href: "#" } }, [
+                                          _vm._v(
+                                            "\n                                            " +
+                                              _vm._s(_vm.contact.location) +
+                                              "\n                                        "
+                                          )
+                                        ])
+                                      ])
+                                    ]
+                                  : _vm._e()
+                              ]
+                            : _vm.user
+                              ? [
+                                  _c("li", [
+                                    _c("i", {
+                                      staticClass: "far fa-envelope fa-lg pr-2"
+                                    }),
+                                    _vm._v(" "),
+                                    _c(
+                                      "a",
+                                      { attrs: { href: _vm.email_href } },
+                                      [
+                                        _vm._v(
+                                          "\n                                        " +
+                                            _vm._s(_vm.user.email) +
+                                            "\n                                    "
+                                        )
+                                      ]
                                     )
                                   ])
-                                ])
-                              ]
-                            : _vm._e(),
-                          _vm._v(" "),
-                          _vm.contact.website
-                            ? [
-                                _c("li", [
-                                  _c("i", {
-                                    staticClass:
-                                      "fas fa-globe-americas fa-lg pr-2"
-                                  }),
-                                  _vm._v(" "),
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: {
-                                        href: _vm.contact.website,
-                                        target: "_blank"
-                                      }
-                                    },
-                                    [
-                                      _vm._v(
-                                        "\n                                        " +
-                                          _vm._s(_vm.contact.website) +
-                                          "\n                                    "
-                                      )
-                                    ]
-                                  )
-                                ])
-                              ]
-                            : _vm._e(),
-                          _vm._v(" "),
-                          _vm.contact.telephone
-                            ? [
-                                _c("li", [
-                                  _c("i", {
-                                    staticClass: "fas fa-phone fa-lg pl-2"
-                                  }),
-                                  _vm._v(" "),
-                                  _c(
-                                    "a",
-                                    { attrs: { href: _vm.telephone_href } },
-                                    [
-                                      _vm._v(
-                                        "\n                                        " +
-                                          _vm._s(
-                                            _vm.contact.formatted_telephone
-                                          ) +
-                                          "\n                                    "
-                                      )
-                                    ]
-                                  )
-                                ])
-                              ]
-                            : _vm._e(),
-                          _vm._v(" "),
-                          _vm.contact.location
-                            ? [
-                                _c("li", [
-                                  _c("i", {
-                                    staticClass:
-                                      "fas fa-map-marker-alt fa-lg px-1"
-                                  }),
-                                  _vm._v(" "),
-                                  _c("a", { attrs: { href: "#" } }, [
-                                    _vm._v(
-                                      "\n                                        " +
-                                        _vm._s(_vm.contact.location) +
-                                        "\n                                    "
-                                    )
-                                  ])
-                                ])
-                              ]
-                            : _vm._e()
+                                ]
+                              : _vm._e()
                         ],
                         2
                       )
@@ -24922,10 +24964,9 @@ var render = function() {
                       _vm._l(_vm.interests, function(_interest) {
                         return [
                           _c(
-                            "a",
+                            "span",
                             {
-                              staticClass: "badge badge-primary py-2 px-2 my-1",
-                              attrs: { href: "#" }
+                              staticClass: "badge badge-primary py-2 px-2 my-1"
                             },
                             [
                               _vm._v(
