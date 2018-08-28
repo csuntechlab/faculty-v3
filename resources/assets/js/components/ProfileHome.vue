@@ -3,54 +3,55 @@
         <div class="container pt-4">
             <div class="row">                 
                 <div class="col-md-4">
-                    
-                    <div class="FAC-contact FACborder-line-wrapper">
-                        <h6>CONTACT</h6>
-                        <ul>
-                            <template v-if='contact'>
-                                <template v-if='contact.email'>
+                    <template v-if='contact || user'>
+                        <div class="FAC-contact FACborder-line-wrapper">
+                            <h6>CONTACT</h6>
+                            <ul>
+                                <template v-if='contact'>
+                                    <template v-if='contact.email'>
+                                        <li>
+                                            <i class="far fa-envelope fa-lg pr-2"></i>
+                                            <a :href="email_href">
+                                                {{ contact.email }}
+                                            </a>
+                                        </li>
+                                    </template>
+                                    <template v-if='contact.website'>
+                                        <li>
+                                            <i class="fas fa-globe-americas fa-lg pr-2"></i>
+                                            <a :href="contact.website" target="_blank">
+                                                {{ contact.website }}
+                                            </a>
+                                        </li>
+                                    </template>
+                                    <template v-if='contact.telephone'>
+                                        <li>
+                                            <i class="fas fa-phone fa-lg pl-2"></i>
+                                            <a :href="telephone_href">
+                                                {{ contact.formatted_telephone }}
+                                            </a>
+                                        </li>
+                                    </template>
+                                    <template v-if='contact.location'>
+                                        <li>
+                                            <i class="fas fa-map-marker-alt fa-lg px-1"></i>
+                                            <a href="#">
+                                                {{ contact.location }}
+                                            </a>
+                                        </li>
+                                    </template>
+                                </template>
+                                <template v-else-if='user'>
                                     <li>
                                         <i class="far fa-envelope fa-lg pr-2"></i>
                                         <a :href="email_href">
-                                            {{ contact.email }}
+                                            {{ user.email }}
                                         </a>
                                     </li>
                                 </template>
-                                <template v-if='contact.website'>
-                                    <li>
-                                        <i class="fas fa-globe-americas fa-lg pr-2"></i>
-                                        <a :href="contact.website" target="_blank">
-                                            {{ contact.website }}
-                                        </a>
-                                    </li>
-                                </template>
-                                <template v-if='contact.telephone'>
-                                    <li>
-                                        <i class="fas fa-phone fa-lg pl-2"></i>
-                                        <a :href="telephone_href">
-                                            {{ contact.formatted_telephone }}
-                                        </a>
-                                    </li>
-                                </template>
-                                <template v-if='contact.location'>
-                                    <li>
-                                        <i class="fas fa-map-marker-alt fa-lg px-1"></i>
-                                        <a href="#">
-                                            {{ contact.location }}
-                                        </a>
-                                    </li>
-                                </template>
-                            </template>
-                            <template v-else-if='user'>
-                                <li>
-                                    <i class="far fa-envelope fa-lg pr-2"></i>
-                                    <a :href="email_href">
-                                        {{ user.email }}
-                                    </a>
-                                </li>
-                            </template>
-                        </ul>
-                    </div>
+                            </ul>
+                        </div>
+                    </template>
 
                     <template v-if='degrees.length'>
                         <div class="FAC-degrees FACborder-line-wrapper">

@@ -46,6 +46,14 @@ class ProfileController extends Controller
             return !preg_match('/^[0-9]+$/', $class->class_number);
         });
 
+        // add the times_taught and last_taught attributes to each class
+        $user->classes = $user->classes->each(function($class) use ($user) {
+            $class->times_taught = $user->classes
+                ->where('course_id', $class->course_id)
+                ->count();
+            $class->last_taught = implode(" ", explode("-", $class->term));
+        });
+
         // finally, limit the set of classes to their unique instances based
         // upon course ID since that will be how the timeline is shown
         $user->classes = $user->classes->unique(function($class) {

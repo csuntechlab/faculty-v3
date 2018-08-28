@@ -1,58 +1,29 @@
 <template>
     <div id="classes">
         <div class="container pt-4">
-            <div class="row">                 
-                <div class="order-last order-md-first col-md-4 pt-5 pt-md-0">
-                    <div class="FAC-pastCourses">
-                        <h6>PAST COURSES</h6>
-                        <ul>
-                            <li class="pb-4 pt-0 pt-md-3 float-md-none float-left pr-4 FAC-pastCourses-width">
-                                <strong>COMP 485 </strong>
-                                <div>Human-Computer Interaction</div>
-                                <div>Last Offered Sp'18</div>
-                                <div>Taught 3 terms</div>
-                            </li>
-                            <li class="pb-4 float-md-none float-left pr-4 FAC-pastCourses-width">
-                                <strong>COMP 485 </strong>
-                                <div>Human-Computer Interaction</div>
-                                <div>Last Offered Sp'18</div>
-                                <div>Taught 3 terms</div>
-                            </li>
-                            <li class="pb-4 float-md-none float-left pr-4 FAC-pastCourses-width">
-                                <strong>COMP 485 </strong>
-                                <div>Human-Computer Interaction</div>
-                                <div>Last Offered Sp'18</div>
-                                <div>Taught 3 terms</div>
-                            </li>
-                            <li class="pb-4 float-md-none float-left pr-4 FAC-pastCourses-width">
-                                <strong>COMP 485 </strong>
-                                <div>Human-Computer Interaction</div>
-                                <div>Last Offered Sp'18</div>
-                                <div>Taught 3 terms</div>
-                            </li>
-                            <li class="pb-4 float-md-none float-left pr-4 FAC-pastCourses-width">
-                                <strong>COMP 485 </strong>
-                                <div>Human-Computer Interaction</div>
-                                <div>Last Offered Sp'18</div>
-                                <div>Taught 3 terms</div>
-                            </li>
-                            <li class="pb-4 float-md-none float-left pr-4 FAC-pastCourses-width">
-                                <strong>COMP 485 </strong>
-                                <div>Human-Computer Interaction</div>
-                                <div>Last Offered Sp'18</div>
-                                <div>Taught 3 terms</div>
-                            </li>
-                            <li class="pb-4 float-md-none float-left pr-4 FAC-pastCourses-width">
-                                <strong>COMP 485 </strong>
-                                <div>Human-Computer Interaction</div>
-                                <div>Last Offered Sp'18</div>
-                                <div>Taught 3 terms</div>
-                            </li>
-                        </ul>
+            <div class="row">    
+                <template v-if='past_courses.length'>             
+                    <div class="order-last order-md-first col-md-4 pt-5 pt-md-0">
+                        <div class="FAC-pastCourses">
+                            <h6>PAST COURSES</h6>
+                            <ul>
+                                <template v-for='_past_course in past_courses'>
+                                    <li class="pb-4 pt-0 pt-md-3 float-md-none float-left pr-4 FAC-pastCourses-width">
+                                        <strong>{{ _past_course.subject }} {{ _past_course.catalog_number }}</strong>
+                                        <div>{{ _past_course.title }}</div>
+                                        <div>Last Offered {{ _past_course.last_taught }}</div>
+                                        <div v-if='_past_course.times_taught > 1'>
+                                            Taught {{ _past_course.times_taught }} terms
+                                        </div>
+                                        <div v-else>
+                                            Taught 1 term
+                                        </div>
+                                    </li>
+                                </template>
+                            </ul>
+                        </div>
                     </div>
-                    
-                  
-                </div>
+                </template>
                 <div class="order-md-last order-first col-12 col-md-8 pr-3">
                     <h2>My Academic Schedule</h2>
                     <div>
@@ -248,6 +219,31 @@
 </template>
 <script>
 export default {
-    name: 'ProfileClasses'
+    name: 'ProfileClasses',
+    data() {
+        return {
+            past_courses: []
+        }
+    },
+    methods: {
+        loadPastCourses: function() {
+            return axios.get(
+                'people/' + $("meta[name=person-uri]").attr('content') + '/classes/history',
+                {
+                    baseURL: $('html').attr('data-api-url')
+                }
+            );
+        }
+    },
+    mounted() {
+        // make the Axios calls concurrently and wait for all of them to return
+        // before applying the reactive data
+        axios.all([this.loadPastCourses()])
+            .then(axios.spread((past_courses) => {
+                // apply the past courses
+                var past_courses_data = past_courses.data;
+                this.past_courses = past_courses_data;
+            }));
+    }
 }
 </script>
