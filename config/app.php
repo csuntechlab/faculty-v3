@@ -253,4 +253,25 @@ return [
 
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Weeks Before Switch to Next Semester
+    |--------------------------------------------------------------------------
+    |
+    | Number of weeks before beginning of next semester to make the next semester
+    | the "current" semester throughout the application.
+    |
+    */
+    'weeks_before_next_semester_switch' => env("WEEKS_BEFORE_NEXT_SEMESTER_SWITCH", 3),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Upload default directories
+    |--------------------------------------------------------------------------
+    |
+    | Specifies the default locations for resource uploads
+    |
+    */
+    'syllabus_upload_location' => env("SYLLABUS_UPLOAD_LOCATION", ""),
+
 ];
