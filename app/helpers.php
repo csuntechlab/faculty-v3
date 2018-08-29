@@ -1,5 +1,7 @@
 <?php
 
+use Carbon\Carbon;
+
 /**
  * Returns an active state if the current URL matches the provided path.
  * Otherwise, this function returns a blank string.
@@ -151,6 +153,20 @@ function storiesUrl($uri) {
 		$uri = substr($uri, 1);
 	}
 	return $base . $uri;
+}
+
+/**
+ * Converts a 24-hour time value to 12-hour time format and returns it.
+ *
+ * @param string $value Time value in 24-hour format
+ * @return string
+ */
+function convertTime($value) {
+    $value = str_replace('h', '', $value);
+
+    $date = Carbon::createFromFormat('Gi', $value);
+    $date->setToStringFormat('g:i A');
+    return $date;
 }
 
 /**

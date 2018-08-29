@@ -45,63 +45,86 @@
                     </template>
 
                     <!-- **********************  CLASSES **************************** -->
+                    <template v-if='current_term'>
+                        <template v-if='classes.length'>
                             <div class="FAC-downloadBtn">
                                 <div class="FAC-downloadBtn__orientation">
-                                    <button type="button" class="btn btn-outline-primary mt-2"><i class="fas fa-calendar-alt fa-xs"></i> Download Classes Schedule</button>
+                                    <a href="#" class="btn btn-outline-primary mt-2" role="button"><i class="fas fa-calendar-alt fa-xs"></i> Download Classes Schedule</a>
                                 </div>
                             </div>
-                    
-                    
-                    
+                        </template>
+                        <div>
+                            <h3 class="list-inline-item">Classes</h3>
+                            <!-- <div class="container">
+                                <div class="row d-none d-md-inline">
+                                    <div class="col-4 list-inline-item pl-0">DESCRIPTION</div>
+                                    <div class="col-1 list-inline-item pl-0">DAYS</div>
+                                    <div class="col-3 list-inline-item ">TIME</div>
+                                    <div class="col-2 list-inline-item ">LOCATION</div>
+                                    <div class="col-2 list-inline-item text-center">INFO</div>
+                                </div> -->
 
-                    <div><h3 class="list-inline-item">Classes</h3>
-                        <!-- <div class="container">
-                            <div class="row d-none d-md-inline">
-                                <div class="col-4 list-inline-item pl-0">DESCRIPTION</div>
-                                <div class="col-1 list-inline-item pl-0">DAYS</div>
-                                <div class="col-3 list-inline-item ">TIME</div>
-                                <div class="col-2 list-inline-item ">LOCATION</div>
-                                <div class="col-2 list-inline-item text-center">INFO</div>
-                            </div> -->
-
-                            <div class="container">
-                            <div class="row d-none d-sm-flex">
-                                <div class="col-4 pl-0">DESCRIPTION</div>
-                                <div class="col-1 pl-0">DAYS</div>
-                                <div class="col-3">TIME</div>
-                                <div class="col-2">LOCATION</div>
-                                <div class="col-2 text-center">INFO</div>
-                            </div>
-                        
-
-                            <div class="row FAC-class-wrapper py-3">
-                                <!-- Description -->
-                                <div class="col-sm-4 col-12">
-                                    <div class="FAC-font-size"><strong>CIT 160 </strong>(20433)</div> 
-                                    <div class="FAC-font-size font-italic">Internet Technologies</div>
+                                <div class="container">
+                                <div class="row d-none d-sm-flex">
+                                    <div class="col-4 pl-0">DESCRIPTION</div>
+                                    <div class="col-1 pl-0">DAYS</div>
+                                    <div class="col-3">TIME</div>
+                                    <div class="col-2">LOCATION</div>
+                                    <div class="col-2 text-center">INFO</div>
                                 </div>
-                                <!-- Days -->
-                                <div class="FAC-font-size col-sm-1 col-12 pl-3 pl-sm-0 pr-0">M W</div>
-                                <!-- Time -->
-                                <div class="FAC-font-size col-sm-3 col-12 pr-0">1:00 p.m - 1:50 p.m.</div>
-                                <!-- Location -->
-                                <div class="FAC-font-size col-sm-2 col-12 pl-2 pr-0 text-nowrap"><a href="#"><i class="fas fa-map-marker-alt px-1 FAC-location-icons"></i>JD3520</a></div>
-                                <!-- Info -->
-                                <div class="FAC-font-size col-sm-2 col-12 text-sm-center text-left">
-                                    <i class="fas fa-file-pdf FAC-info-icons"></i>
-                                    <i class="fas fa-book FAC-info-icons"></i>
-                                    <i class="fas fa-calendar-alt FAC-info-icons "></i>
-                                </div>
+                            
+                                <template v-if='classes.length' v-for='_class in classes'>
+                                    <div class="row FAC-class-wrapper py-3" v-for='_meeting in _class.class_meetings'>
+                                        <!-- Description -->
+                                        <div class="col-sm-4 col-12">
+                                            <div class="FAC-font-size"><strong>{{ _class.subject }} {{ _class.catalog_number }} </strong>({{ _class.class_number }})</div> 
+                                            <div class="FAC-font-size font-italic">{{ _class.title }}</div>
+                                        </div>
+                                        <!-- Days -->
+                                        <div class="FAC-font-size col-sm-1 col-12 pl-3 pl-sm-0 pr-0">
+                                        {{ _meeting.formatted_days }}
+                                        </div>
+                                        <!-- Time -->
+                                        <div class="FAC-font-size col-sm-3 col-12 pr-0">
+                                        {{ _meeting.formatted_duration }}
+                                        </div>
+                                        <!-- Location -->
+                                        <div class="FAC-font-size col-sm-2 col-12 pl-2 pr-0 text-nowrap">
+                                            <a href="#"><i class="fas fa-map-marker-alt px-1 FAC-location-icons"></i>{{ _meeting.location }}</a>
+                                        </div>
+                                        <!-- Info -->
+                                        <div class="FAC-font-size col-sm-2 col-12 text-sm-center text-left">
+                                            <template v-if='_class.syllabus'>
+                                                <a :href="_class.syllabus.url" target="_blank">
+                                                    <i class="fas fa-file-pdf FAC-info-icons"></i>
+                                                </a>
+                                            </template>
+                                            <template v-if='_class.bookstore_url'>
+                                                <a :href="_class.bookstore_url" target="_blank">
+                                                    <i class="fas fa-book FAC-info-icons"></i>
+                                                </a>
+                                            </template>
+                                            <i class="fas fa-calendar-alt FAC-info-icons "></i>
+                                        </div>
+                                    </div>
+                                </template>
+                                <template v-else>
+                                    <div class="row FAC-class-wrapper py-3">
+                                        <div class="col-12 FAC-font-size">
+                                            {{ person_name }} does not have any classes for the selected term.
+                                        </div>
+                                    </div>
+                                </template>
                             </div>
                         </div>
-                    </div>
+                    </template>
 
                     <!-- ************************  OFFICE HOURS ************************ -->
 
                     
                     <div class="FAC-downloadBtn">
                         <div class="FAC-downloadBtn__orientation">
-                            <button type="button" class="btn btn-outline-primary mt-4"><i class="fas fa-calendar-alt fa-xs"></i> Download Office Hours</button>
+                            <a href="#" class="btn btn-outline-primary mt-4" role="button"><i class="fas fa-calendar-alt fa-xs"></i> Download Office Hours</a>
                         </div>
                     </div>
                     <div>
@@ -230,6 +253,9 @@ export default {
         faculty_url: function() {
             return $("meta[name=faculty-url]").attr('content');
         },
+        person_name: function() {
+            return $("meta[name=person-name]").attr('content');
+        },
         person_uri: function() {
             return $("meta[name=person-uri]").attr('content');
         },
@@ -241,6 +267,17 @@ export default {
         }
     },
     methods: {
+        loadCurrentClasses: function() {
+            return axios.get(
+                'people/' + this.person_uri + '/classes',
+                {
+                    baseURL: $('html').attr('data-api-url'),
+                    params: {
+                        term_id: this.current_term_id
+                    }
+                }
+            );
+        },
         loadPastCourses: function() {
             return axios.get(
                 'people/' + this.person_uri + '/classes/history',
@@ -261,8 +298,12 @@ export default {
     mounted() {
         // make the Axios calls concurrently and wait for all of them to return
         // before applying the reactive data
-        axios.all([this.loadPastCourses(), this.loadTerms()])
-            .then(axios.spread((past_courses, terms) => {
+        axios.all([this.loadCurrentClasses(), this.loadPastCourses(), this.loadTerms()])
+            .then(axios.spread((current_classes, past_courses, terms) => {
+                // apply the current classes
+                var current_class_data = current_classes.data;
+                this.classes = current_class_data;
+
                 // apply the past courses
                 var past_courses_data = past_courses.data;
                 this.past_courses = past_courses_data;

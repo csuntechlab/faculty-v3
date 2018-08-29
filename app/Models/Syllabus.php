@@ -11,7 +11,7 @@ class Syllabus extends Model {
 	protected $table = 'syllabi';
 	protected $primaryKey = ['user_id', 'classes_id'];
 
-	protected $appends = ['syllabus_profile_url'];
+	protected $appends = ['url'];
 
 	public $incrementing = false;
 
@@ -21,7 +21,7 @@ class Syllabus extends Model {
      *
      * @return string
      */
-    public function getSyllabusProfileUrlAttribute()
+    public function getUrlAttribute()
     {
         if (env('AWS_CDN_URL')) {
             return env('AWS_CDN_URL').config('app.syllabus_upload_location').$this->term.'/'.$this->syllabus_url;
