@@ -24404,11 +24404,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         telephone_href: function telephone_href() {
             return "tel:" + this.contact.telephone;
+        },
+        person_uri: function person_uri() {
+            return $("meta[name=person-uri]").attr('content');
+        },
+        person_email: function person_email() {
+            return $("meta[name=person-email]").attr('content');
         }
     },
     methods: {
         loadMetadata: function loadMetadata() {
-            return axios.get('people/' + $("meta[name=person-uri]").attr('content'), {
+            return axios.get('people/' + this.person_uri, {
                 baseURL: $('html').attr('data-api-url')
             });
         },
@@ -24416,7 +24422,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             return axios.get('interests/personal', {
                 baseURL: $("meta[name=affinity-url]").attr('content'),
                 params: {
-                    email: $("meta[name=person-email]").attr('content')
+                    email: this.person_email
                 }
             });
         },
@@ -24424,7 +24430,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             return axios.get('badges', {
                 baseURL: $("meta[name=affinity-url]").attr('content'),
                 params: {
-                    email: $("meta[name=person-email]").attr('content')
+                    email: this.person_email
                 }
             });
         }
@@ -25296,16 +25302,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     methods: {
         loadPastCourses: function loadPastCourses() {
-            return axios.get('people/' + $("meta[name=person-uri]").attr('content') + '/classes/history', {
+            return axios.get('people/' + this.person_uri + '/classes/history', {
                 baseURL: $('html').attr('data-api-url')
             });
         }
     },
     mounted: function mounted() {
         var _this = this;
-
-        // set the base URL for Faculty so we can still link out to it
-
 
         // make the Axios calls concurrently and wait for all of them to return
         // before applying the reactive data

@@ -212,12 +212,18 @@ export default {
     },
     telephone_href: function() {
         return "tel:" + this.contact.telephone;
+    },
+    person_uri: function() {
+        return $("meta[name=person-uri]").attr('content');
+    },
+    person_email: function() {
+        return $("meta[name=person-email]").attr('content');
     }
   },
   methods: {
     loadMetadata: function() {
         return axios.get(
-            'people/' + $("meta[name=person-uri]").attr('content'),
+            'people/' + this.person_uri,
             {
                 baseURL: $('html').attr('data-api-url')
             }
@@ -229,7 +235,7 @@ export default {
             {
                 baseURL: $("meta[name=affinity-url]").attr('content'),
                 params: {
-                    email: $("meta[name=person-email]").attr('content')
+                    email: this.person_email
                 }
             }
         );
@@ -240,7 +246,7 @@ export default {
             {
                 baseURL: $("meta[name=affinity-url]").attr('content'),
                 params: {
-                    email: $("meta[name=person-email]").attr('content')
+                    email: this.person_email
                 }
             }
         );

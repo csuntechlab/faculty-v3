@@ -241,7 +241,7 @@ export default {
     methods: {
         loadPastCourses: function() {
             return axios.get(
-                'people/' + $("meta[name=person-uri]").attr('content') + '/classes/history',
+                'people/' + this.person_uri + '/classes/history',
                 {
                     baseURL: $('html').attr('data-api-url')
                 }
@@ -249,9 +249,6 @@ export default {
         }
     },
     mounted() {
-        // set the base URL for Faculty so we can still link out to it
-
-
         // make the Axios calls concurrently and wait for all of them to return
         // before applying the reactive data
         axios.all([this.loadPastCourses()])
