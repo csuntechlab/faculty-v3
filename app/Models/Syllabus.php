@@ -2,13 +2,18 @@
 
 namespace App\Models;
 
+use App\Traits\HasCompositePrimaryKey;
 use Illuminate\Database\Eloquent\Model;
 
 class Syllabus extends Model {
+	use HasCompositePrimaryKey;
+
 	protected $table = 'syllabi';
-	protected $primaryKey = 'syllabi_id';
+	protected $primaryKey = ['user_id', 'classes_id'];
 
 	protected $appends = ['syllabus_profile_url'];
+
+	public $incrementing = false;
 
     /**
      * Creates the syllabus url to display on the

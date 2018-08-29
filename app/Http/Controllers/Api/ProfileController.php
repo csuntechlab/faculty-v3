@@ -7,8 +7,25 @@ use Illuminate\Http\Request;
 
 use App\Models\User;
 
+use CSUNMetaLab\Guzzle\Factories\HandlerGuzzleFactory;
+
 class ProfileController extends Controller
 {
+    /**
+     * The HandlerGuzzle instance.
+     *
+     * @var HandlerGuzzle
+     */
+    protected $guzzle;
+
+    /**
+     * Constructs a new ProfileController instance.
+     */
+    public function __construct() {
+        parent::__construct();
+        $this->guzzle = HandlerGuzzleFactory::fromDefaults();
+    }
+
 	/**
 	 * Returns the metadata for an individual based on a given URI.
 	 *

@@ -31,6 +31,26 @@ function generateBaseUrl($envUrl) {
 }
 
 /**
+ * Generates a URL for the Curriculum web service based upon the URI. The URI
+ * should NOT have a leading slash.
+ *
+ * @param string $uri The URI within the Curriculum WS to link to
+ * @return string
+ */
+function curriculumWsUrl($uri) {
+	$base = generateBaseUrl('CURRICULUM_WEB_SERVICE');
+	if($uri == '/') {
+		return $base;
+	}
+	else if(starts_with($uri, '/')) {
+		// we may receive something with a leading slash, so take its
+		// substring beginning at the second character instead
+		$uri = substr($uri, 1);
+	}
+	return $base . $uri;
+}
+
+/**
  * Generates a URL for the Faculty application based upon the URI. The URI
  * should NOT have a leading slash.
  *

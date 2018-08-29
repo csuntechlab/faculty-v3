@@ -21,8 +21,15 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-// this route group drives the profile API functionality
+// this route group drives the person-based profile API functionality
 Route::prefix('people')->group(function() {
 	Route::get('{uri}', 'ProfileController@getMetadata');
 	Route::get('{uri}/classes/history', 'ProfileController@getClassHistory');
+});
+
+// this route group drives any arbitrary collection-based functionality
+Route::prefix('collections')->group(function() {
+	// this route retrieves both the collection of terms and the current term
+	// so it can populate drop-down fields
+	Route::get('terms', 'TermController@getTerms');
 });
