@@ -31,6 +31,29 @@ function generateBaseUrl($envUrl) {
 }
 
 /**
+ * Generates a URL for the Bookstore servlet resource based upon the set of
+ * function parameters.
+ *
+ * @param int $term_id The numeric term ID
+ * @param string $subject_code The catalog subject code (i.e. COMP)
+ * @param string $catalog_number The catalog number (i.e. 484)
+ * @param int $class_number The ticket number of the class
+ *
+ * @return string
+ */
+function bookstoreUrl($term_id, $subject_code, $catalog_number, $class_number) {
+	$base = env("BOOKSTORE_URL"); // we do not want a trailing slash
+
+	return $base . '?' .
+		'bookstore_id-1=' . env('BOOKSTORE_ID') . '&' .
+		'term_id-1=' . $term_id . '&' .
+		'div-1=&' .
+		'dept-1=' . $subject_code . '&' .
+		'course-1=' . $catalog_number . '&' .
+		'section-1=' . $class_number;
+}
+
+/**
  * Generates a URL for the Curriculum web service based upon the URI. The URI
  * should NOT have a leading slash.
  *

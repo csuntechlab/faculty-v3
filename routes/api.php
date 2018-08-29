@@ -24,6 +24,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 // this route group drives the person-based profile API functionality
 Route::prefix('people')->group(function() {
 	Route::get('{uri}', 'ProfileController@getMetadata');
+	Route::get('{uri}/classes', 'ProfileController@getClasses');
 	Route::get('{uri}/classes/history', 'ProfileController@getClassHistory');
 });
 

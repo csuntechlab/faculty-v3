@@ -25276,16 +25276,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: 'ProfileClasses',
     data: function data() {
         return {
-            past_courses: []
+            past_courses: [],
+            terms: [],
+            current_term: null
         };
     },
 
@@ -25298,11 +25296,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         faculty_profile_url: function faculty_profile_url() {
             return this.faculty_url + this.person_uri;
+        },
+        current_term_id: function current_term_id() {
+            return $("meta[name=current-term-id]").attr('content');
         }
     },
     methods: {
         loadPastCourses: function loadPastCourses() {
             return axios.get('people/' + this.person_uri + '/classes/history', {
+                baseURL: $('html').attr('data-api-url')
+            });
+        },
+        loadTerms: function loadTerms() {
+            return axios.get('collections/terms', {
                 baseURL: $('html').attr('data-api-url')
             });
         }
@@ -25312,10 +25318,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
         // make the Axios calls concurrently and wait for all of them to return
         // before applying the reactive data
-        axios.all([this.loadPastCourses()]).then(axios.spread(function (past_courses) {
+        axios.all([this.loadPastCourses(), this.loadTerms()]).then(axios.spread(function (past_courses, terms) {
             // apply the past courses
             var past_courses_data = past_courses.data;
             _this.past_courses = past_courses_data;
+
+            // apply the set of terms
+            var term_data = terms.data;
+            _this.terms = term_data.terms;
+            _this.current_term = term_data.current;
         }));
     }
 });
@@ -25407,41 +25418,86 @@ var render = function() {
             "div",
             { staticClass: "order-md-last order-first col-12 col-md-8 pr-3" },
             [
-              _c("h2", [_vm._v("My Academic Schedule")]),
-              _vm._v(" "),
-              _c("div", [
-                _c("h3", { staticClass: "list-inline-item" }, [
-                  _vm._v("Fall 2018")
-                ]),
-                _vm._v(" "),
-                _c(
-                  "a",
-                  {
-                    staticClass: "btn btn-outline-primary",
-                    attrs: {
-                      href: _vm.faculty_profile_url + "/printout",
-                      role: "button"
-                    }
-                  },
-                  [
-                    _c("i", { staticClass: "fas fa-print fa-xs" }),
-                    _vm._v(" Printer Friendly Door Sign\n                    ")
+              _vm.current_term
+                ? [
+                    _c("h2", [_vm._v("My Academic Schedule")]),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      [
+                        _c("h3", { staticClass: "list-inline-item" }, [
+                          _vm._v(_vm._s(_vm.current_term.term_display))
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "a",
+                          {
+                            staticClass: "btn btn-outline-primary",
+                            attrs: {
+                              href: _vm.faculty_profile_url + "/printout",
+                              role: "button"
+                            }
+                          },
+                          [
+                            _c("i", { staticClass: "fas fa-print fa-xs" }),
+                            _vm._v(
+                              " Printer Friendly Door Sign\n                        "
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _vm.terms.length
+                          ? [
+                              _c(
+                                "select",
+                                {
+                                  staticClass: "custom-select",
+                                  attrs: { id: "term_select" }
+                                },
+                                [
+                                  _vm._l(_vm.terms, function(_term) {
+                                    return _c(
+                                      "option",
+                                      {
+                                        domProps: {
+                                          value: _term.term_id,
+                                          selected:
+                                            _vm.current_term_id == _term.term_id
+                                        }
+                                      },
+                                      [
+                                        _vm._v(
+                                          "\n                                    " +
+                                            _vm._s(_term.term_display) +
+                                            "\n                                "
+                                        )
+                                      ]
+                                    )
+                                  }),
+                                  _vm._v(" "),
+                                  _c("i", { staticClass: "fas fa-caret-down" })
+                                ],
+                                2
+                              )
+                            ]
+                          : _vm._e()
+                      ],
+                      2
+                    ),
+                    _vm._v(" "),
+                    _c("hr", { staticClass: "FAC-semester-divider" })
                   ]
-                ),
-                _vm._v(" "),
-                _vm._m(0)
-              ]),
+                : _vm._e(),
               _vm._v(" "),
-              _c("hr", { staticClass: "FAC-semester-divider" }),
+              _vm._m(0),
               _vm._v(" "),
               _vm._m(1),
               _vm._v(" "),
               _vm._m(2),
               _vm._v(" "),
-              _vm._m(3),
-              _vm._v(" "),
-              _vm._m(4)
-            ]
+              _vm._m(3)
+            ],
+            2
           )
         ],
         2
@@ -25450,26 +25506,6 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "select",
-      { staticClass: "custom-select", attrs: { id: "inputGroupSelect01" } },
-      [
-        _c("option", { attrs: { selected: "" } }, [_vm._v("Choose Semester")]),
-        _vm._v(" "),
-        _c("option", { attrs: { value: "1" } }, [_vm._v("One")]),
-        _vm._v(" "),
-        _c("option", { attrs: { value: "2" } }, [_vm._v("Two")]),
-        _vm._v(" "),
-        _c("option", { attrs: { value: "3" } }, [_vm._v("Three")]),
-        _vm._v(" "),
-        _c("i", { staticClass: "fas fa-caret-down" })
-      ]
-    )
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement

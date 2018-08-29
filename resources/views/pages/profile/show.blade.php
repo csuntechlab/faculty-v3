@@ -10,6 +10,7 @@
 <meta name="waldo-url" content="{{ env('WALDO_WEB_SERVICE') }}">
 <meta name="person-uri" content="{{ $user->uri }}">
 <meta name="person-email" content="{{ $user->email }}">
+<meta name="current-term-id" content="{{ $currentTerm->term_id }}">
 @stop
 
 {{-- META TAGS 4 SEO --}}

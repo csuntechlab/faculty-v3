@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+use App\Models\Term;
 use App\Models\User;
 
 use CSUNMetaLab\Guzzle\Factories\HandlerGuzzleFactory;
@@ -22,7 +23,6 @@ class ProfileController extends Controller
      * Constructs a new ProfileController instance.
      */
     public function __construct() {
-        parent::__construct();
         $this->guzzle = HandlerGuzzleFactory::fromDefaults();
     }
 
@@ -43,6 +43,64 @@ class ProfileController extends Controller
         }
 
     	return $user;
+    }
+
+    /**
+     * Returns the set of classes with syllabi for the individual identified
+     * by the URI for either the current or given semester.
+     *
+     * @param string $uri The URI of the individual
+     * @return JSON
+     */
+    public function getClasses(Request $request, $uri) {
+        $user = User::with('classes.syllabi', 'classes.classMeetings')
+            ->whereUri($uri)
+            ->firstOrFail();
+
+        // we can either use the current term or a specific term from the
+        // Request instance
+        if($request->filled('term_id')) {
+            $term = Term::find($request->input('term_id'));
+        }
+        else
+        {
+            $termCollection = Term::termsCollection();
+            $term = $termCollection->get('current');
+        }
+
+        // reject any classes with a non-numeric designation since we use
+        // those for special cases and they're non-academic
+        $user->classes = $user->classes->reject(function($class) {
+            return !preg_match('/^[0-9]+$/', $class->class_number);
+        });
+
+        // filter the classes to the given term and filter the syllabus for
+        // each class to the owning User instance; we are also going to generate
+        // the relevant bookstore URLs for each class
+        $user->classes = $user->classes->filter(function(&$class) use ($term, $user) {
+            // filter the syllabi first to the owning User
+            $class->syllabi = $class->syllabi->filter(function($syllabus) use ($user) {
+                return $syllabus->user_id == $user->user_id;
+            })->values();
+
+            // set a singular syllabus attribute and then unset the syllabi
+            // attribute
+            $class->syllabus = $class->syllabi->first();
+            unset($class->syllabi);
+
+            // set a bookstore URL attribute
+            $class->bookstore_url = bookstoreUrl(
+                $term->term_id,
+                $class->subject,
+                $class->catalog_number,
+                $class->class_number
+            );
+
+            // now check the success condition for the class term
+            return $class->term_id == $term->term_id;
+        });
+
+        return $user->classes->values();
     }
 
     /**

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Models\Term;
 use App\Models\User;
 
 class ProfileController extends Controller
@@ -18,6 +19,8 @@ class ProfileController extends Controller
     		->whereUri($uri)
     		->firstOrFail();
 
-    	return view('pages.profile.show', compact('user'));
+        $currentTerm = Term::current();
+
+    	return view('pages.profile.show', compact('user', 'currentTerm'));
     }
 }

@@ -25,28 +25,24 @@
                     </div>
                 </template>
                 <div class="order-md-last order-first col-12 col-md-8 pr-3">
-                    <h2>My Academic Schedule</h2>
-                    <div>
-                        <h3 class="list-inline-item">Fall 2018</h3>
-                        <a :href="faculty_profile_url + '/printout'" class="btn btn-outline-primary" role="button">
-                            <i class="fas fa-print fa-xs"></i> Printer Friendly Door Sign
-                        </a>
-                        <!-- <button type="button" class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Choose Semester <span class="sr-only">Toggle Dropdown</span></button> -->
-                        <!-- <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                        </div> -->
-                        <select class="custom-select" id="inputGroupSelect01">
-                            <option selected>Choose Semester</option> 
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
-                            <i class="fas fa-caret-down"></i>
-                        </select>
-                    </div>
-                    
-                    <hr class="FAC-semester-divider">
+                    <template v-if='current_term'>
+                        <h2>My Academic Schedule</h2>
+                        <div>
+                            <h3 class="list-inline-item">{{ current_term.term_display }}</h3>
+                            <a :href="faculty_profile_url + '/printout'" class="btn btn-outline-primary" role="button">
+                                <i class="fas fa-print fa-xs"></i> Printer Friendly Door Sign
+                            </a>
+                            <template v-if='terms.length'>
+                                <select class="custom-select" id="term_select">
+                                    <option v-for='_term in terms' :value='_term.term_id' :selected='current_term_id == _term.term_id'>
+                                        {{ _term.term_display }}
+                                    </option>
+                                    <i class="fas fa-caret-down"></i>
+                                </select>
+                            </template>
+                        </div>
+                        <hr class="FAC-semester-divider">
+                    </template>
 
                     <!-- **********************  CLASSES **************************** -->
                             <div class="FAC-downloadBtn">
@@ -224,7 +220,10 @@ export default {
     name: 'ProfileClasses',
     data() {
         return {
-            past_courses: []
+            past_courses: [],
+            terms: [],
+            current_term: null,
+            classes: []
         }
     },
     computed: {
@@ -236,6 +235,9 @@ export default {
         },
         faculty_profile_url: function() {
             return this.faculty_url + this.person_uri;
+        },
+        current_term_id: function() {
+            return $("meta[name=current-term-id]").attr('content');
         }
     },
     methods: {
@@ -246,16 +248,29 @@ export default {
                     baseURL: $('html').attr('data-api-url')
                 }
             );
+        },
+        loadTerms: function() {
+            return axios.get(
+                'collections/terms',
+                {
+                    baseURL: $('html').attr('data-api-url')
+                }
+            );
         }
     },
     mounted() {
         // make the Axios calls concurrently and wait for all of them to return
         // before applying the reactive data
-        axios.all([this.loadPastCourses()])
-            .then(axios.spread((past_courses) => {
+        axios.all([this.loadPastCourses(), this.loadTerms()])
+            .then(axios.spread((past_courses, terms) => {
                 // apply the past courses
                 var past_courses_data = past_courses.data;
                 this.past_courses = past_courses_data;
+
+                // apply the set of terms
+                var term_data = terms.data;
+                this.terms = term_data.terms;
+                this.current_term = term_data.current;
             }));
     }
 }

@@ -62,7 +62,7 @@
     }
   }
 
-  #inputGroupSelect01{
+  #term_select{
       width:30%;
       float:right;
      
@@ -71,7 +71,7 @@
 // ***************** MEDIA QUERIES ****************
 
   @include media-breakpoint-down(xs){
-    #inputGroupSelect01{
+    #term_select{
         width:100%;
         float:none;
         margin-top:15px;

@@ -11,6 +11,8 @@ class Term extends Model {
 
 	protected $appends = ['term_display'];
 
+	public $incrementing = false;
+
 	/**
 	 * Replaces the dash in the term name and replaces it with a space.
 	 *
