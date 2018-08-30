@@ -83,7 +83,16 @@
                                         <div class="col-2 text-center">INFO</div>
                                     </div>
                                 
-                                    <template v-if='classes.length' v-for='_class in classes'>
+                                    <template v-if='loading_classes'>
+                                        <div class="row py-3 FAC-class-wrapper">
+                                            <div class="col-12">
+                                                <p class="text-center">
+                                                    <i class="fas fa-spinner fa-spin fa-2x"></i>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </template>
+                                    <template v-else-if='classes.length' v-for='_class in classes'>
                                         <div class="row FAC-class-wrapper py-3" v-for='_meeting in _class.class_meetings'>
                                             <!-- Description -->
                                             <div class="col-sm-4 col-12">
@@ -154,7 +163,16 @@
 
                                 
                                 <div class="container FAC-officeHours-wrapper">
-                                    <template v-if='office_hours.length'>
+                                    <template v-if='loading_officehours'>
+                                        <div class="row py-3 FAC-darkStriped">
+                                            <div class="col-12">
+                                                <p class="text-center">
+                                                    <i class="fas fa-spinner fa-spin fa-2x"></i>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </template>
+                                    <template v-else-if='office_hours.length'>
                                         <div class="row py-3" :class="{'FAC-darkStriped': index % 2 == 0, 'FAC-whiteStriped': index % 2 != 0}" v-for='(_office_hour,index) in office_hours'>
                                              <!-- Description -->
                                             <div class="col-sm-4 col-12">
@@ -232,8 +250,8 @@ export default {
             classes: [],
             office_hours: [],
             loading_all: true,
-            loading_classes: true,
-            loading_officehours: true
+            loading_classes: false,
+            loading_officehours: false
         }
     },
     computed: {

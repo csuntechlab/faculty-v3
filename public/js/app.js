@@ -25404,6 +25404,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: 'ProfileClasses',
@@ -25416,8 +25434,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             classes: [],
             office_hours: [],
             loading_all: true,
-            loading_classes: true,
-            loading_officehours: true
+            loading_classes: false,
+            loading_officehours: false
         };
     },
 
@@ -25748,49 +25766,67 @@ var render = function() {
                                 [
                                   _vm._m(2),
                                   _vm._v(" "),
-                                  _vm._l(_vm.classes, function(_class) {
-                                    return _vm.classes.length
-                                      ? _vm._l(_class.class_meetings, function(
-                                          _meeting
-                                        ) {
-                                          return _c(
-                                            "div",
-                                            {
-                                              staticClass:
-                                                "row FAC-class-wrapper py-3"
-                                            },
-                                            [
-                                              _c(
+                                  _vm.loading_classes
+                                    ? [_vm._m(3)]
+                                    : _vm.classes.length
+                                      ? _vm._l(_vm.classes, function(_class) {
+                                          return _vm._l(
+                                            _class.class_meetings,
+                                            function(_meeting) {
+                                              return _c(
                                                 "div",
                                                 {
-                                                  staticClass: "col-sm-4 col-12"
+                                                  staticClass:
+                                                    "row FAC-class-wrapper py-3"
                                                 },
                                                 [
                                                   _c(
                                                     "div",
                                                     {
                                                       staticClass:
-                                                        "FAC-font-size"
+                                                        "col-sm-4 col-12"
                                                     },
                                                     [
-                                                      _c("strong", [
-                                                        _vm._v(
-                                                          _vm._s(
-                                                            _class.subject
-                                                          ) +
-                                                            " " +
-                                                            _vm._s(
-                                                              _class.catalog_number
-                                                            ) +
-                                                            " "
-                                                        )
-                                                      ]),
-                                                      _vm._v(
-                                                        "(" +
-                                                          _vm._s(
-                                                            _class.class_number
-                                                          ) +
-                                                          ")"
+                                                      _c(
+                                                        "div",
+                                                        {
+                                                          staticClass:
+                                                            "FAC-font-size"
+                                                        },
+                                                        [
+                                                          _c("strong", [
+                                                            _vm._v(
+                                                              _vm._s(
+                                                                _class.subject
+                                                              ) +
+                                                                " " +
+                                                                _vm._s(
+                                                                  _class.catalog_number
+                                                                ) +
+                                                                " "
+                                                            )
+                                                          ]),
+                                                          _vm._v(
+                                                            "(" +
+                                                              _vm._s(
+                                                                _class.class_number
+                                                              ) +
+                                                              ")"
+                                                          )
+                                                        ]
+                                                      ),
+                                                      _vm._v(" "),
+                                                      _c(
+                                                        "div",
+                                                        {
+                                                          staticClass:
+                                                            "FAC-font-size font-italic"
+                                                        },
+                                                        [
+                                                          _vm._v(
+                                                            _vm._s(_class.title)
+                                                          )
+                                                        ]
                                                       )
                                                     ]
                                                   ),
@@ -25799,144 +25835,136 @@ var render = function() {
                                                     "div",
                                                     {
                                                       staticClass:
-                                                        "FAC-font-size font-italic"
+                                                        "FAC-font-size col-sm-1 col-12 pl-3 pl-sm-0 pr-0"
                                                     },
                                                     [
                                                       _vm._v(
-                                                        _vm._s(_class.title)
+                                                        "\n                                        " +
+                                                          _vm._s(
+                                                            _meeting.formatted_days
+                                                          ) +
+                                                          "\n                                        "
                                                       )
                                                     ]
-                                                  )
-                                                ]
-                                              ),
-                                              _vm._v(" "),
-                                              _c(
-                                                "div",
-                                                {
-                                                  staticClass:
-                                                    "FAC-font-size col-sm-1 col-12 pl-3 pl-sm-0 pr-0"
-                                                },
-                                                [
-                                                  _vm._v(
-                                                    "\n                                        " +
-                                                      _vm._s(
-                                                        _meeting.formatted_days
-                                                      ) +
-                                                      "\n                                        "
-                                                  )
-                                                ]
-                                              ),
-                                              _vm._v(" "),
-                                              _c(
-                                                "div",
-                                                {
-                                                  staticClass:
-                                                    "FAC-font-size col-sm-3 col-12 pr-0"
-                                                },
-                                                [
-                                                  _vm._v(
-                                                    "\n                                        " +
-                                                      _vm._s(
-                                                        _meeting.formatted_duration
-                                                      ) +
-                                                      "\n                                        "
-                                                  )
-                                                ]
-                                              ),
-                                              _vm._v(" "),
-                                              _c(
-                                                "div",
-                                                {
-                                                  staticClass:
-                                                    "FAC-font-size col-sm-2 col-12 pl-2 pr-0 text-nowrap"
-                                                },
-                                                [
+                                                  ),
+                                                  _vm._v(" "),
                                                   _c(
-                                                    "a",
-                                                    { attrs: { href: "#" } },
+                                                    "div",
+                                                    {
+                                                      staticClass:
+                                                        "FAC-font-size col-sm-3 col-12 pr-0"
+                                                    },
                                                     [
+                                                      _vm._v(
+                                                        "\n                                        " +
+                                                          _vm._s(
+                                                            _meeting.formatted_duration
+                                                          ) +
+                                                          "\n                                        "
+                                                      )
+                                                    ]
+                                                  ),
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "div",
+                                                    {
+                                                      staticClass:
+                                                        "FAC-font-size col-sm-2 col-12 pl-2 pr-0 text-nowrap"
+                                                    },
+                                                    [
+                                                      _c(
+                                                        "a",
+                                                        {
+                                                          attrs: { href: "#" }
+                                                        },
+                                                        [
+                                                          _c("i", {
+                                                            staticClass:
+                                                              "fas fa-map-marker-alt px-1 FAC-location-icons"
+                                                          }),
+                                                          _vm._v(
+                                                            _vm._s(
+                                                              _meeting.location
+                                                            )
+                                                          )
+                                                        ]
+                                                      )
+                                                    ]
+                                                  ),
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "div",
+                                                    {
+                                                      staticClass:
+                                                        "FAC-font-size col-sm-2 col-12 text-sm-center text-left"
+                                                    },
+                                                    [
+                                                      _class.syllabus
+                                                        ? [
+                                                            _c(
+                                                              "a",
+                                                              {
+                                                                attrs: {
+                                                                  href:
+                                                                    _class
+                                                                      .syllabus
+                                                                      .url,
+                                                                  title:
+                                                                    "View syllabus for " +
+                                                                    _class.subject +
+                                                                    " " +
+                                                                    _class.catalog_number,
+                                                                  target:
+                                                                    "_blank"
+                                                                }
+                                                              },
+                                                              [
+                                                                _c("i", {
+                                                                  staticClass:
+                                                                    "fas fa-file-pdf FAC-info-icons"
+                                                                })
+                                                              ]
+                                                            )
+                                                          ]
+                                                        : _vm._e(),
+                                                      _vm._v(" "),
+                                                      _class.bookstore_url
+                                                        ? [
+                                                            _c(
+                                                              "a",
+                                                              {
+                                                                attrs: {
+                                                                  href:
+                                                                    _class.bookstore_url,
+                                                                  title:
+                                                                    "View books for " +
+                                                                    _class.subject +
+                                                                    " " +
+                                                                    _class.catalog_number,
+                                                                  target:
+                                                                    "_blank"
+                                                                }
+                                                              },
+                                                              [
+                                                                _c("i", {
+                                                                  staticClass:
+                                                                    "fas fa-book FAC-info-icons"
+                                                                })
+                                                              ]
+                                                            )
+                                                          ]
+                                                        : _vm._e(),
+                                                      _vm._v(" "),
                                                       _c("i", {
                                                         staticClass:
-                                                          "fas fa-map-marker-alt px-1 FAC-location-icons"
-                                                      }),
-                                                      _vm._v(
-                                                        _vm._s(
-                                                          _meeting.location
-                                                        )
-                                                      )
-                                                    ]
+                                                          "fas fa-calendar-alt FAC-info-icons "
+                                                      })
+                                                    ],
+                                                    2
                                                   )
                                                 ]
-                                              ),
-                                              _vm._v(" "),
-                                              _c(
-                                                "div",
-                                                {
-                                                  staticClass:
-                                                    "FAC-font-size col-sm-2 col-12 text-sm-center text-left"
-                                                },
-                                                [
-                                                  _class.syllabus
-                                                    ? [
-                                                        _c(
-                                                          "a",
-                                                          {
-                                                            attrs: {
-                                                              href:
-                                                                _class.syllabus
-                                                                  .url,
-                                                              title:
-                                                                "View syllabus for " +
-                                                                _class.subject +
-                                                                " " +
-                                                                _class.catalog_number,
-                                                              target: "_blank"
-                                                            }
-                                                          },
-                                                          [
-                                                            _c("i", {
-                                                              staticClass:
-                                                                "fas fa-file-pdf FAC-info-icons"
-                                                            })
-                                                          ]
-                                                        )
-                                                      ]
-                                                    : _vm._e(),
-                                                  _vm._v(" "),
-                                                  _class.bookstore_url
-                                                    ? [
-                                                        _c(
-                                                          "a",
-                                                          {
-                                                            attrs: {
-                                                              href:
-                                                                _class.bookstore_url,
-                                                              title:
-                                                                "View books for " +
-                                                                _class.subject +
-                                                                " " +
-                                                                _class.catalog_number,
-                                                              target: "_blank"
-                                                            }
-                                                          },
-                                                          [
-                                                            _c("i", {
-                                                              staticClass:
-                                                                "fas fa-book FAC-info-icons"
-                                                            })
-                                                          ]
-                                                        )
-                                                      ]
-                                                    : _vm._e(),
-                                                  _vm._v(" "),
-                                                  _c("i", {
-                                                    staticClass:
-                                                      "fas fa-calendar-alt FAC-info-icons "
-                                                  })
-                                                ],
-                                                2
                                               )
-                                            ]
+                                            }
                                           )
                                         })
                                       : [
@@ -25964,7 +25992,6 @@ var render = function() {
                                             ]
                                           )
                                         ]
-                                  })
                                 ],
                                 2
                               )
@@ -25974,14 +26001,14 @@ var render = function() {
                       _vm._v(" "),
                       _vm.current_term
                         ? [
-                            _vm.office_hours.length ? [_vm._m(3)] : _vm._e(),
+                            _vm.office_hours.length ? [_vm._m(4)] : _vm._e(),
                             _vm._v(" "),
                             _c("div", [
                               _c("h3", { staticClass: "list-inline-item" }, [
                                 _vm._v("Office Hours")
                               ]),
                               _vm._v(" "),
-                              _vm._m(4),
+                              _vm._m(5),
                               _vm._v(" "),
                               _c(
                                 "div",
@@ -25990,196 +26017,201 @@ var render = function() {
                                     "container FAC-officeHours-wrapper"
                                 },
                                 [
-                                  _vm.office_hours.length
-                                    ? _vm._l(_vm.office_hours, function(
-                                        _office_hour,
-                                        index
-                                      ) {
-                                        return _c(
-                                          "div",
-                                          {
-                                            staticClass: "row py-3",
-                                            class: {
-                                              "FAC-darkStriped": index % 2 == 0,
-                                              "FAC-whiteStriped": index % 2 != 0
-                                            }
-                                          },
-                                          [
-                                            _c(
-                                              "div",
-                                              {
-                                                staticClass: "col-sm-4 col-12"
-                                              },
-                                              [
-                                                _c(
-                                                  "div",
-                                                  {
-                                                    staticClass: "FAC-font-size"
-                                                  },
-                                                  [
-                                                    _c("strong", [
-                                                      _vm._v(
-                                                        _vm._s(
-                                                          _office_hour.description
-                                                            ? _office_hour.description
-                                                            : _office_hour.label
-                                                        )
-                                                      )
-                                                    ])
-                                                  ]
-                                                ),
-                                                _vm._v(" "),
-                                                _c(
-                                                  "div",
-                                                  {
-                                                    staticClass:
-                                                      "FAC-font-size font-italic"
-                                                  },
-                                                  [
-                                                    _office_hour.is_byappointment &&
-                                                    !_office_hour.is_walkin
-                                                      ? _c("span", [
-                                                          _vm._v(
-                                                            "\n                                                    Appointment Only\n                                                "
-                                                          )
-                                                        ])
-                                                      : !_office_hour.is_byappointment &&
-                                                        _office_hour.is_walkin
-                                                        ? _c("span", [
-                                                            _vm._v(
-                                                              "\n                                                    Walk-In\n                                                "
-                                                            )
-                                                          ])
-                                                        : _c("span", [
-                                                            _vm._v(
-                                                              "\n                                                    Walk-In & Appointment\n                                                "
-                                                            )
-                                                          ])
-                                                  ]
-                                                )
-                                              ]
-                                            ),
-                                            _vm._v(" "),
-                                            _c(
-                                              "div",
-                                              {
-                                                staticClass:
-                                                  "FAC-font-size col-sm-1 col-12 pl-3 pl-sm-0 pr-0"
-                                              },
-                                              [
-                                                _vm._v(
-                                                  "\n                                            " +
-                                                    _vm._s(
-                                                      _office_hour.formatted_days
-                                                    ) +
-                                                    "\n                                        "
-                                                )
-                                              ]
-                                            ),
-                                            _vm._v(" "),
-                                            _c(
-                                              "div",
-                                              {
-                                                staticClass:
-                                                  "FAC-font-size col-sm-3 col-12 pr-0"
-                                              },
-                                              [
-                                                !_office_hour.appointment_only
-                                                  ? _c("div", [
-                                                      _vm._v(
-                                                        "\n                                                " +
+                                  _vm.loading_officehours
+                                    ? [_vm._m(6)]
+                                    : _vm.office_hours.length
+                                      ? _vm._l(_vm.office_hours, function(
+                                          _office_hour,
+                                          index
+                                        ) {
+                                          return _c(
+                                            "div",
+                                            {
+                                              staticClass: "row py-3",
+                                              class: {
+                                                "FAC-darkStriped":
+                                                  index % 2 == 0,
+                                                "FAC-whiteStriped":
+                                                  index % 2 != 0
+                                              }
+                                            },
+                                            [
+                                              _c(
+                                                "div",
+                                                {
+                                                  staticClass: "col-sm-4 col-12"
+                                                },
+                                                [
+                                                  _c(
+                                                    "div",
+                                                    {
+                                                      staticClass:
+                                                        "FAC-font-size"
+                                                    },
+                                                    [
+                                                      _c("strong", [
+                                                        _vm._v(
                                                           _vm._s(
-                                                            _office_hour.duration
-                                                          ) +
-                                                          "\n                                            "
-                                                      )
-                                                    ])
-                                                  : _vm._e(),
-                                                _vm._v(" "),
-                                                _office_hour.booking_url
-                                                  ? [
-                                                      _c("div", [
-                                                        _c(
-                                                          "a",
-                                                          {
-                                                            attrs: {
-                                                              href:
-                                                                _office_hour.booking_url,
-                                                              target: "_blank"
-                                                            }
-                                                          },
-                                                          [
-                                                            _vm._v(
-                                                              "\n                                                        Book an Appointment\n                                                    "
-                                                            )
-                                                          ]
+                                                            _office_hour.description
+                                                              ? _office_hour.description
+                                                              : _office_hour.label
+                                                          )
                                                         )
                                                       ])
                                                     ]
-                                                  : _vm._e()
-                                              ],
-                                              2
-                                            ),
-                                            _vm._v(" "),
-                                            _c(
-                                              "div",
-                                              {
-                                                staticClass:
-                                                  "FAC-font-size col-sm-2 col-12 pl-2 pr-0 text-nowrap"
-                                              },
-                                              [
-                                                _office_hour.location
-                                                  ? [
-                                                      _c(
-                                                        "a",
-                                                        {
-                                                          attrs: { href: "#" }
-                                                        },
-                                                        [
-                                                          _c("i", {
-                                                            staticClass:
-                                                              "fas fa-map-marker-alt px-1 FAC-location-icons"
-                                                          }),
-                                                          _vm._v(
-                                                            _vm._s(
-                                                              _office_hour.location
-                                                            ) +
-                                                              "\n                                                "
-                                                          )
-                                                        ]
-                                                      )
+                                                  ),
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "div",
+                                                    {
+                                                      staticClass:
+                                                        "FAC-font-size font-italic"
+                                                    },
+                                                    [
+                                                      _office_hour.is_byappointment &&
+                                                      !_office_hour.is_walkin
+                                                        ? _c("span", [
+                                                            _vm._v(
+                                                              "\n                                                    Appointment Only\n                                                "
+                                                            )
+                                                          ])
+                                                        : !_office_hour.is_byappointment &&
+                                                          _office_hour.is_walkin
+                                                          ? _c("span", [
+                                                              _vm._v(
+                                                                "\n                                                    Walk-In\n                                                "
+                                                              )
+                                                            ])
+                                                          : _c("span", [
+                                                              _vm._v(
+                                                                "\n                                                    Walk-In & Appointment\n                                                "
+                                                              )
+                                                            ])
                                                     ]
-                                                  : _vm._e()
-                                              ],
-                                              2
-                                            ),
-                                            _vm._v(" "),
-                                            _vm._m(5, true)
-                                          ]
-                                        )
-                                      })
-                                    : [
-                                        _c(
-                                          "div",
-                                          {
-                                            staticClass:
-                                              "row FAC-darkStriped py-3"
-                                          },
-                                          [
-                                            _c(
-                                              "div",
-                                              { staticClass: "col-12" },
-                                              [
-                                                _vm._v(
-                                                  "\n                                            " +
-                                                    _vm._s(_vm.person_name) +
-                                                    " has not added any office hours for the selected term.\n                                        "
-                                                )
-                                              ]
-                                            )
-                                          ]
-                                        )
-                                      ]
+                                                  )
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "div",
+                                                {
+                                                  staticClass:
+                                                    "FAC-font-size col-sm-1 col-12 pl-3 pl-sm-0 pr-0"
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    "\n                                            " +
+                                                      _vm._s(
+                                                        _office_hour.formatted_days
+                                                      ) +
+                                                      "\n                                        "
+                                                  )
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "div",
+                                                {
+                                                  staticClass:
+                                                    "FAC-font-size col-sm-3 col-12 pr-0"
+                                                },
+                                                [
+                                                  !_office_hour.appointment_only
+                                                    ? _c("div", [
+                                                        _vm._v(
+                                                          "\n                                                " +
+                                                            _vm._s(
+                                                              _office_hour.duration
+                                                            ) +
+                                                            "\n                                            "
+                                                        )
+                                                      ])
+                                                    : _vm._e(),
+                                                  _vm._v(" "),
+                                                  _office_hour.booking_url
+                                                    ? [
+                                                        _c("div", [
+                                                          _c(
+                                                            "a",
+                                                            {
+                                                              attrs: {
+                                                                href:
+                                                                  _office_hour.booking_url,
+                                                                target: "_blank"
+                                                              }
+                                                            },
+                                                            [
+                                                              _vm._v(
+                                                                "\n                                                        Book an Appointment\n                                                    "
+                                                              )
+                                                            ]
+                                                          )
+                                                        ])
+                                                      ]
+                                                    : _vm._e()
+                                                ],
+                                                2
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "div",
+                                                {
+                                                  staticClass:
+                                                    "FAC-font-size col-sm-2 col-12 pl-2 pr-0 text-nowrap"
+                                                },
+                                                [
+                                                  _office_hour.location
+                                                    ? [
+                                                        _c(
+                                                          "a",
+                                                          {
+                                                            attrs: { href: "#" }
+                                                          },
+                                                          [
+                                                            _c("i", {
+                                                              staticClass:
+                                                                "fas fa-map-marker-alt px-1 FAC-location-icons"
+                                                            }),
+                                                            _vm._v(
+                                                              _vm._s(
+                                                                _office_hour.location
+                                                              ) +
+                                                                "\n                                                "
+                                                            )
+                                                          ]
+                                                        )
+                                                      ]
+                                                    : _vm._e()
+                                                ],
+                                                2
+                                              ),
+                                              _vm._v(" "),
+                                              _vm._m(7, true)
+                                            ]
+                                          )
+                                        })
+                                      : [
+                                          _c(
+                                            "div",
+                                            {
+                                              staticClass:
+                                                "row FAC-darkStriped py-3"
+                                            },
+                                            [
+                                              _c(
+                                                "div",
+                                                { staticClass: "col-12" },
+                                                [
+                                                  _vm._v(
+                                                    "\n                                            " +
+                                                      _vm._s(_vm.person_name) +
+                                                      " has not added any office hours for the selected term.\n                                        "
+                                                  )
+                                                ]
+                                              )
+                                            ]
+                                          )
+                                        ]
                                 ],
                                 2
                               )
@@ -26251,6 +26283,18 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row py-3 FAC-class-wrapper" }, [
+      _c("div", { staticClass: "col-12" }, [
+        _c("p", { staticClass: "text-center" }, [
+          _c("i", { staticClass: "fas fa-spinner fa-spin fa-2x" })
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
     return _c("div", { staticClass: "FAC-downloadBtn" }, [
       _c("div", { staticClass: "FAC-downloadBtn__orientation" }, [
         _c(
@@ -26282,6 +26326,18 @@ var staticRenderFns = [
         _c("div", { staticClass: "col-2" }, [_vm._v("LOCATION")]),
         _vm._v(" "),
         _c("div", { staticClass: "col-2 text-center" }, [_vm._v("iCAL")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row py-3 FAC-darkStriped" }, [
+      _c("div", { staticClass: "col-12" }, [
+        _c("p", { staticClass: "text-center" }, [
+          _c("i", { staticClass: "fas fa-spinner fa-spin fa-2x" })
+        ])
       ])
     ])
   },
