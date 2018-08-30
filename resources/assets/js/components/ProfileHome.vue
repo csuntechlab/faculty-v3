@@ -19,7 +19,7 @@
                                     <template v-if='contact.website'>
                                         <li>
                                             <i class="fas fa-globe-americas fa-lg pr-2"></i>
-                                            <a :href="contact.website" target="_blank">
+                                            <a :href="website_href" target="_blank">
                                                 {{ contact.website }}
                                             </a>
                                         </li>
@@ -95,7 +95,7 @@
                                     <template v-if='contact.website'>
                                         <li>
                                             <i class="fas fa-globe-americas fa-lg pr-2"></i>
-                                            <a :href="contact.website" target="_blank">
+                                            <a :href="website_href" target="_blank">
                                                 {{ contact.website }}
                                             </a>
                                         </li>
@@ -212,6 +212,13 @@ export default {
     },
     telephone_href: function() {
         return "tel:" + this.contact.telephone;
+    },
+    website_href: function() {
+        var myHttp = /^http/;
+        if(myHttp.test(this.contact.website)) {
+            return this.contact.website;
+        }
+        return 'http://' + this.contact.website;
     },
     person_uri: function() {
         return $("meta[name=person-uri]").attr('content');

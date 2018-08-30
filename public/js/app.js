@@ -24405,6 +24405,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         telephone_href: function telephone_href() {
             return "tel:" + this.contact.telephone;
         },
+        website_href: function website_href() {
+            var myHttp = /^http/;
+            if (myHttp.test(this.contact.website)) {
+                return this.contact.website;
+            }
+            return 'http://' + this.contact.website;
+        },
         person_uri: function person_uri() {
             return $("meta[name=person-uri]").attr('content');
         },
@@ -24522,7 +24529,7 @@ var render = function() {
                                           "a",
                                           {
                                             attrs: {
-                                              href: _vm.contact.website,
+                                              href: _vm.website_href,
                                               target: "_blank"
                                             }
                                           },
@@ -24742,7 +24749,7 @@ var render = function() {
                                           "a",
                                           {
                                             attrs: {
-                                              href: _vm.contact.website,
+                                              href: _vm.website_href,
                                               target: "_blank"
                                             }
                                           },
