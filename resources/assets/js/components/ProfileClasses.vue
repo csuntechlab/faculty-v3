@@ -148,6 +148,10 @@
                                     </div>
                                 </div>
                             </template>
+                            <template v-else>
+                                <!-- Retain spacing if no office hours -->
+                                <br />
+                            </template>
                             <div>
                                 <!-- MOVE THE DESCRIPTION ONE TO 3 and MOVE THE REST OVER 1 -->
                                 <h3 class="list-inline-item">Office Hours</h3>
@@ -279,6 +283,10 @@ export default {
             // we are now loading the classes and office hours
             this.loading_classes = true;
             this.loading_officehours = true;
+
+            // clear out the classes and office hours
+            this.classes = [];
+            this.office_hours = [];
 
             // make the Axios calls concurrently and wait for all of them to return
             // before applying the reactive data

@@ -25422,6 +25422,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: 'ProfileClasses',
@@ -25466,6 +25470,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             // we are now loading the classes and office hours
             this.loading_classes = true;
             this.loading_officehours = true;
+
+            // clear out the classes and office hours
+            this.classes = [];
+            this.office_hours = [];
 
             // make the Axios calls concurrently and wait for all of them to return
             // before applying the reactive data
@@ -26001,7 +26009,7 @@ var render = function() {
                       _vm._v(" "),
                       _vm.current_term
                         ? [
-                            _vm.office_hours.length ? [_vm._m(4)] : _vm._e(),
+                            _vm.office_hours.length ? [_vm._m(4)] : [_c("br")],
                             _vm._v(" "),
                             _c("div", [
                               _c("h3", { staticClass: "list-inline-item" }, [
