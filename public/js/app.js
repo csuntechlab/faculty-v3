@@ -25277,35 +25277,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: 'ProfileClasses',
@@ -25314,11 +25285,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             past_courses: [],
             terms: [],
             current_term: null,
-            classes: []
+            classes: [],
+            office_hours: []
         };
     },
 
     computed: {
+        api_url: function api_url() {
+            return $("html").attr('data-api-url');
+        },
         faculty_url: function faculty_url() {
             return $("meta[name=faculty-url]").attr('content');
         },
@@ -25338,20 +25313,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     methods: {
         loadCurrentClasses: function loadCurrentClasses() {
             return axios.get('people/' + this.person_uri + '/classes', {
-                baseURL: $('html').attr('data-api-url'),
+                baseURL: this.api_url,
                 params: {
                     term_id: this.current_term_id
                 }
             });
         },
+        loadOfficeHours: function loadOfficeHours() {
+            return axios.get('people/' + this.person_uri + '/office-hours', {
+                baseURL: this.api_url
+            });
+        },
         loadPastCourses: function loadPastCourses() {
             return axios.get('people/' + this.person_uri + '/classes/history', {
-                baseURL: $('html').attr('data-api-url')
+                baseURL: this.api_url
             });
         },
         loadTerms: function loadTerms() {
             return axios.get('collections/terms', {
-                baseURL: $('html').attr('data-api-url')
+                baseURL: this.api_url
             });
         }
     },
@@ -25360,10 +25340,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
         // make the Axios calls concurrently and wait for all of them to return
         // before applying the reactive data
-        axios.all([this.loadCurrentClasses(), this.loadPastCourses(), this.loadTerms()]).then(axios.spread(function (current_classes, past_courses, terms) {
+        axios.all([this.loadCurrentClasses(), this.loadOfficeHours(), this.loadPastCourses(), this.loadTerms()]).then(axios.spread(function (current_classes, office_hours, past_courses, terms) {
             // apply the current classes
             var current_class_data = current_classes.data;
             _this.classes = current_class_data;
+
+            // apply the office hours
+            var office_hours_data = office_hours.data;
+            _this.office_hours = office_hours_data;
+            console.log(_this.office_hours);
 
             // apply the past courses
             var past_courses_data = past_courses.data;
@@ -25661,6 +25646,11 @@ var render = function() {
                                                   {
                                                     attrs: {
                                                       href: _class.syllabus.url,
+                                                      title:
+                                                        "View syllabus for " +
+                                                        _class.subject +
+                                                        " " +
+                                                        _class.catalog_number,
                                                       target: "_blank"
                                                     }
                                                   },
@@ -25682,6 +25672,11 @@ var render = function() {
                                                     attrs: {
                                                       href:
                                                         _class.bookstore_url,
+                                                      title:
+                                                        "View books for " +
+                                                        _class.subject +
+                                                        " " +
+                                                        _class.catalog_number,
                                                       target: "_blank"
                                                     }
                                                   },
@@ -25734,9 +25729,204 @@ var render = function() {
                   ]
                 : _vm._e(),
               _vm._v(" "),
-              _vm._m(2),
-              _vm._v(" "),
-              _vm._m(3)
+              _vm.current_term
+                ? [
+                    _vm.office_hours.length ? [_vm._m(2)] : _vm._e(),
+                    _vm._v(" "),
+                    _c("div", [
+                      _c("h3", { staticClass: "list-inline-item" }, [
+                        _vm._v("Office Hours")
+                      ]),
+                      _vm._v(" "),
+                      _vm._m(3),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "container FAC-officeHours-wrapper" },
+                        [
+                          _vm.office_hours.length
+                            ? _vm._l(_vm.office_hours, function(
+                                _office_hour,
+                                index
+                              ) {
+                                return _c(
+                                  "div",
+                                  {
+                                    staticClass: "row py-3",
+                                    class: {
+                                      "FAC-darkStriped": index % 2 == 0,
+                                      "FAC-whiteStriped": index % 2 != 0
+                                    }
+                                  },
+                                  [
+                                    _c(
+                                      "div",
+                                      { staticClass: "col-sm-4 col-12" },
+                                      [
+                                        _c(
+                                          "div",
+                                          { staticClass: "FAC-font-size" },
+                                          [
+                                            _c("strong", [
+                                              _vm._v(
+                                                _vm._s(
+                                                  _office_hour.description
+                                                    ? _office_hour.description
+                                                    : _office_hour.label
+                                                )
+                                              )
+                                            ])
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "div",
+                                          {
+                                            staticClass:
+                                              "FAC-font-size font-italic"
+                                          },
+                                          [
+                                            _office_hour.is_byappointment &&
+                                            !_office_hour.is_walkin
+                                              ? _c("span", [
+                                                  _vm._v(
+                                                    "\n                                                Appointment Only\n                                            "
+                                                  )
+                                                ])
+                                              : !_office_hour.is_byappointment &&
+                                                _office_hour.is_walkin
+                                                ? _c("span", [
+                                                    _vm._v(
+                                                      "\n                                                Walk-In\n                                            "
+                                                    )
+                                                  ])
+                                                : _c("span", [
+                                                    _vm._v(
+                                                      "\n                                                Walk-In & Appointment\n                                            "
+                                                    )
+                                                  ])
+                                          ]
+                                        )
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass:
+                                          "FAC-font-size col-sm-1 col-12 pl-3 pl-sm-0 pr-0"
+                                      },
+                                      [
+                                        _vm._v(
+                                          "\n                                        " +
+                                            _vm._s(
+                                              _office_hour.formatted_days
+                                            ) +
+                                            "\n                                    "
+                                        )
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass:
+                                          "FAC-font-size col-sm-3 col-12 pr-0"
+                                      },
+                                      [
+                                        !_office_hour.appointment_only
+                                          ? _c("div", [
+                                              _vm._v(
+                                                "\n                                            " +
+                                                  _vm._s(
+                                                    _office_hour.duration
+                                                  ) +
+                                                  "\n                                        "
+                                              )
+                                            ])
+                                          : _vm._e(),
+                                        _vm._v(" "),
+                                        _office_hour.booking_url
+                                          ? [
+                                              _c("div", [
+                                                _c(
+                                                  "a",
+                                                  {
+                                                    attrs: {
+                                                      href:
+                                                        _office_hour.booking_url,
+                                                      target: "_blank"
+                                                    }
+                                                  },
+                                                  [
+                                                    _vm._v(
+                                                      "\n                                                    Book an Appointment\n                                                "
+                                                    )
+                                                  ]
+                                                )
+                                              ])
+                                            ]
+                                          : _vm._e()
+                                      ],
+                                      2
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass:
+                                          "FAC-font-size col-sm-2 col-12 pl-2 pr-0 text-nowrap"
+                                      },
+                                      [
+                                        _office_hour.location
+                                          ? [
+                                              _c(
+                                                "a",
+                                                { attrs: { href: "#" } },
+                                                [
+                                                  _c("i", {
+                                                    staticClass:
+                                                      "fas fa-map-marker-alt px-1 FAC-location-icons"
+                                                  }),
+                                                  _vm._v(
+                                                    _vm._s(
+                                                      _office_hour.location
+                                                    ) +
+                                                      "\n                                            "
+                                                  )
+                                                ]
+                                              )
+                                            ]
+                                          : _vm._e()
+                                      ],
+                                      2
+                                    ),
+                                    _vm._v(" "),
+                                    _vm._m(4, true)
+                                  ]
+                                )
+                              })
+                            : [
+                                _c(
+                                  "div",
+                                  { staticClass: "row FAC-darkStriped py-3" },
+                                  [
+                                    _c("div", { staticClass: "col-12" }, [
+                                      _vm._v(
+                                        "\n                                        " +
+                                          _vm._s(_vm.person_name) +
+                                          " has not added any office hours for the selected term.\n                                    "
+                                      )
+                                    ])
+                                  ]
+                                )
+                              ]
+                        ],
+                        2
+                      )
+                    ])
+                  ]
+                : _vm._e()
             ],
             2
           )
@@ -25807,225 +25997,29 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("h3", { staticClass: "list-inline-item" }, [_vm._v("Office Hours")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "container" }, [
-        _c("div", { staticClass: "row d-none d-sm-flex" }, [
-          _c("div", { staticClass: "col-4 pl-0" }, [_vm._v("DESCRIPTION")]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-1 pl-0" }, [_vm._v("DAYS")]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-3" }, [_vm._v("TIME")]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-2" }, [_vm._v("LOCATION")]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-2 text-center" }, [_vm._v("iCAL")])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "container FAC-officeHours-wrapper" }, [
-        _c("div", { staticClass: "row FAC-darkStriped py-3" }, [
-          _c("div", { staticClass: "col-sm-4 col-12" }, [
-            _c("div", { staticClass: "FAC-font-size" }, [
-              _c("strong", [_vm._v("General Office Hours")])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "FAC-font-size font-italic" }, [
-              _vm._v("Walk-In & Appointment")
-            ])
-          ]),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "FAC-font-size col-sm-1 col-12 pl-3 pl-sm-0 pr-0" },
-            [_vm._v("M T")]
-          ),
-          _vm._v(" "),
-          _c("div", { staticClass: "FAC-font-size col-sm-3 col-12 pr-0" }, [
-            _c("div", [_vm._v("1:00 p.m - 1:50 p.m.")]),
-            _vm._v(" "),
-            _c("div", [
-              _c("a", { attrs: { href: "#" } }, [_vm._v("Book an Appointment")])
-            ])
-          ]),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass: "FAC-font-size col-sm-2 col-12 pl-2 pr-0 text-nowrap"
-            },
-            [
-              _c("a", { attrs: { href: "#" } }, [
-                _c("i", {
-                  staticClass: "fas fa-map-marker-alt px-1 FAC-location-icons"
-                }),
-                _vm._v("META+LAB")
-              ])
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass:
-                "FAC-font-size col-sm-2 col-12 text-sm-center text-left"
-            },
-            [_c("i", { staticClass: "fas fa-calendar-alt FAC-info-icons" })]
-          )
-        ]),
+    return _c("div", { staticClass: "container" }, [
+      _c("div", { staticClass: "row d-none d-sm-flex" }, [
+        _c("div", { staticClass: "col-4 pl-0" }, [_vm._v("DESCRIPTION")]),
         _vm._v(" "),
-        _c("div", { staticClass: "row FAC-whiteStriped py-3" }, [
-          _c("div", { staticClass: "col-sm-4 col-12" }, [
-            _c("div", { staticClass: "FAC-font-size" }, [
-              _c("strong", [_vm._v("Graduate Advisement")])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "FAC-font-size font-italic" }, [
-              _vm._v("Appointment Only")
-            ])
-          ]),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "FAC-font-size col-sm-1 col-12 pl-3 pl-sm-0 pr-0" },
-            [_vm._v("T R")]
-          ),
-          _vm._v(" "),
-          _c("div", { staticClass: "FAC-font-size col-sm-3 col-12 pr-0" }, [
-            _c("div", [
-              _c("a", { attrs: { href: "#" } }, [_vm._v("Book an Appointment")])
-            ])
-          ]),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass: "FAC-font-size col-sm-2 col-12 pl-2 pr-0 text-nowrap"
-            },
-            [
-              _c("a", { attrs: { href: "#" } }, [
-                _c("i", {
-                  staticClass: "fas fa-map-marker-alt px-1 FAC-location-icons"
-                }),
-                _vm._v("JD3520")
-              ])
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass:
-                "FAC-font-size col-sm-2 col-12 text-sm-center text-left"
-            },
-            [_c("i", { staticClass: "fas fa-calendar-alt FAC-info-icons" })]
-          )
-        ]),
+        _c("div", { staticClass: "col-1 pl-0" }, [_vm._v("DAYS")]),
         _vm._v(" "),
-        _c("div", { staticClass: "row FAC-darkStriped py-3" }, [
-          _c("div", { staticClass: "col-sm-4 col-12" }, [
-            _c("div", { staticClass: "FAC-font-size" }, [
-              _c("strong", [_vm._v("CIT 160")])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "FAC-font-size font-italic" }, [
-              _vm._v("Walk-In & Appointment")
-            ])
-          ]),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "FAC-font-size col-sm-1 col-12 pl-3 pl-sm-0 pr-0" },
-            [_vm._v("W")]
-          ),
-          _vm._v(" "),
-          _c("div", { staticClass: "FAC-font-size col-sm-3 col-12 pr-0" }, [
-            _c("div", [_vm._v("2:00 p.m - 3:00 p.m.")]),
-            _vm._v(" "),
-            _c("div", [
-              _c("a", { attrs: { href: "#" } }, [
-                _vm._v("Request an Appointment")
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass: "FAC-font-size col-sm-2 col-12 pl-2 pr-0 text-nowrap"
-            },
-            [
-              _c("a", { attrs: { href: "#" } }, [
-                _c("i", {
-                  staticClass: "fas fa-map-marker-alt px-1 FAC-location-icons"
-                }),
-                _vm._v("META+LAB")
-              ])
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass:
-                "FAC-font-size col-sm-2 col-12 text-sm-center text-left"
-            },
-            [_c("i", { staticClass: "fas fa-calendar-alt FAC-info-icons" })]
-          )
-        ]),
+        _c("div", { staticClass: "col-3" }, [_vm._v("TIME")]),
         _vm._v(" "),
-        _c("div", { staticClass: "row FAC-whiteStriped py-3" }, [
-          _c("div", { staticClass: "col-sm-4 col-12" }, [
-            _c("div", { staticClass: "FAC-font-size" }, [
-              _c("strong", [_vm._v("Appointment Only")])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "FAC-font-size font-italic" }, [
-              _vm._v("Walk-In & Appointment")
-            ])
-          ]),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "FAC-font-size col-sm-1 col-12 pl-3 pl-sm-0 pr-0" },
-            [_vm._v("F")]
-          ),
-          _vm._v(" "),
-          _c("div", { staticClass: "FAC-font-size col-sm-3 col-12 pr-0" }, [
-            _c("div", [_vm._v("1:00 p.m - 1:50 p.m.")]),
-            _vm._v(" "),
-            _c("div", [
-              _c("a", { attrs: { href: "#" } }, [_vm._v("Book an Appointment")])
-            ])
-          ]),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass: "FAC-font-size col-sm-2 col-12 pl-2 pr-0 text-nowrap"
-            },
-            [
-              _c("a", { attrs: { href: "#" } }, [
-                _c("i", {
-                  staticClass: "fas fa-map-marker-alt px-1 FAC-location-icons"
-                }),
-                _vm._v("META+LAB")
-              ])
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass:
-                "FAC-font-size col-sm-2 col-12 text-sm-center text-left"
-            },
-            [_c("i", { staticClass: "fas fa-calendar-alt FAC-info-icons" })]
-          )
-        ])
+        _c("div", { staticClass: "col-2" }, [_vm._v("LOCATION")]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-2 text-center" }, [_vm._v("iCAL")])
       ])
     ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "FAC-font-size col-sm-2 col-12 text-sm-center text-left" },
+      [_c("i", { staticClass: "fas fa-calendar-alt FAC-info-icons" })]
+    )
   }
 ]
 render._withStripped = true

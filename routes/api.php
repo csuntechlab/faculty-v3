@@ -26,6 +26,7 @@ Route::prefix('people')->group(function() {
 	Route::get('{uri}', 'ProfileController@getMetadata');
 	Route::get('{uri}/classes', 'ProfileController@getClasses');
 	Route::get('{uri}/classes/history', 'ProfileController@getClassHistory');
+	Route::get('{uri}/office-hours', 'ProfileController@getOfficeHours');
 });
 
 // this route group drives any arbitrary collection-based functionality

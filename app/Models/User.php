@@ -71,6 +71,16 @@ class User extends Authenticatable
     }
 
     /**
+     * Retrieves a HasMany representing the set of OfficeHour instances associated
+     * with this user.
+     *
+     * @return HasMany
+     */
+    public function officeHours() {
+        return $this->hasMany('App\Models\OfficeHour', 'user_id');
+    }
+
+    /**
      * Scopes the query to a specific URI. Currently this is the email address
      * but this method can be modified in the future to retrieve a URI from
      * a different source.

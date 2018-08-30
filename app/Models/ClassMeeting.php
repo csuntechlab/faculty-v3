@@ -2,10 +2,16 @@
 
 namespace App\Models;
 
+use App\Traits\HasDays;
+use App\Traits\HasDuration;
+
 use Illuminate\Database\Eloquent\Model;
 
 class ClassMeeting extends Model
 {
+    use HasDays;
+    use HasDuration;
+
 	protected $table = 'omar.classMeetings';
     protected $primaryKey = 'classes_id';
 
@@ -18,29 +24,4 @@ class ClassMeeting extends Model
         'term',
         'class_number'
     ];
-
-    /**
-     * Returns the set of days as a formatted string.
-     *
-     * @return string
-     */
-    public function getFormattedDaysAttribute() {
-        if($this->days == 'A') {
-            return 'By Arrangement';
-        }
-        return trim(implode(" ", preg_split('/\s*/', $this->days)));
-    }
-
-    /**
-     * Returns the class' time duration as a formatted string.
-     *
-     * @return string
-     */
-    public function getFormattedDurationAttribute() {
-        if($this->location_type == 'online') {
-            return 'ONLINE';
-        }
-        return convertTime($this->start_time) . ' - ' .
-            convertTime($this->end_time);
-    }
 }

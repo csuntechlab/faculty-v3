@@ -95,12 +95,12 @@
                                         <!-- Info -->
                                         <div class="FAC-font-size col-sm-2 col-12 text-sm-center text-left">
                                             <template v-if='_class.syllabus'>
-                                                <a :href="_class.syllabus.url" target="_blank">
+                                                <a :href="_class.syllabus.url" :title="'View syllabus for ' + _class.subject + ' ' + _class.catalog_number" target="_blank">
                                                     <i class="fas fa-file-pdf FAC-info-icons"></i>
                                                 </a>
                                             </template>
                                             <template v-if='_class.bookstore_url'>
-                                                <a :href="_class.bookstore_url" target="_blank">
+                                                <a :href="_class.bookstore_url" :title="'View books for ' + _class.subject + ' ' + _class.catalog_number" target="_blank">
                                                     <i class="fas fa-book FAC-info-icons"></i>
                                                 </a>
                                             </template>
@@ -121,118 +121,89 @@
 
                     <!-- ************************  OFFICE HOURS ************************ -->
 
-                    
-                    <div class="FAC-downloadBtn">
-                        <div class="FAC-downloadBtn__orientation">
-                            <a href="#" class="btn btn-outline-primary mt-4" role="button"><i class="fas fa-calendar-alt fa-xs"></i> Download Office Hours</a>
-                        </div>
-                    </div>
-                    <div>
-                        <!-- MOVE THE DESCRIPTION ONE TO 3 and MOVE THE REST OVER 1 -->
-                        <h3 class="list-inline-item">Office Hours</h3>
-                        <div class="container">
-                            <div class="row d-none d-sm-flex">
-                                <div class="col-4 pl-0">DESCRIPTION</div>
-                                <div class="col-1 pl-0">DAYS</div>
-                                <div class="col-3">TIME</div>
-                                <div class="col-2">LOCATION</div>
-                                <div class="col-2 text-center">iCAL</div>
+                    <template v-if='current_term'>
+                        <template v-if='office_hours.length'>
+                            <div class="FAC-downloadBtn">
+                                <div class="FAC-downloadBtn__orientation">
+                                    <a href="#" class="btn btn-outline-primary mt-4" role="button"><i class="fas fa-calendar-alt fa-xs"></i> Download Office Hours</a>
+                                </div>
+                            </div>
+                        </template>
+                        <div>
+                            <!-- MOVE THE DESCRIPTION ONE TO 3 and MOVE THE REST OVER 1 -->
+                            <h3 class="list-inline-item">Office Hours</h3>
+                            <div class="container">
+                                <div class="row d-none d-sm-flex">
+                                    <div class="col-4 pl-0">DESCRIPTION</div>
+                                    <div class="col-1 pl-0">DAYS</div>
+                                    <div class="col-3">TIME</div>
+                                    <div class="col-2">LOCATION</div>
+                                    <div class="col-2 text-center">iCAL</div>
+                                </div>
+                            </div>
+
+                            
+                            <div class="container FAC-officeHours-wrapper">
+                                <template v-if='office_hours.length'>
+                                    <div class="row py-3" :class="{'FAC-darkStriped': index % 2 == 0, 'FAC-whiteStriped': index % 2 != 0}" v-for='(_office_hour,index) in office_hours'>
+                                         <!-- Description -->
+                                        <div class="col-sm-4 col-12">
+                                            <div class="FAC-font-size">
+                                                <strong>{{ _office_hour.description ? _office_hour.description : _office_hour.label }}</strong>
+                                            </div> 
+                                            <div class="FAC-font-size font-italic">
+                                                <span v-if='_office_hour.is_byappointment && !_office_hour.is_walkin'>
+                                                    Appointment Only
+                                                </span>
+                                                <span v-else-if='!_office_hour.is_byappointment && _office_hour.is_walkin'>
+                                                    Walk-In
+                                                </span>
+                                                <span v-else>
+                                                    Walk-In &amp; Appointment
+                                                </span>
+                                            </div>
+                                        </div>
+                                         <!-- Days -->
+                                        <div class="FAC-font-size col-sm-1 col-12 pl-3 pl-sm-0 pr-0">
+                                            {{ _office_hour.formatted_days }}
+                                        </div>
+                                         <!-- Time -->
+                                        <div class="FAC-font-size col-sm-3 col-12 pr-0">
+                                            <div v-if='!_office_hour.appointment_only'>
+                                                {{ _office_hour.duration }}
+                                            </div>
+                                            <template v-if='_office_hour.booking_url'>
+                                                <div>
+                                                    <a :href='_office_hour.booking_url' target='_blank'>
+                                                        Book an Appointment
+                                                    </a>
+                                                </div>
+                                            </template>
+                                        </div>
+                                        <!-- Location -->
+                                        <div class="FAC-font-size col-sm-2 col-12 pl-2 pr-0 text-nowrap">
+                                            <template v-if='_office_hour.location'> 
+                                                <a href="#">
+                                                    <i class="fas fa-map-marker-alt px-1 FAC-location-icons"></i>{{ _office_hour.location }}
+                                                </a>
+                                            </template>
+                                        </div>
+                                         <!-- Info -->
+                                        <div class="FAC-font-size col-sm-2 col-12 text-sm-center text-left">
+                                            <i class="fas fa-calendar-alt FAC-info-icons"></i>
+                                        </div>
+                                    </div>
+                                </template>
+                                <template v-else>
+                                    <div class="row FAC-darkStriped py-3">
+                                        <div class="col-12">
+                                            {{ person_name }} has not added any office hours for the selected term.
+                                        </div>
+                                    </div>
+                                </template>
                             </div>
                         </div>
-
-                        
-                        <div class="container FAC-officeHours-wrapper">
-                            <div class="row FAC-darkStriped py-3">
-                                 <!-- Description -->
-                                <div class="col-sm-4 col-12">
-                                    <div class="FAC-font-size"><strong>General Office Hours</strong></div> 
-                                    <div class="FAC-font-size font-italic">Walk-In & Appointment</div>
-                                </div>
-                                 <!-- Days -->
-                                <div class="FAC-font-size col-sm-1 col-12 pl-3 pl-sm-0 pr-0">M T</div>
-                                 <!-- Time -->
-                                <div class="FAC-font-size col-sm-3 col-12 pr-0">
-                                    <div>1:00 p.m - 1:50 p.m.</div> 
-                                    <div><a href="#">Book an Appointment</a></div>
-                                </div>
-                                 <!-- Location -->
-                                <div class="FAC-font-size col-sm-2 col-12 pl-2 pr-0 text-nowrap"><a href="#"><i class="fas fa-map-marker-alt px-1 FAC-location-icons"></i>META+LAB</a></div>
-                                 <!-- Info -->
-                                <div class="FAC-font-size col-sm-2 col-12 text-sm-center text-left">
-                                    <i class="fas fa-calendar-alt FAC-info-icons"></i>
-                                </div>
-                            </div>
-
-
-
-
-                            <div class="row FAC-whiteStriped py-3">
-                                <!-- Description -->
-                                <div class="col-sm-4 col-12">
-                                    <div class="FAC-font-size"><strong>Graduate Advisement</strong></div> 
-                                    <div class="FAC-font-size font-italic">Appointment Only</div>
-                                </div>
-                                 <!-- Days -->
-                                <div class="FAC-font-size col-sm-1 col-12 pl-3 pl-sm-0 pr-0">T R</div>
-                                 <!-- Time -->
-                                <div class="FAC-font-size col-sm-3 col-12 pr-0">
-                                    <div><a href="#">Book an Appointment</a></div>
-                                </div>
-                                 <!-- Location -->
-                                <div class="FAC-font-size col-sm-2 col-12 pl-2 pr-0 text-nowrap"><a href="#"><i class="fas fa-map-marker-alt px-1 FAC-location-icons"></i>JD3520</a></div>
-                                 <!-- Info -->
-                                <div class="FAC-font-size col-sm-2 col-12 text-sm-center text-left">
-                                    <i class="fas fa-calendar-alt FAC-info-icons"></i>
-                                </div>
-                            </div>
-
-
-
-                            <div class="row FAC-darkStriped py-3">
-                                <!-- Description -->
-                                <div class="col-sm-4 col-12">
-                                    <div class="FAC-font-size"><strong>CIT 160</strong></div> 
-                                    <div class="FAC-font-size font-italic">Walk-In & Appointment</div>
-                                </div>
-                                 <!-- Days -->
-                                <div class="FAC-font-size col-sm-1 col-12 pl-3 pl-sm-0 pr-0">W</div>
-                                 <!-- Time -->
-                                <div class="FAC-font-size col-sm-3 col-12 pr-0">
-                                    <div>2:00 p.m - 3:00 p.m.</div> 
-                                    <div><a href="#">Request an Appointment</a></div>
-                                </div>
-                                 <!-- Location -->
-                                <div class="FAC-font-size col-sm-2 col-12 pl-2 pr-0 text-nowrap"><a href="#"><i class="fas fa-map-marker-alt px-1 FAC-location-icons"></i>META+LAB</a></div>
-                                 <!-- Info -->
-                                <div class="FAC-font-size col-sm-2 col-12 text-sm-center text-left">
-                                    <i class="fas fa-calendar-alt FAC-info-icons"></i>
-                                </div>
-                            </div>
-
-
-
-                            <div class="row FAC-whiteStriped py-3">
-                                <!-- Description -->
-                                <div class="col-sm-4 col-12">
-                                    <div class="FAC-font-size"><strong>Appointment Only</strong></div> 
-                                    <div class="FAC-font-size font-italic">Walk-In & Appointment</div>
-                                </div>
-                                 <!-- Days -->
-                                <div class="FAC-font-size col-sm-1 col-12 pl-3 pl-sm-0 pr-0">F</div>
-                                 <!-- Time -->
-                                <div class="FAC-font-size col-sm-3 col-12 pr-0">
-                                    <div>1:00 p.m - 1:50 p.m.</div> 
-                                    <div><a href="#">Book an Appointment</a></div>
-                                </div>
-                                 <!-- Location -->
-                                <div class="FAC-font-size col-sm-2 col-12 pl-2 pr-0 text-nowrap"><a href="#"><i class="fas fa-map-marker-alt px-1 FAC-location-icons"></i>META+LAB</a></div>
-                                 <!-- Info -->
-                                <div class="FAC-font-size col-sm-2 col-12 text-sm-center text-left">
-                                    <i class="fas fa-calendar-alt FAC-info-icons"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    </template>
                 </div>
             </div>
         </div>
@@ -246,10 +217,14 @@ export default {
             past_courses: [],
             terms: [],
             current_term: null,
-            classes: []
+            classes: [],
+            office_hours: []
         }
     },
     computed: {
+        api_url: function() {
+            return $("html").attr('data-api-url');
+        },
         faculty_url: function() {
             return $("meta[name=faculty-url]").attr('content');
         },
@@ -271,10 +246,18 @@ export default {
             return axios.get(
                 'people/' + this.person_uri + '/classes',
                 {
-                    baseURL: $('html').attr('data-api-url'),
+                    baseURL: this.api_url,
                     params: {
                         term_id: this.current_term_id
                     }
+                }
+            );
+        },
+        loadOfficeHours: function() {
+            return axios.get(
+                'people/' + this.person_uri + '/office-hours',
+                {
+                    baseURL: this.api_url
                 }
             );
         },
@@ -282,7 +265,7 @@ export default {
             return axios.get(
                 'people/' + this.person_uri + '/classes/history',
                 {
-                    baseURL: $('html').attr('data-api-url')
+                    baseURL: this.api_url
                 }
             );
         },
@@ -290,7 +273,7 @@ export default {
             return axios.get(
                 'collections/terms',
                 {
-                    baseURL: $('html').attr('data-api-url')
+                    baseURL: this.api_url
                 }
             );
         }
@@ -298,11 +281,16 @@ export default {
     mounted() {
         // make the Axios calls concurrently and wait for all of them to return
         // before applying the reactive data
-        axios.all([this.loadCurrentClasses(), this.loadPastCourses(), this.loadTerms()])
-            .then(axios.spread((current_classes, past_courses, terms) => {
+        axios.all([this.loadCurrentClasses(), this.loadOfficeHours(), this.loadPastCourses(), this.loadTerms()])
+            .then(axios.spread((current_classes, office_hours, past_courses, terms) => {
                 // apply the current classes
                 var current_class_data = current_classes.data;
                 this.classes = current_class_data;
+
+                // apply the office hours
+                var office_hours_data = office_hours.data;
+                this.office_hours = office_hours_data;
+                console.log(this.office_hours);
 
                 // apply the past courses
                 var past_courses_data = past_courses.data;

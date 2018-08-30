@@ -8,43 +8,8 @@ use Illuminate\Http\Request;
 use App\Models\Term;
 use App\Models\User;
 
-use CSUNMetaLab\Guzzle\Factories\HandlerGuzzleFactory;
-
 class ProfileController extends Controller
 {
-    /**
-     * The HandlerGuzzle instance.
-     *
-     * @var HandlerGuzzle
-     */
-    protected $guzzle;
-
-    /**
-     * Constructs a new ProfileController instance.
-     */
-    public function __construct() {
-        $this->guzzle = HandlerGuzzleFactory::fromDefaults();
-    }
-
-	/**
-	 * Returns the metadata for an individual based on a given URI.
-	 *
-	 * @param string $uri The URI of the individual
-     * @return User
-	 */
-    public function getMetadata($uri) {
-    	$user = User::with('connections', 'departments', 'degrees')
-    		->whereUri($uri)
-    		->firstOrFail();
-
-        if($user->primary_connection) {
-            $user->primary_connection->pivot->formatted_telephone =
-                formatPhoneNumber($user->primary_connection->pivot->telephone);
-        }
-
-    	return $user;
-    }
-
     /**
      * Returns the set of classes with syllabi for the individual identified
      * by the URI for either the current or given semester.
@@ -136,5 +101,55 @@ class ProfileController extends Controller
         });
 
         return $user->classes->values();
+    }
+
+    /**
+     * Returns the metadata for an individual based on a given URI.
+     *
+     * @param string $uri The URI of the individual
+     * @return User
+     */
+    public function getMetadata($uri) {
+        $user = User::with('connections', 'departments', 'degrees')
+            ->whereUri($uri)
+            ->firstOrFail();
+
+        if($user->primary_connection) {
+            $user->primary_connection->pivot->formatted_telephone =
+                formatPhoneNumber($user->primary_connection->pivot->telephone);
+        }
+
+        return $user;
+    }
+
+    /**
+     * Returns the set of office hours for the individual identified
+     * by the URI for either the current or given semester.
+     *
+     * @param string $uri The URI of the individual
+     * @return JSON
+     */
+    public function getOfficeHours(Request $request, $uri) {
+        // we can either use the current term or a specific term from the
+        // Request instance
+        if($request->filled('term_id')) {
+            $term = Term::find($request->input('term_id'));
+        }
+        else
+        {
+            $termCollection = Term::termsCollection();
+            $term = $termCollection->get('current');
+        }
+
+        $user = User::with([
+            'officeHours' => function($q) use ($term) {
+                $q->where('term_id', $term->term_id)
+                    ->orderBy('meeting_number', 'ASC');
+            }
+            ])
+            ->whereUri($uri)
+            ->firstOrFail();
+
+        return $user->officeHours;
     }
 }
