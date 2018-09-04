@@ -1,14 +1,22 @@
 
-// Fonts
-@import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
+// Font Awesome (core classes)
+@import '~@fortawesome/fontawesome-free/scss/fontawesome';
 
-// Variables
-@import "variables";
+// Font Awesome (font face definitions and file paths)
+@import '~@fortawesome/fontawesome-free/scss/regular';
+@import '~@fortawesome/fontawesome-free/scss/solid';
+@import '~@fortawesome/fontawesome-free/scss/brands';
 
-// Bootstrap
-@import '~bootstrap/scss/bootstrap';
+// Metaphor SASS
+@import '~metaphor-theme/src/scss/metaphor-v2';
 
-.navbar-laravel {
-  background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
-}
+// Application-specific SASS
+@import "partials/variables";
+@import "partials/header";
+@import "partials/profileClasses";
+@import "partials/home";
+@import "partials/searchPage";
+@import "partials/searchByDept";
+@import "partials/profileHome";
+@import "partials/profileBanner";
+@import "partials/departmentFaculty";

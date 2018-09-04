@@ -110,6 +110,37 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Entity ID (Application)
+    |--------------------------------------------------------------------------
+    |
+    | Entity ID listed as the parent_entity_id column for all child entities in
+    | nemo.memberships.
+    |
+    */
+    'application_entity_id' => env("APPLICATION_ENTITY_ID"),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Application Analytics
+    |--------------------------------------------------------------------------
+    |
+    | The current release version of the application for display.
+    |
+    */
+    'google_analytics_id' => env("GOOGLE_ANALYTICS_TRACKING_ID", ""),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Application Site Validation
+    |--------------------------------------------------------------------------
+    |
+    | The current release version of the application for display.
+    |
+    */
+    'google_site_id' => env("GOOGLE_SITE_VERIFICATION_ID", ""),
+
+    /*
+    |--------------------------------------------------------------------------
     | Autoloaded Service Providers
     |--------------------------------------------------------------------------
     |
@@ -159,6 +190,9 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+
+        // HTML and Form facade code
+        Collective\Html\HtmlServiceProvider::class,
 
         // proxy service provider
         CSUNMetaLab\ProxyPass\Providers\ProxyPassServiceProvider::class,
@@ -214,6 +248,30 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
 
+        'Form' => Collective\Html\FormFacade::class,
+        'HTML' => Collective\Html\HtmlFacade::class,
+
     ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Weeks Before Switch to Next Semester
+    |--------------------------------------------------------------------------
+    |
+    | Number of weeks before beginning of next semester to make the next semester
+    | the "current" semester throughout the application.
+    |
+    */
+    'weeks_before_next_semester_switch' => env("WEEKS_BEFORE_NEXT_SEMESTER_SWITCH", 3),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Upload default directories
+    |--------------------------------------------------------------------------
+    |
+    | Specifies the default locations for resource uploads
+    |
+    */
+    'syllabus_upload_location' => env("SYLLABUS_UPLOAD_LOCATION", ""),
 
 ];
