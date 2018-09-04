@@ -288,6 +288,11 @@ export default {
             this.classes = [];
             this.office_hours = [];
 
+            // apply the current term
+            this.current_term = this.terms.filter((term) => {
+                return term.term_id == this.selected_term;
+            }).pop();
+
             // make the Axios calls concurrently and wait for all of them to return
             // before applying the reactive data
             axios.all([this.loadCurrentClasses(), this.loadOfficeHours()])
