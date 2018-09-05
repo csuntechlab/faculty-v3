@@ -127,7 +127,7 @@ module.exports = function normalizeComponent (
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(17);
-module.exports = __webpack_require__(53);
+module.exports = __webpack_require__(55);
 
 
 /***/ }),
@@ -136,9 +136,9 @@ module.exports = __webpack_require__(53);
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ProfileApp__ = __webpack_require__(42);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ProfileApp__ = __webpack_require__(44);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ProfileApp___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__ProfileApp__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__router_profile_js__ = __webpack_require__(45);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__router_profile_js__ = __webpack_require__(47);
 
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -191,6 +191,9 @@ try {
 
   __webpack_require__(7);
   __webpack_require__(8);
+
+  __webpack_require__(22);
+  __webpack_require__(23);
 } catch (e) {}
 
 /**
@@ -21326,8 +21329,209 @@ module.exports = function(module) {
 
 
 /***/ }),
-/* 22 */,
-/* 23 */,
+/* 22 */
+/***/ (function(module, exports) {
+
+// Reads from master-blade data, which reads from .env file.
+
+/// / Faculty Scaffold && Environment
+// ===================================//
+
+(function () {
+
+    var faculty = {
+        html: $('html'),
+        body: $('body')
+    };
+
+    faculty.env = {
+        url: faculty.html.data('url'),
+        token: faculty.html.data('token'),
+        waldoUrl: faculty.html.data('waldo-url')
+    };
+    // Like C#
+    if (!String.format) {
+        String.format = function (format) {
+            var args = Array.prototype.slice.call(arguments, 1);
+            return format.replace(/{(\d+)}/g, function (match, number) {
+                return typeof args[number] != 'undefined' ? args[number] : match;
+            });
+        };
+    }
+
+    /**
+     * Copy HTML attributes from sourceElement to destinationELement.
+     * @param sourceElement
+     * @param destinationElement
+     */
+    function copyAttributes(sourceElement, destinationElement) {
+        var attributes = $(sourceElement).prop("attributes");
+        // loop through <select> attributes and apply them on <div>
+        $.each(attributes, function () {
+            $(destinationElement).attr(this.name, this.value);
+        });
+    }
+
+    /**
+     * changes any tag to a span.
+     * @param tag - A string or an object that is directly JQuery-able.
+     */
+    function elementToSpan(tag) {
+        var span = $('<span>' + $(tag).text() + '</span>');
+        copyAttributes(tag, span);
+        tag.replaceWith(span);
+    }
+})();
+
+/***/ }),
+/* 23 */
+/***/ (function(module, exports) {
+
+/**
+ * Breaks the room code ('SH0270' or 'JD1622C') into its components: ('SH', '270', '') or ('JD', '1622' 'C')
+ * @param roomCode (String)
+ * @return object
+ */
+function decomposeRoomCode(roomCode) {
+    matches = /([A-Z]+)(0*)([0-9]+)([A-Z0-9]*)/g.exec(roomCode);
+    // matches[0] is just a copy of the room code.
+    var building = matches[1];
+    // matches[2] is the leading leading zeros to the number. we don't want them.
+    var number = matches[3];
+    var suffix = matches[4];
+    return {
+        building: building,
+        number: number,
+        suffix: suffix
+    };
+}
+
+/**
+ * Show the map, if it is available, else show an error.
+ * @param mapData
+ */
+function showMapModal(mapData) {
+    // An error has occurred
+    if ("error" in mapData) {
+        $('#waldo-map-message').text(mapData['error']);
+    } else {
+        // Check to see if the #room-map container exists in the DOM
+        if ($('#room-map').length == 0) {
+            $('#waldo-map-message').after("<div id=\"room-map\"></div>");
+        }
+        // Grab the collection from the data returned from waldo.
+        mapData = mapData['rooms'][0];
+        // Leaflet api is picky about map height.
+        $('#room-map').css({
+            'height': '40em',
+            'width': '100%'
+        });
+        // An object separating the components of the room code.
+        var room = decomposeRoomCode(mapData['room_number']);
+
+        // An object containing beautifully formatted strings to display, keyed by its display purpose.
+        var displayPretty = {
+            title: String.format("Map of: {0} ({1}) {2}{3}", mapData['building_name'], room.building, room.number, room.suffix),
+            popup: String.format("{0} {1}{2}", room.building, room.number, room.suffix)
+        };
+        $('#waldo-map-message').text(displayPretty.title);
+        var coordinates = [mapData['latitude'], mapData['longitude']];
+        var zoom = 18;
+        showMapModal.map = L.map('room-map').setView(coordinates, zoom);
+        L.marker(coordinates).addTo(showMapModal.map).bindPopup(displayPretty.popup);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(showMapModal.map);
+
+        // Since the modal animations take some time, we need to refresh the map size after the modal appears.
+        modalId = $('#show-waldo-map-modal').data('target');
+        $(modalId).on('shown.bs.modal', function () {
+            setTimeout(function () {
+                showMapModal.map.invalidateSize();
+            }, 10);
+        });
+
+        // We destroy the #room-map container from the DOM on modal close.
+        $(modalId).on('hidden.bs.modal', function () {
+            $('#room-map').remove();
+        });
+    }
+    //Show the modal.
+    $('#show-waldo-map-modal').click();
+}
+
+/**
+ * Shows a map of the room using waldo webservice. Best used on a button or anchor tag.
+ */
+function walDo() {
+    var thisElement = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+
+    if (thisElement === null) {
+        thisElement = $(this);
+    }
+
+    // Send the room text to waldo webservice, and if waldo finds the longitude and latitude, then it will dynamically
+    // populate the map modal and show it.
+
+    var room = thisElement.text();
+    var url = String.format("{0}/api/1.0/rooms?{1}", faculty.env.waldoUrl, $.param({ room: room }));
+    if (sessionStorage.getItem('room:' + room)) {
+        roomString = sessionStorage.getItem('room:' + room);
+        showMapModal(JSON.parse(roomString));
+    } else {
+        $.ajax({
+            method: "GET",
+            dataType: "json",
+            url: url,
+            success: function success(data) {
+                if (data['success'] === 'false') {
+                    data['error'] = "Location data not found.";
+                } else {
+                    sessionStorage.setItem('room:' + room, JSON.stringify(data));
+                }
+                showMapModal(data);
+            },
+            error: function error() {
+                var data = [];
+                data['error'] = "Map service unavailable.";
+                showMapModal(data);
+                $('[data-waldo-event-trigger]').each(function () {
+                    $(this).off(thisElement.data('waldo-event-trigger'));
+                    elementToSpan($(this));
+                });
+            }
+        });
+    }
+}
+/**
+ * Call this function on Document.ready for pages that need waldo maps.
+ * In the HTML, add the data attribute "data-waldo-listener" to an element whose inner html is the location
+ * to show on the map. Set these attributes to the type of event that you want to trigger the map being shown.
+ * Also don't forget to include the map modal.
+ */
+function setAllWaldoListeners() {
+    var tagType = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'a';
+
+    console.log('listening');
+    $(tagType + '[data-waldo-event-trigger]').each(function () {
+        var thisElement = $(this);
+        // Get the type of listener we on which we are showing the waldo map. For example: "onclick".
+        var eventType = thisElement.data('waldo-event-trigger');
+        // Remove the existing event listener. This is very important.
+        thisElement.off(eventType);
+        // Set a listener for waldo.
+        thisElement.on(eventType, function (e) {
+            // Prevents link-following / page-reloading on some browsers.
+            e.preventDefault();
+            // The actual functionality we want to do on this event.
+            walDo(thisElement);
+            // Prevents link-following / page-reloading on other browsers.
+            return false;
+        });
+    });
+}
+
+/***/ }),
 /* 24 */,
 /* 25 */,
 /* 26 */,
@@ -21346,15 +21550,17 @@ module.exports = function(module) {
 /* 39 */,
 /* 40 */,
 /* 41 */,
-/* 42 */
+/* 42 */,
+/* 43 */,
+/* 44 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(6)
 /* script */
-var __vue_script__ = __webpack_require__(43)
+var __vue_script__ = __webpack_require__(45)
 /* template */
-var __vue_template__ = __webpack_require__(44)
+var __vue_template__ = __webpack_require__(46)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -21393,7 +21599,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 43 */
+/* 45 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -21418,7 +21624,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 44 */
+/* 46 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -21476,16 +21682,16 @@ if (false) {
 }
 
 /***/ }),
-/* 45 */
+/* 47 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_router__ = __webpack_require__(46);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_ProfileHome__ = __webpack_require__(47);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_router__ = __webpack_require__(48);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_ProfileHome__ = __webpack_require__(49);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_ProfileHome___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_ProfileHome__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_ProfileClasses__ = __webpack_require__(50);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_ProfileClasses__ = __webpack_require__(52);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_ProfileClasses___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_ProfileClasses__);
 
 
@@ -21507,7 +21713,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_
 }));
 
 /***/ }),
-/* 46 */
+/* 48 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -24137,15 +24343,15 @@ if (inBrowser && window.Vue) {
 
 
 /***/ }),
-/* 47 */
+/* 49 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(6)
 /* script */
-var __vue_script__ = __webpack_require__(48)
+var __vue_script__ = __webpack_require__(50)
 /* template */
-var __vue_template__ = __webpack_require__(49)
+var __vue_template__ = __webpack_require__(51)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -24184,7 +24390,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 48 */
+/* 50 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -24482,7 +24688,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 49 */
+/* 51 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -25130,15 +25336,15 @@ if (false) {
 }
 
 /***/ }),
-/* 50 */
+/* 52 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(6)
 /* script */
-var __vue_script__ = __webpack_require__(51)
+var __vue_script__ = __webpack_require__(53)
 /* template */
-var __vue_template__ = __webpack_require__(52)
+var __vue_template__ = __webpack_require__(54)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -25177,7 +25383,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 51 */
+/* 53 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -25558,7 +25764,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 52 */
+/* 54 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -26399,7 +26605,7 @@ if (false) {
 }
 
 /***/ }),
-/* 53 */
+/* 55 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin

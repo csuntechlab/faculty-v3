@@ -3,6 +3,8 @@
 /// / Faculty Scaffold && Environment
 // ===================================//
 
+(function() {
+
 var faculty = {
     html: $('html'),
     body: $('body')
@@ -48,3 +50,4 @@ function elementToSpan(tag) {
     copyAttributes(tag, span);
     tag.replaceWith(span);
 }
+})();

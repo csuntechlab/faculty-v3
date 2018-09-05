@@ -16,6 +16,9 @@ try {
 
     require('metaphor-theme/dist/js/datepicker/datepicker.js');
     require('@fortawesome/fontawesome-free');
+
+    require('./helpers.js');
+    require('./waldo.js');
 } catch (e) {}
 
 /**
