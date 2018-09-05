@@ -123,7 +123,6 @@ waldo.walDo = function walDo (thisElement = null) {
  * Also don't forget to include the map modal.
  */
 waldo.setAllWaldoListeners = function setAllWaldoListeners(tagType = 'a') {
-    console.log('listening');
     $(tagType+'[data-waldo-event-trigger]').each(function(){
         let thisElement = $(this);
         // Get the type of listener we on which we are showing the waldo map. For example: "onclick".
