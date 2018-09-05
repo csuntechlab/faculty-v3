@@ -109,4 +109,15 @@ $(function() {
     });
 });
 </script>
+{{-- Waldo map scripts --}}
+    <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"
+            integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log=="
+            crossorigin=""></script>
+    {!! HTML::script('js/waldo.js') !!}
+@stop
+
+{{-- WALDO MODAL --}}
+@section('modal')
+    {{--waldo map modal--}}
+    @include('pages.profile.partials.waldo-map')
 @stop

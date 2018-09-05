@@ -25,12 +25,14 @@
 		{{-- FACULTY CONTENT --}}
 		@include('layouts.partials.header')
 			@yield('content')
+			@yield('modal')
 		@include('layouts.partials.footer')
 
 		{{-- SCRIPTS --}}
 		{!! HTML::script('/js/manifest.js') !!}
 		{!! HTML::script('/js/vendor.js') !!}
 		{!! HTML::script('js/app.js') !!}
+		{!! HTML::script('/js/helpers.js') !!}
 
 		@yield('page-specific-scripts')
 		{{-- GOOGLE ANALYTICS --}}
