@@ -3,8 +3,6 @@
 /// / Faculty Scaffold && Environment
 // ===================================//
 
-(function() {
-
 var faculty = {
     html: $('html'),
     body: $('body')
@@ -13,7 +11,7 @@ var faculty = {
 faculty.env = {
     url: faculty.html.data('url'),
     token: faculty.html.data('token'),
-    waldoUrl: faculty.html.data('waldo-url')
+    waldoUrl: $("meta[name='waldo-url']").attr('content')
 };
 // Like C#
 if (!String.format) {
@@ -28,12 +26,14 @@ if (!String.format) {
     };
 }
 
+var helpers = {};
+
 /**
  * Copy HTML attributes from sourceElement to destinationELement.
  * @param sourceElement
  * @param destinationElement
  */
-function copyAttributes(sourceElement, destinationElement) {
+helpers.copyAttributes = function copyAttributes(sourceElement, destinationElement) {
     let attributes = $(sourceElement).prop("attributes");
 // loop through <select> attributes and apply them on <div>
     $.each(attributes, function() {
@@ -45,9 +45,13 @@ function copyAttributes(sourceElement, destinationElement) {
  * changes any tag to a span.
  * @param tag - A string or an object that is directly JQuery-able.
  */
-function elementToSpan(tag) {
+helpers.elementToSpan = function elementToSpan(tag) {
     let span = $('<span>' + $(tag).text() + '</span>');
-    copyAttributes(tag, span);
+    helpers.copyAttributes(tag, span);
     tag.replaceWith(span);
 }
-})();
+
+helpers.env = faculty.env;
+
+module.exports = helpers;
+module.exports.default = helpers;

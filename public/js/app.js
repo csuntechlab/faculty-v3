@@ -192,8 +192,8 @@ try {
   __webpack_require__(7);
   __webpack_require__(8);
 
-  __webpack_require__(22);
-  __webpack_require__(23);
+  window.Helpers = __webpack_require__(22);
+  window.Waldo = __webpack_require__(23);
 } catch (e) {}
 
 /**
@@ -21337,62 +21337,70 @@ module.exports = function(module) {
 /// / Faculty Scaffold && Environment
 // ===================================//
 
-(function () {
+var faculty = {
+    html: $('html'),
+    body: $('body')
+};
 
-    var faculty = {
-        html: $('html'),
-        body: $('body')
-    };
-
-    faculty.env = {
-        url: faculty.html.data('url'),
-        token: faculty.html.data('token'),
-        waldoUrl: faculty.html.data('waldo-url')
-    };
-    // Like C#
-    if (!String.format) {
-        String.format = function (format) {
-            var args = Array.prototype.slice.call(arguments, 1);
-            return format.replace(/{(\d+)}/g, function (match, number) {
-                return typeof args[number] != 'undefined' ? args[number] : match;
-            });
-        };
-    }
-
-    /**
-     * Copy HTML attributes from sourceElement to destinationELement.
-     * @param sourceElement
-     * @param destinationElement
-     */
-    function copyAttributes(sourceElement, destinationElement) {
-        var attributes = $(sourceElement).prop("attributes");
-        // loop through <select> attributes and apply them on <div>
-        $.each(attributes, function () {
-            $(destinationElement).attr(this.name, this.value);
+faculty.env = {
+    url: faculty.html.data('url'),
+    token: faculty.html.data('token'),
+    waldoUrl: $("meta[name='waldo-url']").attr('content')
+};
+// Like C#
+if (!String.format) {
+    String.format = function (format) {
+        var args = Array.prototype.slice.call(arguments, 1);
+        return format.replace(/{(\d+)}/g, function (match, number) {
+            return typeof args[number] != 'undefined' ? args[number] : match;
         });
-    }
+    };
+}
 
-    /**
-     * changes any tag to a span.
-     * @param tag - A string or an object that is directly JQuery-able.
-     */
-    function elementToSpan(tag) {
-        var span = $('<span>' + $(tag).text() + '</span>');
-        copyAttributes(tag, span);
-        tag.replaceWith(span);
-    }
-})();
+var helpers = {};
+
+/**
+ * Copy HTML attributes from sourceElement to destinationELement.
+ * @param sourceElement
+ * @param destinationElement
+ */
+helpers.copyAttributes = function copyAttributes(sourceElement, destinationElement) {
+    var attributes = $(sourceElement).prop("attributes");
+    // loop through <select> attributes and apply them on <div>
+    $.each(attributes, function () {
+        $(destinationElement).attr(this.name, this.value);
+    });
+};
+
+/**
+ * changes any tag to a span.
+ * @param tag - A string or an object that is directly JQuery-able.
+ */
+helpers.elementToSpan = function elementToSpan(tag) {
+    var span = $('<span>' + $(tag).text() + '</span>');
+    helpers.copyAttributes(tag, span);
+    tag.replaceWith(span);
+};
+
+helpers.env = faculty.env;
+
+module.exports = helpers;
+module.exports.default = helpers;
 
 /***/ }),
 /* 23 */
 /***/ (function(module, exports) {
+
+var waldo = {};
+
+var helpers = window.Helpers;
 
 /**
  * Breaks the room code ('SH0270' or 'JD1622C') into its components: ('SH', '270', '') or ('JD', '1622' 'C')
  * @param roomCode (String)
  * @return object
  */
-function decomposeRoomCode(roomCode) {
+waldo.decomposeRoomCode = function decomposeRoomCode(roomCode) {
     matches = /([A-Z]+)(0*)([0-9]+)([A-Z0-9]*)/g.exec(roomCode);
     // matches[0] is just a copy of the room code.
     var building = matches[1];
@@ -21404,13 +21412,13 @@ function decomposeRoomCode(roomCode) {
         number: number,
         suffix: suffix
     };
-}
+};
 
 /**
  * Show the map, if it is available, else show an error.
  * @param mapData
  */
-function showMapModal(mapData) {
+waldo.showMapModal = function showMapModal(mapData) {
     // An error has occurred
     if ("error" in mapData) {
         $('#waldo-map-message').text(mapData['error']);
@@ -21427,7 +21435,7 @@ function showMapModal(mapData) {
             'width': '100%'
         });
         // An object separating the components of the room code.
-        var room = decomposeRoomCode(mapData['room_number']);
+        var room = waldo.decomposeRoomCode(mapData['room_number']);
 
         // An object containing beautifully formatted strings to display, keyed by its display purpose.
         var displayPretty = {
@@ -21458,12 +21466,12 @@ function showMapModal(mapData) {
     }
     //Show the modal.
     $('#show-waldo-map-modal').click();
-}
+};
 
 /**
  * Shows a map of the room using waldo webservice. Best used on a button or anchor tag.
  */
-function walDo() {
+waldo.walDo = function walDo() {
     var thisElement = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
 
     if (thisElement === null) {
@@ -21474,10 +21482,10 @@ function walDo() {
     // populate the map modal and show it.
 
     var room = thisElement.text();
-    var url = String.format("{0}/api/1.0/rooms?{1}", faculty.env.waldoUrl, $.param({ room: room }));
+    var url = String.format("{0}rooms?{1}", helpers.env.waldoUrl, $.param({ room: room }));
     if (sessionStorage.getItem('room:' + room)) {
         roomString = sessionStorage.getItem('room:' + room);
-        showMapModal(JSON.parse(roomString));
+        waldo.showMapModal(JSON.parse(roomString));
     } else {
         $.ajax({
             method: "GET",
@@ -21489,27 +21497,27 @@ function walDo() {
                 } else {
                     sessionStorage.setItem('room:' + room, JSON.stringify(data));
                 }
-                showMapModal(data);
+                waldo.showMapModal(data);
             },
             error: function error() {
                 var data = [];
                 data['error'] = "Map service unavailable.";
-                showMapModal(data);
+                waldo.showMapModal(data);
                 $('[data-waldo-event-trigger]').each(function () {
                     $(this).off(thisElement.data('waldo-event-trigger'));
-                    elementToSpan($(this));
+                    helpers.elementToSpan($(this));
                 });
             }
         });
     }
-}
+};
 /**
  * Call this function on Document.ready for pages that need waldo maps.
  * In the HTML, add the data attribute "data-waldo-listener" to an element whose inner html is the location
  * to show on the map. Set these attributes to the type of event that you want to trigger the map being shown.
  * Also don't forget to include the map modal.
  */
-function setAllWaldoListeners() {
+waldo.setAllWaldoListeners = function setAllWaldoListeners() {
     var tagType = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'a';
 
     console.log('listening');
@@ -21524,12 +21532,15 @@ function setAllWaldoListeners() {
             // Prevents link-following / page-reloading on some browsers.
             e.preventDefault();
             // The actual functionality we want to do on this event.
-            walDo(thisElement);
+            waldo.walDo(thisElement);
             // Prevents link-following / page-reloading on other browsers.
             return false;
         });
     });
-}
+};
+
+module.exports = waldo;
+module.exports.default = waldo;
 
 /***/ }),
 /* 24 */,
@@ -25702,10 +25713,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 // we have finished loading classes and office hours
                 _this.loading_classes = false;
                 _this.loading_officehours = false;
-
+            })).then(function () {
                 // allow for the map to be used for location information
-                setAllWaldoListeners();
-            }));
+                Waldo.setAllWaldoListeners();
+            });
         },
         loadCurrentClasses: function loadCurrentClasses() {
             return axios.get('people/' + this.person_uri + '/classes', {
@@ -25759,7 +25770,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             // we have finished loading everything
             _this2.loading_all = false;
-        }));
+        })).then(function () {
+            // allow for the map to be used for location information
+            Waldo.setAllWaldoListeners();
+        });
     }
 });
 

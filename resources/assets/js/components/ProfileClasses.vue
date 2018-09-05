@@ -310,10 +310,11 @@ export default {
                     // we have finished loading classes and office hours
                     this.loading_classes = false;
                     this.loading_officehours = false;
-
+                }))
+                .then(() => {
                     // allow for the map to be used for location information
-                    setAllWaldoListeners();
-                }));
+                    Waldo.setAllWaldoListeners();
+                });
         },
         loadCurrentClasses: function() {
             return axios.get(
@@ -378,7 +379,11 @@ export default {
 
                 // we have finished loading everything
                 this.loading_all = false;
-            }));
+            }))
+            .then(() => {
+                // allow for the map to be used for location information
+                Waldo.setAllWaldoListeners();
+            });
     }
 }
 </script>

@@ -1,9 +1,13 @@
+var waldo = {};
+
+var helpers = window.Helpers;
+
 /**
  * Breaks the room code ('SH0270' or 'JD1622C') into its components: ('SH', '270', '') or ('JD', '1622' 'C')
  * @param roomCode (String)
  * @return object
  */
-function decomposeRoomCode(roomCode) {
+waldo.decomposeRoomCode = function decomposeRoomCode(roomCode) {
     matches = /([A-Z]+)(0*)([0-9]+)([A-Z0-9]*)/g.exec(roomCode);
     // matches[0] is just a copy of the room code.
     let building = matches[1];
@@ -21,7 +25,7 @@ function decomposeRoomCode(roomCode) {
  * Show the map, if it is available, else show an error.
  * @param mapData
  */
-function showMapModal (mapData) {
+waldo.showMapModal = function showMapModal (mapData) {
   // An error has occurred
   if("error" in mapData) {
         $('#waldo-map-message').text(mapData['error']);
@@ -38,7 +42,7 @@ function showMapModal (mapData) {
             'width': '100%',
         });
         // An object separating the components of the room code.
-        let room = decomposeRoomCode(mapData['room_number']);
+        let room = waldo.decomposeRoomCode(mapData['room_number']);
 
         // An object containing beautifully formatted strings to display, keyed by its display purpose.
         let displayPretty = {
@@ -74,7 +78,7 @@ function showMapModal (mapData) {
 /**
  * Shows a map of the room using waldo webservice. Best used on a button or anchor tag.
  */
-function walDo (thisElement = null) {
+waldo.walDo = function walDo (thisElement = null) {
     if(thisElement === null) {
         thisElement = $(this);
     }
@@ -83,10 +87,10 @@ function walDo (thisElement = null) {
     // populate the map modal and show it.
 
     let room = thisElement.text();
-    let url = String.format("{0}/api/1.0/rooms?{1}", faculty.env.waldoUrl, $.param({room: room}));
+    let url = String.format("{0}rooms?{1}", helpers.env.waldoUrl, $.param({room: room}));
     if(sessionStorage.getItem('room:'+room)) {
       roomString = sessionStorage.getItem('room:'+room);
-      showMapModal(JSON.parse(roomString));
+      waldo.showMapModal(JSON.parse(roomString));
     } else {
       $.ajax({
         method: "GET",
@@ -98,15 +102,15 @@ function walDo (thisElement = null) {
           } else {
             sessionStorage.setItem('room:'+room, JSON.stringify(data));
           }
-          showMapModal(data);
+          waldo.showMapModal(data);
         },
         error: function () {
           let data = [];
           data['error'] = "Map service unavailable.";
-          showMapModal(data);
+          waldo.showMapModal(data);
           $('[data-waldo-event-trigger]').each(function(){
             $(this).off(thisElement.data('waldo-event-trigger'));
-            elementToSpan($(this));
+            helpers.elementToSpan($(this));
           });
         }
       });
@@ -118,7 +122,7 @@ function walDo (thisElement = null) {
  * to show on the map. Set these attributes to the type of event that you want to trigger the map being shown.
  * Also don't forget to include the map modal.
  */
-function setAllWaldoListeners(tagType = 'a') {
+waldo.setAllWaldoListeners = function setAllWaldoListeners(tagType = 'a') {
     console.log('listening');
     $(tagType+'[data-waldo-event-trigger]').each(function(){
         let thisElement = $(this);
@@ -131,10 +135,12 @@ function setAllWaldoListeners(tagType = 'a') {
             // Prevents link-following / page-reloading on some browsers.
             e.preventDefault();
             // The actual functionality we want to do on this event.
-            walDo(thisElement);
+            waldo.walDo(thisElement);
             // Prevents link-following / page-reloading on other browsers.
             return false;
         });
     });
 }
 
+module.exports = waldo;
+module.exports.default = waldo;
