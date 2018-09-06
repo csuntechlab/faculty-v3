@@ -45,7 +45,7 @@
                                         <template v-if='contact.location'>
                                             <li>
                                                 <i class="fas fa-map-marker-alt fa-lg px-1"></i>
-                                                <a href="#">
+                                                <a href="javascript:void(0);" data-target="modal" data-modal="#waldoMap" data-waldo-event-trigger="click">
                                                     {{ contact.location }}
                                                 </a>
                                             </li>
@@ -121,7 +121,7 @@
                                         <template v-if='contact.location'>
                                             <li>
                                                 <i class="fas fa-map-marker-alt fa-lg px-1"></i>
-                                                <a href="#">
+                                                <a href="javascript:void(0);" data-target="modal" data-modal="#waldoMap" data-waldo-event-trigger="click">
                                                     {{ contact.location }}
                                                 </a>
                                             </li>
@@ -293,7 +293,11 @@ export default {
 
             // we have finished loading everything
             this.loading_all = false;
-        }));
+        }))
+        .then(() => {
+            // allow for the map to be used for location information
+            Waldo.setAllWaldoListeners();
+        });
   }
 }
 </script>

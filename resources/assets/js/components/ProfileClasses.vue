@@ -109,7 +109,9 @@
                                             </div>
                                             <!-- Location -->
                                             <div class="FAC-font-size col-sm-2 col-12 pl-2 pr-0 text-nowrap">
-                                                <a href="#"><i class="fas fa-map-marker-alt px-1 FAC-location-icons"></i>{{ _meeting.location }}</a>
+                                                <a href="javascript:void(0);" data-target="modal" data-modal="#waldoMap" data-waldo-event-trigger="click">
+                                                    <i class="fas fa-map-marker-alt px-1 FAC-location-icons"></i>{{ _meeting.location }}
+                                                </a>
                                             </div>
                                             <!-- Info -->
                                             <div class="FAC-font-size col-sm-2 col-12 text-sm-center text-left">
@@ -215,7 +217,7 @@
                                             <!-- Location -->
                                             <div class="FAC-font-size col-sm-2 col-12 pl-2 pr-0 text-nowrap">
                                                 <template v-if='_office_hour.location'> 
-                                                    <a href="#">
+                                                    <a href="javascript:void(0);" data-target="modal" data-modal="#waldoMap" data-waldo-event-trigger="click">
                                                         <i class="fas fa-map-marker-alt px-1 FAC-location-icons"></i>{{ _office_hour.location }}
                                                     </a>
                                                 </template>
@@ -308,7 +310,11 @@ export default {
                     // we have finished loading classes and office hours
                     this.loading_classes = false;
                     this.loading_officehours = false;
-                }));
+                }))
+                .then(() => {
+                    // allow for the map to be used for location information
+                    Waldo.setAllWaldoListeners();
+                });
         },
         loadCurrentClasses: function() {
             return axios.get(
@@ -373,7 +379,11 @@ export default {
 
                 // we have finished loading everything
                 this.loading_all = false;
-            }));
+            }))
+            .then(() => {
+                // allow for the map to be used for location information
+                Waldo.setAllWaldoListeners();
+            });
     }
 }
 </script>

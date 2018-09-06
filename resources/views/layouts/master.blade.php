@@ -25,6 +25,7 @@
 		{{-- FACULTY CONTENT --}}
 		@include('layouts.partials.header')
 			@yield('content')
+			@yield('modal')
 		@include('layouts.partials.footer')
 
 		{{-- SCRIPTS --}}

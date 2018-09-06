@@ -12,6 +12,11 @@
 <meta name="person-uri" content="{{ $user->uri }}">
 <meta name="person-email" content="{{ $user->email }}">
 <meta name="current-term-id" content="{{ $currentTerm->term_id }}">
+
+{{-- for waldo map --}}
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css"
+        integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ=="
+        crossorigin=""/>
 @stop
 
 {{-- META TAGS 4 SEO --}}
@@ -109,4 +114,14 @@ $(function() {
     });
 });
 </script>
+{{-- Waldo map scripts --}}
+    <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"
+            integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log=="
+            crossorigin=""></script>
+@stop
+
+{{-- WALDO MODAL --}}
+@section('modal')
+    {{--waldo map modal--}}
+    @include('pages.profile.partials.waldo-map')
 @stop
