@@ -15,7 +15,12 @@ class User extends Authenticatable
     public $incrementing = false;
 
     protected $hidden = ['user_id', 'created_at', 'updated_at', 'connections', 'departments'];
-    protected $appends = ['is_csun_alum', 'primary_connection', 'primary_department', 'uri'];
+    protected $appends = [
+        'is_csun_alum',
+        'primary_connection',
+        'primary_department',
+        'uri'
+    ];
 
     /**
      * Retrieves a BelongsToMany representing the set of Classes instances
@@ -156,6 +161,52 @@ class User extends Authenticatable
         })->values();
 
         return $connections->first();
+    }
+
+    /**
+     * Returns the display line for the primary connection (name + title). The
+     * returned string is different based upon the following conditions:
+     *
+     * 1) If the primary connection is different than the primary department:
+     *    - Add the name of the primary connection to the line
+     *    1a) If the title of the primary connection is different than the rank:
+     *        - Add a dash followed by the title of the connection
+     * 2) The primary connection and primary department are the same:
+     *    - Add the title of the primary connection if it differs from the rank
+     *
+     * @return string
+     */
+    public function getPrimaryConnectionLineAttribute() {
+        $line = "";
+        if(!isset($this->connections)) {
+            $this->load('connections');
+        }
+
+        if(!isset($this->departments)) {
+            $this->load('departments');
+        }
+
+        if(!$this->primary_connection) {
+            return "";
+        }
+        if(!$this->primary_department) {
+            return "";
+        }
+
+        if($this->primary_connection->connectable_id != $this->primary_department->department_id) {
+            $line .= $this->primary_connection->name;
+            if($this->primary_connection->pivot->title != $this->rank) {
+                $line .= ' - ' . $this->primary_connection->pivot->title;
+            }
+        }
+        else
+        {
+            if($this->primary_connection->pivot->title != $this->rank) {
+                $line = $this->primary_connection->pivot->title;
+            }
+        }
+
+        return $line;
     }
 
     /**

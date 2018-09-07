@@ -60,10 +60,10 @@
                         
                         <h1 class="FAC-banner__name">{{ $user->display_name }}</h1> 
                         
-                        @if($user->primary_connection)
-                            @if($user->primary_connection->pivot->title != $user->rank)
-                        	   <div class="FAC-banner__title">{{ $user->primary_connection->pivot->title }}</div>
-                            @endif
+                        @if($user->primary_connection_line)
+                            <div class="FAC-banner__title">
+                                {{ $user->primary_connection_line }}
+                            </div>
                         @endif
                                                 
                         {{--
