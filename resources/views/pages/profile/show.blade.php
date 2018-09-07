@@ -54,7 +54,7 @@
 	                        	<a href="{{ facultyUrl('departments/' . $user->primary_department->department_id) }}">{{ $user->primary_department->name }}</a>
 	                        @endif
 	                        @if($user->is_csun_alum)
-	                        	<a class="FAC-banner__badge badge px-2 ml-2" href="#">CSUN Alum<i class="fas fa-graduation-cap ml-2"></i></a>
+	                        	<a class="FAC-banner__badge badge badge-primary px-2 ml-2" href="#">CSUN Alum<i class="fas fa-graduation-cap ml-2"></i></a>
 	                        @endif
                         </div>
                         

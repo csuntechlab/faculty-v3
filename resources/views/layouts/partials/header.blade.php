@@ -1,13 +1,21 @@
-<div> 
-    <header class="FAC-header">
-        <!-- when ready to use metaphor, get rid of this whole bootstrap grid :)  -->
-        <div class="container">
-            <div class="row">
-                <div class="col-12 col-md-5">
-                    <a href="{{ env('FACULTY_APP_URL') }}"><span class="FAC-temporary-CSUN">CSUN <span class="FAC-temporary-Faculty">  | Faculty Beta</span></span></a>
-                </div>
-            </div>
+<div class="container">
+    <nav class="navbar navbar-metaphor">
+    <a class="navbar-brand" href="#">
+        <span class="sr-only">CSUN Logo</span>
+        <span class="navbar-brand__subbrand">
+        Faculty
+        <small>Beta</small>
+        </span>
+    </a>
+    <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup2" aria-controls="navbarNavAltMarkup2" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup2">
+        <div class="navbar-nav text-center">
+        <a class="nav-item nav-link active" href="#">Home</a>
+        <a class="nav-item nav-link" href="#">Another Link</a>
+        <a class="nav-item nav-link" href="#">A Different Link</a>
         </div>
-       
-    </header>        
+    </div> -->
+    </nav>
 </div>

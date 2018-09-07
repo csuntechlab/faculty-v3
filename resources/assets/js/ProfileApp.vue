@@ -1,14 +1,14 @@
 <template>
 	<div>
-		<div class="tab-container">
-            <div class="container">
-              <ul class="nav">
-                <li class="nav-item"> <router-link class="nav-link" to="/">HOME</router-link> </li>
-                <li class="nav-item"> <router-link class="nav-link" to="/classes">CLASSES</router-link> </li>
-              </ul>
-            </div>
-	    </div>
-		<router-view></router-view>
+      <div class="navwrapper mb-4">
+        <div class="container">
+          <ul class="nav nav-metaphor font-weight-bold">
+            <li class="nav-item"> <router-link class="nav-link" to="/" active-class="" exact-active-class="active">HOME</router-link> </li>
+            <li class="nav-item"> <router-link class="nav-link" to="/classes" active-class="" exact-active-class="active">CLASSES</router-link> </li>
+          </ul>
+        </div>
+      </div>
+      <router-view></router-view>
 	</div>
 </template>
 

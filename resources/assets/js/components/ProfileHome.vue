@@ -12,11 +12,11 @@
             </template>
             <template v-else>
                 <div class="row">                 
-                    <div class="col-md-4">
+                    <div class="col-md-4 order-last order-md-first">
                         <template v-if='contact || user'>
-                            <div class="FAC-contact FACborder-line-wrapper">
-                                <h6>CONTACT</h6>
-                                <ul>
+                            <div class="d-none d-lg-block mb-3 pb-3">
+                                <h6 class="h5 mb-3">CONTACT</h6>
+                                <ul class="list-unstyled">
                                     <template v-if='contact'>
                                         <template v-if='contact.email'>
                                             <li>
@@ -64,11 +64,11 @@
                         </template>
 
                         <template v-if='degrees.length'>
-                            <div class="FAC-degrees FACborder-line-wrapper">
-                                <h6>DEGREES</h6>
-                                <ul class="timeline">
+                            <div class="FAC-degrees mb-3 pb-3">
+                                <h6 class="h5 mb-3">DEGREES</h6>
+                                <ul class="list-unstyled">
                                     <template v-for='_degree in degrees'>
-                                        <li class="timeline__header pb-3">
+                                        <li class="pb-3">
                                             <strong>{{ _degree.degree }}</strong> {{ _degree.discipline }} {{ _degree.year }}, {{ _degree.institute }}
                                         </li>
                                     </template>
@@ -77,8 +77,8 @@
                         </template>
 
                         <template v-if='interests.length'>
-                            <div class="FAC-interests FACborder-line-wrapper ">
-                                <h6>INTERESTS</h6>
+                            <div class="FAC-interests mb-3 pb-3 ">
+                                <h6 class="h5 mb-3">INTERESTS</h6>
                                 <template v-for='_interest in interests'>
                                     <span class="badge badge-primary py-2 px-2 my-1 mr-1">
                                         {{ _interest.title }}
@@ -88,11 +88,11 @@
                         </template>
                     </div>
 
-                    <div class="col-md-8 pr-3">
+                    <div class="col-md-8 order-first order-md-last">
                         <template v-if='contact || user'>
-                            <div class="FAC-contact-sm FACborder-line-wrapper">
-                                <h6>CONTACT</h6>
-                                <ul>
+                            <div class="d-block d-lg-none mb-3 pb-3">
+                                <h6 class="h5 mb-3">CONTACT</h6>
+                                <ul class="list-unstyled">
                                     <template v-if='contact'>
                                         <template v-if='contact.email'>
                                             <li>
@@ -140,14 +140,15 @@
                         </template>
                         
                         <template v-if='biography'>
-                            <h2>Overview</h2>
-                            <div class="FAC-Overview__content">
+                            <h2 class="h3 d-none d-block-md">Overview</h2>
+                            <h2 class="h5 mb-3 d-block d-none-md text-uppercase">Overview</h2>
+                            <div class="mb-3 pb-3 mb-md-0 pb-md-0">
                                 {{ biography }}
                             </div>
                         </template>
 
                         <template v-if='badges.length'>
-                            <h2>Badges & Awards</h2>
+                            <h2 class="h3 text-primary">Badges & Awards</h2>
                             <div class="container">
                                 <div class="row pt-2 pb-4">
                                     <template v-for='_badge in badges'>
@@ -171,29 +172,6 @@
                             </div>
                         </template>
 
-                        <template v-if='degrees.length'>
-                            <div class="FAC-degrees-sm FACborder-line-wrapper">
-                                <h6>DEGREES</h6>
-                                <ul class="timeline">
-                                    <template v-for='_degree in degrees'>
-                                        <li class="timeline__header pb-3">
-                                            <strong>{{ _degree.degree }}</strong> {{ _degree.discipline }} {{ _degree.year }}, {{ _degree.institute }}
-                                        </li>
-                                    </template>
-                                </ul>
-                            </div>
-                        </template>
-
-                        <template v-if='interests.length'>
-                            <div class="FAC-interests-sm FACborder-line-wrapper ">
-                                <h6>INTERESTS</h6>
-                                <template v-for='_interest in interests'>
-                                    <span class="badge badge-primary py-2 px-2 my-1">
-                                        {{ _interest.title }}
-                                    </span>
-                                </template>
-                            </div>
-                        </template>
                     </div>
                 </div>
             </template>
