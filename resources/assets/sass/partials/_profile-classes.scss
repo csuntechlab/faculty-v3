@@ -1,0 +1,148 @@
+.past-courses-list {
+    li {
+        margin-bottom: 3rem;
+        padding-right: 1.5rem;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+}
+
+.classes-term-controls {
+
+    h3 {
+        @include media-breakpoint-down(md){
+            float: left;
+        }
+    }
+
+    .custom-select {
+        width:30%;
+        float:right;
+        background: $primary url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3E%3Cpath fill='%23ffffff' d='M2 0L0 2h4zm0 5L0 3h4z'/%3E%3C/svg%3E") no-repeat right 0.75rem center;
+        background-size: 8px 10px;
+        border-color: $primary;
+        color: $white;
+
+        @include media-breakpoint-down(sm){
+            float: left;
+            width: 43%;
+        }
+
+        @include media-breakpoint-down(xs){
+            width: 50%;
+        }
+    }
+
+    .btn {
+        position: relative;
+        top: -.3rem;
+
+        @include media-breakpoint-down(md){
+            float: right;
+            top: 0;
+            margin-top: 1rem;
+        }
+
+    }
+}
+
+.classes-table {
+    margin-bottom: 3rem;
+
+    @include media-breakpoint-only(md){
+        font-size: 1.5rem;
+    }
+
+    @include media-breakpoint-down(sm){
+        margin-bottom: 1.5rem;
+    }
+
+
+    &__head {
+        font-weight: 700;
+        margin-bottom: 1rem;
+    }
+
+    &__item {
+        background:#F0F0F0;
+        padding-top: 1.8rem;
+        padding-bottom: 1.8rem;
+
+        @include media-breakpoint-down(xs){
+            background: $white;
+            border-bottom: solid 1px $dark;
+        }
+
+        &:nth-child(2) {
+            border-top: solid 1px $dark;
+        }
+
+        &:last-child {
+            border-bottom: solid 1px $dark;
+        }
+
+        &:nth-child(odd) {
+            background: $white;
+        }
+    }
+
+    &__time {
+        text-transform: lowercase;
+
+        @include media-breakpoint-only(lg){
+            font-size: 1.5rem;
+        }
+
+        @include media-breakpoint-only(sm){
+            display: block;
+            margin-right: 1rem;
+        }
+    }
+
+    &__title {
+        @include media-breakpoint-only(xs){
+            font-size: 1.7rem;
+        }
+    }
+
+    &__description {
+        line-height: 1.2;
+        font-style: italic;
+
+        @include media-breakpoint-only(xs){
+            margin-bottom: 1rem;
+        }
+    }
+
+    &__location-icon {
+        i {
+            font-size: 1.8rem;
+        }
+    }
+
+    &__info-icon {
+
+        @include media-breakpoint-down(md){
+            margin-bottom: .8rem;
+            display: block;
+        }
+
+        i {
+            font-size: 1.8rem;
+
+            @include media-breakpoint-down(md){
+                font-size: 2rem;
+            }
+        }
+
+        &:not(:last-child) {
+            margin-right: .5rem;
+
+            @include media-breakpoint-down(md){
+                margin-right: 0;
+            }
+        }
+    }
+}

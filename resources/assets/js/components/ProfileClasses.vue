@@ -1,6 +1,6 @@
 <template>
     <div id="classes">
-        <div class="container pt-4">
+        <div class="container">
             <template v-if='loading_all'>
                 <div class="row">
                     <div class="col-12">
@@ -13,164 +13,177 @@
             <template v-else>
                 <div class="row">    
                     <template v-if='past_courses.length'>             
-                        <div class="order-last order-md-first col-md-4 pt-5 pt-md-0">
-                            <div class="FAC-pastCourses">
-                                <h6>PAST COURSES</h6>
-                                <ul>
-                                    <template v-for='_past_course in past_courses'>
-                                        <li class="pb-4 pt-0 pt-md-3 float-md-none float-left pr-4 FAC-pastCourses-width">
-                                            <strong>{{ _past_course.subject }} {{ _past_course.catalog_number }}</strong>
-                                            <div>{{ _past_course.title }}</div>
-                                            <div>Last Offered {{ _past_course.last_taught }}</div>
-                                            <div v-if='_past_course.times_taught > 1'>
-                                                Taught {{ _past_course.times_taught }} terms
-                                            </div>
-                                            <div v-else>
-                                                Taught 1 term
-                                            </div>
-                                        </li>
-                                    </template>
-                                </ul>
+                        <div class="order-last order-md-first col-md-4 pt-3 pt-md-0">
+                            <h6 class="h5 mb-3">PAST COURSES</h6>
+                            <div class="w-75 d-none d-md-block">
+                                <hr class="hr-metaphor w-25 ml-0 mb-4">
                             </div>
+                            <ul class="past-courses-list list-unstyled">
+                                <template v-for='_past_course in past_courses'>
+                                    <li>
+                                        <strong>{{ _past_course.subject }} {{ _past_course.catalog_number }}</strong>
+                                        <div>{{ _past_course.title }}</div>
+                                        <div>Last Offered {{ _past_course.last_taught }}</div>
+                                        <div v-if='_past_course.times_taught > 1'>
+                                            Taught {{ _past_course.times_taught }} terms
+                                        </div>
+                                        <div v-else>
+                                            Taught 1 term
+                                        </div>
+                                    </li>
+                                </template>
+                            </ul>
                         </div>
                     </template>
                     <div class="order-md-last order-first col-12 col-md-8 pr-3">
                         <template v-if='current_term'>
-                            <h2>My Academic Schedule</h2>
-                            <div>
-                                <h3 class="list-inline-item">{{ current_term.term_display }}</h3>
-                                <a :href="faculty_profile_url + '/printout'" class="btn btn-outline-primary" role="button">
-                                    <i class="fas fa-print fa-xs"></i> Printer Friendly Door Sign
-                                </a>
+                            <h2 class="h3 text-primary mb-4 d-none d-md-block">Academic Schedule</h2>
+                            <h2 class="h5 mb-3 d-block d-md-none text-uppercase">Academic Schedule</h2>
+                            <div class="classes-term-controls clearfix mb-4 mb-lg-5">
+                                <h3 class="font-display d-none d-md-inline mr-3">{{ current_term.term_display }}</h3>
                                 <template v-if='terms.length'>
-                                    <select class="custom-select" id="term_select" v-model='selected_term' @change='changeTerm'>
+                                    <select class="custom-select" v-model='selected_term' @change='changeTerm'>
                                         <option v-for='_term in terms' :value='_term.term_id' :selected='current_term_id == _term.term_id'>
                                             {{ _term.term_display }}
                                         </option>
-                                        <i class="fas fa-caret-down"></i>
                                     </select>
                                 </template>
+                                <a :href="faculty_profile_url + '/printout'" class="btn btn-outline-primary d-none d-md-inline" role="button">
+                                    <i class="fas fa-print fa-xs"></i> Printer Friendly Door Sign
+                                </a>
                             </div>
-                            <hr class="FAC-semester-divider">
+                            <hr class="hr-metaphor d-none d-sm-block">
                         </template>
 
                         <!-- **********************  CLASSES **************************** -->
                         <template v-if='current_term'>
-                            <template v-if='classes.length'>
-                                <div class="FAC-downloadBtn">
-                                    <div class="FAC-downloadBtn__orientation">
-                                        <a href="#" class="btn btn-outline-primary mt-2" role="button"><i class="fas fa-calendar-alt fa-xs"></i> Download Classes Schedule</a>
-                                    </div>
-                                </div>
-                            </template>
                             <div>
-                                <h3 class="list-inline-item">Classes</h3>
-                                <!-- <div class="container">
-                                    <div class="row d-none d-md-inline">
-                                        <div class="col-4 list-inline-item pl-0">DESCRIPTION</div>
-                                        <div class="col-1 list-inline-item pl-0">DAYS</div>
-                                        <div class="col-3 list-inline-item ">TIME</div>
-                                        <div class="col-2 list-inline-item ">LOCATION</div>
-                                        <div class="col-2 list-inline-item text-center">INFO</div>
-                                    </div> -->
-
-                                    <div class="container">
-                                    <div class="row d-none d-sm-flex">
-                                        <div class="col-4 pl-0">DESCRIPTION</div>
-                                        <div class="col-1 pl-0">DAYS</div>
-                                        <div class="col-3">TIME</div>
-                                        <div class="col-2">LOCATION</div>
-                                        <div class="col-2 text-center">INFO</div>
-                                    </div>
-                                
-                                    <template v-if='loading_classes'>
-                                        <div class="row py-3 FAC-class-wrapper">
-                                            <div class="col-12">
-                                                <p class="text-center">
-                                                    <i class="fas fa-spinner fa-spin fa-2x"></i>
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </template>
-                                    <template v-else-if='classes.length' v-for='_class in classes'>
-                                        <div class="row FAC-class-wrapper py-3" v-for='_meeting in _class.class_meetings'>
-                                            <!-- Description -->
-                                            <div class="col-sm-4 col-12">
-                                                <div class="FAC-font-size"><strong>{{ _class.subject }} {{ _class.catalog_number }} </strong>({{ _class.class_number }})</div> 
-                                                <div class="FAC-font-size font-italic">{{ _class.title }}</div>
-                                            </div>
-                                            <!-- Days -->
-                                            <div class="FAC-font-size col-sm-1 col-12 pl-3 pl-sm-0 pr-0">
-                                            {{ _meeting.formatted_days }}
-                                            </div>
-                                            <!-- Time -->
-                                            <div class="FAC-font-size col-sm-3 col-12 pr-0">
-                                            {{ _meeting.formatted_duration }}
-                                            </div>
-                                            <!-- Location -->
-                                            <div class="FAC-font-size col-sm-2 col-12 pl-2 pr-0 text-nowrap">
-                                                <a href="javascript:void(0);" data-target="modal" data-modal="#waldoMap" data-waldo-event-trigger="click">
-                                                    <i class="fas fa-map-marker-alt px-1 FAC-location-icons"></i>{{ _meeting.location }}
-                                                </a>
-                                            </div>
-                                            <!-- Info -->
-                                            <div class="FAC-font-size col-sm-2 col-12 text-sm-center text-left">
-                                                <template v-if='_class.syllabus'>
-                                                    <a :href="_class.syllabus.url" :title="'View syllabus for ' + _class.subject + ' ' + _class.catalog_number" target="_blank">
-                                                        <i class="fas fa-file-pdf FAC-info-icons"></i>
-                                                    </a>
-                                                </template>
-                                                <template v-if='_class.bookstore_url'>
-                                                    <a :href="_class.bookstore_url" :title="'View books for ' + _class.subject + ' ' + _class.catalog_number" target="_blank">
-                                                        <i class="fas fa-book FAC-info-icons"></i>
-                                                    </a>
-                                                </template>
-                                                <i class="fas fa-calendar-alt FAC-info-icons "></i>
-                                            </div>
-                                        </div>
-                                    </template>
-                                    <template v-else>
-                                        <div class="row FAC-class-wrapper py-3">
-                                            <div class="col-12 FAC-font-size">
-                                                {{ person_name }} does not have any classes for the selected term.
-                                            </div>
-                                        </div>
+                                <div class="mb-3 mt-4 mb-md-5 clearfix">
+                                    <h3 class="d-none d-md-inline">Classes</h3>
+                                    <h3 class="d-inline d-md-none font-display h5">Classes</h3>
+                                    <template v-if='classes.length'>
+                                        <a href="#" class="btn btn-outline-primary float-right d-none d-md-inline" role="button"><i class="fas fa-calendar-alt fa-xs"></i> Download Classes Schedule</a>    
                                     </template>
                                 </div>
+
+                                <div class="container-fluid">
+  
+                                    <div class="classes-table">
+                                    
+                                        <div class="row d-none d-sm-flex classes-table__head">
+                                            <div class="col-4 pl-0">DESCRIPTION</div>
+                                            <div class="col-1 pl-0">DAYS</div>
+                                            <div class="col-3">TIME</div>
+                                            <div class="col-2 pl-0 pl-lg-3 pl-xl-0">LOCATION</div>
+                                            <div class="col-2 text-center">INFO</div>
+                                        </div>
+                                
+                                        <template v-if='loading_classes'>
+                                            <div class="row classes-table__item">
+                                                <div class="col-12">
+                                                    <p class="text-center">
+                                                        <i class="fas fa-spinner fa-spin fa-2x"></i>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </template>
+                                        <template v-else-if='classes.length' v-for='_class in classes'>
+                                            <div class="row classes-table__item" v-for='_meeting in _class.class_meetings'>
+                                                <!-- Description -->
+                                                <div class="col-sm-4 col-12">
+                                                    <div><strong class="classes-table__title">{{ _class.subject }} {{ _class.catalog_number }} </strong>({{ _class.class_number }})</div> 
+                                                    <div class="classes-table__description">{{ _class.title }}</div>
+                                                </div>
+                                                <!-- Days -->
+                                                <div class="col-sm-1 col-12 pl-4 pl-sm-0">
+                                                    <span class="d-inline d-sm-none font-weight-bold font-italic">Days: </span>
+                                                    {{ _meeting.formatted_days }}
+                                                </div>
+                                                <!-- Time -->
+                                                <div class="col-sm-3 col-12 pr-0">
+                                                    <span class="d-inline d-sm-none font-weight-bold font-italic">Time: </span>
+                                                    <span class="classes-table__time">{{ _meeting.formatted_duration }}</span>
+                                                </div>
+                                                <!-- Location -->
+                                                <div class="col-sm-2 col-12 pl-4 pl-sm-0 pl-lg-3 pl-xl-0 text-nowrap d-none d-sm-block">
+                                                    <a class="classes-table__location-icon" href="javascript:void(0);" data-target="modal" data-modal="#waldoMap" data-waldo-event-trigger="click">
+                                                        <i class="fas fa-map-marker-alt px-1"></i><span class="text-underline">{{ _meeting.location }}</span>
+                                                    </a>
+                                                </div>
+                                                <!-- Info -->
+                                                <div class="col-sm-2 col-12 text-sm-center text-left">
+                                                    <span class="d-inline d-sm-none font-weight-bold font-italic float-left">Info: </span>
+                                                    <div class="float-left float-sm-none ml-3 mt-2 ml-sm-0 mt-sm-0">
+                                                        <a class="d-block d-sm-none classes-table__info-icon" href="javascript:void(0);" data-target="modal" data-modal="#waldoMap" data-waldo-event-trigger="click">
+                                                            <i class="fas fa-map-marker-alt"></i>
+                                                            <span class="text-underline">View Location ({{ _meeting.location }})</span>
+                                                        </a>
+                                                        <template v-if='_class.syllabus'>
+                                                            <a class="classes-table__info-icon" :href="_class.syllabus.url" :title="'View syllabus for ' + _class.subject + ' ' + _class.catalog_number" target="_blank">
+                                                                <i class="fas fa-file-pdf"></i>
+                                                                <span class="d-inline d-sm-none text-underline">View Syllabus</span>
+                                                            </a>
+                                                        </template>
+                                                        <template v-if='_class.bookstore_url'>
+                                                            <a class="classes-table__info-icon" :href="_class.bookstore_url" :title="'View books for ' + _class.subject + ' ' + _class.catalog_number" target="_blank">
+                                                                <i class="fas fa-book"></i>
+                                                                <span class="d-inline d-sm-none text-underline">View Books</span>
+                                                            </a>
+                                                        </template>
+                                                        <a class="classes-table__info-icon" href="#">
+                                                            <i class="fas fa-calendar-alt"></i>
+                                                            <span class="d-inline d-sm-none text-underline">Download iCal File</span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </template>
+                                        <template v-else>
+                                            <div class="row classes-table__item">
+                                                <div class="col-12">
+                                                    {{ person_name }} does not have any classes for the selected term.
+                                                </div>
+                                            </div>
+                                        </template>
+                                    </div>
+                                </div>
+
+                                <template v-if='classes.length'>
+                                    <a href="#" class="btn btn-outline-primary d-block d-md-none mt-3 mb-5" role="button"><i class="fas fa-calendar-alt fa-xs"></i> Download Classes Schedule</a>    
+                                </template>
+
                             </div>
                         </template>
 
                         <!-- ************************  OFFICE HOURS ************************ -->
 
                         <template v-if='current_term'>
-                            <template v-if='office_hours.length'>
-                                <div class="FAC-downloadBtn">
-                                    <div class="FAC-downloadBtn__orientation">
-                                        <a href="#" class="btn btn-outline-primary mt-4" role="button"><i class="fas fa-calendar-alt fa-xs"></i> Download Office Hours</a>
-                                    </div>
-                                </div>
-                            </template>
-                            <template v-else>
-                                <!-- Retain spacing if no office hours -->
-                                <br />
-                            </template>
-                            <div>
-                                <!-- MOVE THE DESCRIPTION ONE TO 3 and MOVE THE REST OVER 1 -->
-                                <h3 class="list-inline-item">Office Hours</h3>
-                                <div class="container">
-                                    <div class="row d-none d-sm-flex">
+
+                            <div class="mb-3 mt-4 mb-md-5 clearfix">
+                                <h3 class="d-none d-md-inline">Office Hours</h3>
+                                <h3 class="d-inline d-md-none font-display h5">Office Hours</h3>
+
+                                <template v-if='office_hours.length'>
+                                    <a href="#" class="btn btn-outline-primary float-right d-none d-md-inline" role="button"><i class="fas fa-calendar-alt fa-xs"></i> Download Office Hours</a>
+                                </template>
+                            </div>
+
+                          
+                            <!-- MOVE THE DESCRIPTION ONE TO 3 and MOVE THE REST OVER 1 -->
+                            
+                            <div class="container-fluid">
+                                <div class="classes-table">
+                                    <div class="row d-none d-sm-flex classes-table__head">
                                         <div class="col-4 pl-0">DESCRIPTION</div>
                                         <div class="col-1 pl-0">DAYS</div>
                                         <div class="col-3">TIME</div>
-                                        <div class="col-2">LOCATION</div>
-                                        <div class="col-2 text-center">iCAL</div>
+                                        <div class="col-2 pl-0 pl-lg-3 pl-xl-0">LOCATION</div>
+                                        <div class="col-2 text-center">INFO</div>
                                     </div>
-                                </div>
-
-                                
-                                <div class="container FAC-officeHours-wrapper">
+                        
+                                    
                                     <template v-if='loading_officehours'>
-                                        <div class="row py-3 FAC-darkStriped">
+                                        <div class="row classes-table__item">
                                             <div class="col-12">
                                                 <p class="text-center">
                                                     <i class="fas fa-spinner fa-spin fa-2x"></i>
@@ -179,13 +192,13 @@
                                         </div>
                                     </template>
                                     <template v-else-if='office_hours.length'>
-                                        <div class="row py-3" :class="{'FAC-darkStriped': index % 2 == 0, 'FAC-whiteStriped': index % 2 != 0}" v-for='(_office_hour,index) in office_hours'>
-                                             <!-- Description -->
+                                        <div class="row classes-table__item" v-for='(_office_hour,index) in office_hours'>
+                                                <!-- Description -->
                                             <div class="col-sm-4 col-12">
-                                                <div class="FAC-font-size">
-                                                    <strong>{{ _office_hour.description ? _office_hour.description : _office_hour.label }}</strong>
+                                                <div>
+                                                    <strong class="classes-table__title">{{ _office_hour.description ? _office_hour.description : _office_hour.label }}</strong>
                                                 </div> 
-                                                <div class="FAC-font-size font-italic">
+                                                <div class="classes-table__description">
                                                     <span v-if='_office_hour.is_byappointment && !_office_hour.is_walkin'>
                                                         Appointment Only
                                                     </span>
@@ -197,15 +210,17 @@
                                                     </span>
                                                 </div>
                                             </div>
-                                             <!-- Days -->
-                                            <div class="FAC-font-size col-sm-1 col-12 pl-3 pl-sm-0 pr-0">
+                                                <!-- Days -->
+                                            <div class="col-sm-1 col-12 pl-4 pl-sm-0">
+                                                <span class="d-inline d-sm-none font-weight-bold font-italic">Days: </span>
                                                 {{ _office_hour.formatted_days }}
                                             </div>
-                                             <!-- Time -->
-                                            <div class="FAC-font-size col-sm-3 col-12 pr-0">
-                                                <div v-if='!_office_hour.appointment_only'>
+                                                <!-- Time -->
+                                            <div class="col-sm-3 col-12 pr-0">
+                                                <span class="d-inline d-sm-none font-weight-bold font-italic">Time: </span>
+                                                <span v-if='!_office_hour.appointment_only' class="classes-table__time">
                                                     {{ _office_hour.duration }}
-                                                </div>
+                                                </span>
                                                 <template v-if='_office_hour.booking_url'>
                                                     <div>
                                                         <a :href='_office_hour.booking_url' target='_blank'>
@@ -215,28 +230,38 @@
                                                 </template>
                                             </div>
                                             <!-- Location -->
-                                            <div class="FAC-font-size col-sm-2 col-12 pl-2 pr-0 text-nowrap">
+                                            <div class="col-sm-2 col-12 pl-4 pl-sm-0 pl-lg-3 pl-xl-0 text-nowrap d-none d-sm-block">
                                                 <template v-if='_office_hour.location'> 
-                                                    <a href="javascript:void(0);" data-target="modal" data-modal="#waldoMap" data-waldo-event-trigger="click">
-                                                        <i class="fas fa-map-marker-alt px-1 FAC-location-icons"></i>{{ _office_hour.location }}
+                                                    <a class="classes-table__location-icon" href="javascript:void(0);" data-target="modal" data-modal="#waldoMap" data-waldo-event-trigger="click">
+                                                        <i class="fas fa-map-marker-alt px-1"></i>
+                                                        <span class="text-underline">{{ _office_hour.location }}</span>
                                                     </a>
                                                 </template>
                                             </div>
-                                             <!-- Info -->
-                                            <div class="FAC-font-size col-sm-2 col-12 text-sm-center text-left">
-                                                <i class="fas fa-calendar-alt FAC-info-icons"></i>
+                                                <!-- Info -->
+                                            <div class="col-sm-2 col-12 text-sm-center text-left">
+                                                <span class="d-inline d-sm-none font-weight-bold font-italic float-left mr-3">Info: </span>
+                                                <a class="classes-table__info-icon" href="#">
+                                                    <i class="fas fa-calendar-alt"></i>
+                                                    <span class="d-inline d-sm-none text-underline">Download iCal File</span>
+                                                </a>
                                             </div>
                                         </div>
                                     </template>
                                     <template v-else>
-                                        <div class="row FAC-darkStriped py-3">
+                                        <div class="row classes-table__item">
                                             <div class="col-12">
                                                 {{ person_name }} has not added any office hours for the selected term.
                                             </div>
                                         </div>
                                     </template>
+                                  
                                 </div>
                             </div>
+                            <template v-if='office_hours.length'>
+                                <a href="#" class="btn btn-outline-primary d-block d-md-none mt-3 mb-5" role="button"><i class="fas fa-calendar-alt fa-xs"></i> Download Office Hours</a>
+                            </template>
+
                         </template>
                     </div>
                 </div>

@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container py-3">
     <nav class="navbar navbar-metaphor">
     <a class="navbar-brand" href="#">
         <span class="sr-only">CSUN Logo</span>

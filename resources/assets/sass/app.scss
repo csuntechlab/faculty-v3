@@ -13,10 +13,11 @@
 // Application-specific SASS
 @import "partials/variables";
 @import "partials/globals";
-@import "partials/profileClasses";
+@import "partials/profile-classes";
+@import "partials/profile-home";
+@import "partials/profile-banner";
+@import "partials/profile-nav";
 @import "partials/home";
 @import "partials/searchPage";
 @import "partials/searchByDept";
-@import "partials/profileHome";
-@import "partials/profileBanner";
 @import "partials/departmentFaculty";

@@ -1,0 +1,114 @@
+.profile-banner{ 
+    position: relative;
+    background: url(https://www.csun.edu/faculty/imgs/9.jpg) no-repeat center ;
+    background-size: cover;
+    height:30rem;
+
+    @include media-breakpoint-down(sm){
+        height:auto;
+        padding: 2rem 0;
+    }
+
+    &__overlay { 
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+    }
+
+    &__image{ 
+        border-radius: 20rem;
+        border: solid 5px $white;  
+        width: 20rem;     
+
+        @include media-breakpoint-down(sm){
+            width: 18rem;
+            margin: 0 auto;
+            display:block;
+            margin-top: 2rem;
+        }
+    }
+
+    &__content{
+        color: $white;
+    }
+
+    a:not(.badge){
+        color:$white;
+        text-decoration: underline;
+    }
+
+    &__badge {
+        font-size: 1.6rem;
+
+        @include media-breakpoint-down(sm){
+            display:block;
+            text-align:center;
+        }
+    }
+
+    &__department{ 
+        font-size: 1.8rem;
+        font-weight: 700;
+
+        @include media-breakpoint-down(sm){
+            text-align: center;
+            font-size: 1.7rem;
+        }
+    }
+
+    &__name {  
+        color: $white;
+        margin: .8rem 0 0 0;
+
+        @include media-breakpoint-down(md){
+            font-size: 3.6rem;
+        }
+
+        @include media-breakpoint-down(sm){
+            text-align: center;
+            margin: 0 0 1rem;
+            font-size: 3.2rem;
+        }
+    }
+
+    &__title { 
+        font-size: 1.8rem;
+        margin-top: 1rem;
+
+        @include media-breakpoint-down(sm){
+            text-align: center;
+            font-size: 1.7rem;
+        }
+    }
+
+    &__icons{
+        margin: 1.5rem 0 0 0;
+
+        @include media-breakpoint-down(sm){
+            text-align:center;
+        }
+
+        li { 
+            &:not(:last-child){
+                margin-right:1rem;
+                
+                @include media-breakpoint-down(sm){
+                    margin-right: 1.3rem;
+                }
+            }
+
+            i {
+                font-size: 2.5rem;
+
+                @include media-breakpoint-down(sm){
+                    font-size: 2.9rem;
+                }
+
+            }
+        }
+    }
+}
+

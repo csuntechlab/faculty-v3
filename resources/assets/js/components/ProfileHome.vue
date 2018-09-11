@@ -1,6 +1,6 @@
 <template>
-    <div id="home">
-        <div class="container pt-4">
+    <div id="profile-home">
+        <div class="container">
             <template v-if='loading_all'>
                 <div class="row">
                     <div class="col-12">
@@ -14,13 +14,13 @@
                 <div class="row">                 
                     <div class="col-md-4 order-last order-md-first">
                         <template v-if='contact || user'>
-                            <div class="d-none d-lg-block mb-3 pb-3">
+                            <div class="d-none d-md-block mb-3 pb-3">
                                 <h6 class="h5 mb-3">CONTACT</h6>
-                                <ul class="list-unstyled">
+                                <ul class="profile-contact-list list-unstyled">
                                     <template v-if='contact'>
                                         <template v-if='contact.email'>
                                             <li>
-                                                <i class="far fa-envelope fa-lg pr-2"></i>
+                                                <i class="far fa-envelope fa-lg"></i>
                                                 <a :href="email_href">
                                                     {{ contact.email }}
                                                 </a>
@@ -28,7 +28,7 @@
                                         </template>
                                         <template v-if='contact.website'>
                                             <li>
-                                                <i class="fas fa-globe-americas fa-lg pr-2"></i>
+                                                <i class="fas fa-globe-americas fa-lg"></i>
                                                 <a :href="website_href" target="_blank">
                                                     {{ contact.website }}
                                                 </a>
@@ -36,7 +36,7 @@
                                         </template>
                                         <template v-if='contact.telephone'>
                                             <li>
-                                                <i class="fas fa-phone fa-lg pl-2"></i>
+                                                <i class="fas fa-phone fa-flip-horizontal fa-lg"></i>
                                                 <a :href="telephone_href">
                                                     {{ contact.formatted_telephone }}
                                                 </a>
@@ -44,7 +44,7 @@
                                         </template>
                                         <template v-if='contact.location'>
                                             <li>
-                                                <i class="fas fa-map-marker-alt fa-lg px-1"></i>
+                                                <i class="fas fa-map-marker-alt fa-lg"></i>
                                                 <a href="javascript:void(0);" data-target="modal" data-modal="#waldoMap" data-waldo-event-trigger="click">
                                                     {{ contact.location }}
                                                 </a>
@@ -64,11 +64,11 @@
                         </template>
 
                         <template v-if='degrees.length'>
-                            <div class="FAC-degrees mb-3 pb-3">
+                            <div class="mb-3 pb-3">
                                 <h6 class="h5 mb-3">DEGREES</h6>
-                                <ul class="list-unstyled">
+                                <ul class="profile-degrees-list list-unstyled">
                                     <template v-for='_degree in degrees'>
-                                        <li class="pb-3">
+                                        <li>
                                             <strong>{{ _degree.degree }}</strong> {{ _degree.discipline }} {{ _degree.year }}, {{ _degree.institute }}
                                         </li>
                                     </template>
@@ -77,7 +77,7 @@
                         </template>
 
                         <template v-if='interests.length'>
-                            <div class="FAC-interests mb-3 pb-3 ">
+                            <div class="mb-3 pb-3 ">
                                 <h6 class="h5 mb-3">INTERESTS</h6>
                                 <template v-for='_interest in interests'>
                                     <span class="badge badge-primary py-2 px-2 my-1 mr-1">
@@ -90,13 +90,13 @@
 
                     <div class="col-md-8 order-first order-md-last">
                         <template v-if='contact || user'>
-                            <div class="d-block d-lg-none mb-3 pb-3">
-                                <h6 class="h5 mb-3">CONTACT</h6>
-                                <ul class="list-unstyled">
+                            <div class="d-block d-md-none mb-3 pb-3">
+                                <h2 class="h5 mb-3 d-block d-md-none text-uppercase">Contact</h2>
+                                <ul class="profile-contact-list list-unstyled">
                                     <template v-if='contact'>
                                         <template v-if='contact.email'>
                                             <li>
-                                                <i class="far fa-envelope fa-lg pr-2"></i>
+                                                <i class="far fa-envelope fa-lg"></i>
                                                 <a :href="email_href">
                                                     {{ contact.email }}
                                                 </a>
@@ -104,7 +104,7 @@
                                         </template>
                                         <template v-if='contact.website'>
                                             <li>
-                                                <i class="fas fa-globe-americas fa-lg pr-2"></i>
+                                                <i class="fas fa-globe-americas fa-lg"></i>
                                                 <a :href="website_href" target="_blank">
                                                     {{ contact.website }}
                                                 </a>
@@ -112,7 +112,7 @@
                                         </template>
                                         <template v-if='contact.telephone'>
                                             <li>
-                                                <i class="fas fa-phone fa-lg pl-2"></i>
+                                                <i class="fas fa-phone fa-flip-horizontal fa-lg"></i>
                                                 <a :href="telephone_href">
                                                     {{ contact.formatted_telephone }}
                                                 </a>
@@ -120,7 +120,7 @@
                                         </template>
                                         <template v-if='contact.location'>
                                             <li>
-                                                <i class="fas fa-map-marker-alt fa-lg px-1"></i>
+                                                <i class="fas fa-map-marker-alt fa-lg"></i>
                                                 <a href="javascript:void(0);" data-target="modal" data-modal="#waldoMap" data-waldo-event-trigger="click">
                                                     {{ contact.location }}
                                                 </a>
@@ -129,7 +129,7 @@
                                     </template>
                                     <template v-else-if='user'>
                                         <li>
-                                            <i class="far fa-envelope fa-lg pr-2"></i>
+                                            <i class="far fa-envelope fa-lg"></i>
                                             <a :href="email_href">
                                                 {{ user.email }}
                                             </a>
@@ -140,15 +140,17 @@
                         </template>
                         
                         <template v-if='biography'>
-                            <h2 class="h3 d-none d-block-md">Overview</h2>
-                            <h2 class="h5 mb-3 d-block d-none-md text-uppercase">Overview</h2>
-                            <div class="mb-3 pb-3 mb-md-0 pb-md-0">
+                            <h2 class="h3 d-none d-md-block text-primary">Overview</h2>
+                            <h2 class="h5 mb-3 d-block d-md-none text-uppercase">Overview</h2>
+                            <div class="mb-3 pb-3 mb-md-5 pb-md-4">
                                 {{ biography }}
                             </div>
                         </template>
 
                         <template v-if='badges.length'>
-                            <h2 class="h3 text-primary">Badges & Awards</h2>
+                            <h2 class="h3 d-none d-md-block text-primary">Badges &amp; Awards</h2>
+                            <h2 class="h5 mb-3 d-block d-md-none text-uppercase">Badges &amp; Awards</h2>
+
                             <div class="container">
                                 <div class="row pt-2 pb-4">
                                     <template v-for='_badge in badges'>
@@ -159,8 +161,8 @@
                                                 </div>
                                                 <div class="media-body align-self-center">
                                                     <template v-if='_badge.url_web'>
-                                                        <a :href="_badge.url_web">
-                                                            <p>{{ _badge.name }} ({{ _badge.award_date }})</p>
+                                                        <a :href="_badge.url_web" class="text-body">
+                                                            {{ _badge.name }} ({{ _badge.award_date }})
                                                         </a>
                                                     </template>
                                                     <p v-else>{{ _badge.name }} ({{ _badge.award_date }})</p>

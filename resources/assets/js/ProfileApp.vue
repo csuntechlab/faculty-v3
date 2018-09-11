@@ -1,6 +1,6 @@
 <template>
 	<div>
-      <div class="navwrapper mb-4">
+      <div class="profile-nav">
         <div class="container">
           <ul class="nav nav-metaphor font-weight-bold">
             <li class="nav-item"> <router-link class="nav-link" to="/" active-class="" exact-active-class="active">HOME</router-link> </li>

@@ -1,0 +1,33 @@
+.profile-contact-list {
+    li {
+        position: relative;
+        padding-left: 3rem;
+        margin-bottom: 1.5rem;
+        overflow-wrap: break-word;
+
+        @include media-breakpoint-down(md){
+            margin-bottom: 1rem;
+        }
+        
+        &:last-child {
+            margin-bottom: 0;
+        }
+
+        i {
+            position: absolute;
+            left: 0;
+            top: .5rem;
+            color: $primary;
+        } 
+
+        a {
+            color: $body-color;
+        }
+    }
+}
+
+.profile-degrees-list {
+    li:not(:last-child) {
+        padding-bottom: 1rem;
+    }
+}
