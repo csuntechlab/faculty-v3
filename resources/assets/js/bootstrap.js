@@ -15,7 +15,7 @@ try {
     require('metaphor-theme/node_modules/bootstrap/dist/js/bootstrap.js');
 
     require('metaphor-theme/dist/js/datepicker/datepicker.js');
-    require('@fortawesome/fontawesome-free');
+    require('@fortawesome/fontawesome-free/js/all.js');
 
     window.Helpers = require('./helpers.js');
     window.Waldo = require('./waldo.js');
