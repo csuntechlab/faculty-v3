@@ -14704,6 +14704,10 @@ html {
   border-bottom-color: #d22030;
 }
 
+.nav-metaphor .nav-link.active:focus {
+  border-bottom-color: #d22030;
+}
+
 .nav-metaphor .nav-link:hover {
   border-bottom-color: #3d454d;
 }
