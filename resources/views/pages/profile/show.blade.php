@@ -61,9 +61,11 @@
                         </div>
                         
                         <h1 class="profile-banner__name d-none d-md-block">{{ $user->display_name }}</h1> 
-                        
-                        @if($user->primary_connection)
-                        	<div class="profile-banner__title">{{ $user->primary_connection->pivot->title }}</div>
+
+                        @if($user->primary_connection_line)
+                            <div class="profile-banner__title">
+                                {{ $user->primary_connection_line }}
+                            </div>
                         @endif
                                                 
                         {{--
