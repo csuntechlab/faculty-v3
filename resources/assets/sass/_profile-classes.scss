@@ -63,6 +63,10 @@
     &__head {
         font-weight: 700;
         margin-bottom: 1rem;
+
+        @include media-breakpoint-down(sm){
+            font-size: 1.4rem;
+        }
     }
 
     &__item {
@@ -71,7 +75,7 @@
         padding-bottom: 1.8rem;
 
         @include media-breakpoint-down(xs){
-            background: $white;
+            background: none;
             border-bottom: solid 1px $dark;
         }
 
@@ -84,7 +88,7 @@
         }
 
         &:nth-child(odd) {
-            background: $white;
+            background: none;
         }
     }
 

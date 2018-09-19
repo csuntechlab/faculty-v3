@@ -10737,6 +10737,15 @@ div.datepicker-calendar.default button.datepicker-close {
   color: #000;
 }
 
+body {
+  background: #f8f9fa;
+  color: #545459;
+}
+
+.main {
+  min-height: calc(100vh - 30rem);
+}
+
 .past-courses-list li {
   margin-bottom: 3rem;
   padding-right: 1.5rem;
@@ -10808,6 +10817,12 @@ div.datepicker-calendar.default button.datepicker-close {
   margin-bottom: 1rem;
 }
 
+@media (max-width: 767.98px) {
+  .classes-table__head {
+    font-size: 1.4rem;
+  }
+}
+
 .classes-table__item {
   background: #F0F0F0;
   padding-top: 1.8rem;
@@ -10816,7 +10831,7 @@ div.datepicker-calendar.default button.datepicker-close {
 
 @media (max-width: 575.98px) {
   .classes-table__item {
-    background: #fff;
+    background: none;
     border-bottom: solid 1px #3d454d;
   }
 }
@@ -10830,7 +10845,7 @@ div.datepicker-calendar.default button.datepicker-close {
 }
 
 .classes-table__item:nth-child(odd) {
-  background: #fff;
+  background: none;
 }
 
 .classes-table__time {
@@ -10922,7 +10937,7 @@ div.datepicker-calendar.default button.datepicker-close {
 .profile-contact-list li i {
   position: absolute;
   left: 0;
-  top: .5rem;
+  top: .3rem;
   color: #d22030;
 }
 
@@ -10932,6 +10947,10 @@ div.datepicker-calendar.default button.datepicker-close {
 
 .profile-degrees-list li:not(:last-child) {
   padding-bottom: 1rem;
+}
+
+.badge--profile-interests {
+  white-space: normal;
 }
 
 .profile-banner {
@@ -10944,7 +10963,8 @@ div.datepicker-calendar.default button.datepicker-close {
 @media (max-width: 767.98px) {
   .profile-banner {
     height: auto;
-    padding: 2rem 0;
+    padding: 2rem 0 .75rem;
+    overflow: hidden;
   }
 }
 
@@ -10966,9 +10986,7 @@ div.datepicker-calendar.default button.datepicker-close {
 @media (max-width: 767.98px) {
   .profile-banner__image {
     width: 18rem;
-    margin: 0 auto;
-    display: block;
-    margin-top: 2rem;
+    margin: 0 auto 1.5rem;
   }
 }
 
@@ -10985,13 +11003,6 @@ div.datepicker-calendar.default button.datepicker-close {
   font-size: 1.6rem;
 }
 
-@media (max-width: 767.98px) {
-  .profile-banner__badge {
-    display: block;
-    text-align: center;
-  }
-}
-
 .profile-banner__department {
   font-size: 1.8rem;
   font-weight: 700;
@@ -11001,12 +11012,15 @@ div.datepicker-calendar.default button.datepicker-close {
   .profile-banner__department {
     text-align: center;
     font-size: 1.7rem;
+    position: relative;
+    z-index: 2;
   }
 }
 
 .profile-banner__name {
   color: #fff;
   margin: .8rem 0 0 0;
+  position: relative;
 }
 
 @media (max-width: 991.98px) {
@@ -11018,8 +11032,19 @@ div.datepicker-calendar.default button.datepicker-close {
 @media (max-width: 767.98px) {
   .profile-banner__name {
     text-align: center;
-    margin: 0 0 1rem;
-    font-size: 3.2rem;
+    margin: 0 0 .7rem;
+    padding-bottom: .7rem;
+    font-size: 3rem;
+    line-height: 1;
+  }
+  .profile-banner__name:after {
+    content: " ";
+    position: absolute;
+    bottom: -50rem;
+    left: -100%;
+    height: 50rem;
+    width: 300%;
+    background: rgba(0, 0, 0, 0.65);
   }
 }
 
@@ -11032,6 +11057,7 @@ div.datepicker-calendar.default button.datepicker-close {
   .profile-banner__title {
     text-align: center;
     font-size: 1.7rem;
+    margin-top: 0;
   }
 }
 
@@ -11070,6 +11096,7 @@ div.datepicker-calendar.default button.datepicker-close {
 .profile-nav {
   position: relative;
   margin-bottom: 3rem;
+  background: #fff;
 }
 
 .profile-nav:before {

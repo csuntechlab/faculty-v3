@@ -1,55 +1,8 @@
-// ul{
-//     text-decoration: none;
-//     list-style-type: none;
-//     margin:0;
-//     padding:0;
-//     color:grey;
-//     font-weight:300;
-// }
-// p{
-//     color:grey;
-//     font-weight:300;
-// }
+body {
+    background: $light;
+    color: #545459;
+}
 
-// figure{
-//     display: flex;
-//     align-items: center;
-    
-// }
-
-// h2{
-//     font-size:30px;
-//     font-weight:300;
-//     color:rgb(75, 75, 75);
-// }
-// h3{
-//     font-size:25px;
-//     font-weight:300;
-//     color:rgb(75, 75, 75);
-// }
-// h6{
-//     /* font-size:15px; */
-//     font-weight:500;
-//     color:rgb(75, 75, 75);
-// }
-
-// .fa-phone{
-//     transform: scaleX(-1);
-// }
-
-// .badge{
-//     font-size:13px;
-//     font-family:sans-serif;    
-//     border-radius:3px;
-// }
-
-// .media{
-//     float:left;
-//     .media-heading{
-//         font-size:15px;
-//     }
-// }
-
-// a {
-//     text-decoration: none;
-// }
+.main {
+    min-height: calc(100vh - 30rem);
+}

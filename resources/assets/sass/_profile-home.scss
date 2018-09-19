@@ -17,7 +17,7 @@
         i {
             position: absolute;
             left: 0;
-            top: .5rem;
+            top: .3rem;
             color: $primary;
         } 
 
@@ -31,4 +31,8 @@
     li:not(:last-child) {
         padding-bottom: 1rem;
     }
+}
+
+.badge--profile-interests {
+    white-space: normal;
 }

@@ -36,37 +36,41 @@
         <div class="profile-banner__overlay">
         </div>
         <div class="container">
-                    <!-- pt-5 pt-md-3 pb-4 pb-md-0 -->
             <div class="row align-items-center">
                 <div class="col-12 col-md-4">
-                    <h1 class="profile-banner__name d-block d-md-none text-center">{{ $user->display_name }}</h1>
+                    <!-- <h1 class="profile-banner__name d-block d-md-none text-center">{{ $user->display_name }}</h1>
                     <div class="profile-banner__department text-primary text-center d-block d-md-none">
                         {{ strtoupper($user->rank) }} |
                         @if($user->primary_department)
                             <a href="{{ facultyUrl('departments/' . $user->primary_department->department_id) }}">{{ $user->primary_department->name }}</a>
                         @endif
-                    </div>
+                    </div> -->
                     <img class="profile-banner__image img-fluid mx-auto d-block" src="{{ asset('imgs/profile-default.png') }}" alt="Photo of {{ $user->display_name }}" id="profile-image">
                 </div>
                 <div class="col-12 col-md-8">
                     <div class="profile-banner__content">
-                        
-                        <div class="profile-banner__department text-primary d-none d-md-block">{{ strtoupper($user->rank) }} |
-                        	@if($user->primary_department)
-	                        	<a href="{{ facultyUrl('departments/' . $user->primary_department->department_id) }}">{{ $user->primary_department->name }}</a>
-	                        @endif
-	                        @if($user->is_csun_alum)
-	                        	<a class="profile-banner__badge badge badge-primary px-2 ml-2" href="#">CSUN Alum<i class="fas fa-graduation-cap ml-2"></i></a>
-	                        @endif
-                        </div>
-                        
-                        <h1 class="profile-banner__name d-none d-md-block">{{ $user->display_name }}</h1> 
-
-                        @if($user->primary_connection_line)
-                            <div class="profile-banner__title">
-                                {{ $user->primary_connection_line }}
+                        <div class="row">
+                            <div class="col-12 order-2 order-md-1">
+                                <div class="profile-banner__department text-primary">{{ strtoupper($user->rank) }} |
+                                    @if($user->primary_department)
+                                        <a href="{{ facultyUrl('departments/' . $user->primary_department->department_id) }}">{{ $user->primary_department->name }}</a>
+                                    @endif
+                                    @if($user->is_csun_alum)
+                                        <a class="profile-banner__badge badge badge-primary px-2 ml-2" href="#">CSUN Alum<i class="fas fa-graduation-cap ml-2"></i></a>
+                                    @endif
+                                </div>
                             </div>
-                        @endif
+                            <div class="col-12 order-1 order-md-2">
+                                <h1 class="profile-banner__name">{{ $user->display_name }}</h1> 
+                            </div>
+                            @if($user->primary_connection_line)
+                                <div class="col-12 order-3">
+                                    <div class="profile-banner__title">
+                                        {{ $user->primary_connection_line }}
+                                    </div>
+                                </div>
+                            @endif
+                        </div>
                                                 
                         {{--
                         <ul class="profile-banner__icons list-unstyled">

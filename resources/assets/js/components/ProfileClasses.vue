@@ -96,12 +96,12 @@
                                                 </div>
                                                 <!-- Days -->
                                                 <div class="col-sm-1 col-12 pl-4 pl-sm-0">
-                                                    <span class="d-inline d-sm-none font-weight-bold font-italic">Days: </span>
+                                                    <span class="d-inline d-sm-none font-weight-bold">Days: </span>
                                                     {{ _meeting.formatted_days }}
                                                 </div>
                                                 <!-- Time -->
                                                 <div class="col-sm-3 col-12 pr-0">
-                                                    <span class="d-inline d-sm-none font-weight-bold font-italic">Time: </span>
+                                                    <span class="d-inline d-sm-none font-weight-bold">Time: </span>
                                                     <span class="classes-table__time">{{ _meeting.formatted_duration }}</span>
                                                 </div>
                                                 <!-- Location -->
@@ -112,7 +112,7 @@
                                                 </div>
                                                 <!-- Info -->
                                                 <div class="col-sm-2 col-12 text-sm-center text-left">
-                                                    <span class="d-inline d-sm-none font-weight-bold font-italic float-left">Info: </span>
+                                                    <span class="d-inline d-sm-none font-weight-bold float-left">Info: </span>
                                                     <div class="float-left float-sm-none ml-3 mt-2 ml-sm-0 mt-sm-0">
                                                         <a class="d-block d-sm-none classes-table__info-icon" href="javascript:void(0);" data-target="modal" data-modal="#waldoMap" data-waldo-event-trigger="click">
                                                             <i class="fas fa-map-marker-alt"></i>
@@ -160,6 +160,7 @@
                         <template v-if='current_term'>
 
                             <div class="mb-3 mt-4 mb-md-5 clearfix">
+                                <hr class="hr-metaphor d-none d-sm-block d-md-none">
                                 <h3 class="d-none d-md-inline">Office Hours</h3>
                                 <h3 class="d-inline d-md-none font-display h5">Office Hours</h3>
 
@@ -212,12 +213,12 @@
                                             </div>
                                                 <!-- Days -->
                                             <div class="col-sm-1 col-12 pl-4 pl-sm-0">
-                                                <span class="d-inline d-sm-none font-weight-bold font-italic">Days: </span>
+                                                <span class="d-inline d-sm-none font-weight-bold">Days: </span>
                                                 {{ _office_hour.formatted_days }}
                                             </div>
                                                 <!-- Time -->
                                             <div class="col-sm-3 col-12 pr-0">
-                                                <span class="d-inline d-sm-none font-weight-bold font-italic">Time: </span>
+                                                <span class="d-inline d-sm-none font-weight-bold">Time: </span>
                                                 <span v-if='!_office_hour.appointment_only' class="classes-table__time">
                                                     {{ _office_hour.duration }}
                                                 </span>
@@ -240,7 +241,7 @@
                                             </div>
                                                 <!-- Info -->
                                             <div class="col-sm-2 col-12 text-sm-center text-left">
-                                                <span class="d-inline d-sm-none font-weight-bold font-italic float-left mr-3">Info: </span>
+                                                <span class="d-inline d-sm-none font-weight-bold float-left mr-3">Info: </span>
                                                 <a class="classes-table__info-icon" href="#">
                                                     <i class="fas fa-calendar-alt"></i>
                                                     <span class="d-inline d-sm-none text-underline">Download iCal File</span>

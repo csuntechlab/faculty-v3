@@ -80,7 +80,7 @@
                             <div class="mb-3 pb-3 ">
                                 <h6 class="h5 mb-3">INTERESTS</h6>
                                 <template v-for='_interest in interests'>
-                                    <span class="badge badge-primary py-2 px-2 my-1 mr-1">
+                                    <span class="badge badge-primary badge--profile-interests py-2 px-2 my-1 mr-1">
                                         {{ _interest.title }}
                                     </span>
                                 </template>

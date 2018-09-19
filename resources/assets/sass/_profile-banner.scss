@@ -6,7 +6,8 @@
 
     @include media-breakpoint-down(sm){
         height:auto;
-        padding: 2rem 0;
+        padding: 2rem 0 .75rem;
+        overflow: hidden;
     }
 
     &__overlay { 
@@ -25,9 +26,7 @@
 
         @include media-breakpoint-down(sm){
             width: 18rem;
-            margin: 0 auto;
-            display:block;
-            margin-top: 2rem;
+            margin: 0 auto 1.5rem;
         }
     }
 
@@ -42,26 +41,24 @@
 
     &__badge {
         font-size: 1.6rem;
-
-        @include media-breakpoint-down(sm){
-            display:block;
-            text-align:center;
-        }
     }
 
     &__department{ 
         font-size: 1.8rem;
         font-weight: 700;
-
+        
         @include media-breakpoint-down(sm){
             text-align: center;
             font-size: 1.7rem;
+            position: relative;
+            z-index: 2;
         }
     }
 
     &__name {  
         color: $white;
         margin: .8rem 0 0 0;
+        position: relative;
 
         @include media-breakpoint-down(md){
             font-size: 3.6rem;
@@ -69,8 +66,21 @@
 
         @include media-breakpoint-down(sm){
             text-align: center;
-            margin: 0 0 1rem;
-            font-size: 3.2rem;
+            margin: 0 0 .7rem;
+            padding-bottom: .7rem;
+            font-size: 3rem;
+            line-height: 1;
+
+            &:after {
+                content: " ";
+                position: absolute;
+                bottom: -50rem;
+                left: -100%;
+                height: 50rem;
+                width: 300%;
+                background: rgba(0,0,0,.65);
+            }
+
         }
     }
 
@@ -81,6 +91,7 @@
         @include media-breakpoint-down(sm){
             text-align: center;
             font-size: 1.7rem;
+            margin-top: 0;
         }
     }
 

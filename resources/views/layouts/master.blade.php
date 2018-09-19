@@ -24,8 +24,10 @@
 
 		{{-- FACULTY CONTENT --}}
 		@include('layouts.partials.header')
-			@yield('content')
-			@yield('modal')
+			<main class="main">
+				@yield('content')
+				@yield('modal')
+			</main>
 		@include('layouts.partials.footer')
 
 		{{-- SCRIPTS --}}
