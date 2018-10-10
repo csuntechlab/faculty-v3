@@ -3,7 +3,7 @@
 
 @section('content')
 
-<main class="main py-5 my-5">
+<section class="py-3 py-md-5 my-5">
     <div class="container">
         <div class="row">
             <div class="col">
@@ -35,11 +35,11 @@
                 
                 <div class="indexSearch mb-5">
                     <div class="row justify-content-center">
-                        <div class="col-lg-7 col-md-8 col-9 pr-0">
+                        <div class="col-lg-7 col-md-8 col-8 pr-0">
                             <input type="text" class="form-control form-control-lg pr-0 indexSearch__input" placeholder="Search by name..." aria-label="Faculty Name" aria-describedby="btn-search">
                         </div>
-                        <div class="col-lg-1 col-md-2 col-3 pl-0">
-                            <button type="button" class="indexSearch__btn btn btn-lg btn-primary btn-block" id="btn-search"><i class="fas fa-search"></i></button>
+                        <div class="col-lg-2 col-md-2 col-sm-3 col-4 pl-0">
+                            <button type="button" class="indexSearch__btn btn btn-lg btn-primary btn-block" id="btn-search"><i class="fas fa-search"></i> Search</button>
                         </div>
                     </div>
                 </div>
@@ -50,8 +50,7 @@
             </div>
         </div>
     </div>
-</main>
-
+</section>
 @stop
 
 @section('page-specific-scripts')

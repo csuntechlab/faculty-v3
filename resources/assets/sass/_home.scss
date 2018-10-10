@@ -17,9 +17,15 @@
             position: relative;
             top: -1.5rem;
             margin: 0 1.5rem; 
+            font-size: 1.6rem;
+
+            @include media-breakpoint-down(sm) {
+                font-size: 1.4rem;
+            }
 
             @include media-breakpoint-down(xs) {
-                margin: 0 0.3rem
+                margin: 0 0.3rem;
+                font-size: 1rem;
             }
         }
     }
@@ -41,6 +47,22 @@
     &__btn {
         border-bottom-left-radius: 0;
         border-top-left-radius: 0;
+
+        svg {
+            margin-right: .5rem;
+        
+            @include media-breakpoint-down(md) {
+                font-size: 1.6rem;
+                margin-right: 0rem;
+                margin-left: -0.2rem;
+                position: relative;
+                top: -0.15rem;            
+            }
+
+            @media (max-width: 374px) {
+                display: none;
+            }
+        }
     }
 
     &__input {
