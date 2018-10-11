@@ -1,0 +1,21 @@
+.card-department {
+    &:hover {
+        text-decoration: none;
+    }
+
+    .card {
+        height:11rem;
+        border:solid 1px $light-gray;
+
+        &:hover{ 
+            border:solid 2px $primary;
+        }
+    }
+
+    .card-body {
+        display: flex;
+        align-items:center;
+        justify-content: center;
+        text-align: center;
+    }
+}

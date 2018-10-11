@@ -14,7 +14,7 @@
     "cross-env": "^5.1",
     "laravel-mix": "^2.0",
     "lodash": "^4.17.4",
-    "metaphor-theme": "^2.0.9",
+    "metaphor-theme": "^2.0.12",
     "vue": "^2.5.7"
   },
   "dependencies": {

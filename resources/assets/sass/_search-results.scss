@@ -1,0 +1,88 @@
+.searchBanner {
+    &__btn {
+        border-bottom-left-radius: 0;
+        border-top-left-radius: 0;
+
+        svg {
+            margin-right: .5rem;
+
+            @media (max-width: 444px) {
+                display: none;
+            }
+        }
+    }
+
+    &__input {
+        border-bottom-right-radius: 0;
+        border-top-right-radius: 0;
+    }
+}
+
+.profile-card{
+    height: 100%;;
+    border-radius:5px;
+    border: 1px solid $light-gray;
+    padding-top: 5px;
+    padding-bottom: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 350px;
+    color: $body-color;
+
+    &:hover{ 
+        border:solid 1px $csunred;
+        text-decoration: none;
+        color: $body-color;
+
+        .card-title {
+            color: $primary;
+        }
+    }
+
+    &__img {
+        width: 30%;
+        border-radius: 50%;
+    }
+}
+
+.departmentHeader {
+    border-bottom: 1px solid $light-gray;
+
+    &__title {
+        border-bottom: 1px solid $light-gray;
+        padding-bottom: 1rem;
+        margin-bottom: 0;
+
+        @include media-breakpoint-down(sm) {
+            text-align: center;
+        }
+    }
+
+    &__itemWrapper {
+        margin: 0 1.5rem; 
+        padding: 1rem 0;
+    }
+    
+    &__item {
+        display:inline-block;
+        white-space: nowrap;
+        margin: 0.5rem 0;
+
+        @include media-breakpoint-down(sm) {
+            display: block;
+            width: 50%;
+            float: left;
+            margin: 0.3rem 0;
+        }
+
+        @include media-breakpoint-down(xs) {
+            width: 100%;
+            float: none;
+            text-align: center;
+        }
+
+        svg {
+            margin-right: .5rem;
+        } 
+    }
+}
