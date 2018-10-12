@@ -1,5 +1,8 @@
 @extends('layouts.master')
 
+@section('title')
+{{ config('app.name') }}
+@stop
 
 @section('content')
 

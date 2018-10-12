@@ -4,7 +4,7 @@
         <a class="navbar-brand" href="{{ url('/') }}">
             <span class="sr-only">CSUN Logo</span>
             <span class="navbar-brand__subbrand">
-            Faculty
+            {{ config('app.name') }}
             <small>Beta</small>
             </span>
         </a>

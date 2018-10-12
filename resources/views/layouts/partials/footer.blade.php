@@ -7,7 +7,7 @@
                 <img class="d-block mx-auto mx-md-0 img-fluid footer-metaphor__emblem mb-3 mb-md-0" src="//s3-us-west-2.amazonaws.com/csun-metalab/metaphor/dist/img/csun-emblem.svg" alt="CSUN Emblem">
             </div>
             <div class="col-12 col-md-9">
-                <h6>CSUN Faculty </h6>
+                <h6>{{ config('app.name') }} </h6>
                 <div>
                 &copy; California State University, Northridge <br> 
                 18111 Nordhoff Street, Northridge, CA 91330 <br>
