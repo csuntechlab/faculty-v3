@@ -19,9 +19,8 @@ Route::get('/search', function () {
     return view('pages.search-results');
 })->name('search');
 
-Route::get('/departments', function () {
-    return view('pages.departments');
-})->name('departments');
+Route::get('/departments', 'DepartmentController@all')
+	->name('departments');
 
 Route::get('/departments/{id}/people', function () {
     return view('pages.search-results');

@@ -1,5 +1,9 @@
 @extends('layouts.master')
 
+@section('title')
+Departments
+@stop
+
 
 @section('content')
 
@@ -24,66 +28,17 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-4 col-sm-6 col-12 pb-3">
-                <a href="/search" class="card-department">
-                    <div class="card">
-                        <div class="card-body">
-                            <h2 class="card-title h6 font-weight-normal">Academic First Year Experiences</h2>
-                        </div>                           
-                    </div>
-                </a>
-            </div>
-
-            <div class="col-lg-4 col-sm-6 col-12 pb-3">
-                <a href="/search" class="card-department">
-                    <div class="card">
-                        <div class="card-body">
-                            <h2 class="card-title h6 font-weight-normal">Acounting & Information Systems</h2>
-                        </div>                           
-                    </div>
-                </a>
-            </div>
-
-            <div class="col-lg-4 col-sm-6 col-12 pb-3">
-                <a href="/search" class="card-department">
-                    <div class="card">
-                        <div class="card-body">
-                            <h2 class="card-title h6 font-weight-normal">African Studies</h2>
-                        </div>                           
-                    </div>
-                </a>
-            </div>
-
-            <div class="col-lg-4 col-sm-6 col-12 pb-3">
-                <a href="/search" class="card-department">
-                    <div class="card">
-                        <div class="card-body">
-                            <h2 class="card-title h6 font-weight-normal">Asian American Studies</h2>
-                        </div>                           
-                    </div>
-                </a>
-            </div>
-
-            <div class="col-lg-4 col-sm-6 col-12 pb-3">
-                <a href="/search" class="card-department">
-                    <div class="card">
-                        <div class="card-body">
-                            <h2 class="card-title h6 font-weight-normal">American Indian Studies Program</h2>
-                        </div>                           
-                    </div>
-                </a>
-            </div>
-
-            <div class="col-lg-4 col-sm-6 col-12 pb-3">
-                <a href="/search" class="card-department">
-                    <div class="card">
-                        <div class="card-body">
-                            <h2 class="card-title h6 font-weight-normal">Anthropology</h2>
-                        </div>                           
-                    </div>
-                </a>
-            </div>
-
+            @foreach($departments as $department)
+                <div class="col-lg-4 col-sm-6 col-12 pb-3">
+                    <a href="{{ route('departments.people', ['id' => $department->department_id]) }}" class="card-department">
+                        <div class="card">
+                            <div class="card-body">
+                                <h2 class="card-title h6 font-weight-normal">{{ $department->name }}</h2>
+                            </div>                           
+                        </div>
+                    </a>
+                </div>
+            @endforeach
         </div>
 
         <div class="pt-5 mt-lg-4">
