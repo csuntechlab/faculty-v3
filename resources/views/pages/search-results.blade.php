@@ -108,98 +108,58 @@
             </div>
         </div>
 
-        <div class="row text-center py-2">
-            <div class="col-lg-4 col-sm-6 col-12 py-2 mb-4" >
-                <a href="#" class="card profile-card">
-                    <img class="profile-card__img d-block mx-auto mt-4"  src="https://cdn.metalab.csun.edu/media/faculty/steven.fitzgerald/avatar.jpg" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Steven Fitzgerald</h5>
-                        <div class="card-text">Professor</div>
-                        <div>Computer Science</div>
-                    </div>
-                </a>
-            </div>
-
-            <div class="col-lg-4 col-sm-6 col-12 py-2 mb-4" >
-                <a href="#" class="card profile-card">
-                    <img class="profile-card__img d-block mx-auto mt-4"  src="https://cdn.metalab.csun.edu/media/faculty/steven.fitzgerald/avatar.jpg" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Cheryl Spector</h5>
-                        <div class="card-text">Professor</div>
-                        <div>English</div>
-                    </div>
-                </a>
-            </div>
-
-            <div class="col-lg-4 col-sm-6 col-12 py-2 mb-4" >
-                <a href="#" class="card profile-card">
-                    <img class="profile-card__img d-block mx-auto mt-4"  src="https://cdn.metalab.csun.edu/media/faculty/steven.fitzgerald/avatar.jpg" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Nerces Kevork Kazandjian</h5>
-                        <div class="card-text">Faculty</div>
-                        <div>Computer Science</div>
-                    </div>
-                </a>
-            </div>
-
-
-            <div class="col-lg-4 col-sm-6 col-12 py-2 mb-4" >
-                <a href="#" class="card profile-card">
-                    <img class="profile-card__img d-block mx-auto mt-4"  src="https://cdn.metalab.csun.edu/media/faculty/steven.fitzgerald/avatar.jpg" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Bobbie (Roberta) Emetu</h5>
-                        <div class="card-text">Assistant Professor</div>
-                        <div>Health Sciences</div>
-                    </div>
-                </a>
-            </div>
-
-            <div class="col-lg-4 col-sm-6 col-12 py-2 mb-4" >
-                <a href="#" class="card profile-card">
-                    <img class="profile-card__img d-block mx-auto mt-4"  src="https://cdn.metalab.csun.edu/media/faculty/steven.fitzgerald/avatar.jpg" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Cati Acevedo-Torres</h5>
-                        <div class="card-text">Lecturer</div>
-                        <div>Finance, Financial Planning, and Insurance</div>
-                    </div>
-                </a>
-            </div>
-
-            <div class="col-lg-4 col-sm-6 col-12 py-2 mb-4" >
-                <a href="#" class="card profile-card">
-                    <img class="profile-card__img d-block mx-auto mt-4"  src="https://cdn.metalab.csun.edu/media/faculty/steven.fitzgerald/avatar.jpg" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Thomas J Abraham</h5>
-                        <div class="card-text">Lecturer</div>
-                        <div>Educational Leadership & Policy Studies</div>
-                    </div>
-                </a>
-            </div>
-        </div>
-
-        <div class="row justify-content-center my-3 my-md-5">
-            <div class="col-4">
-                <nav aria-label="Page navigation example">
-                <ul class="pagination pagination-lg justify-content-center">
-                    <li class="page-item pr-2">
-                        <a class="page-link" href="#" aria-label="Previous">
-                            <span aria-hidden="true">&laquo;</span>
-                            <span class="sr-only">Previous</span>
+        @if($people->count() > 0)
+            <div class="row text-center py-2">
+                @foreach($people as $person)
+                    <div class="col-lg-4 col-sm-6 col-12 py-2 mb-4" >
+                        <a href="{{ route('profile', ['uri' => $person->uri]) }}" class="card profile-card">
+                            <img class="profile-card__img d-block mx-auto mt-4"  src="https://cdn.metalab.csun.edu/media/faculty/steven.fitzgerald/avatar.jpg" alt="Card image cap">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ $person->display_name }}</h5>
+                                <div class="card-text">{{ $person->rank }}</div>
+                                <div>
+                                    @if($type == 'department_faculty')
+                                        {{ $department->name }}
+                                    @else
+                                        @if(!empty($person->primary_connection))
+                                            {{ $person->primary_connection->name }}
+                                        @elseif(!empty($person->primary_department))
+                                            {{ $person->primary_department->name }}
+                                        @endif
+                                    @endif
+                                </div>
+                            </div>
                         </a>
-                    </li>
-                    <li class="page-item px-2"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item px-2"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item px-2"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item pl-2">
-                        <a class="page-link" href="#" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
-                            <span class="sr-only">Next</span>
-                        </a>
-                    </li>
-                </ul>
-                </nav>
+                    </div>
+                @endforeach
             </div>
-        </div>
+        @endif
+
+        @if($people->count() > 0)
+            <div class="row justify-content-center my-3 my-md-5">
+                <div class="col-4">
+                    <nav aria-label="Page navigation example">
+                    <ul class="pagination pagination-lg justify-content-center">
+                        <li class="page-item pr-2">
+                            <a class="page-link" href="#" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                        </li>
+                        <li class="page-item px-2"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item px-2"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item px-2"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item pl-2">
+                            <a class="page-link" href="#" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </li>
+                    </ul>
+                    </nav>
+                </div>
+            </div>
+        @endif
     </div>
 </section>
 @stop
