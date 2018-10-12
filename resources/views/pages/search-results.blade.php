@@ -76,7 +76,7 @@
                         @endif
                         @if(!empty($department->contact->telephone))
                             <div class="departmentHeader__item pr-3">
-                                <i class="fas fa-phone"></i>{{ formatPhoneNumber($department->contact->telephone) }}
+                                <a href="tel:{{ $department->contact->telephone }}"><i class="fas fa-phone"></i>{{ formatPhoneNumber($department->contact->telephone) }}</a>
                             </div>
                         @endif
                         @if(!empty($department->contact->website))
