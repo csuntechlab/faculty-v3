@@ -12,6 +12,16 @@ class Department extends Model
     public $incrementing = false;
 
     /**
+     * Returns a HasOne representing the contact information (if any) for
+     * this department.
+     *
+     * @return HasOne
+     */
+    public function contact() {
+    	return $this->hasOne('App\Models\Contact', 'user_id', 'department_id');
+    }
+
+    /**
      * Returns a BelongsToMany representing the set of active faculty members
      * in this department.
      *
@@ -19,7 +29,7 @@ class Department extends Model
      */
     public function faculty() {
     	return $this->belongsToMany('App\Models\User', 'department_user', 'department_id', 'user_id')
-			->wherePivotIn('role_name', ['faculty', 'emeritus']);
-    		//->wherePivot('status', 'Active');
+			->wherePivotIn('role_name', ['faculty', 'emeritus'])
+    		->wherePivot('status', 'Active');
     }
 }

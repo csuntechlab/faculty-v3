@@ -1,5 +1,13 @@
 @extends('layouts.master')
 
+@section('title')
+    @if(!empty($title))
+        {{ $title }}
+    @else
+        All Faculty
+    @endif
+@stop
+
 
 @section('content')
 <div class="pb-1 bg-white">
@@ -8,8 +16,13 @@
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ route('home') }}"><i class="fas fa-home"></i> Home</a></li>
                 <li class="breadcrumb-item"><a href="{{ route('departments') }}">All Departments</a></li>
-                <li class="breadcrumb-item active">Computer Science</li>
-                <!-- <li class="breadcrumb-item active">Search Results: "Joe Smith"</li> -->
+                @if($type == 'department_faculty')
+                    <li class="breadcrumb-item active">{{ $department->name }}</li>
+                @elseif($type == 'search_results')
+                    <li class="breadcrumb-item active">Search Results: "{{ $query }}"</li>
+                @else
+                    <li class="breadcrumb-item active">All Faculty</li>
+                @endif
             </ol>
         </nav>
 
@@ -21,7 +34,7 @@
         {!! Form::open(['route' => 'search', 'method' => 'GET']) !!}
         <div class="row justify-content-center">
             <div class="col-lg-6 col-md-8 col-sm-8 col-7 pr-0">
-                <input type="text" name="q" placeholder="Search by Name..." class="form-control d-inline searchBanner__input">
+                <input type="text" name="q" value="{{ !empty($query) ? $query : '' }}" placeholder="Search by Name..." class="form-control d-inline searchBanner__input">
             </div>
             <div class="col-md-2 col-sm-3 col-3 pl-0">
                 <button type="button" class="btn btn-primary btn-block searchBanner__btn"><i class="fas fa-search"></i>  Search</button>
@@ -41,35 +54,56 @@
 
 <section>
     <div class="container py-5">
-        <div class="departmentHeader mb-sm-5 mb-4 clearfix">
-            <h3 class="departmentHeader__title">Computer Science</h3>
-            <div class="departmentHeader__itemWrapper clearfix">
-                <div class="departmentHeader__item pr-3">
-                    <i class="far fa-building"></i>Jacaranda Hall
-                </div>
-                <div class="departmentHeader__item pr-3">
-                    <i class="fas fa-map-marker-alt"></i>JD 4503
-                </div>
-                <div class="departmentHeader__item pr-3">
-                    <i class="far fa-envelope"></i>91330-8261
-                </div>
-                <div class="departmentHeader__item pr-3">
-                    <i class="fas fa-phone"></i>(818) 677-3398
-                </div>
-                <div class="departmentHeader__item pr-3">
-                    <a href="#"><i class="fas fa-globe-americas"></i>Website</a>
-                </div>
-                <div class="departmentHeader__item pr-3">
-                    <a href="#"><i class="fas fa-envelope"></i>compsci@csun.edu</a>  
-                </div>
+        @if($type == 'department_faculty')
+            <div class="departmentHeader mb-sm-5 mb-4 clearfix">
+                <h3 class="departmentHeader__title">{{ $department->name }}</h3>
+                @if(!empty($department->contact))
+                    <div class="departmentHeader__itemWrapper clearfix">
+                        @if(!empty($department->contact->location))
+                            <div class="departmentHeader__item pr-3">
+                                <i class="far fa-building"></i>{{ $department->contact->location }}
+                            </div>
+                        @endif
+                        @if(!empty($department->contact->office))
+                            <div class="departmentHeader__item pr-3">
+                                <i class="fas fa-map-marker-alt"></i>{{ $department->contact->office }}
+                            </div>
+                        @endif
+                        @if(!empty($department->contact->mail_drop))
+                            <div class="departmentHeader__item pr-3">
+                                <i class="far fa-envelope"></i>{{ $department->contact->mail_drop }}
+                            </div>
+                        @endif
+                        @if(!empty($department->contact->telephone))
+                            <div class="departmentHeader__item pr-3">
+                                <i class="fas fa-phone"></i>{{ formatPhoneNumber($department->contact->telephone) }}
+                            </div>
+                        @endif
+                        @if(!empty($department->contact->website))
+                            <div class="departmentHeader__item pr-3">
+                                <a href="{{ $department->contact->website }}"><i class="fas fa-globe-americas"></i>Website</a>
+                            </div>
+                        @endif
+                        @if(!empty($department->contact->email))
+                            <div class="departmentHeader__item pr-3">
+                                <a href="mailto:{{ $department->contact->email }}"><i class="fas fa-envelope"></i>{{ $department->contact->email }}</a>  
+                            </div>
+                        @endif
+                    </div>
+                @endif
             </div>
-        </div>
+        @endif
 
-         <div class="row">
+        <div class="row">
             <div class="col-sm-12 text-center text-md-left">
                 <h5 class="mb-3">
-                    66 Faculty Members <span class="font-weight-normal">in Computer Science</span>
-                    <!--18 Results <span class="font-weight-normal">for "Joe Smith"</span> -->
+                    @if($type == 'department_faculty')
+                        {{ $people->count() }} Faculty Member(s) <span class="font-weight-normal">in {{ $department->name }}</span>
+                    @elseif($type == 'search_results')
+                        {{ $people->count() }} Result(s) <span class="font-weight-normal">for "{{ $query }}"</span>
+                    @else
+                        {{ $people->count() }} Faculty Members
+                    @endif
                 </h5>
             </div>
         </div>
