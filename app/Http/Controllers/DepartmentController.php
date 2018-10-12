@@ -20,4 +20,21 @@ class DepartmentController extends Controller
 
         return view('pages.departments', compact('departments'));
     }
+
+    /**
+     * Displays the set of faculty in a given academic department.
+     *
+     * @param string $id The ID of the academic department
+     * @return View
+     */
+    public function faculty($id) {
+        $department = Department::with([
+            'faculty' => function($q) {
+                $q->orderBy('display_name', 'ASC');
+            },
+        ])
+        ->findOrFail($id);
+        
+        return view('pages.search-results', compact('department'));
+    }
 }

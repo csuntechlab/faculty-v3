@@ -30,7 +30,7 @@ Departments
         <div class="row">
             @foreach($departments as $department)
                 <div class="col-lg-4 col-sm-6 col-12 pb-3">
-                    <a href="{{ route('departments.people', ['id' => $department->department_id]) }}" class="card-department">
+                    <a href="{{ route('departments.faculty', ['id' => $department->department_id]) }}" class="card-department">
                         <div class="card">
                             <div class="card-body">
                                 <h2 class="card-title h6 font-weight-normal">{{ $department->name }}</h2>

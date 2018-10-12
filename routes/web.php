@@ -22,9 +22,8 @@ Route::get('/search', function () {
 Route::get('/departments', 'DepartmentController@all')
 	->name('departments');
 
-Route::get('/departments/{id}/people', function () {
-    return view('pages.search-results');
-})->name('departments.people');
+Route::get('/departments/{id}/faculty', 'DepartmentController@faculty')
+	->name('departments.faculty');
 
 Route::get('{uri}', 'ProfileController@show')
 	->name('profile');
