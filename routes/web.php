@@ -13,14 +13,19 @@
 
 Route::get('/', function () {
     return view('pages.index');
-});
+})->name('home');
 
 Route::get('/search', function () {
     return view('pages.search-results');
-});
+})->name('search');
 
 Route::get('/departments', function () {
     return view('pages.departments');
-});
+})->name('departments.all');
 
-Route::get('{uri}', 'ProfileController@show');
+Route::get('/departments/{id}/people', function () {
+    return view('pages.search-results');
+})->name('departments.people');
+
+Route::get('{uri}', 'ProfileController@show')
+	->name('profile');
