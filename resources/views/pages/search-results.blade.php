@@ -19,7 +19,7 @@
                 @if($type == 'department_faculty')
                     <li class="breadcrumb-item active">{{ $department->name }}</li>
                 @elseif($type == 'search_results')
-                    <li class="breadcrumb-item active">Search Results: "{{ $query }}"</li>
+                    <li class="breadcrumb-item active">Search Results: &quot;{{ $query }}&quot;</li>
                 @else
                     <li class="breadcrumb-item active">All Faculty</li>
                 @endif
@@ -100,7 +100,7 @@
                     @if($type == 'department_faculty')
                         {{ $people->count() }} Faculty Member(s) <span class="font-weight-normal">in {{ $department->name }}</span>
                     @elseif($type == 'search_results')
-                        {{ $people->count() }} Result(s) <span class="font-weight-normal">for "{{ $query }}"</span>
+                        {{ $people->count() }} Result(s) <span class="font-weight-normal">for &quot;{{ $query }}&quot;</span>
                     @else
                         {{ $people->count() }} Faculty Members
                     @endif
@@ -113,7 +113,10 @@
                 @foreach($people as $person)
                     <div class="col-lg-4 col-sm-6 col-12 py-2 mb-4" >
                         <a href="{{ route('profile', ['uri' => $person->uri]) }}" class="card profile-card">
-                            <img class="profile-card__img d-block mx-auto mt-4"  src="https://cdn.metalab.csun.edu/media/faculty/steven.fitzgerald/avatar.jpg" alt="Card image cap">
+                            <img class="profile-card__img d-block mx-auto mt-4"
+                                 data-profile-uri="{{ $person->uri }}" 
+                                 src="https://cdn.metalab.csun.edu/media/faculty/steven.fitzgerald/avatar.jpg"
+                                 alt="Card image for {{ $person->display_name }}">
                             <div class="card-body">
                                 <h5 class="card-title">{{ $person->display_name }}</h5>
                                 <div class="card-text">{{ $person->rank }}</div>
