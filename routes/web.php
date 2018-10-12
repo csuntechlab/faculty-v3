@@ -21,7 +21,7 @@ Route::get('/search', function () {
 
 Route::get('/departments', function () {
     return view('pages.departments');
-})->name('departments.all');
+})->name('departments');
 
 Route::get('/departments/{id}/people', function () {
     return view('pages.search-results');

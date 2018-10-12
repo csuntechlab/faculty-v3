@@ -6,8 +6,8 @@
     <div class="container">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ url('/') }}"><i class="fas fa-home"></i> Home</a></li>
-                <li class="breadcrumb-item"><a href="{{ url('departments') }}">All Departments</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('home') }}"><i class="fas fa-home"></i> Home</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('departments') }}">All Departments</a></li>
                 <li class="breadcrumb-item active">Computer Science</li>
                 <!-- <li class="breadcrumb-item active">Search Results: "Joe Smith"</li> -->
             </ol>
@@ -18,17 +18,19 @@
 
 <section class="searchBanner bg-white pb-5 pt-4">
     <div class="container">
+        {!! Form::open(['route' => 'search', 'method' => 'GET']) !!}
         <div class="row justify-content-center">
             <div class="col-lg-6 col-md-8 col-sm-8 col-7 pr-0">
-                <input type="text" placeholder="Search by Name..." class="form-control d-inline searchBanner__input">
+                <input type="text" name="q" placeholder="Search by Name..." class="form-control d-inline searchBanner__input">
             </div>
             <div class="col-md-2 col-sm-3 col-3 pl-0">
                 <button type="button" class="btn btn-primary btn-block searchBanner__btn"><i class="fas fa-search"></i>  Search</button>
             </div>
         </div>
+        {!! Form::close() !!}
         <div class="row">
             <div class="col-12 pt-5 text-center" >
-                <a href="{{ url('departments') }}">Browse By Department</a> 
+                <a href="{{ route('departments') }}">Browse By Department</a> 
             </div>
         </div>
     </div>

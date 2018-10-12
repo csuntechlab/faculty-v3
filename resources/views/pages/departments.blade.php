@@ -8,7 +8,7 @@
     <div class="container">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/"><i class="fas fa-home"></i> Home</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('home') }}"><i class="fas fa-home"></i> Home</a></li>
                 <li class="breadcrumb-item active">All Departments</li>
             </ol>
         </nav>
@@ -89,7 +89,7 @@
         <div class="pt-5 mt-lg-4">
             <div class="row">
                 <div class="col-12">
-                    <a href="{{ url('search') }}">&#8592; Back to Search</a>
+                    <a href="{{ route('search') }}">&#8592; Back to Search</a>
                 </div>
             </div>
         </div>
