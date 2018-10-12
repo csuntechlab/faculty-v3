@@ -89,7 +89,7 @@
         <div class="pt-5 mt-lg-4">
             <div class="row">
                 <div class="col-12">
-                    <a href="/">&#8592; Back to Search</a>
+                    <a href="{{ url('search') }}">&#8592; Back to Search</a>
                 </div>
             </div>
         </div>

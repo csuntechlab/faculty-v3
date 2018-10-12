@@ -6,8 +6,8 @@
     <div class="container">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/"><i class="fas fa-home"></i> Home</a></li>
-                <li class="breadcrumb-item"><a href="/departments">All Departments</a></li>
+                <li class="breadcrumb-item"><a href="{{ url('/') }}"><i class="fas fa-home"></i> Home</a></li>
+                <li class="breadcrumb-item"><a href="{{ url('departments') }}">All Departments</a></li>
                 <li class="breadcrumb-item active">Computer Science</li>
                 <!-- <li class="breadcrumb-item active">Search Results: "Joe Smith"</li> -->
             </ol>
@@ -28,7 +28,7 @@
         </div>
         <div class="row">
             <div class="col-12 pt-5 text-center" >
-                <a href="/departments">Browse By Department</a> 
+                <a href="{{ url('departments') }}">Browse By Department</a> 
             </div>
         </div>
     </div>

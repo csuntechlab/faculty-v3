@@ -1,7 +1,7 @@
 <div class="bg-white">
     <div class="container py-3">
         <nav class="navbar navbar-metaphor">
-        <a class="navbar-brand" href="/">
+        <a class="navbar-brand" href="{{ url('/') }}">
             <span class="sr-only">CSUN Logo</span>
             <span class="navbar-brand__subbrand">
             Faculty

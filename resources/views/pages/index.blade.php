@@ -45,7 +45,7 @@
                 </div>
                     
                 <div class="text-center">
-                    <a href="/departments">Browse By Department</a> 
+                    <a href="{{ url('departments') }}">Browse By Department</a> 
                 </div>
             </div>
         </div>

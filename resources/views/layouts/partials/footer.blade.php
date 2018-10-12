@@ -11,7 +11,7 @@
                 <div>
                 &copy; California State University, Northridge <br> 
                 18111 Nordhoff Street, Northridge, CA 91330 <br>
-                Phone: <a href="#">(818) 677-1200</a> / <a href="//www.csun.edu/contact" target="csun">Contact Us</a>
+                Phone: <a href="tel:8186771200">(818) 677-1200</a> / <a href="//www.csun.edu/contact" target="csun">Contact Us</a>
                 </div>
             </div>
             </div>
