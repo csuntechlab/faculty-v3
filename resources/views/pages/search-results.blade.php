@@ -115,7 +115,7 @@
                         <a href="{{ route('profile', ['uri' => $person->uri]) }}" class="card profile-card">
                             <img class="profile-card__img d-block mx-auto mt-4"
                                  data-profile-uri="{{ $person->uri }}" 
-                                 src="https://cdn.metalab.csun.edu/media/faculty/steven.fitzgerald/avatar.jpg"
+                                 src="{{ asset('imgs/profile-default.png') }}"
                                  alt="Card image for {{ $person->display_name }}">
                             <div class="card-body">
                                 <h5 class="card-title">{{ $person->display_name }}</h5>

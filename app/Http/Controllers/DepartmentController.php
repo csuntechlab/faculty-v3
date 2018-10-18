@@ -31,10 +31,17 @@ class DepartmentController extends Controller
         $department = Department::with([
             'contact',
             'faculty' => function($q) {
-                $q->orderBy('display_name', 'ASC');
+                $q->orderBy('last_name', 'ASC')
+                    ->orderBy('first_name', 'ASC');
             },
         ])
         ->findOrFail($id);
+
+        // remove any potential duplicates of the faculty members based upon
+        // the user ID
+        $department->faculty = $department->faculty->unique(function($user) {
+            return $user->user_id;
+        });
 
         // remove the people collection and turn it into its own variable
         // for iteration consistency on the search results page
