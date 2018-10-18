@@ -142,7 +142,8 @@
             <div class="row justify-content-center my-3 my-md-5">
                 <div class="col-4">
                     <nav aria-label="Page navigation example">
-                    <ul class="pagination pagination-lg justify-content-center">
+                    {!! $people->links() !!}
+                    {{-- <ul class="pagination pagination-lg justify-content-center">
                         <li class="page-item pr-2">
                             <a class="page-link" href="#" aria-label="Previous">
                                 <span aria-hidden="true">&laquo;</span>
@@ -158,7 +159,7 @@
                                 <span class="sr-only">Next</span>
                             </a>
                         </li>
-                    </ul>
+                    </ul>--}}
                     </nav>
                 </div>
             </div>

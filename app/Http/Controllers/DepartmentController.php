@@ -27,7 +27,7 @@ class DepartmentController extends Controller
      * @param string $id The ID of the academic department
      * @return View
      */
-    public function faculty($id) {
+    public function faculty(Request $request, $id) {
         $department = Department::with([
             'contact',
             'faculty' => function($q) {
@@ -38,8 +38,11 @@ class DepartmentController extends Controller
 
         // remove the people collection and turn it into its own variable
         // for iteration consistency on the search results page
-        $people = $department->faculty;
+        $people = paginateData($request, $department->faculty);
         unset($department->faculty);
+
+        // set the path for the pages
+        $people->withPath(route('departments.faculty', ['id' => $id]));
 
         // these two variables tell the search results page how to display
         // the given information
