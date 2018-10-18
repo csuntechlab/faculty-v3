@@ -98,17 +98,17 @@
             <div class="col-sm-12 text-center text-md-left">
                 <h5 class="mb-3">
                     @if($type == 'department_faculty')
-                        {{ $people->count() }} Faculty Member(s) <span class="font-weight-normal">in {{ $department->name }}</span>
+                        {{ $people->total() }} Faculty Member(s) <span class="font-weight-normal">in {{ $department->name }}</span>
                     @elseif($type == 'search_results')
-                        {{ $people->count() }} Result(s) <span class="font-weight-normal">for &quot;{{ $query }}&quot;</span>
+                        {{ $people->total() }} Result(s) <span class="font-weight-normal">for &quot;{{ $query }}&quot;</span>
                     @else
-                        {{ $people->count() }} Faculty Members
+                        {{ $people->total() }} Faculty Members
                     @endif
                 </h5>
             </div>
         </div>
 
-        @if($people->count() > 0)
+        @if($people->total() > 0)
             <div class="row text-center py-2">
                 @foreach($people as $person)
                     <div class="col-lg-4 col-sm-6 col-12 py-2 mb-4" >
@@ -138,11 +138,11 @@
             </div>
         @endif
 
-        @if($people->count() > 0)
+        @if($people->total() > 0)
             <div class="row justify-content-center my-3 my-md-5">
                 <div class="col-4">
-                    <nav aria-label="Page navigation example">
-                    {!! $people->links() !!}
+                    <nav aria-label="Page navigation">
+                        {!! $people->links() !!}
                     </nav>
                 </div>
             </div>
