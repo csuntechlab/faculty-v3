@@ -19,7 +19,7 @@
                 @if($type == 'department_faculty')
                     <li class="breadcrumb-item active">{{ $department->name }}</li>
                 @elseif($type == 'search_results')
-                    <li class="breadcrumb-item active">Search Results: &quot;{{ $query }}&quot;</li>
+                    <li class="breadcrumb-item active">Search Results: &quot;{{ $q }}&quot;</li>
                 @else
                     <li class="breadcrumb-item active">All Faculty</li>
                 @endif
@@ -34,7 +34,7 @@
         {!! Form::open(['route' => 'search', 'method' => 'GET']) !!}
         <div class="row justify-content-center">
             <div class="col-lg-6 col-md-8 col-sm-8 col-7 pr-0">
-                <input type="text" name="q" value="{{ !empty($query) ? $query : '' }}" placeholder="Search by Name..." class="form-control d-inline searchBanner__input">
+                <input type="text" name="q" value="{{ !empty($q) ? $q : '' }}" placeholder="Search by Name..." class="form-control d-inline searchBanner__input">
             </div>
             <div class="col-md-2 col-sm-3 col-3 pl-0">
                 <button type="button" class="btn btn-primary btn-block searchBanner__btn"><i class="fas fa-search"></i>  Search</button>
@@ -100,7 +100,7 @@
                     @if($type == 'department_faculty')
                         {{ $people->total() }} Faculty Member(s) <span class="font-weight-normal">in {{ $department->name }}</span>
                     @elseif($type == 'search_results')
-                        {{ $people->total() }} Result(s) <span class="font-weight-normal">for &quot;{{ $query }}&quot;</span>
+                        {{ $people->total() }} Result(s) <span class="font-weight-normal">for &quot;{{ $q }}&quot;</span>
                     @else
                         {{ $people->total() }} Faculty Members
                     @endif

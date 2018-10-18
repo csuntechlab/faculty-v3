@@ -31,7 +31,9 @@ class DepartmentController extends Controller
         $department = Department::with([
             'contact',
             'faculty' => function($q) {
-                $q->orderBy('last_name', 'ASC')
+                $q->whereNotDeceased()
+                    ->whereActive()
+                    ->orderBy('last_name', 'ASC')
                     ->orderBy('first_name', 'ASC');
             },
         ])

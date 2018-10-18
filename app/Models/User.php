@@ -100,6 +100,36 @@ class User extends Authenticatable
     }
 
     /**
+     * Scopes the query only to active individuals.
+     *
+     * @param Builder $query The query to constrain
+     * @return Builder
+     */
+    public function scopeWhereActive($query) {
+        return $query->where('affiliation_status', 'Active');
+    }
+
+    /**
+     * Scopes the query only to faculty members.
+     *
+     * @param Builder $query The query to constrain
+     * @return Builder
+     */
+    public function scopeWhereFaculty($query) {
+        return $query->whereNotNull('rank');
+    }
+
+    /**
+     * Scopes the query only to individuals that are alive.
+     *
+     * @param Builder $query The query to constrain
+     * @return Builder
+     */
+    public function scopeWhereNotDeceased($query) {
+        return $query->where('deceased', '0');
+    }
+
+    /**
      * Returns whether this individual has graduated from CSUN at some point.
      *
      * @return bool
