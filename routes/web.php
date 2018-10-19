@@ -13,14 +13,16 @@
 
 Route::get('/', function () {
     return view('pages.index');
-});
+})->name('home');
 
-Route::get('/search', function () {
-    return view('pages.search-results');
-});
+Route::get('/search', 'SearchController@search')
+	->name('search');
 
-Route::get('/departments', function () {
-    return view('pages.departments');
-});
+Route::get('/departments', 'DepartmentController@all')
+	->name('departments');
 
-Route::get('{uri}', 'ProfileController@show');
+Route::get('/departments/{id}/faculty', 'DepartmentController@faculty')
+	->name('departments.faculty');
+
+Route::get('{uri}', 'ProfileController@show')
+	->name('profile');

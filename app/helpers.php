@@ -2,6 +2,9 @@
 
 use Carbon\Carbon;
 
+use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
+
 /**
  * Returns an active state if the current URL matches the provided path.
  * Otherwise, this function returns a blank string.
@@ -194,4 +197,40 @@ function formatPhoneNumber($phone) {
 
     // format and return
     return "{$areaCode}-{$centralOfficeCode}-{$lineNumber}";
+}
+
+/**
+ * Returns a URL with the http schema prepended if it does not already exist.
+ * If the schema is already there just return the passed parameter.
+ *
+ * @param string $link The link to check for the schema
+ * @return string
+ */
+function checkHttp($link) {
+    return (starts_with($link, 'http') ? $link : 'http://' . $link);
+}
+
+/**
+ * Takes a Collection of data and then paginates it manually into a
+ * LengthAwarePaginator. Returns the instance of the
+ * LengthAwarePaginator that was instantiated.
+ *
+ * @param Request $request The request instance that will be used to find the "page"
+ * query parameter
+ * @param Collection $items The set of data to paginate
+ * @param int $perPage Optional parameter describing the number of items per page
+ *
+ * @return LengthAwarePaginator
+ */
+function paginateData(Request $request, $items, $perPage=20) {
+	// build a paginator manually
+	$page = $request->input('page', 1);
+	$data = new LengthAwarePaginator(
+		$items->forPage($page, $perPage), // we have to slice the data manually
+		$items->count(),
+		$perPage,
+		$page
+	);
+
+	return $data;
 }

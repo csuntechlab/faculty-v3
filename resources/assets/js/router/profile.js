@@ -3,7 +3,7 @@ import Router from 'vue-router'
 import ProfileHome from '../components/ProfileHome'
 import ProfileClasses from '../components/ProfileClasses'
 
-Vue.use(Router)
+Vue.use(Router);
 
 export default new Router({
   routes: [

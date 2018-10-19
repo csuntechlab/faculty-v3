@@ -53,7 +53,7 @@
                             <div class="col-12 order-2 order-md-1">
                                 <div class="profile-banner__department text-primary">{{ strtoupper($user->rank) }} |
                                     @if($user->primary_department)
-                                        <a href="{{ facultyUrl('departments/' . $user->primary_department->department_id) }}">{{ $user->primary_department->name }}</a>
+                                        <a href="{{ route('departments.faculty', ['id' => $user->primary_department->department_id]) }}">{{ $user->primary_department->name }}</a>
                                     @endif
                                     @if($user->is_csun_alum)
                                         <a class="profile-banner__badge badge badge-primary px-2 ml-2" href="#">CSUN Alum<i class="fas fa-graduation-cap ml-2"></i></a>

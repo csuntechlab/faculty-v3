@@ -7,12 +7,11 @@
 
 require('./bootstrap');
 
-window.Vue = require('vue');
-
 import ProfileApp from './ProfileApp'
 import profileRouter from './router/profile.js'
 
-Vue.config.productionTip = false
+window.Vue = require('vue');
+Vue.config.productionTip = false;
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -21,9 +20,11 @@ Vue.config.productionTip = false
  */
 
 // Vue application specific to the Profile screens
-const vueProfile = new Vue({
-    el: '#profile_app',
-    router: profileRouter,
-	components: { ProfileApp },
-	template: '<ProfileApp/>'
-});
+if(document.getElementById('profile_app')) {
+	const vueProfile = new Vue({
+	    el: '#profile_app',
+	    router: profileRouter,
+		components: { ProfileApp },
+		template: '<ProfileApp/>'
+	});
+}
