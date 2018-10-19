@@ -200,6 +200,17 @@ function formatPhoneNumber($phone) {
 }
 
 /**
+ * Returns a URL with the http schema prepended if it does not already exist.
+ * If the schema is already there just return the passed parameter.
+ *
+ * @param string $link The link to check for the schema
+ * @return string
+ */
+function checkHttp($link) {
+    return (starts_with($link, 'http') ? $link : 'http://' . $link);
+}
+
+/**
  * Takes a Collection of data and then paginates it manually into a
  * LengthAwarePaginator. Returns the instance of the
  * LengthAwarePaginator that was instantiated.

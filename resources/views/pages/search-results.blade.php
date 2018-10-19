@@ -40,7 +40,7 @@
                 <input type="text" name="q" value="{{ !empty($q) ? $q : '' }}" placeholder="Search by Name..." class="form-control d-inline searchBanner__input">
             </div>
             <div class="col-md-2 col-sm-3 col-3 pl-0">
-                <button type="button" class="btn btn-primary btn-block searchBanner__btn"><i class="fas fa-search"></i>  Search</button>
+                <button type="submit" class="btn btn-primary btn-block searchBanner__btn"><i class="fas fa-search"></i>  Search</button>
             </div>
         </div>
         {!! Form::close() !!}
@@ -84,7 +84,7 @@
                         @endif
                         @if(!empty($department->contact->website))
                             <div class="departmentHeader__item pr-3">
-                                <a href="{{ $department->contact->website }}"><i class="fas fa-globe-americas"></i>Website</a>
+                                <a href="{{ checkHttp($department->contact->website) }}"><i class="fas fa-globe-americas"></i>Website</a>
                             </div>
                         @endif
                         @if(!empty($department->contact->email))
