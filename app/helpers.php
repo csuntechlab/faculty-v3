@@ -222,7 +222,7 @@ function checkHttp($link) {
  *
  * @return LengthAwarePaginator
  */
-function paginateData(Request $request, $items, $perPage=20) {
+function paginateData(Request $request, $items, $perPage=24) {
 	// build a paginator manually
 	$page = $request->input('page', 1);
 	$data = new LengthAwarePaginator(
