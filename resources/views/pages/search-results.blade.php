@@ -167,13 +167,13 @@ $(function() {
         axios.get(
             profileImgUri,
             {
-                baseURL: mediaWsUrl
+                baseURL: mediaWsUrl + 'faculty/media'
             }
         ).then(function(response) {
-            // Media WS results in a redirect when it returns the proper image
-            // so we can use that as the "src" attribute in the profile image
+            // Media WS results in a JSON object when it returns the proper image
+            // result so we can use that as the "src" attribute in the profile image
             // placeholder
-            $(element).attr('src', response.request.responseURL);
+            $(element).attr('src', response.data.avatar_image);
         }).catch(function(error) {
             console.error(error);
         });
