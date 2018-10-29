@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  webserver:
+    container_name: faculty-v3
+    image: csunmetalab/environment:faculty-v3
+    ports:
+      - '8080:80'
+    volumes:
+      - .:/var/www/
+
+  composer:
+    restart: 'no'
+    container_name: faculty-v3_composer
+    image: composer:latest
+    command: install --ignore-platform-reqs
+    volumes:
+      - .:/app/
