@@ -6,11 +6,9 @@ RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
  && apt-get update \
 # Update and install additional dependencies/packages
   && apt-get update && apt-get install -y \
-  php7.2 \
-  wget \
   yarn \
 # Install NVM
-  && wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash \
+  && curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash \
 # Define Bashrc source
   && . ~/.bashrc \
 # Install NPM v9.11.2
