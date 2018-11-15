@@ -51,7 +51,7 @@
                     <div class="profile-banner__content">
                         <div class="row">
                             <div class="col-12 order-2 order-md-1">
-                                <div class="profile-banner__department text-primary">{{ strtoupper($user->rank) }} |
+                                <div class="profile-banner__department">{{ strtoupper($user->rank) }} |
                                     @if($user->primary_department)
                                         <a href="{{ route('departments.faculty', ['id' => $user->primary_department->department_id]) }}">{{ $user->primary_department->name }}</a>
                                     @endif

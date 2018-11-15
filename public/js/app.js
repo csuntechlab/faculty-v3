@@ -30908,6 +30908,29 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: 'ProfileProjects',
@@ -30916,9 +30939,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             roleFilters: ['Investigator', 'Other Faculty', 'Principle Investigator', 'Former Principle Investigator', 'Lead Principle Investigator', 'Project Manager', 'Proposal Editor'],
             statusFilters: ['Active', 'Completed'],
             typeFilters: ['Creative Work', 'Project', 'Research', 'Service'],
-            selectedFilters: []
+            selectedFilters: [],
+            windowWidth: 0,
+            isMobile: false,
+            isDesktop: false
         };
     },
+    mounted: function mounted() {
+        this.$nextTick(function () {
+            window.addEventListener('resize', this.getWindowWidth);
+            //Init
+            this.getWindowWidth();
+        });
+    },
+    beforeDestroy: function beforeDestroy() {
+        window.removeEventListener('resize', this.getWindowWidth);
+    },
+
     methods: {
         filterCheckboxWasClicked: function filterCheckboxWasClicked(event) {
             var correspondingBadge = document.getElementById(event.target.id.replace(/role/i, 'badge'));
@@ -30934,6 +30971,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 }
             }
 
+            this.checkIfProjectFilterBarShouldBeDisplayed();
+        },
+        filterBadgeWasClicked: function filterBadgeWasClicked(event) {
+            var correspondingCheckbox = document.getElementById(event.target.id.replace(/badge-remove/i, 'role'));
+            correspondingCheckbox.click();
+        },
+        ClearAllWasClicked: function ClearAllWasClicked(event) {
+            var checkboxes = document.getElementsByClassName("projectFilterList__checkbox");
+            for (var i = 0; i < checkboxes.length; i++) {
+                if (checkboxes[i].checked) {
+                    checkboxes[i].click();
+                }
+            }
+
+            this.checkIfProjectFilterBarShouldBeDisplayed();
+        },
+        checkIfProjectFilterBarShouldBeDisplayed: function checkIfProjectFilterBarShouldBeDisplayed() {
             var projectFilterBar = document.getElementById("projectFilterBar");
 
             if (this.selectedFilters.length !== 0) {
@@ -30942,20 +30996,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 projectFilterBar.classList.remove('active');
             }
         },
-        filterBadgeWasClicked: function filterBadgeWasClicked(event) {
-            var correspondingCheckbox = document.getElementById(event.target.id.replace(/badge-remove/i, 'role'));
-            var parentBadge = document.getElementById(event.target.id.replace(/badge-remove/i, 'badge'));
+        getWindowWidth: function getWindowWidth() {
+            this.windowWidth = document.documentElement.clientWidth;
 
-            correspondingCheckbox.checked = false;
-            parentBadge.classList.remove('active');
-        },
-        ClearAllWasClicked: function ClearAllWasClicked(event) {
-            var checkboxes = document.getElementsByClassName("projectFilterList__checkbox");
-
-            for (var i = 0; i < checkboxes.length; i++) {
-                if (checkboxes[i].checked) {
-                    checkboxes[i].click();
-                }
+            if (this.windowWidth > 767) {
+                this.isMobile = false;
+                this.isDesktop = true;
+            } else {
+                this.isMobile = true;
+                this.isDesktop = false;
             }
         }
     }
@@ -30972,131 +31021,199 @@ var render = function() {
   return _c("div", { attrs: { id: "projects" } }, [
     _c("div", { staticClass: "container" }, [
       _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-md-4 order-last order-md-first" }, [
-          _c("h6", { staticClass: "h5 mb-4" }, [_vm._v("PROJECT FILTERS")]),
-          _vm._v(" "),
+        _c("div", { staticClass: "col-md-4" }, [
           _c(
-            "ul",
-            { staticClass: "projectFilterList list-unstyled" },
+            "div",
+            {
+              staticClass: "clearfix",
+              class: { "d-block": _vm.isMobile, "d-none": _vm.isDesktop }
+            },
             [
-              _vm._m(0),
-              _vm._v(" "),
-              _vm._l(_vm.roleFilters, function(filter) {
-                return _c("li", [
-                  _c("div", { staticClass: "custom-control custom-checkbox" }, [
-                    _c("input", {
-                      ref: "role-" + filter.replace(/\s/g, ""),
-                      refInFor: true,
-                      staticClass:
-                        "custom-control-input projectFilterList__checkbox",
-                      attrs: {
-                        type: "checkbox",
-                        id: "role-" + filter.replace(/\s/g, "")
-                      },
-                      domProps: { value: filter },
-                      on: {
-                        click: function($event) {
-                          _vm.filterCheckboxWasClicked($event)
-                        }
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c(
-                      "label",
-                      {
-                        staticClass: "custom-control-label",
-                        attrs: { for: "role-" + filter.replace(/\s/g, "") }
-                      },
-                      [_vm._v(_vm._s(filter))]
-                    )
-                  ])
-                ])
-              })
-            ],
-            2
-          ),
-          _vm._v(" "),
-          _c(
-            "ul",
-            { staticClass: "projectFilterList list-unstyled" },
-            [
-              _vm._m(1),
-              _vm._v(" "),
-              _vm._l(_vm.statusFilters, function(filter) {
-                return _c("li", [
-                  _c("div", { staticClass: "custom-control custom-checkbox" }, [
-                    _c("input", {
-                      ref: "role-" + filter.replace(/\s/g, ""),
-                      refInFor: true,
-                      staticClass:
-                        "custom-control-input projectFilterList__checkbox",
-                      attrs: {
-                        type: "checkbox",
-                        id: "role-" + filter.replace(/\s/g, "")
-                      },
-                      domProps: { value: filter },
-                      on: {
-                        click: function($event) {
-                          _vm.filterCheckboxWasClicked($event)
-                        }
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c(
-                      "label",
-                      {
-                        staticClass: "custom-control-label",
-                        attrs: { for: "role-" + filter.replace(/\s/g, "") }
-                      },
-                      [_vm._v(_vm._s(filter))]
-                    )
-                  ])
-                ])
-              })
-            ],
-            2
-          ),
-          _vm._v(" "),
-          _c(
-            "ul",
-            { staticClass: "projectFilterList list-unstyled" },
-            [
-              _vm._m(2),
-              _vm._v(" "),
-              _vm._l(_vm.typeFilters, function(filter) {
-                return _c("li", [
-                  _c("div", { staticClass: "custom-control custom-checkbox" }, [
-                    _c("input", {
-                      ref: "role-" + filter.replace(/\s/g, ""),
-                      refInFor: true,
-                      staticClass:
-                        "custom-control-input projectFilterList__checkbox",
-                      attrs: {
-                        type: "checkbox",
-                        id: "role-" + filter.replace(/\s/g, "")
-                      },
-                      domProps: { value: filter },
-                      on: {
-                        click: function($event) {
-                          _vm.filterCheckboxWasClicked($event)
-                        }
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c(
-                      "label",
-                      {
-                        staticClass: "custom-control-label",
-                        attrs: { for: "role-" + filter.replace(/\s/g, "") }
-                      },
-                      [_vm._v(_vm._s(filter))]
-                    )
-                  ])
-                ])
-              }),
+              _c("h2", { staticClass: "h3 text-primary mb-4 float-left" }, [
+                _vm._v("Projects")
+              ]),
               _vm._v(" "),
               _c(
-                "li",
+                "div",
+                {
+                  staticClass: "btn btn-sm btn-secondary float-right",
+                  attrs: {
+                    "data-toggle": "collapse",
+                    "data-target": "#collapseFilters",
+                    "aria-expanded": "false",
+                    "aria-controls": "collapseFilters"
+                  }
+                },
+                [
+                  _c("i", { staticClass: "fas fa-sliders-h" }),
+                  _vm._v(" Filters "),
+                  _vm.selectedFilters.length > 0
+                    ? _c("span", [
+                        _vm._v("(" + _vm._s(_vm.selectedFilters.length) + ")")
+                      ])
+                    : _vm._e()
+                ]
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              class: {
+                "collapse clearfix": _vm.isMobile,
+                "collapse show": _vm.isDesktop
+              },
+              attrs: { id: "collapseFilters" }
+            },
+            [
+              _c("h6", { staticClass: "h5 mb-4 d-none d-md-block" }, [
+                _vm._v("PROJECT FILTERS")
+              ]),
+              _vm._v(" "),
+              _c(
+                "ul",
+                { staticClass: "projectFilterList list-unstyled" },
+                [
+                  _vm._m(0),
+                  _vm._v(" "),
+                  _vm._l(_vm.roleFilters, function(filter) {
+                    return _c("li", [
+                      _c(
+                        "div",
+                        { staticClass: "custom-control custom-checkbox" },
+                        [
+                          _c("input", {
+                            ref: "role-" + filter.replace(/\s/g, ""),
+                            refInFor: true,
+                            staticClass:
+                              "custom-control-input projectFilterList__checkbox",
+                            attrs: {
+                              type: "checkbox",
+                              id: "role-" + filter.replace(/\s/g, "")
+                            },
+                            domProps: { value: filter },
+                            on: {
+                              click: function($event) {
+                                _vm.filterCheckboxWasClicked($event)
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c(
+                            "label",
+                            {
+                              staticClass: "custom-control-label",
+                              attrs: {
+                                for: "role-" + filter.replace(/\s/g, "")
+                              }
+                            },
+                            [_vm._v(_vm._s(filter))]
+                          )
+                        ]
+                      )
+                    ])
+                  })
+                ],
+                2
+              ),
+              _vm._v(" "),
+              _c(
+                "ul",
+                { staticClass: "projectFilterList list-unstyled" },
+                [
+                  _vm._m(1),
+                  _vm._v(" "),
+                  _vm._l(_vm.statusFilters, function(filter) {
+                    return _c("li", [
+                      _c(
+                        "div",
+                        { staticClass: "custom-control custom-checkbox" },
+                        [
+                          _c("input", {
+                            ref: "role-" + filter.replace(/\s/g, ""),
+                            refInFor: true,
+                            staticClass:
+                              "custom-control-input projectFilterList__checkbox",
+                            attrs: {
+                              type: "checkbox",
+                              id: "role-" + filter.replace(/\s/g, "")
+                            },
+                            domProps: { value: filter },
+                            on: {
+                              click: function($event) {
+                                _vm.filterCheckboxWasClicked($event)
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c(
+                            "label",
+                            {
+                              staticClass: "custom-control-label",
+                              attrs: {
+                                for: "role-" + filter.replace(/\s/g, "")
+                              }
+                            },
+                            [_vm._v(_vm._s(filter))]
+                          )
+                        ]
+                      )
+                    ])
+                  })
+                ],
+                2
+              ),
+              _vm._v(" "),
+              _c(
+                "ul",
+                { staticClass: "projectFilterList list-unstyled" },
+                [
+                  _vm._m(2),
+                  _vm._v(" "),
+                  _vm._l(_vm.typeFilters, function(filter) {
+                    return _c("li", [
+                      _c(
+                        "div",
+                        { staticClass: "custom-control custom-checkbox" },
+                        [
+                          _c("input", {
+                            ref: "role-" + filter.replace(/\s/g, ""),
+                            refInFor: true,
+                            staticClass:
+                              "custom-control-input projectFilterList__checkbox",
+                            attrs: {
+                              type: "checkbox",
+                              id: "role-" + filter.replace(/\s/g, "")
+                            },
+                            domProps: { value: filter },
+                            on: {
+                              click: function($event) {
+                                _vm.filterCheckboxWasClicked($event)
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c(
+                            "label",
+                            {
+                              staticClass: "custom-control-label",
+                              attrs: {
+                                for: "role-" + filter.replace(/\s/g, "")
+                              }
+                            },
+                            [_vm._v(_vm._s(filter))]
+                          )
+                        ]
+                      )
+                    ])
+                  })
+                ],
+                2
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
                 {
                   staticClass: "projectFilterList__clear",
                   on: {
@@ -31107,178 +31224,163 @@ var render = function() {
                 },
                 [_vm._v("Clear All Filters")]
               )
-            ],
-            2
+            ]
           ),
           _vm._v(" "),
-          _c("h6", { staticClass: "h5 mb-4 mt-5" }, [
-            _vm._v("RESEARCH INTERESTS")
-          ]),
-          _vm._v(" "),
-          _c(
-            "span",
-            {
-              staticClass:
-                "badge  badge-danger badge--profile-interests py-2 px-2 my-1 mr-1"
-            },
-            [_vm._v("\n                    Foo\n                ")]
-          ),
-          _vm._v(" "),
-          _c(
-            "span",
-            {
-              staticClass:
-                "badge  badge-danger badge--profile-interests py-2 px-2 my-1 mr-1"
-            },
-            [_vm._v("\n                    Bar\n                ")]
-          )
+          _vm._m(3)
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "col-md-8 order-first order-md-last" }, [
-          _c(
-            "div",
-            {
-              staticClass: "projectFilterBar",
-              attrs: { id: "projectFilterBar" }
-            },
-            [
-              _c("strong", { staticClass: "projectFilterBar__label" }, [
-                _vm._v("Filtered By:")
-              ]),
-              _vm._v(" "),
-              _vm._l(_vm.roleFilters, function(filter) {
-                return _vm.roleFilters
-                  ? _c(
-                      "span",
-                      {
-                        staticClass:
-                          "badge badge-primary projectFilterBar__badge py-2 px-2 my-1 mr-1",
-                        attrs: { id: "badge-" + filter.replace(/\s/g, "") }
-                      },
-                      [
-                        _vm._v(
-                          "\n                        " +
-                            _vm._s(filter) +
-                            " \n                        "
-                        ),
-                        _c(
-                          "span",
-                          {
-                            ref: "badge-remove-" + filter.replace(/\s/g, ""),
-                            refInFor: true,
-                            staticClass: "projectFilterBar__remove",
-                            attrs: {
-                              id: "badge-remove-" + filter.replace(/\s/g, "")
-                            },
-                            on: {
-                              click: function($event) {
-                                _vm.filterBadgeWasClicked($event)
+        _c("div", { staticClass: "col-md-8" }, [
+          _c("div", { staticClass: "d-none d-md-block" }, [
+            _c("h2", { staticClass: "h3 text-primary mb-4" }, [
+              _vm._v("Projects")
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "projectFilterBar",
+                attrs: { id: "projectFilterBar" }
+              },
+              [
+                _c("strong", { staticClass: "projectFilterBar__label" }, [
+                  _vm._v("Filtered By:")
+                ]),
+                _vm._v(" "),
+                _vm._l(_vm.roleFilters, function(filter) {
+                  return _vm.roleFilters
+                    ? _c(
+                        "span",
+                        {
+                          staticClass:
+                            "badge badge-primary projectFilterBar__badge py-2 px-2 my-1 mr-1",
+                          attrs: { id: "badge-" + filter.replace(/\s/g, "") }
+                        },
+                        [
+                          _vm._v(
+                            "\n                            " +
+                              _vm._s(filter) +
+                              " \n                            "
+                          ),
+                          _c(
+                            "span",
+                            {
+                              ref: "badge-remove-" + filter.replace(/\s/g, ""),
+                              refInFor: true,
+                              staticClass: "projectFilterBar__remove",
+                              attrs: {
+                                id: "badge-remove-" + filter.replace(/\s/g, "")
+                              },
+                              on: {
+                                click: function($event) {
+                                  _vm.filterBadgeWasClicked($event)
+                                }
                               }
-                            }
-                          },
-                          [
-                            _vm._v(
-                              "\n                            x\n                        "
-                            )
-                          ]
-                        )
-                      ]
-                    )
-                  : _vm._e()
-              }),
-              _vm._v(" "),
-              _vm._l(_vm.statusFilters, function(filter) {
-                return _vm.statusFilters
-                  ? _c(
-                      "span",
-                      {
-                        staticClass:
-                          "badge badge-primary projectFilterBar__badge py-2 px-2 my-1 mr-1",
-                        attrs: { id: "badge-" + filter.replace(/\s/g, "") }
-                      },
-                      [
-                        _vm._v(
-                          "\n                        " +
-                            _vm._s(filter) +
-                            " \n                        "
-                        ),
-                        _c(
-                          "span",
-                          {
-                            ref: "badge-remove-" + filter.replace(/\s/g, ""),
-                            refInFor: true,
-                            staticClass: "projectFilterBar__remove",
-                            attrs: {
-                              id: "badge-remove-" + filter.replace(/\s/g, "")
                             },
-                            on: {
-                              click: function($event) {
-                                _vm.filterBadgeWasClicked($event)
+                            [
+                              _vm._v(
+                                "\n                                x\n                            "
+                              )
+                            ]
+                          )
+                        ]
+                      )
+                    : _vm._e()
+                }),
+                _vm._v(" "),
+                _vm._l(_vm.statusFilters, function(filter) {
+                  return _vm.statusFilters
+                    ? _c(
+                        "span",
+                        {
+                          staticClass:
+                            "badge badge-primary projectFilterBar__badge py-2 px-2 my-1 mr-1",
+                          attrs: { id: "badge-" + filter.replace(/\s/g, "") }
+                        },
+                        [
+                          _vm._v(
+                            "\n                            " +
+                              _vm._s(filter) +
+                              " \n                            "
+                          ),
+                          _c(
+                            "span",
+                            {
+                              ref: "badge-remove-" + filter.replace(/\s/g, ""),
+                              refInFor: true,
+                              staticClass: "projectFilterBar__remove",
+                              attrs: {
+                                id: "badge-remove-" + filter.replace(/\s/g, "")
+                              },
+                              on: {
+                                click: function($event) {
+                                  _vm.filterBadgeWasClicked($event)
+                                }
                               }
-                            }
-                          },
-                          [
-                            _vm._v(
-                              "\n                            x\n                        "
-                            )
-                          ]
-                        )
-                      ]
-                    )
-                  : _vm._e()
-              }),
-              _vm._v(" "),
-              _vm._l(_vm.typeFilters, function(filter) {
-                return _vm.typeFilters
-                  ? _c(
-                      "span",
-                      {
-                        staticClass:
-                          "badge badge-primary projectFilterBar__badge py-2 px-2 my-1 mr-1",
-                        attrs: { id: "badge-" + filter.replace(/\s/g, "") }
-                      },
-                      [
-                        _vm._v(
-                          "\n                        " +
-                            _vm._s(filter) +
-                            " \n                        "
-                        ),
-                        _c(
-                          "span",
-                          {
-                            ref: "badge-remove-" + filter.replace(/\s/g, ""),
-                            refInFor: true,
-                            staticClass: "projectFilterBar__remove",
-                            attrs: {
-                              id: "badge-remove-" + filter.replace(/\s/g, "")
                             },
-                            on: {
-                              click: function($event) {
-                                _vm.filterBadgeWasClicked($event)
+                            [
+                              _vm._v(
+                                "\n                                x\n                            "
+                              )
+                            ]
+                          )
+                        ]
+                      )
+                    : _vm._e()
+                }),
+                _vm._v(" "),
+                _vm._l(_vm.typeFilters, function(filter) {
+                  return _vm.typeFilters
+                    ? _c(
+                        "span",
+                        {
+                          staticClass:
+                            "badge badge-primary projectFilterBar__badge py-2 px-2 my-1 mr-1",
+                          attrs: { id: "badge-" + filter.replace(/\s/g, "") }
+                        },
+                        [
+                          _vm._v(
+                            "\n                            " +
+                              _vm._s(filter) +
+                              " \n                            "
+                          ),
+                          _c(
+                            "span",
+                            {
+                              ref: "badge-remove-" + filter.replace(/\s/g, ""),
+                              refInFor: true,
+                              staticClass: "projectFilterBar__remove",
+                              attrs: {
+                                id: "badge-remove-" + filter.replace(/\s/g, "")
+                              },
+                              on: {
+                                click: function($event) {
+                                  _vm.filterBadgeWasClicked($event)
+                                }
                               }
-                            }
-                          },
-                          [
-                            _vm._v(
-                              "\n                            x\n                        "
-                            )
-                          ]
-                        )
-                      ]
-                    )
-                  : _vm._e()
-              })
-            ],
-            2
-          ),
-          _vm._v(" "),
-          _c("h2", { staticClass: "h3 text-primary mb-4" }, [
-            _vm._v("Projects")
+                            },
+                            [
+                              _vm._v(
+                                "\n                                x\n                            "
+                              )
+                            ]
+                          )
+                        ]
+                      )
+                    : _vm._e()
+                })
+              ],
+              2
+            )
           ]),
           _vm._v(" "),
-          _vm._m(3),
+          _vm._m(4),
           _vm._v(" "),
-          _vm._m(4)
+          _vm._m(5),
+          _vm._v(" "),
+          _vm._m(6),
+          _vm._v(" "),
+          _vm._m(7)
         ])
       ])
     ])
@@ -31302,6 +31404,44 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("li", [_c("strong", [_vm._v("Project Type")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "d-none d-md-block" }, [
+      _c("h6", { staticClass: "h5 mb-4 mt-5" }, [_vm._v("RESEARCH INTERESTS")]),
+      _vm._v(" "),
+      _c(
+        "span",
+        {
+          staticClass:
+            "badge  badge-danger badge--profile-interests py-2 px-2 my-1 mr-1"
+        },
+        [_vm._v("\n                        Foo\n                    ")]
+      ),
+      _vm._v(" "),
+      _c(
+        "span",
+        {
+          staticClass:
+            "badge  badge-danger badge--profile-interests py-2 px-2 my-1 mr-1"
+        },
+        [_vm._v("\n                        Bar\n                    ")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "mb-2" }, [
+      _vm._v("Showing "),
+      _c("strong", [_vm._v("2")]),
+      _vm._v(" of "),
+      _c("strong", [_vm._v("20")]),
+      _vm._v(" projects")
+    ])
   },
   function() {
     var _vm = this
@@ -31367,6 +31507,32 @@ var staticRenderFns = [
           " Cindy Malone, Shina Dunkin, Marge Mintz, Giovonni Nios\n                    "
         )
       ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "d-block d-md-none" }, [
+      _c("h6", { staticClass: "h5 mb-4 mt-5" }, [_vm._v("RESEARCH INTERESTS")]),
+      _vm._v(" "),
+      _c(
+        "span",
+        {
+          staticClass:
+            "badge  badge-danger badge--profile-interests py-2 px-2 my-1 mr-1"
+        },
+        [_vm._v("\n                        Foo\n                    ")]
+      ),
+      _vm._v(" "),
+      _c(
+        "span",
+        {
+          staticClass:
+            "badge  badge-danger badge--profile-interests py-2 px-2 my-1 mr-1"
+        },
+        [_vm._v("\n                        Bar\n                    ")]
+      )
     ])
   }
 ]

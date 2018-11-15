@@ -11174,7 +11174,7 @@ body {
 
 .profileProject {
   background: white;
-  border: 1px solid #bec6c3;
+  border: 1px solid #dee2e6;
   -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.16);
           box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.16);
   padding: 1.5rem 3rem;
@@ -11200,12 +11200,12 @@ body {
 .profileProject__type {
   font-weight: 700;
   float: right;
+  padding-right: 2rem;
 }
 
 .projectFilterBar {
   display: none;
-  position: absolute;
-  top: -3rem;
+  margin-bottom: 3rem;
 }
 
 .projectFilterBar.active {
@@ -11223,6 +11223,15 @@ body {
 
 .projectFilterBar__remove {
   cursor: pointer;
+  padding: 0.3rem 0.5rem;
+}
+
+@media (max-width: 767.98px) {
+  .projectFilterList {
+    float: left;
+    padding-left: 0.7rem;
+    padding-right: 4.3rem;
+  }
 }
 
 .projectFilterList__clear {
@@ -11230,6 +11239,15 @@ body {
   font-weight: 700;
   cursor: pointer;
   margin-top: 2rem;
+}
+
+@media (max-width: 767.98px) {
+  .projectFilterList__clear {
+    float: left;
+    width: 100%;
+    margin-top: 0;
+    margin-bottom: 3rem;
+  }
 }
 
 .projectFilterList__clear:hover {

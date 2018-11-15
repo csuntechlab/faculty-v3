@@ -2,122 +2,135 @@
     <div id="projects">
         <div class="container">
             <div class="row">                 
-                <div class="col-md-4 order-last order-md-first">
-                    <h6 class="h5 mb-4">PROJECT FILTERS</h6>
-                    <ul class="projectFilterList list-unstyled">
-                        <li>
-                            <strong>Project Role</strong>
-                        </li>
-                        <li v-for="filter in roleFilters">
-                            <div class="custom-control custom-checkbox">
-                                <input 
-                                    type="checkbox" 
-                                    class="custom-control-input projectFilterList__checkbox" 
-                                    v-bind:ref="'role-' + filter.replace(/\s/g, '')"
-                                    v-bind:id="'role-' + filter.replace(/\s/g, '')"
-                                    v-on:click="filterCheckboxWasClicked($event)" 
-                                    v-bind:value="filter"
-                                >
-                                <label class="custom-control-label" v-bind:for="'role-' + filter.replace(/\s/g, '')">{{ filter }}</label>
-                            </div>
-                        </li>
-                    </ul>
+                <div class="col-md-4">
 
-                    <ul class="projectFilterList list-unstyled">
-                        <li>
-                            <strong>Project Status</strong>
-                        </li>
-                        <li v-for="filter in statusFilters">
-                            <div class="custom-control custom-checkbox">
-                                <input 
-                                    type="checkbox" 
-                                    class="custom-control-input projectFilterList__checkbox" 
-                                    v-bind:ref="'role-' + filter.replace(/\s/g, '')"
-                                    v-bind:id="'role-' + filter.replace(/\s/g, '')"
-                                    v-on:click="filterCheckboxWasClicked($event)" 
-                                    v-bind:value="filter"
-                                >
-                                <label class="custom-control-label" v-bind:for="'role-' + filter.replace(/\s/g, '')">{{ filter }}</label>
-                            </div>
-                        </li>
-                    </ul>
-
-                    <ul class="projectFilterList list-unstyled">
-                        <li>
-                            <strong>Project Type</strong>
-                        </li>
-
-                        <li v-for="filter in typeFilters">
-                            <div class="custom-control custom-checkbox">
-                                <input 
-                                    type="checkbox" 
-                                    class="custom-control-input projectFilterList__checkbox" 
-                                    v-bind:ref="'role-' + filter.replace(/\s/g, '')"
-                                    v-bind:id="'role-' + filter.replace(/\s/g, '')"
-                                    v-on:click="filterCheckboxWasClicked($event)" 
-                                    v-bind:value="filter"
-                                >
-                                <label class="custom-control-label" v-bind:for="'role-' + filter.replace(/\s/g, '')">{{ filter }}</label>
-                            </div>
-                        </li>
-
-                        <li class="projectFilterList__clear" v-on:click="ClearAllWasClicked($event)">Clear All Filters</li>
-                    </ul>
-
-                    <h6 class="h5 mb-4 mt-5">RESEARCH INTERESTS</h6>
-                    <span class="badge  badge-danger badge--profile-interests py-2 px-2 my-1 mr-1">
-                        Foo
-                    </span>
-                    <span class="badge  badge-danger badge--profile-interests py-2 px-2 my-1 mr-1">
-                        Bar
-                    </span>
-
-                </div>
-
-                <div class="col-md-8 order-first order-md-last">
-                    <div class="projectFilterBar" id="projectFilterBar">
-                    
-                        <strong class="projectFilterBar__label">Filtered By:</strong> 
-                    
-                        <span v-if="roleFilters" v-for="filter in roleFilters" v-bind:id="'badge-' + filter.replace(/\s/g, '')" class="badge badge-primary projectFilterBar__badge py-2 px-2 my-1 mr-1">
-                            {{ filter }} 
-                            <span 
-                                class="projectFilterBar__remove"
-                                v-bind:ref="'badge-remove-' + filter.replace(/\s/g, '')"
-                                v-bind:id="'badge-remove-' + filter.replace(/\s/g, '')"
-                                v-on:click="filterBadgeWasClicked($event)"
-                            >
-                                x
-                            </span>
-                        </span>
-                    
-
-                        <span v-if="statusFilters" v-for="filter in statusFilters" v-bind:id="'badge-' + filter.replace(/\s/g, '')" class="badge badge-primary projectFilterBar__badge py-2 px-2 my-1 mr-1">
-                            {{ filter }} 
-                            <span 
-                                class="projectFilterBar__remove"
-                                v-bind:ref="'badge-remove-' + filter.replace(/\s/g, '')"
-                                v-bind:id="'badge-remove-' + filter.replace(/\s/g, '')"
-                                v-on:click="filterBadgeWasClicked($event)"
-                            >
-                                x
-                            </span>
-                        </span>
-
-                        <span v-if="typeFilters" v-for="filter in typeFilters" v-bind:id="'badge-' + filter.replace(/\s/g, '')" class="badge badge-primary projectFilterBar__badge py-2 px-2 my-1 mr-1">
-                            {{ filter }} 
-                            <span 
-                                class="projectFilterBar__remove"
-                                v-bind:ref="'badge-remove-' + filter.replace(/\s/g, '')"
-                                v-bind:id="'badge-remove-' + filter.replace(/\s/g, '')"
-                                v-on:click="filterBadgeWasClicked($event)"
-                            >
-                                x
-                            </span>
-                        </span>
+                    <div class="clearfix" v-bind:class="{ 'd-block': isMobile, 'd-none': isDesktop }">
+                        <h2 class="h3 text-primary mb-4 float-left">Projects</h2>
+                        <div class="btn btn-sm btn-secondary float-right" data-toggle="collapse" data-target="#collapseFilters" aria-expanded="false" aria-controls="collapseFilters"> 
+                            <i class="fas fa-sliders-h"></i> Filters <span v-if="selectedFilters.length > 0">({{ selectedFilters.length }})</span>
+                        </div>
                     </div>
 
-                    <h2 class="h3 text-primary mb-4">Projects</h2>
+                    <div v-bind:class="{ 'collapse clearfix': isMobile, 'collapse show': isDesktop }" id="collapseFilters">
+                        <h6 class="h5 mb-4 d-none d-md-block">PROJECT FILTERS</h6>
+                        <ul class="projectFilterList list-unstyled">
+                            <li>
+                                <strong>Project Role</strong>
+                            </li>
+                            <li v-for="filter in roleFilters">
+                                <div class="custom-control custom-checkbox">
+                                    <input 
+                                        type="checkbox" 
+                                        class="custom-control-input projectFilterList__checkbox" 
+                                        v-bind:ref="'role-' + filter.replace(/\s/g, '')"
+                                        v-bind:id="'role-' + filter.replace(/\s/g, '')"
+                                        v-on:click="filterCheckboxWasClicked($event)" 
+                                        v-bind:value="filter"
+                                    >
+                                    <label class="custom-control-label" v-bind:for="'role-' + filter.replace(/\s/g, '')">{{ filter }}</label>
+                                </div>
+                            </li>
+                        </ul>
+
+                        <ul class="projectFilterList list-unstyled">
+                            <li>
+                                <strong>Project Status</strong>
+                            </li>
+                            <li v-for="filter in statusFilters">
+                                <div class="custom-control custom-checkbox">
+                                    <input 
+                                        type="checkbox" 
+                                        class="custom-control-input projectFilterList__checkbox" 
+                                        v-bind:ref="'role-' + filter.replace(/\s/g, '')"
+                                        v-bind:id="'role-' + filter.replace(/\s/g, '')"
+                                        v-on:click="filterCheckboxWasClicked($event)" 
+                                        v-bind:value="filter"
+                                    >
+                                    <label class="custom-control-label" v-bind:for="'role-' + filter.replace(/\s/g, '')">{{ filter }}</label>
+                                </div>
+                            </li>
+                        </ul>
+
+                        <ul class="projectFilterList list-unstyled">
+                            <li>
+                                <strong>Project Type</strong>
+                            </li>
+
+                            <li v-for="filter in typeFilters">
+                                <div class="custom-control custom-checkbox">
+                                    <input 
+                                        type="checkbox" 
+                                        class="custom-control-input projectFilterList__checkbox" 
+                                        v-bind:ref="'role-' + filter.replace(/\s/g, '')"
+                                        v-bind:id="'role-' + filter.replace(/\s/g, '')"
+                                        v-on:click="filterCheckboxWasClicked($event)" 
+                                        v-bind:value="filter"
+                                    >
+                                    <label class="custom-control-label" v-bind:for="'role-' + filter.replace(/\s/g, '')">{{ filter }}</label>
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="projectFilterList__clear" v-on:click="ClearAllWasClicked($event)">Clear All Filters</div>
+                    </div>
+
+                    <div class="d-none d-md-block">
+                        <h6 class="h5 mb-4 mt-5">RESEARCH INTERESTS</h6>
+                        <span class="badge  badge-danger badge--profile-interests py-2 px-2 my-1 mr-1">
+                            Foo
+                        </span>
+                        <span class="badge  badge-danger badge--profile-interests py-2 px-2 my-1 mr-1">
+                            Bar
+                        </span>
+                    </div>
+                </div>
+
+                <div class="col-md-8">
+                    <div class="d-none d-md-block">
+                        <h2 class="h3 text-primary mb-4">Projects</h2>
+
+                        <div class="projectFilterBar" id="projectFilterBar">
+                        
+                            <strong class="projectFilterBar__label">Filtered By:</strong> 
+                        
+                            <span v-if="roleFilters" v-for="filter in roleFilters" v-bind:id="'badge-' + filter.replace(/\s/g, '')" class="badge badge-primary projectFilterBar__badge py-2 px-2 my-1 mr-1">
+                                {{ filter }} 
+                                <span 
+                                    class="projectFilterBar__remove"
+                                    v-bind:ref="'badge-remove-' + filter.replace(/\s/g, '')"
+                                    v-bind:id="'badge-remove-' + filter.replace(/\s/g, '')"
+                                    v-on:click="filterBadgeWasClicked($event)"
+                                >
+                                    x
+                                </span>
+                            </span>
+                        
+                            <span v-if="statusFilters" v-for="filter in statusFilters" v-bind:id="'badge-' + filter.replace(/\s/g, '')" class="badge badge-primary projectFilterBar__badge py-2 px-2 my-1 mr-1">
+                                {{ filter }} 
+                                <span 
+                                    class="projectFilterBar__remove"
+                                    v-bind:ref="'badge-remove-' + filter.replace(/\s/g, '')"
+                                    v-bind:id="'badge-remove-' + filter.replace(/\s/g, '')"
+                                    v-on:click="filterBadgeWasClicked($event)"
+                                >
+                                    x
+                                </span>
+                            </span>
+
+                            <span v-if="typeFilters" v-for="filter in typeFilters" v-bind:id="'badge-' + filter.replace(/\s/g, '')" class="badge badge-primary projectFilterBar__badge py-2 px-2 my-1 mr-1">
+                                {{ filter }} 
+                                <span 
+                                    class="projectFilterBar__remove"
+                                    v-bind:ref="'badge-remove-' + filter.replace(/\s/g, '')"
+                                    v-bind:id="'badge-remove-' + filter.replace(/\s/g, '')"
+                                    v-on:click="filterBadgeWasClicked($event)"
+                                >
+                                    x
+                                </span>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="mb-2">Showing <strong>2</strong> of <strong>20</strong> projects</div>
 
                     <div class="profileProject">
                         <a class="profileProject__title" href="#">
@@ -155,6 +168,16 @@
                         </div>
                     </div>
 
+                    <div class="d-block d-md-none">
+                        <h6 class="h5 mb-4 mt-5">RESEARCH INTERESTS</h6>
+                        <span class="badge  badge-danger badge--profile-interests py-2 px-2 my-1 mr-1">
+                            Foo
+                        </span>
+                        <span class="badge  badge-danger badge--profile-interests py-2 px-2 my-1 mr-1">
+                            Bar
+                        </span>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -168,8 +191,21 @@ export default {
             roleFilters: ['Investigator','Other Faculty','Principle Investigator','Former Principle Investigator','Lead Principle Investigator','Project Manager','Proposal Editor'],
             statusFilters: ['Active','Completed'],
             typeFilters: ['Creative Work','Project','Research','Service'],
-            selectedFilters: []
+            selectedFilters: [],
+            windowWidth: 0,
+            isMobile: false,
+            isDesktop: false
         }
+    },
+    mounted() {
+        this.$nextTick(function() {
+            window.addEventListener('resize', this.getWindowWidth);
+            //Init
+            this.getWindowWidth()
+        })
+    },
+    beforeDestroy() {
+        window.removeEventListener('resize', this.getWindowWidth);
     },
     methods: {
         filterCheckboxWasClicked : function(event) {
@@ -186,6 +222,23 @@ export default {
                 }
             }
 
+            this.checkIfProjectFilterBarShouldBeDisplayed();
+        },
+        filterBadgeWasClicked : function(event) {
+            var correspondingCheckbox = document.getElementById(event.target.id.replace(/badge-remove/i, 'role'));
+            correspondingCheckbox.click()
+        },
+        ClearAllWasClicked : function(event) {
+            var checkboxes = document.getElementsByClassName("projectFilterList__checkbox");
+            for (var i = 0; i < checkboxes.length; i++) {
+                if (checkboxes[i].checked ) {
+                    checkboxes[i].click()
+                } 
+            }
+
+            this.checkIfProjectFilterBarShouldBeDisplayed();
+        },
+        checkIfProjectFilterBarShouldBeDisplayed : function() {
             var projectFilterBar = document.getElementById("projectFilterBar")
             
             if (this.selectedFilters.length !== 0) {
@@ -194,22 +247,16 @@ export default {
                 projectFilterBar.classList.remove('active');
             }
         },
-        filterBadgeWasClicked : function(event) {
-            var correspondingCheckbox = document.getElementById(event.target.id.replace(/badge-remove/i, 'role'));
-            var parentBadge = document.getElementById(event.target.id.replace(/badge-remove/i, 'badge'));
+        getWindowWidth() {
+            this.windowWidth = document.documentElement.clientWidth;
 
-            correspondingCheckbox.checked = false;
-            parentBadge.classList.remove('active');
-            
-        },
-        ClearAllWasClicked : function(event) {
-            var checkboxes = document.getElementsByClassName("projectFilterList__checkbox");
-
-            for (var i = 0; i < checkboxes.length; i++) {
-                if (checkboxes[i].checked ) {
-                    checkboxes[i].click()
-                } 
-            }     
+            if ( this.windowWidth > 767 ) {
+                this.isMobile = false;
+                this.isDesktop = true;
+            } else {
+                this.isMobile = true;
+                this.isDesktop = false;         
+            }
         }
     }
 }

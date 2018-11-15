@@ -1,6 +1,6 @@
 .profileProject {
     background: white;
-    border: 1px solid $light-gray;
+    border: 1px solid $gray-300;
     box-shadow: 0 1px 3px 0 rgba(0,0,0,0.16);
     padding: 1.5rem 3rem;
     margin-bottom: 1rem;
@@ -23,13 +23,13 @@
     &__type {
         font-weight: 700;
         float: right;
+        padding-right: 2rem;
     }
 }
 
 .projectFilterBar {
     display: none;
-    position: absolute;
-    top: -3rem;
+    margin-bottom: 3rem;
 
     &.active {
         display: block;
@@ -42,27 +42,37 @@
         &.active {
             display: inline-block;
         }
-
-        // i,
-        // svg {
-        //     margin-left: .5rem;
-        // }
     }
 
     &__remove {
         cursor: pointer;
+        padding: 0.3rem 0.5rem;
     }
 }
 
 .projectFilterList {
+
+    @include media-breakpoint-down(sm){
+        float: left;
+        padding-left: 0.7rem;
+        padding-right: 4.3rem;
+    }
+
     &__clear {
         color: $primary;
         font-weight: 700;
         cursor: pointer;
         margin-top: 2rem;
 
+        @include media-breakpoint-down(sm){
+            float: left;
+            width: 100%;
+            margin-top: 0;
+            margin-bottom: 3rem;
+        }
+
         &:hover {
             text-decoration: underline;
-        }
+        }  
     }
 }
