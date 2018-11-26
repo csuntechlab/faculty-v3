@@ -58,19 +58,22 @@ class SearchController extends Controller
         // for iteration consistency on the search results page
         $people = paginateData($request, $users);
 
-        // set the path for the pages
-        $people->withPath(route('search'));
-
         // these two variables tell the search results page how to display
         // the given information
         if(!empty($q)) {
             $type = 'search_results';
             $title = "Search results: $q";
+
+            // set the path for the pages
+            $people->withPath(route('search') . "?q=$q");
         }
         else
         {
             $type = 'all_faculty';
             $title = "All Faculty";
+
+            // set the path for the pages
+            $people->withPath(route('search'));
         }
         
         return view('pages.search-results', compact('type', 'title', 'department', 'people', 'q'));
