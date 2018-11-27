@@ -30,24 +30,8 @@ class Term extends Model {
 	 * @return Term
 	 */
 	public function scopeCurrent($query) {
-		$terms = $query->nowAndNext(1)->get();
-		$current = $terms->first();
-		$next = $terms->last();
-
-		// check to see if we should swap to the next term
-		$today = Carbon::today();
-		$nextStart = Carbon::parse($next->begin_date);
-
-		$switchWeeks = config('app.weeks_before_next_semester_switch');
-
-		// is the next term start date within three weeks away?
-		$diff = $today->diffInWeeks($nextStart, false);
-		if($diff >= 0 && $diff <= $switchWeeks) {
-			// return the next semester
-			return $next;
-		}
-
-		return $current;
+		$terms = self::termsCollection();
+		return $terms->first();
 	}
 
 	public function scopeFind($term_id)
