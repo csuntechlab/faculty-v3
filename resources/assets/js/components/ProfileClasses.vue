@@ -12,29 +12,60 @@
             </template>
             <template v-else>
                 <div class="row">    
-                    <template v-if='past_courses.length'>             
-                        <div class="order-last order-md-first col-md-4 pt-3 pt-md-0">
+                    <div class="order-last order-md-first col-md-4 pt-3 pt-md-0">
+                        <div class="mb-3 pb-3">
                             <h6 class="h5 mb-3">PAST COURSES</h6>
-                            <div class="w-75 d-none d-md-block">
-                                <hr class="hr-metaphor w-25 ml-0 mb-4">
-                            </div>
-                            <ul class="past-courses-list list-unstyled">
-                                <template v-for='_past_course in past_courses'>
-                                    <li>
-                                        <strong>{{ _past_course.subject }} {{ _past_course.catalog_number }}</strong>
-                                        <div>{{ _past_course.title }}</div>
-                                        <div>Last Offered {{ _past_course.last_taught }}</div>
-                                        <div v-if='_past_course.times_taught > 1'>
-                                            Taught {{ _past_course.times_taught }} terms
-                                        </div>
-                                        <div v-else>
-                                            Taught 1 term
-                                        </div>
-                                    </li>
-                                </template>
-                            </ul>
+                            <template v-if='past_courses.length'>  
+                                <ul class="past-courses-list list-unstyled">
+                                    <template v-for='_past_course in past_courses.slice(0, 3)'>
+                                        <li>
+                                            <strong>{{ _past_course.subject }} {{ _past_course.catalog_number }}</strong>
+                                            <div>{{ _past_course.title }}</div>
+                                            <div>Last Offered {{ _past_course.last_taught }}</div>
+                                            <div v-if='_past_course.times_taught > 1'>
+                                                Taught {{ _past_course.times_taught }} sections
+                                            </div>
+                                            <div v-else>
+                                                Taught 1 sections
+                                            </div>
+                                        </li>
+                                    </template>
+                                </ul>
+                                <ul class="past-courses-list list-unstyled collapse" id="collapseExample">
+                                    <template v-for='_past_course in past_courses.slice(3)'>
+                                        <li>
+                                            <strong>{{ _past_course.subject }} {{ _past_course.catalog_number }}</strong>
+                                            <div>{{ _past_course.title }}</div>
+                                            <div>Last Offered {{ _past_course.last_taught }}</div>
+                                            <div v-if='_past_course.times_taught > 1'>
+                                                Taught {{ _past_course.times_taught }} sections
+                                            </div>
+                                            <div v-else>
+                                                Taught 1 sections
+                                            </div>
+                                        </li>
+                                    </template>
+                                </ul>
+                                <div v-if=" past_courses.length > 3" class="past-courses-list-control" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                                    <strong class="past-courses-list-control__show-all text-primary">Show All Courses <i class="fas fa-chevron-right"></i></span></strong> 
+                                    <strong class="past-courses-list-control__show-fewer text-primary"><i class="fas fa-chevron-left"></i> Show Fewer Courses </span></strong>
+                                </div>
+                            </template>
+                            <template v-else>
+                                {{ person_name }} does not have any past classes.
+                            </template>
                         </div>
-                    </template>
+                        <div class="mb-3 pb-3">
+                            <h6 class="h5 mb-3">TEACHING INTERESTS</h6>
+                            <span class="badge  badge-danger badge--profile-interests py-2 px-2 my-1 mr-1">
+                                Foo
+                            </span>
+                            <span class="badge  badge-danger badge--profile-interests py-2 px-2 my-1 mr-1">
+                                Bar
+                            </span>
+                        </div>
+                    </div>
+                    
                     <div class="order-md-last order-first col-12 col-md-8 pr-3">
                         <template v-if='current_term'>
                             <h2 class="h3 text-primary mb-4 d-none d-md-block">Academic Schedule</h2>

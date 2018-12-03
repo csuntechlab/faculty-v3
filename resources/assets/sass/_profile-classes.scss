@@ -1,10 +1,25 @@
 .past-courses-list {
+    margin-bottom: 0;
+    
     li {
+        color: $gray-600;
         margin-bottom: 3rem;
         padding-right: 1.5rem;
+    }
+}
 
-        &:last-child {
-            margin-bottom: 0;
+.past-courses-list-control {
+    cursor: pointer;
+
+    &[aria-expanded="false"] {
+        .past-courses-list-control__show-fewer {
+            display: none;
+        }
+    }
+
+    &[aria-expanded="true"] {
+        .past-courses-list-control__show-all {
+            display: none;
         }
     }
 }
