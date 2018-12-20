@@ -188,7 +188,7 @@ export default {
     name: 'ProfileProjects',
     data: function () {
         return {
-            roleFilters: ['Investigator','Other Faculty','Principle Investigator','Former Principle Investigator','Lead Principle Investigator','Project Manager','Proposal Editor'],
+            roleFilters: ['Investigator','Other Faculty','Principal Investigator','Former Principal Investigator','Lead Principal Investigator','Project Manager','Proposal Editor'],
             statusFilters: ['Active','Completed'],
             typeFilters: ['Creative Work','Project','Research','Service'],
             selectedFilters: [],
