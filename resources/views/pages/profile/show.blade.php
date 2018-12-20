@@ -7,6 +7,7 @@
 <meta name="degrees-url" content="{{ env('DEGREES_WEB_SERVICE') }}">
 <meta name="directory-url" content="{{ env('DIRECTORY_WEB_SERVICE') }}">
 <meta name="media-url" content="{{ env('MEDIA_WEB_SERVICE') }}">
+<meta name="projects-url" content="{{ env('PROJECTS_WEB_SERVICE') }}">
 <meta name="waldo-url" content="{{ env('WALDO_WEB_SERVICE') }}">
 <meta name="person-name" content="{{ $user->display_name }}">
 <meta name="person-uri" content="{{ $user->uri }}">

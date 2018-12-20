@@ -143,7 +143,7 @@
                             <strong>NFS:</strong> $2,770,000
                         </div>
                         <div class="profileProject__item">
-                            <strong>Lead Principle Investigator:</strong> Cindy Malone
+                            <strong>Lead Principal Investigator:</strong> Cindy Malone
                         </div>
                         <div class="profileProject__item">
                             <strong>Team:</strong> Cindy Malone, Shina Dunkin, Anton Garraway, Bradly Luskby, Marge Mintz, Giovonni Nios, Otellia Kopzyanucy
@@ -161,7 +161,7 @@
                             <strong>NFS:</strong> $2,770,000
                         </div>
                         <div class="profileProject__item">
-                            <strong>Lead Principle Investigator:</strong> Cindy Malone
+                            <strong>Lead Principal Investigator:</strong> Cindy Malone
                         </div>
                         <div class="profileProject__item">
                             <strong>Team:</strong> Cindy Malone, Shina Dunkin, Marge Mintz, Giovonni Nios
@@ -188,13 +188,15 @@ export default {
     name: 'ProfileProjects',
     data: function () {
         return {
+            projects: [],
             roleFilters: ['Investigator','Other Faculty','Principal Investigator','Former Principal Investigator','Lead Principal Investigator','Project Manager','Proposal Editor'],
             statusFilters: ['Active','Completed'],
             typeFilters: ['Creative Work','Project','Research','Service'],
             selectedFilters: [],
             windowWidth: 0,
             isMobile: false,
-            isDesktop: false
+            isDesktop: false,
+            loading_all: true
         }
     },
     mounted() {
@@ -202,12 +204,44 @@ export default {
             window.addEventListener('resize', this.getWindowWidth);
             //Init
             this.getWindowWidth()
-        })
+        });
+        // make the Axios calls concurrently and wait for all of them to return
+        // before applying the reactive data
+        axios.all([this.loadProjects()])
+            .then(axios.spread((projects) => {
+                // apply the projects
+                this.projects = projects;
+                console.log(this.projects);
+
+                // we have finished loading everything
+                this.loading_all = false;
+            }));
     },
     beforeDestroy() {
         window.removeEventListener('resize', this.getWindowWidth);
     },
+    computed: {
+        // this computed property filters the set of projects brought in from
+        // the projects API based upon the set of selected filters
+        displayedProjects: function() {
+            return [];
+        },
+        person_email: function() {
+            return $("meta[name=person-email]").attr('content');
+        }
+    },
     methods: {
+        loadProjects: function() {
+            return axios.get(
+                'members/projects',
+                {
+                    baseURL: $('meta[name=projects-url').attr('content'),
+                    params: {
+                        email: this.person_email
+                    }
+                }
+            );
+        },
         filterCheckboxWasClicked : function(event) {
             var correspondingBadge = document.getElementById(event.target.id.replace(/role/i, 'badge'))
 
