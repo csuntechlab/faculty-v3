@@ -28,6 +28,3 @@ mix.js('resources/assets/js/app.js', 'public/js')
    .options({
       processCssUrls: false
    }); // we are not processing the CSS urls due to how the SCSS for Font Awesome works
-
-// copy the webfonts for Font Awesome
-mix.copyDirectory('node_modules/@fortawesome/fontawesome-free/webfonts', 'public/webfonts');
