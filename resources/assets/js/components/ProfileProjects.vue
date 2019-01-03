@@ -224,7 +224,43 @@ export default {
         // this computed property filters the set of projects brought in from
         // the projects API based upon the set of selected filters
         displayedProjects: function() {
-            return [];
+            // if there are no selected filters, just return the entire set of
+            // projects
+            if(!this.selectedFilters.length) {
+                return this.projects;
+            }
+
+            // iterate over the set of selected filters and apply each one to
+            // the set of projects
+            let displayedProjects = [];
+            this.selectedFilters.forEach(function(filter) {
+                let filteredProjects = this.applyFilter(filter);
+
+                // filter the filtered projects to ensure they do not already
+                // exist in the set of already-displayed projects
+                filteredProjects = filteredProjects.filter(function(project) {
+                    // I'm using a regular "for" loop and not a forEach() or a
+                    // for...of for a very specific reason here
+                    for(let i = 0; i < displayedProjects.length; i++) {
+                        if(displayedProjects[i].project_id == project.project_id) {
+                            // project already exists in the displayed set
+                            return false;
+                        }
+                    }
+
+                    // project either does not already exist or there are currently
+                    // no displayed projects so it should be added anyway
+                    return true;
+                });
+
+                // now push each still-existing filtered project onto the set of
+                // displayed projects
+                filteredProjects.forEach(function(project) {
+                    displayedProjects.push(project);
+                });
+            });
+
+            return displayedProjects;
         },
         person_email: function() {
             return $("meta[name=person-email]").attr('content');
@@ -241,6 +277,49 @@ export default {
                     }
                 }
             );
+        },
+        applyFilter: function(filter) {
+            // figure out the type of the specified filter
+            if(this.roleFilters.indexOf(filter) != -1) {
+                // member role filter
+                return this.applyRoleFilter(filter);
+            }
+            
+            if(this.statusFilters.indexOf(filter) != -1) {
+                // project status filter
+                return this.applyStatusFilter(filter);
+            }
+
+            if(this.typeFilters.indexOf(filter) != -1) {
+                // project type filter
+                return this.applyTypeFilter(filter);
+            }
+
+            // unknown filter, so return an empty array of projects in order
+            // to prevent overriding all other filters further down the
+            // line
+            return [];
+        },
+        applyRoleFilter: function(filter) {
+            // apply a filter to a copy of the projects array based upon
+            // a given member role
+            let filteredProjects = this.projects.slice(0);
+
+            return filteredProjects;
+        },
+        applyStatusFilter: function(filter) {
+            // apply a filter to a copy of the projects array based upon
+            // a specific project status
+            let filteredProjects = this.projects.slice(0);
+
+            return filteredProjects;
+        },
+        applyTypeFilter: function(filter) {
+            // apply a filter to a copy of the projects array based upon
+            // a specific project type
+            let filteredProjects = this.projects.slice(0);
+
+            return filteredProjects;
         },
         filterCheckboxWasClicked : function(event) {
             var correspondingBadge = document.getElementById(event.target.id.replace(/role/i, 'badge'))
