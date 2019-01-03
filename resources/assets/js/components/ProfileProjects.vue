@@ -333,6 +333,27 @@ export default {
             // a given member role
             let filteredProjects = this.projects.slice(0);
 
+            // different decisions have to be made based upon the role name so
+            // we will create a Map instance
+            let roles = new Map();
+            this.roleFilters.forEach(function(role) {
+                if(role == 'Former Principal Investigator') {
+                    // this role is referred to as "Former PI" in the WS
+                    types.set(role, 'Former PI');
+                }
+                else
+                {
+                    // all other types are equivalent
+                    types.set(role, role);
+                }
+            });
+
+            // now actually filter the projects by the member role name
+            let roleName = roles.get(role);
+            filteredProjects = filteredProjects.filter(function(project) {
+                return project.role_position == roleName;
+            });
+
             return filteredProjects;
         },
         applyStatusFilter: function(filter) {

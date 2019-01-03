@@ -31080,6 +31080,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             // a given member role
             var filteredProjects = this.projects.slice(0);
 
+            // different decisions have to be made based upon the role name so
+            // we will create a Map instance
+            var roles = new Map();
+            this.roleFilters.forEach(function (role) {
+                if (role == 'Former Principal Investigator') {
+                    // this role is referred to as "Former PI" in the WS
+                    types.set(role, 'Former PI');
+                } else {
+                    // all other types are equivalent
+                    types.set(role, role);
+                }
+            });
+
+            // now actually filter the projects by the member role name
+            var roleName = roles.get(role);
+            filteredProjects = filteredProjects.filter(function (project) {
+                return project.role_position == roleName;
+            });
+
             return filteredProjects;
         },
         applyStatusFilter: function applyStatusFilter(filter) {
