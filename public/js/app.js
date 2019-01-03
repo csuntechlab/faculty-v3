@@ -31094,6 +31094,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             // a specific project type
             var filteredProjects = this.projects.slice(0);
 
+            // the type system name comes back, not the display name, so we
+            // need a way to dereference the system name
+            var types = new Map();
+            this.typeFilters.forEach(function (type) {
+                if (type == 'Creative Work') {
+                    types.set(type, 'creative');
+                } else {
+                    // everything except Creative Work is just the lower-case
+                    // variant of the type
+                    types.set(type, type.toLowerCase());
+                }
+            });
+
+            // now actually filter the projects by the system name of the purpose
+            var purpose = types.get(filter);
+            filteredProjects = filteredProjects.filter(function (project) {
+                return project.attributes.purpose_name == purpose;
+            });
+
             return filteredProjects;
         },
         filterCheckboxWasClicked: function filterCheckboxWasClicked(event) {
