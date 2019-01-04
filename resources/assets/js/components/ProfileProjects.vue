@@ -390,6 +390,9 @@ export default {
             // now actually filter the projects by the system name of the purpose
             let purpose = this.projectTypeMap.get(filter);
             filteredProjects = filteredProjects.filter(function(project) {
+                if(!project.attributes) {
+                    return false;
+                }
                 return project.attributes.purpose_name == purpose;
             });
 

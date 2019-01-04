@@ -31146,6 +31146,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             // now actually filter the projects by the system name of the purpose
             var purpose = this.projectTypeMap.get(filter);
             filteredProjects = filteredProjects.filter(function (project) {
+                if (!project.attributes) {
+                    return false;
+                }
                 return project.attributes.purpose_name == purpose;
             });
 
