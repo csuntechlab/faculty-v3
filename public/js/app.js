@@ -29020,24 +29020,37 @@ var render = function() {
                                                             _vm._s(
                                                               _badge.name
                                                             ) +
-                                                            " (" +
-                                                            _vm._s(
-                                                              _badge.award_date
-                                                            ) +
-                                                            ")\n                                                    "
-                                                        )
+                                                            " "
+                                                        ),
+                                                        _badge.award_date
+                                                          ? _c("span", [
+                                                              _vm._v(
+                                                                "(" +
+                                                                  _vm._s(
+                                                                    _badge.award_date
+                                                                  ) +
+                                                                  ")"
+                                                              )
+                                                            ])
+                                                          : _vm._e()
                                                       ]
                                                     )
                                                   ]
                                                 : _c("p", [
                                                     _vm._v(
-                                                      _vm._s(_badge.name) +
-                                                        " (" +
-                                                        _vm._s(
-                                                          _badge.award_date
-                                                        ) +
-                                                        ")"
-                                                    )
+                                                      _vm._s(_badge.name) + " "
+                                                    ),
+                                                    _badge.award_date
+                                                      ? _c("span", [
+                                                          _vm._v(
+                                                            "(" +
+                                                              _vm._s(
+                                                                _badge.award_date
+                                                              ) +
+                                                              ")"
+                                                          )
+                                                        ])
+                                                      : _vm._e()
                                                   ])
                                             ],
                                             2
