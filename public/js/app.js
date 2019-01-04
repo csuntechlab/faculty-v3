@@ -31055,6 +31055,36 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         person_email: function person_email() {
             return $("meta[name=person-email]").attr('content');
+        },
+        projectRoleMap: function projectRoleMap() {
+            // different decisions have to be made based upon the role name so
+            // we will create a Map instance
+            var roles = new Map();
+            this.roleFilters.forEach(function (role) {
+                if (role == 'Former Principal Investigator') {
+                    // this role is referred to as "Former PI" in the WS
+                    types.set(role, 'Former PI');
+                } else {
+                    // all other types are equivalent
+                    types.set(role, role);
+                }
+            });
+            return roles;
+        },
+        projectTypeMap: function projectTypeMap() {
+            // the type system name comes back, not the display name, so we
+            // need a way to dereference the system name
+            var types = new Map();
+            this.typeFilters.forEach(function (type) {
+                if (type == 'Creative Work') {
+                    types.set(type, 'creative');
+                } else {
+                    // everything except Creative Work is just the lower-case
+                    // variant of the type
+                    types.set(type, type.toLowerCase());
+                }
+            });
+            return types;
         }
     },
     methods: {
@@ -31093,21 +31123,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             // a given member role
             var filteredProjects = this.projects.slice(0);
 
-            // different decisions have to be made based upon the role name so
-            // we will create a Map instance
-            var roles = new Map();
-            this.roleFilters.forEach(function (role) {
-                if (role == 'Former Principal Investigator') {
-                    // this role is referred to as "Former PI" in the WS
-                    types.set(role, 'Former PI');
-                } else {
-                    // all other types are equivalent
-                    types.set(role, role);
-                }
-            });
-
             // now actually filter the projects by the member role name
-            var roleName = roles.get(role);
+            var roleName = this.projectRoleMap.get(role);
             filteredProjects = filteredProjects.filter(function (project) {
                 return project.role_position == roleName;
             });
@@ -31126,21 +31143,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             // a specific project type
             var filteredProjects = this.projects.slice(0);
 
-            // the type system name comes back, not the display name, so we
-            // need a way to dereference the system name
-            var types = new Map();
-            this.typeFilters.forEach(function (type) {
-                if (type == 'Creative Work') {
-                    types.set(type, 'creative');
-                } else {
-                    // everything except Creative Work is just the lower-case
-                    // variant of the type
-                    types.set(type, type.toLowerCase());
-                }
-            });
-
             // now actually filter the projects by the system name of the purpose
-            var purpose = types.get(filter);
+            var purpose = this.projectTypeMap.get(filter);
             filteredProjects = filteredProjects.filter(function (project) {
                 return project.attributes.purpose_name == purpose;
             });

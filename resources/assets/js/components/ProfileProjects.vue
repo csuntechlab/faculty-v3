@@ -292,6 +292,40 @@ export default {
         },
         person_email: function() {
             return $("meta[name=person-email]").attr('content');
+        },
+        projectRoleMap: function() {
+            // different decisions have to be made based upon the role name so
+            // we will create a Map instance
+            let roles = new Map();
+            this.roleFilters.forEach(function(role) {
+                if(role == 'Former Principal Investigator') {
+                    // this role is referred to as "Former PI" in the WS
+                    types.set(role, 'Former PI');
+                }
+                else
+                {
+                    // all other types are equivalent
+                    types.set(role, role);
+                }
+            });
+            return roles;
+        },
+        projectTypeMap: function() {
+            // the type system name comes back, not the display name, so we
+            // need a way to dereference the system name
+            let types = new Map();
+            this.typeFilters.forEach(function(type) {
+                if(type == 'Creative Work') {
+                    types.set(type, 'creative');
+                }
+                else
+                {
+                    // everything except Creative Work is just the lower-case
+                    // variant of the type
+                    types.set(type, type.toLowerCase());
+                }
+            });
+            return types;
         }
     },
     methods: {
@@ -333,23 +367,8 @@ export default {
             // a given member role
             let filteredProjects = this.projects.slice(0);
 
-            // different decisions have to be made based upon the role name so
-            // we will create a Map instance
-            let roles = new Map();
-            this.roleFilters.forEach(function(role) {
-                if(role == 'Former Principal Investigator') {
-                    // this role is referred to as "Former PI" in the WS
-                    types.set(role, 'Former PI');
-                }
-                else
-                {
-                    // all other types are equivalent
-                    types.set(role, role);
-                }
-            });
-
             // now actually filter the projects by the member role name
-            let roleName = roles.get(role);
+            let roleName = this.projectRoleMap.get(role);
             filteredProjects = filteredProjects.filter(function(project) {
                 return project.role_position == roleName;
             });
@@ -368,23 +387,8 @@ export default {
             // a specific project type
             let filteredProjects = this.projects.slice(0);
 
-            // the type system name comes back, not the display name, so we
-            // need a way to dereference the system name
-            let types = new Map();
-            this.typeFilters.forEach(function(type) {
-                if(type == 'Creative Work') {
-                    types.set(type, 'creative');
-                }
-                else
-                {
-                    // everything except Creative Work is just the lower-case
-                    // variant of the type
-                    types.set(type, type.toLowerCase());
-                }
-            });
-
             // now actually filter the projects by the system name of the purpose
-            let purpose = types.get(filter);
+            let purpose = this.projectTypeMap.get(filter);
             filteredProjects = filteredProjects.filter(function(project) {
                 return project.attributes.purpose_name == purpose;
             });
