@@ -380,6 +380,28 @@ export default {
             // a specific project status
             let filteredProjects = this.projects.slice(0);
 
+            // filter the projects based upon project end date or lack thereof
+            filteredProjects = filteredProjects.filter(function(project) {
+                if(filter == 'Active') {
+                    if(!project.project_end_date) {
+                        // no end date, so assume the project is still active
+                        return true;
+                    }
+                    // TODO: compare end date to current date with moment.js
+                }
+                else if(filter == 'Completed') {
+                    if(!project.project_end_date) {
+                        // no end date, so assume the project is still active
+                        return false;
+                    }
+                    // TODO: compare end date to current date with moment.js
+                }
+
+                // unknown status filter so filter out this project to prevent
+                // overriding other filters further down the line
+                return false;
+            });
+
             return filteredProjects;
         },
         applyTypeFilter: function(filter) {
