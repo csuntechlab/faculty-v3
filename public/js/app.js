@@ -30819,6 +30819,29 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: 'ProfileProjects',
@@ -30856,6 +30879,34 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             });
             console.log(_this.projects);
 
+            // calculate the total awarded amount for the project
+            // per individual sponsor
+            _this.projects.forEach(function (project) {
+                project.award_sponsors = [];
+                if (project.award.length) {
+                    var awardMap = new Map();
+                    project.award.forEach(function (award) {
+                        var awardAmount = parseFloat(award.award_amount);
+                        if (awardAmount > 0.00) {
+                            if (!awardMap.has(award.sponsor_code)) {
+                                var award_sponsor_data = {
+                                    sponsor: award.sponsor,
+                                    total: awardAmount
+                                };
+                                awardMap.set(award.sponsor_code, award_sponsor_data);
+                            } else {
+                                var _award_sponsor_data = awardMap.get(award.sponsor_code);
+                                _award_sponsor_data.total += awardAmount;
+                                awardMap.set(award.sponsor_code, _award_sponsor_data);
+                            }
+                        }
+                    });
+                    awardMap.forEach(function (award_sponsor_data) {
+                        project.award_sponsors.push(award_sponsor_data);
+                    });
+                }
+            });
+
             // we have finished loading everything
             _this.loading_all = false;
         }));
@@ -30877,7 +30928,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }
 
             // iterate over the set of selected filters and apply each one to
-            // the set of projects
+            // the set of projects; selection of multiple filters results in
+            // essentially a chained set of logical OR statements
             var displayedProjects = [];
             this.selectedFilters.forEach(function (filter) {
                 var filteredProjects = _this2.applyFilter(filter);
@@ -31033,6 +31085,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             });
 
             return filteredProjects;
+        },
+        uppercaseFirstLetter: function uppercaseFirstLetter(str) {
+            // https://dzone.com/articles/how-to-capitalize-the-first-letter-of-a-string-in
+            return str.charAt(0).toUpperCase() + str.slice(1);
+        },
+        renderProjectTeamList: function renderProjectTeamList(project) {
+            // returns a comma-separated string representing the members on
+            // a project; if no members exist, it returns a blank string
+            if (!project.members.length) {
+                return "";
+            }
+            var nameArr = [];
+            project.members.forEach(function (member) {
+                nameArr.push(member.display_name);
+            });
+            return nameArr.join(', ');
         },
         filterCheckboxWasClicked: function filterCheckboxWasClicked(event) {
             var correspondingBadge = document.getElementById(event.target.id.replace(/role/i, 'badge'));
@@ -31392,7 +31460,7 @@ var render = function() {
                         },
                         [
                           _vm._v(
-                            "\n                            Foo\n                        "
+                            "\n                                Foo\n                            "
                           )
                         ]
                       ),
@@ -31405,7 +31473,7 @@ var render = function() {
                         },
                         [
                           _vm._v(
-                            "\n                            Bar\n                        "
+                            "\n                                Bar\n                            "
                           )
                         ]
                       )
@@ -31449,9 +31517,9 @@ var render = function() {
                                   },
                                   [
                                     _vm._v(
-                                      "\n                                " +
+                                      "\n                                    " +
                                         _vm._s(filter) +
-                                        " \n                                "
+                                        " \n                                    "
                                     ),
                                     _c(
                                       "span",
@@ -31474,7 +31542,7 @@ var render = function() {
                                       },
                                       [
                                         _vm._v(
-                                          "\n                                    x\n                                "
+                                          "\n                                        x\n                                    "
                                         )
                                       ]
                                     )
@@ -31496,9 +31564,9 @@ var render = function() {
                                   },
                                   [
                                     _vm._v(
-                                      "\n                                " +
+                                      "\n                                    " +
                                         _vm._s(filter) +
-                                        " \n                                "
+                                        " \n                                    "
                                     ),
                                     _c(
                                       "span",
@@ -31521,7 +31589,7 @@ var render = function() {
                                       },
                                       [
                                         _vm._v(
-                                          "\n                                    x\n                                "
+                                          "\n                                        x\n                                    "
                                         )
                                       ]
                                     )
@@ -31543,9 +31611,9 @@ var render = function() {
                                   },
                                   [
                                     _vm._v(
-                                      "\n                                " +
+                                      "\n                                    " +
                                         _vm._s(filter) +
-                                        " \n                                "
+                                        " \n                                    "
                                     ),
                                     _c(
                                       "span",
@@ -31568,7 +31636,7 @@ var render = function() {
                                       },
                                       [
                                         _vm._v(
-                                          "\n                                    x\n                                "
+                                          "\n                                        x\n                                    "
                                         )
                                       ]
                                     )
@@ -31597,9 +31665,147 @@ var render = function() {
                                   _vm._v(" project(s)")
                                 ]),
                                 _vm._v(" "),
-                                _vm._m(4),
-                                _vm._v(" "),
-                                _vm._m(5)
+                                _vm._l(_vm.displayedProjects, function(
+                                  project
+                                ) {
+                                  return _c(
+                                    "div",
+                                    { staticClass: "profileProject" },
+                                    [
+                                      _c(
+                                        "a",
+                                        {
+                                          staticClass: "profileProject__title",
+                                          attrs: { href: "#" }
+                                        },
+                                        [
+                                          _vm._v(
+                                            "\n                                        " +
+                                              _vm._s(project.project_title) +
+                                              "\n                                    "
+                                          )
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      project.attributes
+                                        ? _c(
+                                            "div",
+                                            {
+                                              staticClass:
+                                                "profileProject__type"
+                                            },
+                                            [
+                                              project.attributes.purpose_name ==
+                                              "creative"
+                                                ? _c("span", [
+                                                    _vm._v("Creative Work")
+                                                  ])
+                                                : _c("span", [
+                                                    _vm._v(
+                                                      _vm._s(
+                                                        _vm.uppercaseFirstLetter(
+                                                          project.attributes
+                                                            .purpose_name
+                                                        )
+                                                      )
+                                                    )
+                                                  ])
+                                            ]
+                                          )
+                                        : _vm._e(),
+                                      _vm._v(" "),
+                                      project.award.length
+                                        ? _c(
+                                            "div",
+                                            {
+                                              staticClass:
+                                                "profileProject__item"
+                                            },
+                                            [
+                                              _vm._l(
+                                                project.award_sponsors,
+                                                function(award_sponsor) {
+                                                  return [
+                                                    _c("p", [
+                                                      _c("strong", [
+                                                        _vm._v(
+                                                          _vm._s(
+                                                            award_sponsor.sponsor
+                                                          ) + ":"
+                                                        )
+                                                      ]),
+                                                      _vm._v(
+                                                        " " +
+                                                          _vm._s(
+                                                            new Intl.NumberFormat(
+                                                              "en-US",
+                                                              {
+                                                                style:
+                                                                  "currency",
+                                                                currency: "USD"
+                                                              }
+                                                            ).format(
+                                                              award_sponsor.total
+                                                            )
+                                                          )
+                                                      )
+                                                    ])
+                                                  ]
+                                                }
+                                              )
+                                            ],
+                                            2
+                                          )
+                                        : _vm._e(),
+                                      _vm._v(" "),
+                                      project.pi
+                                        ? _c(
+                                            "div",
+                                            {
+                                              staticClass:
+                                                "profileProject__item"
+                                            },
+                                            [
+                                              _c("strong", [
+                                                _vm._v(
+                                                  "Lead Principal Investigator:"
+                                                )
+                                              ]),
+                                              _vm._v(
+                                                " " +
+                                                  _vm._s(
+                                                    project.pi.display_name
+                                                  ) +
+                                                  "\n                                    "
+                                              )
+                                            ]
+                                          )
+                                        : _vm._e(),
+                                      _vm._v(" "),
+                                      project.members.length
+                                        ? _c(
+                                            "div",
+                                            {
+                                              staticClass:
+                                                "profileProject__item"
+                                            },
+                                            [
+                                              _c("strong", [_vm._v("Team:")]),
+                                              _vm._v(
+                                                " " +
+                                                  _vm._s(
+                                                    _vm.renderProjectTeamList(
+                                                      project
+                                                    )
+                                                  ) +
+                                                  "\n                                    "
+                                              )
+                                            ]
+                                          )
+                                        : _vm._e()
+                                    ]
+                                  )
+                                })
                               ]
                             : [
                                 _c("div", { staticClass: "mb-2" }, [
@@ -31617,7 +31823,7 @@ var render = function() {
                           ])
                         ],
                     _vm._v(" "),
-                    _vm._m(6)
+                    _vm._m(4)
                   ],
                   2
                 )
@@ -31663,76 +31869,6 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "profileProject" }, [
-      _c("a", { staticClass: "profileProject__title", attrs: { href: "#" } }, [
-        _vm._v(
-          "\n                                    CSUN-UCLA Stem Cell Scientest Training Program\n                                "
-        )
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "profileProject__type" }, [
-        _vm._v(
-          "\n                                    Project\n                                "
-        )
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "profileProject__item" }, [
-        _c("strong", [_vm._v("NFS:")]),
-        _vm._v(" $2,770,000\n                                ")
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "profileProject__item" }, [
-        _c("strong", [_vm._v("Lead Principal Investigator:")]),
-        _vm._v(" Cindy Malone\n                                ")
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "profileProject__item" }, [
-        _c("strong", [_vm._v("Team:")]),
-        _vm._v(
-          " Cindy Malone, Shina Dunkin, Anton Garraway, Bradly Luskby, Marge Mintz, Giovonni Nios, Otellia Kopzyanucy\n                                "
-        )
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "profileProject" }, [
-      _c("a", { staticClass: "profileProject__title", attrs: { href: "#" } }, [
-        _vm._v(
-          "\n                                    RUI/Collaborative Research: MSB-ECA: Mice-o-scapes: Using isotopes to understand the effect of climate and landscape change on small mammal ecology over the past 100 years\n                                "
-        )
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "profileProject__type" }, [
-        _vm._v(
-          "\n                                    Project\n                                "
-        )
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "profileProject__item" }, [
-        _c("strong", [_vm._v("NFS:")]),
-        _vm._v(" $2,770,000\n                                ")
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "profileProject__item" }, [
-        _c("strong", [_vm._v("Lead Principal Investigator:")]),
-        _vm._v(" Cindy Malone\n                                ")
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "profileProject__item" }, [
-        _c("strong", [_vm._v("Team:")]),
-        _vm._v(
-          " Cindy Malone, Shina Dunkin, Marge Mintz, Giovonni Nios\n                                "
-        )
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("div", { staticClass: "d-block d-md-none" }, [
       _c("h6", { staticClass: "h5 mb-4 mt-5" }, [_vm._v("RESEARCH INTERESTS")]),
       _vm._v(" "),
@@ -31742,7 +31878,11 @@ var staticRenderFns = [
           staticClass:
             "badge  badge-danger badge--profile-interests py-2 px-2 my-1 mr-1"
         },
-        [_vm._v("\n                            Foo\n                        ")]
+        [
+          _vm._v(
+            "\n                                Foo\n                            "
+          )
+        ]
       ),
       _vm._v(" "),
       _c(
@@ -31751,7 +31891,11 @@ var staticRenderFns = [
           staticClass:
             "badge  badge-danger badge--profile-interests py-2 px-2 my-1 mr-1"
         },
-        [_vm._v("\n                            Bar\n                        ")]
+        [
+          _vm._v(
+            "\n                                Bar\n                            "
+          )
+        ]
       )
     ])
   }

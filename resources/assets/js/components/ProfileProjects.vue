@@ -146,39 +146,24 @@
                             <template v-if="displayedProjects.length">
                                 <div class="mb-2">Showing <strong>{{ displayedProjects.length }}</strong> of <strong>{{ projects.length }}</strong> project(s)</div>
 
-                                <div class="profileProject">
+                                <div v-for="project in displayedProjects" class="profileProject">
                                     <a class="profileProject__title" href="#">
-                                        CSUN-UCLA Stem Cell Scientest Training Program
+                                        {{ project.project_title }}
                                     </a>
-                                    <div class="profileProject__type">
-                                        Project
+                                    <div v-if="project.attributes" class="profileProject__type">
+                                        <span v-if="project.attributes.purpose_name == 'creative'">Creative Work</span>
+                                        <span v-else>{{ uppercaseFirstLetter(project.attributes.purpose_name) }}</span>
                                     </div>
-                                    <div class="profileProject__item">
-                                        <strong>NFS:</strong> $2,770,000
+                                    <div v-if="project.award.length" class="profileProject__item">
+                                        <template v-for="award_sponsor in project.award_sponsors">
+                                            <p><strong>{{ award_sponsor.sponsor }}:</strong> {{ new Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD'}).format(award_sponsor.total) }}</p>
+                                        </template>
                                     </div>
-                                    <div class="profileProject__item">
-                                        <strong>Lead Principal Investigator:</strong> Cindy Malone
+                                    <div v-if="project.pi" class="profileProject__item">
+                                        <strong>Lead Principal Investigator:</strong> {{ project.pi.display_name }}
                                     </div>
-                                    <div class="profileProject__item">
-                                        <strong>Team:</strong> Cindy Malone, Shina Dunkin, Anton Garraway, Bradly Luskby, Marge Mintz, Giovonni Nios, Otellia Kopzyanucy
-                                    </div>
-                                </div>
-
-                                <div class="profileProject">
-                                    <a class="profileProject__title" href="#">
-                                        RUI/Collaborative Research: MSB-ECA: Mice-o-scapes: Using isotopes to understand the effect of climate and landscape change on small mammal ecology over the past 100 years
-                                    </a>
-                                    <div class="profileProject__type">
-                                        Project
-                                    </div>
-                                    <div class="profileProject__item">
-                                        <strong>NFS:</strong> $2,770,000
-                                    </div>
-                                    <div class="profileProject__item">
-                                        <strong>Lead Principal Investigator:</strong> Cindy Malone
-                                    </div>
-                                    <div class="profileProject__item">
-                                        <strong>Team:</strong> Cindy Malone, Shina Dunkin, Marge Mintz, Giovonni Nios
+                                    <div v-if="project.members.length" class="profileProject__item">
+                                        <strong>Team:</strong> {{ renderProjectTeamList(project) }}
                                     </div>
                                 </div>
                             </template>
@@ -242,6 +227,36 @@ export default {
                 });
                 console.log(this.projects);
 
+                // calculate the total awarded amount for the project
+                // per individual sponsor
+                this.projects.forEach(function(project) {
+                    project.award_sponsors = [];
+                    if(project.award.length) {
+                        let awardMap = new Map();
+                        project.award.forEach(function(award) {
+                            let awardAmount = parseFloat(award.award_amount);
+                            if(awardAmount > 0.00) {
+                                if(!awardMap.has(award.sponsor_code)) {
+                                    let award_sponsor_data = {
+                                        sponsor: award.sponsor,
+                                        total: awardAmount
+                                    };
+                                    awardMap.set(award.sponsor_code, award_sponsor_data);
+                                }
+                                else
+                                {
+                                    let award_sponsor_data = awardMap.get(award.sponsor_code);
+                                    award_sponsor_data.total += awardAmount;
+                                    awardMap.set(award.sponsor_code, award_sponsor_data);
+                                }
+                            }
+                        });
+                        awardMap.forEach(function(award_sponsor_data) {
+                            project.award_sponsors.push(award_sponsor_data);
+                        });
+                    }
+                });
+
                 // we have finished loading everything
                 this.loading_all = false;
             }));
@@ -260,7 +275,8 @@ export default {
             }
 
             // iterate over the set of selected filters and apply each one to
-            // the set of projects
+            // the set of projects; selection of multiple filters results in
+            // essentially a chained set of logical OR statements
             let displayedProjects = [];
             this.selectedFilters.forEach((filter) => {
                 let filteredProjects = this.applyFilter(filter);
@@ -424,6 +440,22 @@ export default {
             });
 
             return filteredProjects;
+        },
+        uppercaseFirstLetter: function(str) {
+            // https://dzone.com/articles/how-to-capitalize-the-first-letter-of-a-string-in
+            return str.charAt(0).toUpperCase() + str.slice(1);
+        },
+        renderProjectTeamList: function(project) {
+            // returns a comma-separated string representing the members on
+            // a project; if no members exist, it returns a blank string
+            if(!project.members.length) {
+                return "";
+            }
+            let nameArr = [];
+            project.members.forEach(function(member) {
+                nameArr.push(member.display_name);
+            });
+            return nameArr.join(', ');
         },
         filterCheckboxWasClicked : function(event) {
             var correspondingBadge = document.getElementById(event.target.id.replace(/role/i, 'badge'))
