@@ -87,12 +87,14 @@
 
                         <div class="d-none d-md-block">
                             <h6 class="h5 mb-4" v-bind:class="{'mt-5': projects.length}">RESEARCH INTERESTS</h6>
-                            <span class="badge  badge-danger badge--profile-interests py-2 px-2 my-1 mr-1">
-                                Foo
-                            </span>
-                            <span class="badge  badge-danger badge--profile-interests py-2 px-2 my-1 mr-1">
-                                Bar
-                            </span>
+                            <template v-if="interests.length">
+                                <span v-for="_interest in interests" class="badge  badge-danger badge--profile-interests py-2 px-2 my-1 mr-1">
+                                    {{ _interest.title }}
+                                </span>
+                            </template>
+                            <template v-else>
+                                There are currently no research interests to display.
+                            </template>
                         </div>
                     </div>
 
@@ -177,12 +179,14 @@
 
                         <div class="d-block d-md-none">
                             <h6 class="h5 mb-4 mt-5">RESEARCH INTERESTS</h6>
-                            <span class="badge  badge-danger badge--profile-interests py-2 px-2 my-1 mr-1">
-                                Foo
-                            </span>
-                            <span class="badge  badge-danger badge--profile-interests py-2 px-2 my-1 mr-1">
-                                Bar
-                            </span>
+                            <template v-if="interests.length">
+                                <span v-for="_interest in interests" class="badge  badge-danger badge--profile-interests py-2 px-2 my-1 mr-1">
+                                    {{ _interest.title }}
+                                </span>
+                            </template>
+                            <template v-else>
+                                There are currently no research interests to display.
+                            </template>
                         </div>
 
                     </div>
@@ -197,6 +201,7 @@ export default {
     data: function () {
         return {
             projects: [],
+            interests: [],
             roleFilters: ['Investigator','Other Faculty','Principal Investigator','Former Principal Investigator','Lead Principal Investigator','Project Manager','Proposal Editor'],
             statusFilters: ['Active','Completed'],
             typeFilters: ['Creative Work','Project','Research','Service'],
@@ -216,16 +221,21 @@ export default {
 
         // make the Axios calls concurrently and wait for all of them to return
         // before applying the reactive data
-        axios.all([this.loadProjects()])
-            .then(axios.spread((projects) => {
+        axios.all([this.loadProjects(), this.loadResearchInterests()])
+            .then(axios.spread((projects, interests) => {
                 // apply the projects
-                this.projects = projects.data.projects;
+                if(projects.data.projects != null) {
+                    this.projects = projects.data.projects;
+                }
+                else
+                {
+                    this.projects = [];
+                }
 
                 // filter out any non-publishable projects
                 this.projects = this.projects.filter(function(project) {
                     return project.is_publishable == "1";
                 });
-                console.log(this.projects);
 
                 // calculate the total awarded amount for the project
                 // per individual sponsor
@@ -256,6 +266,9 @@ export default {
                         });
                     }
                 });
+
+                // apply the research interests
+                this.interests = interests.data.interests;
 
                 // we have finished loading everything
                 this.loading_all = false;
@@ -304,8 +317,6 @@ export default {
                     displayedProjects.push(project);
                 });
             });
-
-            console.log(displayedProjects);
 
             return displayedProjects;
         },
@@ -356,6 +367,17 @@ export default {
                 'members/projects',
                 {
                     baseURL: $('meta[name=projects-url').attr('content'),
+                    params: {
+                        email: this.person_email
+                    }
+                }
+            );
+        },
+        loadResearchInterests: function() {
+            return axios.get(
+                'interests/research',
+                {
+                    baseURL: $("meta[name=affinity-url]").attr('content'),
                     params: {
                         email: this.person_email
                     }

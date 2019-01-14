@@ -30804,12 +30804,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: 'ProfileProjects',
     data: function data() {
         return {
             projects: [],
+            interests: [],
             roleFilters: ['Investigator', 'Other Faculty', 'Principal Investigator', 'Former Principal Investigator', 'Lead Principal Investigator', 'Project Manager', 'Proposal Editor'],
             statusFilters: ['Active', 'Completed'],
             typeFilters: ['Creative Work', 'Project', 'Research', 'Service'],
@@ -30831,15 +30836,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
         // make the Axios calls concurrently and wait for all of them to return
         // before applying the reactive data
-        axios.all([this.loadProjects()]).then(axios.spread(function (projects) {
+        axios.all([this.loadProjects(), this.loadResearchInterests()]).then(axios.spread(function (projects, interests) {
             // apply the projects
-            _this.projects = projects.data.projects;
+            if (projects.data.projects != null) {
+                _this.projects = projects.data.projects;
+            } else {
+                _this.projects = [];
+            }
 
             // filter out any non-publishable projects
             _this.projects = _this.projects.filter(function (project) {
                 return project.is_publishable == "1";
             });
-            console.log(_this.projects);
 
             // calculate the total awarded amount for the project
             // per individual sponsor
@@ -30868,6 +30876,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     });
                 }
             });
+
+            // apply the research interests
+            _this.interests = interests.data.interests;
 
             // we have finished loading everything
             _this.loading_all = false;
@@ -30920,8 +30931,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 });
             });
 
-            console.log(displayedProjects);
-
             return displayedProjects;
         },
         person_email: function person_email() {
@@ -30965,6 +30974,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         loadProjects: function loadProjects() {
             return axios.get('members/projects', {
                 baseURL: $('meta[name=projects-url').attr('content'),
+                params: {
+                    email: this.person_email
+                }
+            });
+        },
+        loadResearchInterests: function loadResearchInterests() {
+            return axios.get('interests/research', {
+                baseURL: $("meta[name=affinity-url]").attr('content'),
                 params: {
                     email: this.person_email
                 }
@@ -31410,42 +31427,44 @@ var render = function() {
                         ]
                       : _vm._e(),
                     _vm._v(" "),
-                    _c("div", { staticClass: "d-none d-md-block" }, [
-                      _c(
-                        "h6",
-                        {
-                          staticClass: "h5 mb-4",
-                          class: { "mt-5": _vm.projects.length }
-                        },
-                        [_vm._v("RESEARCH INTERESTS")]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "span",
-                        {
-                          staticClass:
-                            "badge  badge-danger badge--profile-interests py-2 px-2 my-1 mr-1"
-                        },
-                        [
-                          _vm._v(
-                            "\n                            Foo\n                        "
-                          )
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "span",
-                        {
-                          staticClass:
-                            "badge  badge-danger badge--profile-interests py-2 px-2 my-1 mr-1"
-                        },
-                        [
-                          _vm._v(
-                            "\n                            Bar\n                        "
-                          )
-                        ]
-                      )
-                    ])
+                    _c(
+                      "div",
+                      { staticClass: "d-none d-md-block" },
+                      [
+                        _c(
+                          "h6",
+                          {
+                            staticClass: "h5 mb-4",
+                            class: { "mt-5": _vm.projects.length }
+                          },
+                          [_vm._v("RESEARCH INTERESTS")]
+                        ),
+                        _vm._v(" "),
+                        _vm.interests.length
+                          ? _vm._l(_vm.interests, function(_interest) {
+                              return _c(
+                                "span",
+                                {
+                                  staticClass:
+                                    "badge  badge-danger badge--profile-interests py-2 px-2 my-1 mr-1"
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                " +
+                                      _vm._s(_interest.title) +
+                                      "\n                            "
+                                  )
+                                ]
+                              )
+                            })
+                          : [
+                              _vm._v(
+                                "\n                            There are currently no research interests to display.\n                        "
+                              )
+                            ]
+                      ],
+                      2
+                    )
                   ],
                   2
                 ),
@@ -31795,7 +31814,39 @@ var render = function() {
                           ])
                         ],
                     _vm._v(" "),
-                    _vm._m(4)
+                    _c(
+                      "div",
+                      { staticClass: "d-block d-md-none" },
+                      [
+                        _c("h6", { staticClass: "h5 mb-4 mt-5" }, [
+                          _vm._v("RESEARCH INTERESTS")
+                        ]),
+                        _vm._v(" "),
+                        _vm.interests.length
+                          ? _vm._l(_vm.interests, function(_interest) {
+                              return _c(
+                                "span",
+                                {
+                                  staticClass:
+                                    "badge  badge-danger badge--profile-interests py-2 px-2 my-1 mr-1"
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                " +
+                                      _vm._s(_interest.title) +
+                                      "\n                            "
+                                  )
+                                ]
+                              )
+                            })
+                          : [
+                              _vm._v(
+                                "\n                            There are currently no research interests to display.\n                        "
+                              )
+                            ]
+                      ],
+                      2
+                    )
                   ],
                   2
                 )
@@ -31836,32 +31887,6 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("li", [_c("strong", [_vm._v("Project Type")])])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "d-block d-md-none" }, [
-      _c("h6", { staticClass: "h5 mb-4 mt-5" }, [_vm._v("RESEARCH INTERESTS")]),
-      _vm._v(" "),
-      _c(
-        "span",
-        {
-          staticClass:
-            "badge  badge-danger badge--profile-interests py-2 px-2 my-1 mr-1"
-        },
-        [_vm._v("\n                            Foo\n                        ")]
-      ),
-      _vm._v(" "),
-      _c(
-        "span",
-        {
-          staticClass:
-            "badge  badge-danger badge--profile-interests py-2 px-2 my-1 mr-1"
-        },
-        [_vm._v("\n                            Bar\n                        ")]
-      )
-    ])
   }
 ]
 render._withStripped = true
