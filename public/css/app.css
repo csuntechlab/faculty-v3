@@ -10807,13 +10807,26 @@ body {
   min-height: calc(100vh - 30rem);
 }
 
+.past-courses-list {
+  margin-bottom: 0;
+}
+
 .past-courses-list li {
+  color: #6c757d;
   margin-bottom: 3rem;
   padding-right: 1.5rem;
 }
 
-.past-courses-list li:last-child {
-  margin-bottom: 0;
+.past-courses-list-control {
+  cursor: pointer;
+}
+
+.past-courses-list-control[aria-expanded="false"] .past-courses-list-control__show-fewer {
+  display: none;
+}
+
+.past-courses-list-control[aria-expanded="true"] .past-courses-list-control__show-all {
+  display: none;
 }
 
 @media (max-width: 991.98px) {
