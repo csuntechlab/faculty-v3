@@ -30843,7 +30843,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             //Init
             this.getWindowWidth();
         });
-        console.log(moment().format('YYYY-MM-DD'));
+
         // make the Axios calls concurrently and wait for all of them to return
         // before applying the reactive data
         axios.all([this.loadProjects()]).then(axios.spread(function (projects) {
@@ -30868,6 +30868,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         // this computed property filters the set of projects brought in from
         // the projects API based upon the set of selected filters
         displayedProjects: function displayedProjects() {
+            var _this2 = this;
+
             // if there are no selected filters, just return the entire set of
             // projects
             if (!this.selectedFilters.length) {
@@ -30878,7 +30880,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             // the set of projects
             var displayedProjects = [];
             this.selectedFilters.forEach(function (filter) {
-                var filteredProjects = this.applyFilter(filter);
+                var filteredProjects = _this2.applyFilter(filter);
 
                 // filter the filtered projects to ensure they do not already
                 // exist in the set of already-displayed projects
@@ -30904,6 +30906,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 });
             });
 
+            console.log(displayedProjects);
+
             return displayedProjects;
         },
         person_email: function person_email() {
@@ -30916,10 +30920,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.roleFilters.forEach(function (role) {
                 if (role == 'Former Principal Investigator') {
                     // this role is referred to as "Former PI" in the WS
-                    types.set(role, 'Former PI');
+                    roles.set(role, 'Former PI');
                 } else {
-                    // all other types are equivalent
-                    types.set(role, role);
+                    // all other roles are equivalent
+                    roles.set(role, role);
                 }
             });
             return roles;
@@ -30977,7 +30981,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var filteredProjects = this.projects.slice(0);
 
             // now actually filter the projects by the member role name
-            var roleName = this.projectRoleMap.get(role);
+            var roleName = this.projectRoleMap.get(filter);
             filteredProjects = filteredProjects.filter(function (project) {
                 return project.role_position == roleName;
             });
@@ -30996,13 +31000,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                         // no end date, so assume the project is still active
                         return true;
                     }
-                    // TODO: compare end date to current date with moment.js
+                    // compare end date to current date with moment.js
+                    return moment().isSameOrBefore(project.project_end_date, 'day');
                 } else if (filter == 'Completed') {
                     if (!project.project_end_date) {
                         // no end date, so assume the project is still active
                         return false;
                     }
-                    // TODO: compare end date to current date with moment.js
+                    // compare end date to current date with moment.js
+                    return moment().isAfter(project.project_end_date, 'day');
                 }
 
                 // unknown status filter so filter out this project to prevent

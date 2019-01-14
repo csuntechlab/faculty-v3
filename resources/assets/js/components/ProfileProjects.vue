@@ -228,6 +228,7 @@ export default {
             //Init
             this.getWindowWidth()
         });
+
         // make the Axios calls concurrently and wait for all of them to return
         // before applying the reactive data
         axios.all([this.loadProjects()])
@@ -261,7 +262,7 @@ export default {
             // iterate over the set of selected filters and apply each one to
             // the set of projects
             let displayedProjects = [];
-            this.selectedFilters.forEach(function(filter) {
+            this.selectedFilters.forEach((filter) => {
                 let filteredProjects = this.applyFilter(filter);
 
                 // filter the filtered projects to ensure they do not already
@@ -288,6 +289,8 @@ export default {
                 });
             });
 
+            console.log(displayedProjects);
+
             return displayedProjects;
         },
         person_email: function() {
@@ -300,12 +303,12 @@ export default {
             this.roleFilters.forEach(function(role) {
                 if(role == 'Former Principal Investigator') {
                     // this role is referred to as "Former PI" in the WS
-                    types.set(role, 'Former PI');
+                    roles.set(role, 'Former PI');
                 }
                 else
                 {
-                    // all other types are equivalent
-                    types.set(role, role);
+                    // all other roles are equivalent
+                    roles.set(role, role);
                 }
             });
             return roles;
@@ -368,7 +371,7 @@ export default {
             let filteredProjects = this.projects.slice(0);
 
             // now actually filter the projects by the member role name
-            let roleName = this.projectRoleMap.get(role);
+            let roleName = this.projectRoleMap.get(filter);
             filteredProjects = filteredProjects.filter(function(project) {
                 return project.role_position == roleName;
             });
@@ -387,14 +390,16 @@ export default {
                         // no end date, so assume the project is still active
                         return true;
                     }
-                    // TODO: compare end date to current date with moment.js
+                    // compare end date to current date with moment.js
+                    return moment().isSameOrBefore(project.project_end_date, 'day');
                 }
                 else if(filter == 'Completed') {
                     if(!project.project_end_date) {
                         // no end date, so assume the project is still active
                         return false;
                     }
-                    // TODO: compare end date to current date with moment.js
+                    // compare end date to current date with moment.js
+                    return moment().isAfter(project.project_end_date, 'day');
                 }
 
                 // unknown status filter so filter out this project to prevent
