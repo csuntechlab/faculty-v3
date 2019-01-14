@@ -147,7 +147,7 @@
                                 <div class="mb-2">Showing <strong>{{ displayedProjects.length }}</strong> of <strong>{{ projects.length }}</strong> project(s)</div>
 
                                 <div v-for="project in displayedProjects" class="profileProject">
-                                    <a class="profileProject__title" href="#">
+                                    <a class="profileProject__title" :href="generateProjectUrl(project)">
                                         {{ project.project_title }}
                                     </a>
                                     <div v-if="project.attributes" class="profileProject__type">
@@ -345,7 +345,10 @@ export default {
                 }
             });
             return types;
-        }
+        },
+        scholarship_url: function() {
+            return $("meta[name=helix-url]").attr('content');
+        },
     },
     methods: {
         loadProjects: function() {
@@ -456,6 +459,9 @@ export default {
                 nameArr.push(member.display_name);
             });
             return nameArr.join(', ');
+        },
+        generateProjectUrl: function(project) {
+            return this.scholarship_url + 'project/' + project.slug;
         },
         filterCheckboxWasClicked : function(event) {
             var correspondingBadge = document.getElementById(event.target.id.replace(/role/i, 'badge'))

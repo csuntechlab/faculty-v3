@@ -30804,44 +30804,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: 'ProfileProjects',
@@ -30994,6 +30956,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 }
             });
             return types;
+        },
+        scholarship_url: function scholarship_url() {
+            return $("meta[name=helix-url]").attr('content');
         }
     },
     methods: {
@@ -31101,6 +31066,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 nameArr.push(member.display_name);
             });
             return nameArr.join(', ');
+        },
+        generateProjectUrl: function generateProjectUrl(project) {
+            return this.scholarship_url + 'project/' + project.slug;
         },
         filterCheckboxWasClicked: function filterCheckboxWasClicked(event) {
             var correspondingBadge = document.getElementById(event.target.id.replace(/role/i, 'badge'));
@@ -31460,7 +31428,7 @@ var render = function() {
                         },
                         [
                           _vm._v(
-                            "\n                                Foo\n                            "
+                            "\n                            Foo\n                        "
                           )
                         ]
                       ),
@@ -31473,7 +31441,7 @@ var render = function() {
                         },
                         [
                           _vm._v(
-                            "\n                                Bar\n                            "
+                            "\n                            Bar\n                        "
                           )
                         ]
                       )
@@ -31517,9 +31485,9 @@ var render = function() {
                                   },
                                   [
                                     _vm._v(
-                                      "\n                                    " +
+                                      "\n                                " +
                                         _vm._s(filter) +
-                                        " \n                                    "
+                                        " \n                                "
                                     ),
                                     _c(
                                       "span",
@@ -31542,7 +31510,7 @@ var render = function() {
                                       },
                                       [
                                         _vm._v(
-                                          "\n                                        x\n                                    "
+                                          "\n                                    x\n                                "
                                         )
                                       ]
                                     )
@@ -31564,9 +31532,9 @@ var render = function() {
                                   },
                                   [
                                     _vm._v(
-                                      "\n                                    " +
+                                      "\n                                " +
                                         _vm._s(filter) +
-                                        " \n                                    "
+                                        " \n                                "
                                     ),
                                     _c(
                                       "span",
@@ -31589,7 +31557,7 @@ var render = function() {
                                       },
                                       [
                                         _vm._v(
-                                          "\n                                        x\n                                    "
+                                          "\n                                    x\n                                "
                                         )
                                       ]
                                     )
@@ -31611,9 +31579,9 @@ var render = function() {
                                   },
                                   [
                                     _vm._v(
-                                      "\n                                    " +
+                                      "\n                                " +
                                         _vm._s(filter) +
-                                        " \n                                    "
+                                        " \n                                "
                                     ),
                                     _c(
                                       "span",
@@ -31636,7 +31604,7 @@ var render = function() {
                                       },
                                       [
                                         _vm._v(
-                                          "\n                                        x\n                                    "
+                                          "\n                                    x\n                                "
                                         )
                                       ]
                                     )
@@ -31676,13 +31644,17 @@ var render = function() {
                                         "a",
                                         {
                                           staticClass: "profileProject__title",
-                                          attrs: { href: "#" }
+                                          attrs: {
+                                            href: _vm.generateProjectUrl(
+                                              project
+                                            )
+                                          }
                                         },
                                         [
                                           _vm._v(
-                                            "\n                                        " +
+                                            "\n                                    " +
                                               _vm._s(project.project_title) +
-                                              "\n                                    "
+                                              "\n                                "
                                           )
                                         ]
                                       ),
@@ -31776,7 +31748,7 @@ var render = function() {
                                                   _vm._s(
                                                     project.pi.display_name
                                                   ) +
-                                                  "\n                                    "
+                                                  "\n                                "
                                               )
                                             ]
                                           )
@@ -31798,7 +31770,7 @@ var render = function() {
                                                       project
                                                     )
                                                   ) +
-                                                  "\n                                    "
+                                                  "\n                                "
                                               )
                                             ]
                                           )
@@ -31878,11 +31850,7 @@ var staticRenderFns = [
           staticClass:
             "badge  badge-danger badge--profile-interests py-2 px-2 my-1 mr-1"
         },
-        [
-          _vm._v(
-            "\n                                Foo\n                            "
-          )
-        ]
+        [_vm._v("\n                            Foo\n                        ")]
       ),
       _vm._v(" "),
       _c(
@@ -31891,11 +31859,7 @@ var staticRenderFns = [
           staticClass:
             "badge  badge-danger badge--profile-interests py-2 px-2 my-1 mr-1"
         },
-        [
-          _vm._v(
-            "\n                                Bar\n                            "
-          )
-        ]
+        [_vm._v("\n                            Bar\n                        ")]
       )
     ])
   }
