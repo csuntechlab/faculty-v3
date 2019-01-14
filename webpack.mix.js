@@ -22,7 +22,8 @@ mix.js('resources/assets/js/app.js', 'public/js')
    	'popper.js',
    	'jquery',
    	'metaphor-theme/node_modules/bootstrap/dist/js/bootstrap.min.js',
-   	'metaphor-theme/dist/js/datepicker/datepicker.js'
+   	'metaphor-theme/dist/js/datepicker/datepicker.js',
+      'moment'
    ])
    .sass('resources/assets/sass/app.scss', 'public/css')
    .options({
