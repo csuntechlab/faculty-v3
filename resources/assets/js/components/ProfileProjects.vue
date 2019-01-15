@@ -287,36 +287,55 @@ export default {
                 return this.projects;
             }
 
-            // iterate over the set of selected filters and apply each one to
-            // the set of projects; selection of multiple filters results in
-            // essentially a chained set of logical OR statements
-            let displayedProjects = [];
+            let selectedRoles = [];
+            let selectedStatus = [];
+            let selectedTypes = [];
+
+            let matchingRole = [];
+            let matchingStatus = [];
+            let matchingType = [];
+
+            // group the filters and projects into their various types so we know
+            // how to do the OR gates versus the AND gates first
             this.selectedFilters.forEach((filter) => {
-                let filteredProjects = this.applyFilter(filter);
-
-                // filter the filtered projects to ensure they do not already
-                // exist in the set of already-displayed projects
-                filteredProjects = filteredProjects.filter(function(project) {
-                    // I'm using a regular "for" loop and not a forEach() or a
-                    // for...of for a very specific reason here
-                    for(let i = 0; i < displayedProjects.length; i++) {
-                        if(displayedProjects[i].project_id == project.project_id) {
-                            // project already exists in the displayed set
-                            return false;
-                        }
-                    }
-
-                    // project either does not already exist or there are currently
-                    // no displayed projects so it should be added anyway
-                    return true;
-                });
-
-                // now push each still-existing filtered project onto the set of
-                // displayed projects
-                filteredProjects.forEach(function(project) {
-                    displayedProjects.push(project);
-                });
+                if(this.roleFilters.indexOf(filter) != -1) {
+                    selectedRoles.push(filter);
+                    matchingRole = matchingRole.concat(this.applyFilter(filter));
+                }
+                else if(this.statusFilters.indexOf(filter) != -1) {
+                    selectedStatus.push(filter);
+                    matchingStatus = matchingStatus.concat(this.applyFilter(filter));
+                }
+                else if(this.typeFilters.indexOf(filter) != -1) {
+                    selectedTypes.push(filter);
+                    matchingType = matchingType.concat(this.applyFilter(filter));
+                }
             });
+
+            // perform chained AND gates on the projects that have already had
+            // the OR gates applied to them above
+            // Ex: ((Lead Principal Investigator OR Investigator) AND (Project OR Creative Work))
+            let tempFilters = [selectedRoles, selectedStatus, selectedTypes];
+            let tempProjects = [matchingRole, matchingStatus, matchingType];
+            let displayedProjects = this.projects;
+            for(let i = 0; i < tempFilters.length; i++) {
+                // we only care to apply the AND gate if something within the
+                // filter type was already selected
+                if(tempFilters[i].length) {
+                    displayedProjects = displayedProjects.filter(function(project) {
+                        for(let j = 0; j < tempProjects[i].length; j++) {
+                            // project in the existing set of displayed projects matches
+                            // this filtered project, so keep it
+                            if(project.project_id == tempProjects[i][j].project_id) {
+                                return true;
+                            }
+                        }
+                        // project in the existing set of displayed projects does not
+                        // match this filtered project, so reject it
+                        return false;
+                    });
+                }
+            }
 
             return displayedProjects;
         },
