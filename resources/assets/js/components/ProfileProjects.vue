@@ -88,9 +88,9 @@
                         <div class="d-none d-md-block">
                             <h6 class="h5 mb-4" v-bind:class="{'mt-5': projects.length}">RESEARCH INTERESTS</h6>
                             <template v-if="interests.length">
-                                <span v-for="_interest in interests" class="badge  badge-danger badge--profile-interests py-2 px-2 my-1 mr-1">
+                                <a :href="generateInterestSearchUrl(_interest)" v-for="_interest in interests" class="badge  badge-danger badge--profile-interests py-2 px-2 my-1 mr-1" target="_blank">
                                     {{ _interest.title }}
-                                </span>
+                                </a>
                             </template>
                             <template v-else>
                                 There are currently no research interests to display.
@@ -149,7 +149,7 @@
                                 <div class="mb-2">Showing <strong>{{ displayedProjects.length }}</strong> of <strong>{{ projects.length }}</strong> project(s)</div>
 
                                 <div v-for="project in displayedProjects" class="profileProject">
-                                    <a class="profileProject__title" :href="generateProjectUrl(project)">
+                                    <a class="profileProject__title" :href="generateProjectUrl(project)" target="_blank">
                                         {{ project.project_title }}
                                     </a>
                                     <div v-if="project.attributes" class="profileProject__type">
@@ -180,9 +180,9 @@
                         <div class="d-block d-md-none">
                             <h6 class="h5 mb-4 mt-5">RESEARCH INTERESTS</h6>
                             <template v-if="interests.length">
-                                <span v-for="_interest in interests" class="badge  badge-danger badge--profile-interests py-2 px-2 my-1 mr-1">
+                                <a :href="generateInterestSearchUrl(_interest)" v-for="_interest in interests" class="badge  badge-danger badge--profile-interests py-2 px-2 my-1 mr-1" target="_blank">
                                     {{ _interest.title }}
-                                </span>
+                                </a>
                             </template>
                             <template v-else>
                                 There are currently no research interests to display.
@@ -484,6 +484,10 @@ export default {
         },
         generateProjectUrl: function(project) {
             return this.scholarship_url + 'project/' + project.slug;
+        },
+        generateInterestSearchUrl: function(interest) {
+            return this.scholarship_url + 'search/research-interests?searchType=research-interest&query=' +
+                interest.title.split(" ").join("+");
         },
         filterCheckboxWasClicked : function(event) {
             var correspondingBadge = document.getElementById(event.target.id.replace(/role/i, 'badge'))

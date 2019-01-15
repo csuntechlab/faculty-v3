@@ -31087,6 +31087,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         generateProjectUrl: function generateProjectUrl(project) {
             return this.scholarship_url + 'project/' + project.slug;
         },
+        generateInterestSearchUrl: function generateInterestSearchUrl(interest) {
+            return this.scholarship_url + 'search/research-interests?searchType=research-interest&query=' + interest.title.split(" ").join("+");
+        },
         filterCheckboxWasClicked: function filterCheckboxWasClicked(event) {
             var correspondingBadge = document.getElementById(event.target.id.replace(/role/i, 'badge'));
 
@@ -31443,10 +31446,16 @@ var render = function() {
                         _vm.interests.length
                           ? _vm._l(_vm.interests, function(_interest) {
                               return _c(
-                                "span",
+                                "a",
                                 {
                                   staticClass:
-                                    "badge  badge-danger badge--profile-interests py-2 px-2 my-1 mr-1"
+                                    "badge  badge-danger badge--profile-interests py-2 px-2 my-1 mr-1",
+                                  attrs: {
+                                    href: _vm.generateInterestSearchUrl(
+                                      _interest
+                                    ),
+                                    target: "_blank"
+                                  }
                                 },
                                 [
                                   _vm._v(
@@ -31666,7 +31675,8 @@ var render = function() {
                                           attrs: {
                                             href: _vm.generateProjectUrl(
                                               project
-                                            )
+                                            ),
+                                            target: "_blank"
                                           }
                                         },
                                         [
@@ -31825,10 +31835,16 @@ var render = function() {
                         _vm.interests.length
                           ? _vm._l(_vm.interests, function(_interest) {
                               return _c(
-                                "span",
+                                "a",
                                 {
                                   staticClass:
-                                    "badge  badge-danger badge--profile-interests py-2 px-2 my-1 mr-1"
+                                    "badge  badge-danger badge--profile-interests py-2 px-2 my-1 mr-1",
+                                  attrs: {
+                                    href: _vm.generateInterestSearchUrl(
+                                      _interest
+                                    ),
+                                    target: "_blank"
+                                  }
                                 },
                                 [
                                   _vm._v(
