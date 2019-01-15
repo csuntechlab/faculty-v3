@@ -15,6 +15,9 @@ Route::get('/', function () {
     return view('pages.index');
 })->name('home');
 
+Route::get('/welcome', 'WelcomeController@welcome')
+	->name('welcome');
+
 Route::get('/search', 'SearchController@search')
 	->name('search');
 
@@ -26,3 +29,4 @@ Route::get('/departments/{id}/faculty', 'DepartmentController@faculty')
 
 Route::get('{uri}', 'ProfileController@show')
 	->name('profile');
+

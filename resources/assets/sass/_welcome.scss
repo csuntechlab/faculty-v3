@@ -1,0 +1,56 @@
+.newFac {
+    @extend .col-lg-3;
+    margin-bottom: 1rem;
+
+    &--med {
+        @extend .col-lg-4;
+    }
+
+    &--big {
+        @extend .col-lg-6;
+    }
+
+    &--giant {
+        @extend .col-lg-8;
+    }
+
+    &--huge {
+        @extend .col-lg-12;
+    }
+
+    &.active {
+        // @extend .col-lg-6;
+        // @extend .offset-lg-3;
+        
+        .welcome-card {
+            border-color: red;
+        }
+    } 
+}
+
+
+.welcome-card{
+    height: 100%;;
+    border-radius:5px;
+    border: 1px solid $light-gray;
+    padding-top: 5px;
+    padding-bottom: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    color: $body-color;
+
+    &:hover{ 
+        border:solid 1px $csunred;
+        text-decoration: none;
+        color: $body-color;
+
+        .card-title {
+            color: $primary;
+        }
+    }
+
+    &__img {
+        width: 30%;
+        border-radius: 50%;
+    }
+}
