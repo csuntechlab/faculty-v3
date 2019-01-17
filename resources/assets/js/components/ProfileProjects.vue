@@ -287,36 +287,71 @@ export default {
                 return this.projects;
             }
 
-            let selectedRoles = [];
-            let selectedStatus = [];
-            let selectedTypes = [];
+            // we will reduce this multidimensional array down only to the
+            // actual filters that have been selected; each array is intentionally
+            // a copy of the original set of filters to prevent modification of
+            // its original bound data element. In addition, if there are more
+            // filter types that need to be added in the future, all that needs to
+            // be modified is this array and the rest of the logic for this
+            // computed property will still work.
+            let _selectedFilters = [
+                this.roleFilters.slice(0),
+                this.statusFilters.slice(0),
+                this.typeFilters.slice(0)
+            ];
 
-            let matchingRole = [];
-            let matchingStatus = [];
-            let matchingType = [];
+            let _filtersToRemove = [];
+            let _matchingProjects = [];
 
-            // group the filters and projects into their various types so we know
-            // how to do the OR gates versus the AND gates first
-            this.selectedFilters.forEach((filter) => {
-                if(this.roleFilters.indexOf(filter) != -1) {
-                    selectedRoles.push(filter);
-                    matchingRole = matchingRole.concat(this.applyFilter(filter));
-                }
-                else if(this.statusFilters.indexOf(filter) != -1) {
-                    selectedStatus.push(filter);
-                    matchingStatus = matchingStatus.concat(this.applyFilter(filter));
-                }
-                else if(this.typeFilters.indexOf(filter) != -1) {
-                    selectedTypes.push(filter);
-                    matchingType = matchingType.concat(this.applyFilter(filter));
-                }
+            _selectedFilters.forEach((filtersArray, filtersIndex) => {
+                // add an empty project slot to account for any possible
+                // projects that match the given filter and also add a slot
+                // to account for any filters of that type to remove
+                _matchingProjects.push([]);
+                _filtersToRemove.push([]);
+
+                // group the filters and projects into their various types so we know
+                // how to do the OR gates versus the AND gates first
+                filtersArray.forEach((filter, index) => {
+                    if(this.selectedFilters.indexOf(filter) != -1) {
+                        // this filter has been selected, so we will add its
+                        // matching projects to another array
+                        _matchingProjects[filtersIndex] = _matchingProjects[filtersIndex].concat(this.applyFilter(filter));
+                    }
+                    else
+                    {
+                        // this filter was not selected, so mark it for removal
+                        // from its sub-array of available filters
+                        _filtersToRemove[filtersIndex].push(filter);
+                    }
+                });
+            });
+
+            // now remove all filters of each type that have been marked for
+            // removal
+            _filtersToRemove.forEach((removeArray, removeArrayIndex) => {
+                removeArray.forEach((removeFilter) => {
+                    _selectedFilters[removeArrayIndex].splice(
+                        _selectedFilters[removeArrayIndex].indexOf(removeFilter),
+                        1
+                    );
+                });
+            });
+
+            // generate the set of temporary selected filters and matching projects
+            // dynamically
+            let tempFilters = [];
+            let tempProjects = [];
+            _selectedFilters.forEach((filtersArray) => {
+                tempFilters.push(filtersArray);
+            });
+            _matchingProjects.forEach((projectsArray) => {
+                tempProjects.push(projectsArray);
             });
 
             // perform chained AND gates on the projects that have already had
             // the OR gates applied to them above
             // Ex: ((Lead Principal Investigator OR Investigator) AND (Project OR Creative Work))
-            let tempFilters = [selectedRoles, selectedStatus, selectedTypes];
-            let tempProjects = [matchingRole, matchingStatus, matchingType];
             let displayedProjects = this.projects;
             for(let i = 0; i < tempFilters.length; i++) {
                 // we only care to apply the AND gate if something within the
