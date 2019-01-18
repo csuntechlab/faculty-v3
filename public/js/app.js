@@ -1,143 +1,22 @@
-webpackJsonp([1],[
-/* 0 */,
-/* 1 */,
-/* 2 */,
-/* 3 */,
-/* 4 */
-/***/ (function(module, exports) {
+webpackJsonp([1],{
 
-/* globals __VUE_SSR_CONTEXT__ */
-
-// IMPORTANT: Do NOT use ES2015 features in this file.
-// This module is a runtime utility for cleaner component module output and will
-// be included in the final webpack user bundle.
-
-module.exports = function normalizeComponent (
-  rawScriptExports,
-  compiledTemplate,
-  functionalTemplate,
-  injectStyles,
-  scopeId,
-  moduleIdentifier /* server only */
-) {
-  var esModule
-  var scriptExports = rawScriptExports = rawScriptExports || {}
-
-  // ES6 modules interop
-  var type = typeof rawScriptExports.default
-  if (type === 'object' || type === 'function') {
-    esModule = rawScriptExports
-    scriptExports = rawScriptExports.default
-  }
-
-  // Vue.extend constructor export interop
-  var options = typeof scriptExports === 'function'
-    ? scriptExports.options
-    : scriptExports
-
-  // render functions
-  if (compiledTemplate) {
-    options.render = compiledTemplate.render
-    options.staticRenderFns = compiledTemplate.staticRenderFns
-    options._compiled = true
-  }
-
-  // functional template
-  if (functionalTemplate) {
-    options.functional = true
-  }
-
-  // scopedId
-  if (scopeId) {
-    options._scopeId = scopeId
-  }
-
-  var hook
-  if (moduleIdentifier) { // server build
-    hook = function (context) {
-      // 2.3 injection
-      context =
-        context || // cached call
-        (this.$vnode && this.$vnode.ssrContext) || // stateful
-        (this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext) // functional
-      // 2.2 with runInNewContext: true
-      if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
-        context = __VUE_SSR_CONTEXT__
-      }
-      // inject component styles
-      if (injectStyles) {
-        injectStyles.call(this, context)
-      }
-      // register component module identifier for async chunk inferrence
-      if (context && context._registeredComponents) {
-        context._registeredComponents.add(moduleIdentifier)
-      }
-    }
-    // used by ssr in case component is cached and beforeCreate
-    // never gets called
-    options._ssrRegister = hook
-  } else if (injectStyles) {
-    hook = injectStyles
-  }
-
-  if (hook) {
-    var functional = options.functional
-    var existing = functional
-      ? options.render
-      : options.beforeCreate
-
-    if (!functional) {
-      // inject component registration as beforeCreate hook
-      options.beforeCreate = existing
-        ? [].concat(existing, hook)
-        : [hook]
-    } else {
-      // for template-only hot-reload because in that case the render fn doesn't
-      // go through the normalizer
-      options._injectStyles = hook
-      // register for functioal component in vue file
-      options.render = function renderWithStyleInjection (h, context) {
-        hook.call(context)
-        return existing(h, context)
-      }
-    }
-  }
-
-  return {
-    esModule: esModule,
-    exports: scriptExports,
-    options: options
-  }
-}
-
-
-/***/ }),
-/* 5 */,
-/* 6 */,
-/* 7 */,
-/* 8 */,
-/* 9 */,
-/* 10 */,
-/* 11 */,
-/* 12 */,
-/* 13 */,
-/* 14 */,
-/* 15 */
+/***/ 141:
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(16);
-module.exports = __webpack_require__(58);
+__webpack_require__(142);
+module.exports = __webpack_require__(184);
 
 
 /***/ }),
-/* 16 */
+
+/***/ 142:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ProfileApp__ = __webpack_require__(42);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ProfileApp__ = __webpack_require__(168);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ProfileApp___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__ProfileApp__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__router_profile_js__ = __webpack_require__(45);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__router_profile_js__ = __webpack_require__(171);
 
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -145,12 +24,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-__webpack_require__(17);
+__webpack_require__(143);
 
 
 
 
-window.Vue = __webpack_require__(6);
+window.Vue = __webpack_require__(7);
 Vue.config.productionTip = false;
 
 /**
@@ -170,12 +49,13 @@ if (document.getElementById('profile_app')) {
 }
 
 /***/ }),
-/* 17 */
+
+/***/ 143:
 /***/ (function(module, exports, __webpack_require__) {
 
 
-window._ = __webpack_require__(18);
-window.Popper = __webpack_require__(3).default;
+window._ = __webpack_require__(144);
+window.Popper = __webpack_require__(4).default;
 
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
@@ -185,15 +65,17 @@ window.Popper = __webpack_require__(3).default;
  */
 
 try {
-  window.$ = window.jQuery = __webpack_require__(2);
+  window.$ = window.jQuery = __webpack_require__(3);
 
-  __webpack_require__(20);
+  __webpack_require__(145);
 
-  __webpack_require__(7);
-  __webpack_require__(21);
+  __webpack_require__(9);
+  __webpack_require__(146);
 
-  window.Helpers = __webpack_require__(22);
-  window.Waldo = __webpack_require__(23);
+  window.moment = __webpack_require__(0);
+
+  window.Helpers = __webpack_require__(148);
+  window.Waldo = __webpack_require__(149);
 } catch (e) {}
 
 /**
@@ -202,7 +84,7 @@ try {
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */
 
-window.axios = __webpack_require__(8);
+window.axios = __webpack_require__(134);
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
@@ -238,7 +120,8 @@ if (token) {
 // });
 
 /***/ }),
-/* 18 */
+
+/***/ 144:
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, module) {var __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -17348,38 +17231,11 @@ if (token) {
   }
 }.call(this));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(19)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(8)(module)))
 
 /***/ }),
-/* 19 */
-/***/ (function(module, exports) {
 
-module.exports = function(module) {
-	if(!module.webpackPolyfill) {
-		module.deprecate = function() {};
-		module.paths = [];
-		// module.parent = undefined by default
-		if(!module.children) module.children = [];
-		Object.defineProperty(module, "loaded", {
-			enumerable: true,
-			get: function() {
-				return module.l;
-			}
-		});
-		Object.defineProperty(module, "id", {
-			enumerable: true,
-			get: function() {
-				return module.i;
-			}
-		});
-		module.webpackPolyfill = 1;
-	}
-	return module;
-};
-
-
-/***/ }),
-/* 20 */
+/***/ 145:
 /***/ (function(module, exports, __webpack_require__) {
 
 /*!
@@ -17388,7 +17244,7 @@ module.exports = function(module) {
   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
   */
 (function (global, factory) {
-   true ? factory(exports, __webpack_require__(2), __webpack_require__(3)) :
+   true ? factory(exports, __webpack_require__(3), __webpack_require__(4)) :
   typeof define === 'function' && define.amd ? define(['exports', 'jquery', 'popper.js'], factory) :
   (factory((global.bootstrap = {}),global.jQuery,global.Popper));
 }(this, (function (exports,$,Popper) { 'use strict';
@@ -21329,11 +21185,12 @@ module.exports = function(module) {
 
 
 /***/ }),
-/* 21 */
+
+/***/ 146:
 /***/ (function(module, exports) {
 
 /*!
- * Font Awesome Free 5.4.0 by @fontawesome - https://fontawesome.com
+ * Font Awesome Free 5.4.1 by @fontawesome - https://fontawesome.com
  * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
  */
 (function () {
@@ -21655,7 +21512,7 @@ var icons = {
   "less": [640, 512, [], "f41d", "M612.7 219c0-20.5 3.2-32.6 3.2-54.6 0-34.2-12.6-45.2-40.5-45.2h-20.5v24.2h6.3c14.2 0 17.3 4.7 17.3 22.1 0 16.3-1.6 32.6-1.6 51.5 0 24.2 7.9 33.6 23.6 37.3v1.6c-15.8 3.7-23.6 13.1-23.6 37.3 0 18.9 1.6 34.2 1.6 51.5 0 17.9-3.7 22.6-17.3 22.6v.5h-6.3V393h20.5c27.8 0 40.5-11 40.5-45.2 0-22.6-3.2-34.2-3.2-54.6 0-11 6.8-22.6 27.3-23.6v-27.3c-20.5-.7-27.3-12.3-27.3-23.3zm-105.6 32c-15.8-6.3-30.5-10-30.5-20.5 0-7.9 6.3-12.6 17.9-12.6s22.1 4.7 33.6 13.1l21-27.8c-13.1-10-31-20.5-55.2-20.5-35.7 0-59.9 20.5-59.9 49.4 0 25.7 22.6 38.9 41.5 46.2 16.3 6.3 32.1 11.6 32.1 22.1 0 7.9-6.3 13.1-20.5 13.1-13.1 0-26.3-5.3-40.5-16.3l-21 30.5c15.8 13.1 39.9 22.1 59.9 22.1 42 0 64.6-22.1 64.6-51s-22.5-41-43-47.8zm-358.9 59.4c-3.7 0-8.4-3.2-8.4-13.1V119.1H65.2c-28.4 0-41 11-41 45.2 0 22.6 3.2 35.2 3.2 54.6 0 11-6.8 22.6-27.3 23.6v27.3c20.5.5 27.3 12.1 27.3 23.1 0 19.4-3.2 31-3.2 53.6 0 34.2 12.6 45.2 40.5 45.2h20.5v-24.2h-6.3c-13.1 0-17.3-5.3-17.3-22.6s1.6-32.1 1.6-51.5c0-24.2-7.9-33.6-23.6-37.3v-1.6c15.8-3.7 23.6-13.1 23.6-37.3 0-18.9-1.6-34.2-1.6-51.5s3.7-22.1 17.3-22.1H93v150.8c0 32.1 11 53.1 43.1 53.1 10 0 17.9-1.6 23.6-3.7l-5.3-34.2c-3.1.8-4.6.8-6.2.8zM379.9 251c-16.3-6.3-31-10-31-20.5 0-7.9 6.3-12.6 17.9-12.6 11.6 0 22.1 4.7 33.6 13.1l21-27.8c-13.1-10-31-20.5-55.2-20.5-35.7 0-59.9 20.5-59.9 49.4 0 25.7 22.6 38.9 41.5 46.2 16.3 6.3 32.1 11.6 32.1 22.1 0 7.9-6.3 13.1-20.5 13.1-13.1 0-26.3-5.3-40.5-16.3l-20.5 30.5c15.8 13.1 39.9 22.1 59.9 22.1 42 0 64.6-22.1 64.6-51 .1-28.9-22.5-41-43-47.8zm-155-68.8c-38.4 0-75.1 32.1-74.1 82.5 0 52 34.2 82.5 79.3 82.5 18.9 0 39.9-6.8 56.2-17.9l-15.8-27.8c-11.6 6.8-22.6 10-34.2 10-21 0-37.3-10-41.5-34.2H290c.5-3.7 1.6-11 1.6-19.4.6-42.6-22.6-75.7-66.7-75.7zm-30 66.2c3.2-21 15.8-31 30.5-31 18.9 0 26.3 13.1 26.3 31h-56.8z"],
   "line": [448, 512, [], "f3c0", "M272.1 204.2v71.1c0 1.8-1.4 3.2-3.2 3.2h-11.4c-1.1 0-2.1-.6-2.6-1.3l-32.6-44v42.2c0 1.8-1.4 3.2-3.2 3.2h-11.4c-1.8 0-3.2-1.4-3.2-3.2v-71.1c0-1.8 1.4-3.2 3.2-3.2H219c1 0 2.1.5 2.6 1.4l32.6 44v-42.2c0-1.8 1.4-3.2 3.2-3.2h11.4c1.8-.1 3.3 1.4 3.3 3.1zm-82-3.2h-11.4c-1.8 0-3.2 1.4-3.2 3.2v71.1c0 1.8 1.4 3.2 3.2 3.2h11.4c1.8 0 3.2-1.4 3.2-3.2v-71.1c0-1.7-1.4-3.2-3.2-3.2zm-27.5 59.6h-31.1v-56.4c0-1.8-1.4-3.2-3.2-3.2h-11.4c-1.8 0-3.2 1.4-3.2 3.2v71.1c0 .9.3 1.6.9 2.2.6.5 1.3.9 2.2.9h45.7c1.8 0 3.2-1.4 3.2-3.2v-11.4c0-1.7-1.4-3.2-3.1-3.2zM332.1 201h-45.7c-1.7 0-3.2 1.4-3.2 3.2v71.1c0 1.7 1.4 3.2 3.2 3.2h45.7c1.8 0 3.2-1.4 3.2-3.2v-11.4c0-1.8-1.4-3.2-3.2-3.2H301v-12h31.1c1.8 0 3.2-1.4 3.2-3.2V234c0-1.8-1.4-3.2-3.2-3.2H301v-12h31.1c1.8 0 3.2-1.4 3.2-3.2v-11.4c-.1-1.7-1.5-3.2-3.2-3.2zM448 113.7V399c-.1 44.8-36.8 81.1-81.7 81H81c-44.8-.1-81.1-36.9-81-81.7V113c.1-44.8 36.9-81.1 81.7-81H367c44.8.1 81.1 36.8 81 81.7zm-61.6 122.6c0-73-73.2-132.4-163.1-132.4-89.9 0-163.1 59.4-163.1 132.4 0 65.4 58 120.2 136.4 130.6 19.1 4.1 16.9 11.1 12.6 36.8-.7 4.1-3.3 16.1 14.1 8.8 17.4-7.3 93.9-55.3 128.2-94.7 23.6-26 34.9-52.3 34.9-81.5z"],
   "linkedin": [448, 512, [], "f08c", "M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"],
-  "linkedin-in": [448, 512, [], "f0e1", "M100.3 480H7.4V180.9h92.9V480zM53.8 140.1C24.1 140.1 0 115.5 0 85.8 0 56.1 24.1 32 53.8 32c29.7 0 53.8 24.1 53.8 53.8 0 29.7-24.1 54.3-53.8 54.3zM448 480h-92.7V334.4c0-34.7-.7-79.2-48.3-79.2-48.3 0-55.7 37.7-55.7 76.7V480h-92.8V180.9h89.1v40.8h1.3c12.4-23.5 42.7-48.3 87.9-48.3 94 0 111.3 61.9 111.3 142.3V480z"],
+  "linkedin-in": [448, 512, [], "f0e1", "M100.3 448H7.4V148.9h92.9V448zM53.8 108.1C24.1 108.1 0 83.5 0 53.8S24.1 0 53.8 0s53.8 24.1 53.8 53.8-24.1 54.3-53.8 54.3zM448 448h-92.7V302.4c0-34.7-.7-79.2-48.3-79.2-48.3 0-55.7 37.7-55.7 76.7V448h-92.8V148.9h89.1v40.8h1.3c12.4-23.5 42.7-48.3 87.9-48.3 94 0 111.3 61.9 111.3 142.3V448h-.1z"],
   "linode": [448, 512, [], "f2b8", "M437.4 226.3c-.3-.9-.9-1.4-1.4-2l-70-38.6c-.9-.6-2-.6-3.1 0l-58.9 36c-.9.6-1.4 1.7-1.4 2.6l-.9 31.4-24-16c-.9-.6-2.3-.6-3.1 0L240 260.9l-1.4-35.1c0-.9-.6-2-1.4-2.3l-36-24.3 33.7-17.4c1.1-.6 1.7-1.7 1.7-2.9l-5.7-132.3c0-.9-.9-2-1.7-2.6L138.6.3c-.9-.3-1.7-.3-2.3-.3L12.6 38.6c-1.4.6-2.3 2-2 3.7L38 175.4c.9 3.4 34 27.4 38.6 30.9l-26.9 12.9c-1.4.9-2 2.3-1.7 3.4l20.6 100.3c.6 2.9 23.7 23.1 27.1 26.3l-17.4 10.6c-.9.6-1.7 2-1.4 3.1 1.4 7.1 15.4 77.7 16.9 79.1l65.1 69.1c.6.6 1.4.6 2.3.9.6 0 1.1-.3 1.7-.6l83.7-66.9c.9-.6 1.1-1.4 1.1-2.3l-2-46 28 23.7c1.1.9 2.9.9 4 0l66.9-53.4c.9-.6 1.1-1.4 1.1-2.3l2.3-33.4 20.3 14c1.1.9 2.6.9 3.7 0l54.6-43.7c.6-.3 1.1-1.1 1.1-2 .9-6.5 10.3-70.8 9.7-72.8zm-204.8 4.8l4 92.6-90.6 61.2-14-96.6 100.6-57.2zm-7.7-180l5.4 126-106.6 55.4L104 97.7l120.9-46.6zM44 173.1L18 48l79.7 49.4 19.4 132.9L44 173.1zm30.6 147.8L55.7 230l70 58.3 13.7 93.4-64.8-60.8zm24.3 117.7l-13.7-67.1 61.7 60.9 9.7 67.4-57.7-61.2zm64.5 64.5l-10.6-70.9 85.7-61.4 3.1 70-78.2 62.3zm82-115.1c0-3.4.9-22.9-2-25.1l-24.3-20 22.3-14.9c2.3-1.7 1.1-5.7 1.1-8l29.4 22.6.6 68.3-27.1-22.9zm94.3-25.4l-60.9 48.6-.6-68.6 65.7-46.9-4.2 66.9zm27.7-25.7l-19.1-13.4 2-34c.3-.9-.3-2-1.1-2.6L308 259.7l.6-30 64.6 40.6-5.8 66.6zm54.6-39.8l-48.3 38.3 5.7-65.1 51.1-36.6-8.5 63.4z"],
   "linux": [448, 512, [], "f17c", "M196.1 123.6c-.2-1.4 1.9-2.3 3.2-2.9 1.7-.7 3.9-1 5.5-.1.4.2.8.7.6 1.1-.4 1.2-2.4 1-3.5 1.6-1 .5-1.8 1.7-3 1.7-1 .1-2.7-.4-2.8-1.4zm24.7-.3c1 .5 1.8 1.7 3 1.7 1.1 0 2.8-.4 2.9-1.5.2-1.4-1.9-2.3-3.2-2.9-1.7-.7-3.9-1-5.5-.1-.4.2-.8.7-.6 1.1.3 1.3 2.3 1.1 3.4 1.7zm214.7 310.2c-.5 8.2-6.5 13.8-13.9 18.3-14.9 9-37.3 15.8-50.9 32.2l-2.6-2.2 2.6 2.2c-14.2 16.9-31.7 26.6-48.3 27.9-16.5 1.3-32-6.3-40.3-23v-.1c-1.1-2.1-1.9-4.4-2.5-6.7-21.5 1.2-40.2-5.3-55.1-4.1-22 1.2-35.8 6.5-48.3 6.6-4.8 10.6-14.3 17.6-25.9 20.2-16 3.7-36.1 0-55.9-10.4l1.6-3-1.6 3c-18.5-9.8-42-8.9-59.3-12.5-8.7-1.8-16.3-5-20.1-12.3-3.7-7.3-3-17.3 2.2-31.7 1.7-5.1.4-12.7-.8-20.8-.6-3.9-1.2-7.9-1.2-11.8 0-4.3.7-8.5 2.8-12.4 4.5-8.5 11.8-12.1 18.5-14.5 6.7-2.4 12.8-4 17-8.3 5.2-5.5 10.1-14.4 16.6-20.2-2.6-17.2.2-35.4 6.2-53.3 12.6-37.9 39.2-74.2 58.1-96.7 16.1-22.9 20.8-41.3 22.5-64.7C158 103.4 132.4-.2 234.8 0c80.9.1 76.3 85.4 75.8 131.3-.3 30.1 16.3 50.5 33.4 72 15.2 18 35.1 44.3 46.5 74.4 9.3 24.6 12.9 51.8 3.7 79.1 1.4.5 2.8 1.2 4.1 2 1.4.8 2.7 1.8 4 2.9 6.6 5.6 8.7 14.3 10.5 22.4 1.9 8.1 3.6 15.7 7.2 19.7 11.1 12.4 15.9 21.5 15.5 29.7zM220.8 109.1c3.6.9 8.9 2.4 13 4.4-2.1-12.2 4.5-23.5 11.8-23 8.9.3 13.9 15.5 9.1 27.3-.8 1.9-2.8 3.4-3.9 4.6 6.7 2.3 11 4.1 12.6 4.9 7.9-9.5 10.8-26.2 4.3-40.4-9.8-21.4-34.2-21.8-44 .4-3.2 7.2-3.9 14.9-2.9 21.8zm-46.2 18.8c7.8-5.7 6.9-4.7 5.9-5.5-8-6.9-6.6-27.4 1.8-28.1 6.3-.5 10.8 10.7 9.6 19.6 3.1-2.1 6.7-3.6 10.2-4.6 1.7-19.3-9-33.5-19.1-33.5-18.9 0-24 37.5-8.4 52.1zm-9.4 20.9c1.5 4.9 6.1 10.5 14.7 15.3 7.8 4.6 12 11.5 20 15 2.6 1.1 5.7 1.9 9.6 2.1 18.4 1.1 27.1-11.3 38.2-14.9 11.7-3.7 20.1-11 22.7-18.1 3.2-8.5-2.1-14.7-10.5-18.2-11.3-4.9-16.3-5.2-22.6-9.3-10.3-6.6-18.8-8.9-25.9-8.9-14.4 0-23.2 9.8-27.9 14.2-.5.5-7.9 5.9-14.1 10.5-4.2 3.3-5.6 7.4-4.2 12.3zm-33.5 252.8L112.1 366c-6.8-9.2-13.8-14.8-21.9-16-7.7-1.2-12.6 1.4-17.7 6.9-4.8 5.1-8.8 12.3-14.3 18-7.8 6.5-9.3 6.2-19.6 9.9-6.3 2.2-11.3 4.6-14.8 11.3-2.7 5-2.1 12.2-.9 20 1.2 7.9 3 16.3.6 23.9v.2c-5 13.7-5 21.7-2.6 26.4 7.9 15.4 46.6 6.1 76.5 21.9 31.4 16.4 72.6 17.1 75.3-18 2.1-20.5-31.5-49-41-68.9zm153.9 35.8c3.2-11 6.3-21.3 6.8-29 .8-15.2 1.6-28.7 4.4-39.9 3.1-12.6 9.3-23.1 21.4-27.3 2.3-21.1 18.7-21.1 38.3-12.5 18.9 8.5 26 16 22.8 26.1 1 0 2-.1 4.2 0 5.2-16.9-14.3-28-30.7-34.8 2.9-12 2.4-24.1-.4-35.7-6-25.3-22.6-47.8-35.2-59-2.3-.1-2.1 1.9 2.6 6.5 11.6 10.7 37.1 49.2 23.3 84.9-3.9-1-7.6-1.5-10.9-1.4-5.3-29.1-17.5-53.2-23.6-64.6-11.5-21.4-29.5-65.3-37.2-95.7-4.5 6.4-12.4 11.9-22.3 15-4.7 1.5-9.7 5.5-15.9 9-13.9 8-30 8.8-42.4-1.2-4.5-3.6-8-7.6-12.6-10.3-1.6-.9-5.1-3.3-6.2-4.1-2 37.8-27.3 85.3-39.3 112.7-8.3 19.7-13.2 40.8-13.8 61.5-21.8-29.1-5.9-66.3 2.6-82.4 9.5-17.6 11-22.5 8.7-20.8-8.6 14-22 36.3-27.2 59.2-2.7 11.9-3.2 24 .3 35.2 3.5 11.2 11.1 21.5 24.6 29.9 0 0 24.8 14.3 38.3 32.5 7.4 10 9.7 18.7 7.4 24.9-2.5 6.7-9.6 8.9-16.7 8.9 4.8 6 10.3 13 14.4 19.6 37.6 25.7 82.2 15.7 114.3-7.2zM415 408.5c-10-11.3-7.2-33.1-17.1-41.6-6.9-6-13.6-5.4-22.6-5.1-7.7 8.8-25.8 19.6-38.4 16.3-11.5-2.9-18-16.3-18.8-29.5-.3.2-.7.3-1 .5-7.1 3.9-11.1 10.8-13.7 21.1-2.5 10.2-3.4 23.5-4.2 38.7-.7 11.8-6.2 26.4-9.9 40.6-3.5 13.2-5.8 25.2-1.1 36.3 7.2 14.5 19.5 20.4 33.7 19.3 14.2-1.1 30.4-9.8 43.6-25.5 22-26.6 62.3-29.7 63.2-46.5.3-5.1-3.1-13-13.7-24.6zM173.3 148.7c2 1.9 4.7 4.5 8 7.1 6.6 5.2 15.8 10.6 27.3 10.6 11.6 0 22.5-5.9 31.8-10.8 4.9-2.6 10.9-7 14.8-10.4 3.9-3.4 5.9-6.3 3.1-6.6-2.8-.3-2.6 2.6-6 5.1-4.4 3.2-9.7 7.4-13.9 9.8-7.4 4.2-19.5 10.2-29.9 10.2-10.4 0-18.7-4.8-24.9-9.7-3.1-2.5-5.7-5-7.7-6.9-1.5-1.4-1.9-4.6-4.3-4.9-1.4-.1-1.8 3.7 1.7 6.5z"],
   "lyft": [512, 512, [], "f3c3", "M0 81.1h77.8v208.7c0 33.1 15 52.8 27.2 61-12.7 11.1-51.2 20.9-80.2-2.8C7.8 334 0 310.7 0 289V81.1zm485.9 173.5v-22h23.8v-76.8h-26.1c-10.1-46.3-51.2-80.7-100.3-80.7-56.6 0-102.7 46-102.7 102.7V357c16 2.3 35.4-.3 51.7-14 17.1-14 24.8-37.2 24.8-59v-6.7h38.8v-76.8h-38.8v-23.3c0-34.6 52.2-34.6 52.2 0v77.1c0 56.6 46 102.7 102.7 102.7v-76.5c-14.5 0-26.1-11.7-26.1-25.9zm-294.3-99v113c0 15.4-23.8 15.4-23.8 0v-113H91v132.7c0 23.8 8 54 45 63.9 37 9.8 58.2-10.6 58.2-10.6-2.1 13.4-14.5 23.3-34.9 25.3-15.5 1.6-35.2-3.6-45-7.8v70.3c25.1 7.5 51.5 9.8 77.6 4.7 47.1-9.1 76.8-48.4 76.8-100.8V155.1h-77.1v.5z"],
@@ -23779,7 +23636,7 @@ function makeLayersCounterAbstract(params) {
 
 var noop$2 = function noop() {};
 var p = config.measurePerformance && PERFORMANCE && PERFORMANCE.mark && PERFORMANCE.measure ? PERFORMANCE : { mark: noop$2, measure: noop$2 };
-var preamble = 'FA "5.4.0"';
+var preamble = 'FA "5.4.1"';
 
 var begin = function begin(name) {
   p.mark(preamble + ' ' + name + ' begins');
@@ -25070,7 +24927,8 @@ bunker(bootstrap);
 
 
 /***/ }),
-/* 22 */
+
+/***/ 148:
 /***/ (function(module, exports) {
 
 // Reads from master-blade data, which reads from .env file.
@@ -25129,7 +24987,8 @@ module.exports = helpers;
 module.exports.default = helpers;
 
 /***/ }),
-/* 23 */
+
+/***/ 149:
 /***/ (function(module, exports) {
 
 var waldo = {};
@@ -25283,33 +25142,16 @@ module.exports = waldo;
 module.exports.default = waldo;
 
 /***/ }),
-/* 24 */,
-/* 25 */,
-/* 26 */,
-/* 27 */,
-/* 28 */,
-/* 29 */,
-/* 30 */,
-/* 31 */,
-/* 32 */,
-/* 33 */,
-/* 34 */,
-/* 35 */,
-/* 36 */,
-/* 37 */,
-/* 38 */,
-/* 39 */,
-/* 40 */,
-/* 41 */,
-/* 42 */
+
+/***/ 168:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(4)
+var normalizeComponent = __webpack_require__(5)
 /* script */
-var __vue_script__ = __webpack_require__(43)
+var __vue_script__ = __webpack_require__(169)
 /* template */
-var __vue_template__ = __webpack_require__(44)
+var __vue_template__ = __webpack_require__(170)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -25348,7 +25190,8 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 43 */
+
+/***/ 169:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -25374,7 +25217,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 44 */
+
+/***/ 170:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -25466,18 +25310,19 @@ if (false) {
 }
 
 /***/ }),
-/* 45 */
+
+/***/ 171:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_router__ = __webpack_require__(48);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_ProfileHome__ = __webpack_require__(49);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_router__ = __webpack_require__(174);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_ProfileHome__ = __webpack_require__(175);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_ProfileHome___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_ProfileHome__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_ProfileClasses__ = __webpack_require__(52);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_ProfileClasses__ = __webpack_require__(178);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_ProfileClasses___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_ProfileClasses__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_ProfileProjects__ = __webpack_require__(55);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_ProfileProjects__ = __webpack_require__(181);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_ProfileProjects___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_ProfileProjects__);
 
 
@@ -25504,9 +25349,8 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_
 }));
 
 /***/ }),
-/* 46 */,
-/* 47 */,
-/* 48 */
+
+/***/ 174:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -28136,15 +27980,16 @@ if (inBrowser && window.Vue) {
 
 
 /***/ }),
-/* 49 */
+
+/***/ 175:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(4)
+var normalizeComponent = __webpack_require__(5)
 /* script */
-var __vue_script__ = __webpack_require__(50)
+var __vue_script__ = __webpack_require__(176)
 /* template */
-var __vue_template__ = __webpack_require__(51)
+var __vue_template__ = __webpack_require__(177)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -28183,7 +28028,8 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 50 */
+
+/***/ 176:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -28464,7 +28310,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 51 */
+
+/***/ 177:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -29020,24 +28867,37 @@ var render = function() {
                                                             _vm._s(
                                                               _badge.name
                                                             ) +
-                                                            " (" +
-                                                            _vm._s(
-                                                              _badge.award_date
-                                                            ) +
-                                                            ")\n                                                    "
-                                                        )
+                                                            " "
+                                                        ),
+                                                        _badge.award_date
+                                                          ? _c("span", [
+                                                              _vm._v(
+                                                                "(" +
+                                                                  _vm._s(
+                                                                    _badge.award_date
+                                                                  ) +
+                                                                  ")"
+                                                              )
+                                                            ])
+                                                          : _vm._e()
                                                       ]
                                                     )
                                                   ]
                                                 : _c("p", [
                                                     _vm._v(
-                                                      _vm._s(_badge.name) +
-                                                        " (" +
-                                                        _vm._s(
-                                                          _badge.award_date
-                                                        ) +
-                                                        ")"
-                                                    )
+                                                      _vm._s(_badge.name) + " "
+                                                    ),
+                                                    _badge.award_date
+                                                      ? _c("span", [
+                                                          _vm._v(
+                                                            "(" +
+                                                              _vm._s(
+                                                                _badge.award_date
+                                                              ) +
+                                                              ")"
+                                                          )
+                                                        ])
+                                                      : _vm._e()
                                                   ])
                                             ],
                                             2
@@ -29087,15 +28947,16 @@ if (false) {
 }
 
 /***/ }),
-/* 52 */
+
+/***/ 178:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(4)
+var normalizeComponent = __webpack_require__(5)
 /* script */
-var __vue_script__ = __webpack_require__(53)
+var __vue_script__ = __webpack_require__(179)
 /* template */
-var __vue_template__ = __webpack_require__(54)
+var __vue_template__ = __webpack_require__(180)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -29134,7 +28995,8 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 53 */
+
+/***/ 179:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -29575,7 +29437,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 54 */
+
+/***/ 180:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -30836,15 +30699,16 @@ if (false) {
 }
 
 /***/ }),
-/* 55 */
+
+/***/ 181:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(4)
+var normalizeComponent = __webpack_require__(5)
 /* script */
-var __vue_script__ = __webpack_require__(56)
+var __vue_script__ = __webpack_require__(182)
 /* template */
-var __vue_template__ = __webpack_require__(57)
+var __vue_template__ = __webpack_require__(183)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -30883,11 +30747,24 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 56 */
+
+/***/ 182:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -31078,27 +30955,333 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     name: 'ProfileProjects',
     data: function data() {
         return {
-            roleFilters: ['Investigator', 'Other Faculty', 'Principle Investigator', 'Former Principle Investigator', 'Lead Principle Investigator', 'Project Manager', 'Proposal Editor'],
+            projects: [],
+            interests: [],
+            roleFilters: ['Investigator', 'Other Faculty', 'Principal Investigator', 'Former Principal Investigator', 'Lead Principal Investigator', 'Project Manager', 'Proposal Editor'],
             statusFilters: ['Active', 'Completed'],
             typeFilters: ['Creative Work', 'Project', 'Research', 'Service'],
             selectedFilters: [],
             windowWidth: 0,
             isMobile: false,
-            isDesktop: false
+            isDesktop: false,
+            loading_all: true
         };
     },
     mounted: function mounted() {
+        var _this = this;
+
         this.$nextTick(function () {
             window.addEventListener('resize', this.getWindowWidth);
             //Init
             this.getWindowWidth();
         });
+
+        // make the Axios calls concurrently and wait for all of them to return
+        // before applying the reactive data
+        axios.all([this.loadProjects(), this.loadResearchInterests()]).then(axios.spread(function (projects, interests) {
+            // apply the projects
+            if (projects.data.projects != null) {
+                _this.projects = projects.data.projects;
+            } else {
+                _this.projects = [];
+            }
+
+            // filter out any non-publishable projects
+            _this.projects = _this.projects.filter(function (project) {
+                return project.is_publishable == "1";
+            });
+
+            // calculate the total awarded amount for the project
+            // per individual sponsor
+            _this.projects.forEach(function (project) {
+                project.award_sponsors = [];
+                if (project.award.length) {
+                    var awardMap = new Map();
+                    project.award.forEach(function (award) {
+                        var awardAmount = parseFloat(award.award_amount);
+                        if (awardAmount > 0.00) {
+                            if (!awardMap.has(award.sponsor_code)) {
+                                var award_sponsor_data = {
+                                    sponsor: award.sponsor,
+                                    total: awardAmount
+                                };
+                                awardMap.set(award.sponsor_code, award_sponsor_data);
+                            } else {
+                                var _award_sponsor_data = awardMap.get(award.sponsor_code);
+                                _award_sponsor_data.total += awardAmount;
+                                awardMap.set(award.sponsor_code, _award_sponsor_data);
+                            }
+                        }
+                    });
+                    awardMap.forEach(function (award_sponsor_data) {
+                        project.award_sponsors.push(award_sponsor_data);
+                    });
+                }
+            });
+
+            // apply the research interests
+            _this.interests = interests.data.interests;
+
+            // we have finished loading everything
+            _this.loading_all = false;
+        }));
     },
     beforeDestroy: function beforeDestroy() {
         window.removeEventListener('resize', this.getWindowWidth);
     },
 
+    computed: {
+        // this computed property filters the set of projects brought in from
+        // the projects API based upon the set of selected filters
+        displayedProjects: function displayedProjects() {
+            var _this2 = this;
+
+            // if there are no selected filters, just return the entire set of
+            // projects
+            if (!this.selectedFilters.length) {
+                return this.projects;
+            }
+
+            // we will reduce this multidimensional array down only to the
+            // actual filters that have been selected; each array is intentionally
+            // a copy of the original set of filters to prevent modification of
+            // its original bound data element. In addition, if there are more
+            // filter types that need to be added in the future, all that needs to
+            // be modified is this array and the rest of the logic for this
+            // computed property will still work.
+            var _selectedFilters = [this.roleFilters.slice(0), this.statusFilters.slice(0), this.typeFilters.slice(0)];
+
+            var _filtersToRemove = [];
+            var _matchingProjects = [];
+
+            _selectedFilters.forEach(function (filtersArray, filtersIndex) {
+                // add an empty project slot to account for any possible
+                // projects that match the given filter and also add a slot
+                // to account for any filters of that type to remove
+                _matchingProjects.push([]);
+                _filtersToRemove.push([]);
+
+                // group the filters and projects into their various types so we know
+                // how to do the OR gates versus the AND gates first
+                filtersArray.forEach(function (filter, index) {
+                    if (_this2.selectedFilters.indexOf(filter) != -1) {
+                        // this filter has been selected, so we will add its
+                        // matching projects to another array
+                        _matchingProjects[filtersIndex] = _matchingProjects[filtersIndex].concat(_this2.applyFilter(filter));
+                    } else {
+                        // this filter was not selected, so mark it for removal
+                        // from its sub-array of available filters
+                        _filtersToRemove[filtersIndex].push(filter);
+                    }
+                });
+            });
+
+            // now remove all filters of each type that have been marked for
+            // removal
+            _filtersToRemove.forEach(function (removeArray, removeArrayIndex) {
+                removeArray.forEach(function (removeFilter) {
+                    _selectedFilters[removeArrayIndex].splice(_selectedFilters[removeArrayIndex].indexOf(removeFilter), 1);
+                });
+            });
+
+            // generate the set of temporary selected filters and matching projects
+            // dynamically
+            var tempFilters = [];
+            var tempProjects = [];
+            _selectedFilters.forEach(function (filtersArray) {
+                tempFilters.push(filtersArray);
+            });
+            _matchingProjects.forEach(function (projectsArray) {
+                tempProjects.push(projectsArray);
+            });
+
+            // perform chained AND gates on the projects that have already had
+            // the OR gates applied to them above
+            // Ex: ((Lead Principal Investigator OR Investigator) AND (Project OR Creative Work))
+            var displayedProjects = this.projects;
+
+            var _loop = function _loop(i) {
+                // we only care to apply the AND gate if something within the
+                // filter type was already selected
+                if (tempFilters[i].length) {
+                    displayedProjects = displayedProjects.filter(function (project) {
+                        for (var j = 0; j < tempProjects[i].length; j++) {
+                            // project in the existing set of displayed projects matches
+                            // this filtered project, so keep it
+                            if (project.project_id == tempProjects[i][j].project_id) {
+                                return true;
+                            }
+                        }
+                        // project in the existing set of displayed projects does not
+                        // match this filtered project, so reject it
+                        return false;
+                    });
+                }
+            };
+
+            for (var i = 0; i < tempFilters.length; i++) {
+                _loop(i);
+            }
+
+            return displayedProjects;
+        },
+        person_email: function person_email() {
+            return $("meta[name=person-email]").attr('content');
+        },
+        projectRoleMap: function projectRoleMap() {
+            // different decisions have to be made based upon the role name so
+            // we will create a Map instance
+            var roles = new Map();
+            this.roleFilters.forEach(function (role) {
+                if (role == 'Former Principal Investigator') {
+                    // this role is referred to as "Former PI" in the WS
+                    roles.set(role, 'Former PI');
+                } else {
+                    // all other roles are equivalent
+                    roles.set(role, role);
+                }
+            });
+            return roles;
+        },
+        projectTypeMap: function projectTypeMap() {
+            // the type system name comes back, not the display name, so we
+            // need a way to dereference the system name
+            var types = new Map();
+            this.typeFilters.forEach(function (type) {
+                if (type == 'Creative Work') {
+                    types.set(type, 'creative');
+                } else {
+                    // everything except Creative Work is just the lower-case
+                    // variant of the type
+                    types.set(type, type.toLowerCase());
+                }
+            });
+            return types;
+        },
+        scholarship_url: function scholarship_url() {
+            return $("meta[name=helix-url]").attr('content');
+        }
+    },
     methods: {
+        loadProjects: function loadProjects() {
+            return axios.get('members/projects', {
+                baseURL: $('meta[name=projects-url').attr('content'),
+                params: {
+                    email: this.person_email
+                }
+            });
+        },
+        loadResearchInterests: function loadResearchInterests() {
+            return axios.get('interests/research', {
+                baseURL: $("meta[name=affinity-url]").attr('content'),
+                params: {
+                    email: this.person_email
+                }
+            });
+        },
+        applyFilter: function applyFilter(filter) {
+            // figure out the type of the specified filter
+            if (this.roleFilters.indexOf(filter) != -1) {
+                // member role filter
+                return this.applyRoleFilter(filter);
+            }
+
+            if (this.statusFilters.indexOf(filter) != -1) {
+                // project status filter
+                return this.applyStatusFilter(filter);
+            }
+
+            if (this.typeFilters.indexOf(filter) != -1) {
+                // project type filter
+                return this.applyTypeFilter(filter);
+            }
+
+            // unknown filter, so return an empty array of projects in order
+            // to prevent overriding all other filters further down the
+            // line
+            return [];
+        },
+        applyRoleFilter: function applyRoleFilter(filter) {
+            // apply a filter to a copy of the projects array based upon
+            // a given member role
+            var filteredProjects = this.projects.slice(0);
+
+            // now actually filter the projects by the member role name
+            var roleName = this.projectRoleMap.get(filter);
+            filteredProjects = filteredProjects.filter(function (project) {
+                return project.role_position == roleName;
+            });
+
+            return filteredProjects;
+        },
+        applyStatusFilter: function applyStatusFilter(filter) {
+            // apply a filter to a copy of the projects array based upon
+            // a specific project status
+            var filteredProjects = this.projects.slice(0);
+
+            // filter the projects based upon project end date or lack thereof
+            filteredProjects = filteredProjects.filter(function (project) {
+                if (filter == 'Active') {
+                    if (!project.project_end_date) {
+                        // no end date, so assume the project is still active
+                        return true;
+                    }
+                    // compare end date to current date with moment.js
+                    return moment().isSameOrBefore(project.project_end_date, 'day');
+                } else if (filter == 'Completed') {
+                    if (!project.project_end_date) {
+                        // no end date, so assume the project is still active
+                        return false;
+                    }
+                    // compare end date to current date with moment.js
+                    return moment().isAfter(project.project_end_date, 'day');
+                }
+
+                // unknown status filter so filter out this project to prevent
+                // overriding other filters further down the line
+                return false;
+            });
+
+            return filteredProjects;
+        },
+        applyTypeFilter: function applyTypeFilter(filter) {
+            // apply a filter to a copy of the projects array based upon
+            // a specific project type
+            var filteredProjects = this.projects.slice(0);
+
+            // now actually filter the projects by the system name of the purpose
+            var purpose = this.projectTypeMap.get(filter);
+            filteredProjects = filteredProjects.filter(function (project) {
+                if (!project.attributes) {
+                    return false;
+                }
+                return project.attributes.purpose_name == purpose;
+            });
+
+            return filteredProjects;
+        },
+        uppercaseFirstLetter: function uppercaseFirstLetter(str) {
+            // https://dzone.com/articles/how-to-capitalize-the-first-letter-of-a-string-in
+            return str.charAt(0).toUpperCase() + str.slice(1);
+        },
+        renderProjectTeamList: function renderProjectTeamList(project) {
+            // returns a comma-separated string representing the members on
+            // a project; if no members exist, it returns a blank string
+            if (!project.members.length) {
+                return "";
+            }
+            var nameArr = [];
+            project.members.forEach(function (member) {
+                nameArr.push(member.display_name);
+            });
+            return nameArr.join(', ');
+        },
+        generateProjectUrl: function generateProjectUrl(project) {
+            return this.scholarship_url + 'project/' + project.slug;
+        },
+        generateInterestSearchUrl: function generateInterestSearchUrl(interest) {
+            return this.scholarship_url + 'search/research-interests?searchType=research-interest&query=' + interest.title.split(" ").join("+");
+        },
         filterCheckboxWasClicked: function filterCheckboxWasClicked(event) {
             var correspondingBadge = document.getElementById(event.target.id.replace(/role/i, 'badge'));
 
@@ -31153,7 +31336,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 57 */
+
+/***/ 183:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -31161,374 +31345,739 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { attrs: { id: "projects" } }, [
-    _c("div", { staticClass: "container" }, [
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-md-4" }, [
-          _c(
-            "div",
-            {
-              staticClass: "clearfix",
-              class: { "d-block": _vm.isMobile, "d-none": _vm.isDesktop }
-            },
-            [
-              _c("h2", { staticClass: "h3 text-primary mb-4 float-left" }, [
-                _vm._v("Projects")
-              ]),
-              _vm._v(" "),
-              _c(
-                "div",
-                {
-                  staticClass: "btn btn-sm btn-secondary float-right",
-                  attrs: {
-                    "data-toggle": "collapse",
-                    "data-target": "#collapseFilters",
-                    "aria-expanded": "false",
-                    "aria-controls": "collapseFilters"
-                  }
-                },
-                [
-                  _c("i", { staticClass: "fas fa-sliders-h" }),
-                  _vm._v(" Filters "),
-                  _vm.selectedFilters.length > 0
-                    ? _c("span", [
-                        _vm._v("(" + _vm._s(_vm.selectedFilters.length) + ")")
-                      ])
-                    : _vm._e()
-                ]
-              )
+    _c(
+      "div",
+      { staticClass: "container" },
+      [
+        _vm.loading_all
+          ? [_vm._m(0)]
+          : [
+              _c("div", { staticClass: "row" }, [
+                _c(
+                  "div",
+                  { staticClass: "col-md-4" },
+                  [
+                    _c(
+                      "div",
+                      {
+                        staticClass: "clearfix",
+                        class: {
+                          "d-block": _vm.isMobile,
+                          "d-none": _vm.isDesktop
+                        }
+                      },
+                      [
+                        _c(
+                          "h2",
+                          { staticClass: "h3 text-primary mb-4 float-left" },
+                          [_vm._v("Projects")]
+                        ),
+                        _vm._v(" "),
+                        _vm.projects.length
+                          ? _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "btn btn-sm btn-secondary float-right",
+                                attrs: {
+                                  "data-toggle": "collapse",
+                                  "data-target": "#collapseFilters",
+                                  "aria-expanded": "false",
+                                  "aria-controls": "collapseFilters"
+                                }
+                              },
+                              [
+                                _c("i", { staticClass: "fas fa-sliders-h" }),
+                                _vm._v(" Filters "),
+                                _vm.selectedFilters.length > 0
+                                  ? _c("span", [
+                                      _vm._v(
+                                        "(" +
+                                          _vm._s(_vm.selectedFilters.length) +
+                                          ")"
+                                      )
+                                    ])
+                                  : _vm._e()
+                              ]
+                            )
+                          : _vm._e()
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _vm.projects.length
+                      ? [
+                          _c(
+                            "div",
+                            {
+                              class: {
+                                "collapse clearfix": _vm.isMobile,
+                                "collapse show": _vm.isDesktop
+                              },
+                              attrs: { id: "collapseFilters" }
+                            },
+                            [
+                              _c(
+                                "h6",
+                                { staticClass: "h5 mb-4 d-none d-md-block" },
+                                [_vm._v("PROJECT FILTERS")]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "ul",
+                                {
+                                  staticClass: "projectFilterList list-unstyled"
+                                },
+                                [
+                                  _vm._m(1),
+                                  _vm._v(" "),
+                                  _vm._l(_vm.roleFilters, function(filter) {
+                                    return _c("li", [
+                                      _c(
+                                        "div",
+                                        {
+                                          staticClass:
+                                            "custom-control custom-checkbox"
+                                        },
+                                        [
+                                          _c("input", {
+                                            ref:
+                                              "role-" +
+                                              filter.replace(/\s/g, ""),
+                                            refInFor: true,
+                                            staticClass:
+                                              "custom-control-input projectFilterList__checkbox",
+                                            attrs: {
+                                              type: "checkbox",
+                                              id:
+                                                "role-" +
+                                                filter.replace(/\s/g, "")
+                                            },
+                                            domProps: { value: filter },
+                                            on: {
+                                              click: function($event) {
+                                                _vm.filterCheckboxWasClicked(
+                                                  $event
+                                                )
+                                              }
+                                            }
+                                          }),
+                                          _vm._v(" "),
+                                          _c(
+                                            "label",
+                                            {
+                                              staticClass:
+                                                "custom-control-label",
+                                              attrs: {
+                                                for:
+                                                  "role-" +
+                                                  filter.replace(/\s/g, "")
+                                              }
+                                            },
+                                            [_vm._v(_vm._s(filter))]
+                                          )
+                                        ]
+                                      )
+                                    ])
+                                  })
+                                ],
+                                2
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "ul",
+                                {
+                                  staticClass: "projectFilterList list-unstyled"
+                                },
+                                [
+                                  _vm._m(2),
+                                  _vm._v(" "),
+                                  _vm._l(_vm.statusFilters, function(filter) {
+                                    return _c("li", [
+                                      _c(
+                                        "div",
+                                        {
+                                          staticClass:
+                                            "custom-control custom-checkbox"
+                                        },
+                                        [
+                                          _c("input", {
+                                            ref:
+                                              "role-" +
+                                              filter.replace(/\s/g, ""),
+                                            refInFor: true,
+                                            staticClass:
+                                              "custom-control-input projectFilterList__checkbox",
+                                            attrs: {
+                                              type: "checkbox",
+                                              id:
+                                                "role-" +
+                                                filter.replace(/\s/g, "")
+                                            },
+                                            domProps: { value: filter },
+                                            on: {
+                                              click: function($event) {
+                                                _vm.filterCheckboxWasClicked(
+                                                  $event
+                                                )
+                                              }
+                                            }
+                                          }),
+                                          _vm._v(" "),
+                                          _c(
+                                            "label",
+                                            {
+                                              staticClass:
+                                                "custom-control-label",
+                                              attrs: {
+                                                for:
+                                                  "role-" +
+                                                  filter.replace(/\s/g, "")
+                                              }
+                                            },
+                                            [_vm._v(_vm._s(filter))]
+                                          )
+                                        ]
+                                      )
+                                    ])
+                                  })
+                                ],
+                                2
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "ul",
+                                {
+                                  staticClass: "projectFilterList list-unstyled"
+                                },
+                                [
+                                  _vm._m(3),
+                                  _vm._v(" "),
+                                  _vm._l(_vm.typeFilters, function(filter) {
+                                    return _c("li", [
+                                      _c(
+                                        "div",
+                                        {
+                                          staticClass:
+                                            "custom-control custom-checkbox"
+                                        },
+                                        [
+                                          _c("input", {
+                                            ref:
+                                              "role-" +
+                                              filter.replace(/\s/g, ""),
+                                            refInFor: true,
+                                            staticClass:
+                                              "custom-control-input projectFilterList__checkbox",
+                                            attrs: {
+                                              type: "checkbox",
+                                              id:
+                                                "role-" +
+                                                filter.replace(/\s/g, "")
+                                            },
+                                            domProps: { value: filter },
+                                            on: {
+                                              click: function($event) {
+                                                _vm.filterCheckboxWasClicked(
+                                                  $event
+                                                )
+                                              }
+                                            }
+                                          }),
+                                          _vm._v(" "),
+                                          _c(
+                                            "label",
+                                            {
+                                              staticClass:
+                                                "custom-control-label",
+                                              attrs: {
+                                                for:
+                                                  "role-" +
+                                                  filter.replace(/\s/g, "")
+                                              }
+                                            },
+                                            [_vm._v(_vm._s(filter))]
+                                          )
+                                        ]
+                                      )
+                                    ])
+                                  })
+                                ],
+                                2
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                {
+                                  staticClass: "projectFilterList__clear",
+                                  on: {
+                                    click: function($event) {
+                                      _vm.ClearAllWasClicked($event)
+                                    }
+                                  }
+                                },
+                                [_vm._v("Clear All Filters")]
+                              )
+                            ]
+                          )
+                        ]
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "d-none d-md-block" },
+                      [
+                        _c(
+                          "h6",
+                          {
+                            staticClass: "h5 mb-4",
+                            class: { "mt-5": _vm.projects.length }
+                          },
+                          [_vm._v("RESEARCH INTERESTS")]
+                        ),
+                        _vm._v(" "),
+                        _vm.interests.length
+                          ? _vm._l(_vm.interests, function(_interest) {
+                              return _c(
+                                "a",
+                                {
+                                  staticClass:
+                                    "badge  badge-danger badge--profile-interests py-2 px-2 my-1 mr-1",
+                                  attrs: {
+                                    href: _vm.generateInterestSearchUrl(
+                                      _interest
+                                    ),
+                                    target: "_blank"
+                                  }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                " +
+                                      _vm._s(_interest.title) +
+                                      "\n                            "
+                                  )
+                                ]
+                              )
+                            })
+                          : [
+                              _vm._v(
+                                "\n                            There are currently no research interests to display.\n                        "
+                              )
+                            ]
+                      ],
+                      2
+                    )
+                  ],
+                  2
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "col-md-8" },
+                  [
+                    _c("div", { staticClass: "d-none d-md-block" }, [
+                      _c("h2", { staticClass: "h3 text-primary mb-4" }, [
+                        _vm._v("Projects")
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticClass: "projectFilterBar",
+                          attrs: { id: "projectFilterBar" }
+                        },
+                        [
+                          _c(
+                            "strong",
+                            { staticClass: "projectFilterBar__label" },
+                            [_vm._v("Filtered By:")]
+                          ),
+                          _vm._v(" "),
+                          _vm._l(_vm.roleFilters, function(filter) {
+                            return _vm.roleFilters
+                              ? _c(
+                                  "span",
+                                  {
+                                    staticClass:
+                                      "badge badge-primary projectFilterBar__badge py-2 px-2 my-1 mr-1",
+                                    attrs: {
+                                      id: "badge-" + filter.replace(/\s/g, "")
+                                    }
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                                " +
+                                        _vm._s(filter) +
+                                        " \n                                "
+                                    ),
+                                    _c(
+                                      "span",
+                                      {
+                                        ref:
+                                          "badge-remove-" +
+                                          filter.replace(/\s/g, ""),
+                                        refInFor: true,
+                                        staticClass: "projectFilterBar__remove",
+                                        attrs: {
+                                          id:
+                                            "badge-remove-" +
+                                            filter.replace(/\s/g, "")
+                                        },
+                                        on: {
+                                          click: function($event) {
+                                            _vm.filterBadgeWasClicked($event)
+                                          }
+                                        }
+                                      },
+                                      [
+                                        _vm._v(
+                                          "\n                                    x\n                                "
+                                        )
+                                      ]
+                                    )
+                                  ]
+                                )
+                              : _vm._e()
+                          }),
+                          _vm._v(" "),
+                          _vm._l(_vm.statusFilters, function(filter) {
+                            return _vm.statusFilters
+                              ? _c(
+                                  "span",
+                                  {
+                                    staticClass:
+                                      "badge badge-primary projectFilterBar__badge py-2 px-2 my-1 mr-1",
+                                    attrs: {
+                                      id: "badge-" + filter.replace(/\s/g, "")
+                                    }
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                                " +
+                                        _vm._s(filter) +
+                                        " \n                                "
+                                    ),
+                                    _c(
+                                      "span",
+                                      {
+                                        ref:
+                                          "badge-remove-" +
+                                          filter.replace(/\s/g, ""),
+                                        refInFor: true,
+                                        staticClass: "projectFilterBar__remove",
+                                        attrs: {
+                                          id:
+                                            "badge-remove-" +
+                                            filter.replace(/\s/g, "")
+                                        },
+                                        on: {
+                                          click: function($event) {
+                                            _vm.filterBadgeWasClicked($event)
+                                          }
+                                        }
+                                      },
+                                      [
+                                        _vm._v(
+                                          "\n                                    x\n                                "
+                                        )
+                                      ]
+                                    )
+                                  ]
+                                )
+                              : _vm._e()
+                          }),
+                          _vm._v(" "),
+                          _vm._l(_vm.typeFilters, function(filter) {
+                            return _vm.typeFilters
+                              ? _c(
+                                  "span",
+                                  {
+                                    staticClass:
+                                      "badge badge-primary projectFilterBar__badge py-2 px-2 my-1 mr-1",
+                                    attrs: {
+                                      id: "badge-" + filter.replace(/\s/g, "")
+                                    }
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                                " +
+                                        _vm._s(filter) +
+                                        " \n                                "
+                                    ),
+                                    _c(
+                                      "span",
+                                      {
+                                        ref:
+                                          "badge-remove-" +
+                                          filter.replace(/\s/g, ""),
+                                        refInFor: true,
+                                        staticClass: "projectFilterBar__remove",
+                                        attrs: {
+                                          id:
+                                            "badge-remove-" +
+                                            filter.replace(/\s/g, "")
+                                        },
+                                        on: {
+                                          click: function($event) {
+                                            _vm.filterBadgeWasClicked($event)
+                                          }
+                                        }
+                                      },
+                                      [
+                                        _vm._v(
+                                          "\n                                    x\n                                "
+                                        )
+                                      ]
+                                    )
+                                  ]
+                                )
+                              : _vm._e()
+                          })
+                        ],
+                        2
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _vm.projects.length
+                      ? [
+                          _vm.displayedProjects.length
+                            ? [
+                                _c("div", { staticClass: "mb-2" }, [
+                                  _vm._v("Showing "),
+                                  _c("strong", [
+                                    _vm._v(_vm._s(_vm.displayedProjects.length))
+                                  ]),
+                                  _vm._v(" of "),
+                                  _c("strong", [
+                                    _vm._v(_vm._s(_vm.projects.length))
+                                  ]),
+                                  _vm._v(" project(s)")
+                                ]),
+                                _vm._v(" "),
+                                _vm._l(_vm.displayedProjects, function(
+                                  project
+                                ) {
+                                  return _c(
+                                    "div",
+                                    { staticClass: "profileProject" },
+                                    [
+                                      _c(
+                                        "a",
+                                        {
+                                          staticClass: "profileProject__title",
+                                          attrs: {
+                                            href: _vm.generateProjectUrl(
+                                              project
+                                            ),
+                                            target: "_blank"
+                                          }
+                                        },
+                                        [
+                                          _vm._v(
+                                            "\n                                    " +
+                                              _vm._s(project.project_title) +
+                                              "\n                                "
+                                          )
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      project.attributes
+                                        ? _c(
+                                            "div",
+                                            {
+                                              staticClass:
+                                                "profileProject__type"
+                                            },
+                                            [
+                                              project.attributes.purpose_name ==
+                                              "creative"
+                                                ? _c("span", [
+                                                    _vm._v("Creative Work")
+                                                  ])
+                                                : _c("span", [
+                                                    _vm._v(
+                                                      _vm._s(
+                                                        _vm.uppercaseFirstLetter(
+                                                          project.attributes
+                                                            .purpose_name
+                                                        )
+                                                      )
+                                                    )
+                                                  ])
+                                            ]
+                                          )
+                                        : _vm._e(),
+                                      _vm._v(" "),
+                                      project.award.length
+                                        ? _c(
+                                            "div",
+                                            {
+                                              staticClass:
+                                                "profileProject__item"
+                                            },
+                                            [
+                                              _vm._l(
+                                                project.award_sponsors,
+                                                function(award_sponsor) {
+                                                  return [
+                                                    _c("p", [
+                                                      _c("strong", [
+                                                        _vm._v(
+                                                          _vm._s(
+                                                            award_sponsor.sponsor
+                                                          ) + ":"
+                                                        )
+                                                      ]),
+                                                      _vm._v(
+                                                        " " +
+                                                          _vm._s(
+                                                            new Intl.NumberFormat(
+                                                              "en-US",
+                                                              {
+                                                                style:
+                                                                  "currency",
+                                                                currency: "USD"
+                                                              }
+                                                            ).format(
+                                                              award_sponsor.total
+                                                            )
+                                                          )
+                                                      )
+                                                    ])
+                                                  ]
+                                                }
+                                              )
+                                            ],
+                                            2
+                                          )
+                                        : _vm._e(),
+                                      _vm._v(" "),
+                                      project.pi
+                                        ? _c(
+                                            "div",
+                                            {
+                                              staticClass:
+                                                "profileProject__item"
+                                            },
+                                            [
+                                              _c("strong", [
+                                                _vm._v(
+                                                  "Lead Principal Investigator:"
+                                                )
+                                              ]),
+                                              _vm._v(
+                                                " " +
+                                                  _vm._s(
+                                                    project.pi.display_name
+                                                  ) +
+                                                  "\n                                "
+                                              )
+                                            ]
+                                          )
+                                        : _vm._e(),
+                                      _vm._v(" "),
+                                      project.members.length
+                                        ? _c(
+                                            "div",
+                                            {
+                                              staticClass:
+                                                "profileProject__item"
+                                            },
+                                            [
+                                              _c("strong", [_vm._v("Team:")]),
+                                              _vm._v(
+                                                " " +
+                                                  _vm._s(
+                                                    _vm.renderProjectTeamList(
+                                                      project
+                                                    )
+                                                  ) +
+                                                  "\n                                "
+                                              )
+                                            ]
+                                          )
+                                        : _vm._e()
+                                    ]
+                                  )
+                                })
+                              ]
+                            : [
+                                _c("div", { staticClass: "mb-2" }, [
+                                  _vm._v(
+                                    "There are currently no projects that match your selected filters."
+                                  )
+                                ])
+                              ]
+                        ]
+                      : [
+                          _c("div", { staticClass: "mb-2" }, [
+                            _vm._v(
+                              "There are currently no projects to display."
+                            )
+                          ])
+                        ],
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "d-block d-md-none" },
+                      [
+                        _c("h6", { staticClass: "h5 mb-4 mt-5" }, [
+                          _vm._v("RESEARCH INTERESTS")
+                        ]),
+                        _vm._v(" "),
+                        _vm.interests.length
+                          ? _vm._l(_vm.interests, function(_interest) {
+                              return _c(
+                                "a",
+                                {
+                                  staticClass:
+                                    "badge  badge-danger badge--profile-interests py-2 px-2 my-1 mr-1",
+                                  attrs: {
+                                    href: _vm.generateInterestSearchUrl(
+                                      _interest
+                                    ),
+                                    target: "_blank"
+                                  }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                " +
+                                      _vm._s(_interest.title) +
+                                      "\n                            "
+                                  )
+                                ]
+                              )
+                            })
+                          : [
+                              _vm._v(
+                                "\n                            There are currently no research interests to display.\n                        "
+                              )
+                            ]
+                      ],
+                      2
+                    )
+                  ],
+                  2
+                )
+              ])
             ]
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              class: {
-                "collapse clearfix": _vm.isMobile,
-                "collapse show": _vm.isDesktop
-              },
-              attrs: { id: "collapseFilters" }
-            },
-            [
-              _c("h6", { staticClass: "h5 mb-4 d-none d-md-block" }, [
-                _vm._v("PROJECT FILTERS")
-              ]),
-              _vm._v(" "),
-              _c(
-                "ul",
-                { staticClass: "projectFilterList list-unstyled" },
-                [
-                  _vm._m(0),
-                  _vm._v(" "),
-                  _vm._l(_vm.roleFilters, function(filter) {
-                    return _c("li", [
-                      _c(
-                        "div",
-                        { staticClass: "custom-control custom-checkbox" },
-                        [
-                          _c("input", {
-                            ref: "role-" + filter.replace(/\s/g, ""),
-                            refInFor: true,
-                            staticClass:
-                              "custom-control-input projectFilterList__checkbox",
-                            attrs: {
-                              type: "checkbox",
-                              id: "role-" + filter.replace(/\s/g, "")
-                            },
-                            domProps: { value: filter },
-                            on: {
-                              click: function($event) {
-                                _vm.filterCheckboxWasClicked($event)
-                              }
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c(
-                            "label",
-                            {
-                              staticClass: "custom-control-label",
-                              attrs: {
-                                for: "role-" + filter.replace(/\s/g, "")
-                              }
-                            },
-                            [_vm._v(_vm._s(filter))]
-                          )
-                        ]
-                      )
-                    ])
-                  })
-                ],
-                2
-              ),
-              _vm._v(" "),
-              _c(
-                "ul",
-                { staticClass: "projectFilterList list-unstyled" },
-                [
-                  _vm._m(1),
-                  _vm._v(" "),
-                  _vm._l(_vm.statusFilters, function(filter) {
-                    return _c("li", [
-                      _c(
-                        "div",
-                        { staticClass: "custom-control custom-checkbox" },
-                        [
-                          _c("input", {
-                            ref: "role-" + filter.replace(/\s/g, ""),
-                            refInFor: true,
-                            staticClass:
-                              "custom-control-input projectFilterList__checkbox",
-                            attrs: {
-                              type: "checkbox",
-                              id: "role-" + filter.replace(/\s/g, "")
-                            },
-                            domProps: { value: filter },
-                            on: {
-                              click: function($event) {
-                                _vm.filterCheckboxWasClicked($event)
-                              }
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c(
-                            "label",
-                            {
-                              staticClass: "custom-control-label",
-                              attrs: {
-                                for: "role-" + filter.replace(/\s/g, "")
-                              }
-                            },
-                            [_vm._v(_vm._s(filter))]
-                          )
-                        ]
-                      )
-                    ])
-                  })
-                ],
-                2
-              ),
-              _vm._v(" "),
-              _c(
-                "ul",
-                { staticClass: "projectFilterList list-unstyled" },
-                [
-                  _vm._m(2),
-                  _vm._v(" "),
-                  _vm._l(_vm.typeFilters, function(filter) {
-                    return _c("li", [
-                      _c(
-                        "div",
-                        { staticClass: "custom-control custom-checkbox" },
-                        [
-                          _c("input", {
-                            ref: "role-" + filter.replace(/\s/g, ""),
-                            refInFor: true,
-                            staticClass:
-                              "custom-control-input projectFilterList__checkbox",
-                            attrs: {
-                              type: "checkbox",
-                              id: "role-" + filter.replace(/\s/g, "")
-                            },
-                            domProps: { value: filter },
-                            on: {
-                              click: function($event) {
-                                _vm.filterCheckboxWasClicked($event)
-                              }
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c(
-                            "label",
-                            {
-                              staticClass: "custom-control-label",
-                              attrs: {
-                                for: "role-" + filter.replace(/\s/g, "")
-                              }
-                            },
-                            [_vm._v(_vm._s(filter))]
-                          )
-                        ]
-                      )
-                    ])
-                  })
-                ],
-                2
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                {
-                  staticClass: "projectFilterList__clear",
-                  on: {
-                    click: function($event) {
-                      _vm.ClearAllWasClicked($event)
-                    }
-                  }
-                },
-                [_vm._v("Clear All Filters")]
-              )
-            ]
-          ),
-          _vm._v(" "),
-          _vm._m(3)
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-md-8" }, [
-          _c("div", { staticClass: "d-none d-md-block" }, [
-            _c("h2", { staticClass: "h3 text-primary mb-4" }, [
-              _vm._v("Projects")
-            ]),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass: "projectFilterBar",
-                attrs: { id: "projectFilterBar" }
-              },
-              [
-                _c("strong", { staticClass: "projectFilterBar__label" }, [
-                  _vm._v("Filtered By:")
-                ]),
-                _vm._v(" "),
-                _vm._l(_vm.roleFilters, function(filter) {
-                  return _vm.roleFilters
-                    ? _c(
-                        "span",
-                        {
-                          staticClass:
-                            "badge badge-primary projectFilterBar__badge py-2 px-2 my-1 mr-1",
-                          attrs: { id: "badge-" + filter.replace(/\s/g, "") }
-                        },
-                        [
-                          _vm._v(
-                            "\n                            " +
-                              _vm._s(filter) +
-                              " \n                            "
-                          ),
-                          _c(
-                            "span",
-                            {
-                              ref: "badge-remove-" + filter.replace(/\s/g, ""),
-                              refInFor: true,
-                              staticClass: "projectFilterBar__remove",
-                              attrs: {
-                                id: "badge-remove-" + filter.replace(/\s/g, "")
-                              },
-                              on: {
-                                click: function($event) {
-                                  _vm.filterBadgeWasClicked($event)
-                                }
-                              }
-                            },
-                            [
-                              _vm._v(
-                                "\n                                x\n                            "
-                              )
-                            ]
-                          )
-                        ]
-                      )
-                    : _vm._e()
-                }),
-                _vm._v(" "),
-                _vm._l(_vm.statusFilters, function(filter) {
-                  return _vm.statusFilters
-                    ? _c(
-                        "span",
-                        {
-                          staticClass:
-                            "badge badge-primary projectFilterBar__badge py-2 px-2 my-1 mr-1",
-                          attrs: { id: "badge-" + filter.replace(/\s/g, "") }
-                        },
-                        [
-                          _vm._v(
-                            "\n                            " +
-                              _vm._s(filter) +
-                              " \n                            "
-                          ),
-                          _c(
-                            "span",
-                            {
-                              ref: "badge-remove-" + filter.replace(/\s/g, ""),
-                              refInFor: true,
-                              staticClass: "projectFilterBar__remove",
-                              attrs: {
-                                id: "badge-remove-" + filter.replace(/\s/g, "")
-                              },
-                              on: {
-                                click: function($event) {
-                                  _vm.filterBadgeWasClicked($event)
-                                }
-                              }
-                            },
-                            [
-                              _vm._v(
-                                "\n                                x\n                            "
-                              )
-                            ]
-                          )
-                        ]
-                      )
-                    : _vm._e()
-                }),
-                _vm._v(" "),
-                _vm._l(_vm.typeFilters, function(filter) {
-                  return _vm.typeFilters
-                    ? _c(
-                        "span",
-                        {
-                          staticClass:
-                            "badge badge-primary projectFilterBar__badge py-2 px-2 my-1 mr-1",
-                          attrs: { id: "badge-" + filter.replace(/\s/g, "") }
-                        },
-                        [
-                          _vm._v(
-                            "\n                            " +
-                              _vm._s(filter) +
-                              " \n                            "
-                          ),
-                          _c(
-                            "span",
-                            {
-                              ref: "badge-remove-" + filter.replace(/\s/g, ""),
-                              refInFor: true,
-                              staticClass: "projectFilterBar__remove",
-                              attrs: {
-                                id: "badge-remove-" + filter.replace(/\s/g, "")
-                              },
-                              on: {
-                                click: function($event) {
-                                  _vm.filterBadgeWasClicked($event)
-                                }
-                              }
-                            },
-                            [
-                              _vm._v(
-                                "\n                                x\n                            "
-                              )
-                            ]
-                          )
-                        ]
-                      )
-                    : _vm._e()
-                })
-              ],
-              2
-            )
-          ]),
-          _vm._v(" "),
-          _vm._m(4),
-          _vm._v(" "),
-          _vm._m(5),
-          _vm._v(" "),
-          _vm._m(6),
-          _vm._v(" "),
-          _vm._m(7)
-        ])
-      ])
-    ])
+      ],
+      2
+    )
   ])
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-12" }, [
+        _c("p", { staticClass: "text-center" }, [
+          _c("i", { staticClass: "fas fa-spinner fa-spin fa-3x" })
+        ])
+      ])
+    ])
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -31546,136 +32095,6 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("li", [_c("strong", [_vm._v("Project Type")])])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "d-none d-md-block" }, [
-      _c("h6", { staticClass: "h5 mb-4 mt-5" }, [_vm._v("RESEARCH INTERESTS")]),
-      _vm._v(" "),
-      _c(
-        "span",
-        {
-          staticClass:
-            "badge  badge-danger badge--profile-interests py-2 px-2 my-1 mr-1"
-        },
-        [_vm._v("\n                        Foo\n                    ")]
-      ),
-      _vm._v(" "),
-      _c(
-        "span",
-        {
-          staticClass:
-            "badge  badge-danger badge--profile-interests py-2 px-2 my-1 mr-1"
-        },
-        [_vm._v("\n                        Bar\n                    ")]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "mb-2" }, [
-      _vm._v("Showing "),
-      _c("strong", [_vm._v("2")]),
-      _vm._v(" of "),
-      _c("strong", [_vm._v("20")]),
-      _vm._v(" projects")
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "profileProject" }, [
-      _c("a", { staticClass: "profileProject__title", attrs: { href: "#" } }, [
-        _vm._v(
-          "\n                        CSUN-UCLA Stem Cell Scientest Training Program\n                    "
-        )
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "profileProject__type" }, [
-        _vm._v("\n                        Project\n                    ")
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "profileProject__item" }, [
-        _c("strong", [_vm._v("NFS:")]),
-        _vm._v(" $2,770,000\n                    ")
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "profileProject__item" }, [
-        _c("strong", [_vm._v("Lead Principle Investigator:")]),
-        _vm._v(" Cindy Malone\n                    ")
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "profileProject__item" }, [
-        _c("strong", [_vm._v("Team:")]),
-        _vm._v(
-          " Cindy Malone, Shina Dunkin, Anton Garraway, Bradly Luskby, Marge Mintz, Giovonni Nios, Otellia Kopzyanucy\n                    "
-        )
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "profileProject" }, [
-      _c("a", { staticClass: "profileProject__title", attrs: { href: "#" } }, [
-        _vm._v(
-          "\n                        RUI/Collaborative Research: MSB-ECA: Mice-o-scapes: Using isotopes to understand the effect of climate and landscape change on small mammal ecology over the past 100 years\n                    "
-        )
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "profileProject__type" }, [
-        _vm._v("\n                        Project\n                    ")
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "profileProject__item" }, [
-        _c("strong", [_vm._v("NFS:")]),
-        _vm._v(" $2,770,000\n                    ")
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "profileProject__item" }, [
-        _c("strong", [_vm._v("Lead Principle Investigator:")]),
-        _vm._v(" Cindy Malone\n                    ")
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "profileProject__item" }, [
-        _c("strong", [_vm._v("Team:")]),
-        _vm._v(
-          " Cindy Malone, Shina Dunkin, Marge Mintz, Giovonni Nios\n                    "
-        )
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "d-block d-md-none" }, [
-      _c("h6", { staticClass: "h5 mb-4 mt-5" }, [_vm._v("RESEARCH INTERESTS")]),
-      _vm._v(" "),
-      _c(
-        "span",
-        {
-          staticClass:
-            "badge  badge-danger badge--profile-interests py-2 px-2 my-1 mr-1"
-        },
-        [_vm._v("\n                        Foo\n                    ")]
-      ),
-      _vm._v(" "),
-      _c(
-        "span",
-        {
-          staticClass:
-            "badge  badge-danger badge--profile-interests py-2 px-2 my-1 mr-1"
-        },
-        [_vm._v("\n                        Bar\n                    ")]
-      )
-    ])
   }
 ]
 render._withStripped = true
@@ -31688,10 +32107,122 @@ if (false) {
 }
 
 /***/ }),
-/* 58 */
+
+/***/ 184:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
+/***/ }),
+
+/***/ 5:
+/***/ (function(module, exports) {
+
+/* globals __VUE_SSR_CONTEXT__ */
+
+// IMPORTANT: Do NOT use ES2015 features in this file.
+// This module is a runtime utility for cleaner component module output and will
+// be included in the final webpack user bundle.
+
+module.exports = function normalizeComponent (
+  rawScriptExports,
+  compiledTemplate,
+  functionalTemplate,
+  injectStyles,
+  scopeId,
+  moduleIdentifier /* server only */
+) {
+  var esModule
+  var scriptExports = rawScriptExports = rawScriptExports || {}
+
+  // ES6 modules interop
+  var type = typeof rawScriptExports.default
+  if (type === 'object' || type === 'function') {
+    esModule = rawScriptExports
+    scriptExports = rawScriptExports.default
+  }
+
+  // Vue.extend constructor export interop
+  var options = typeof scriptExports === 'function'
+    ? scriptExports.options
+    : scriptExports
+
+  // render functions
+  if (compiledTemplate) {
+    options.render = compiledTemplate.render
+    options.staticRenderFns = compiledTemplate.staticRenderFns
+    options._compiled = true
+  }
+
+  // functional template
+  if (functionalTemplate) {
+    options.functional = true
+  }
+
+  // scopedId
+  if (scopeId) {
+    options._scopeId = scopeId
+  }
+
+  var hook
+  if (moduleIdentifier) { // server build
+    hook = function (context) {
+      // 2.3 injection
+      context =
+        context || // cached call
+        (this.$vnode && this.$vnode.ssrContext) || // stateful
+        (this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext) // functional
+      // 2.2 with runInNewContext: true
+      if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
+        context = __VUE_SSR_CONTEXT__
+      }
+      // inject component styles
+      if (injectStyles) {
+        injectStyles.call(this, context)
+      }
+      // register component module identifier for async chunk inferrence
+      if (context && context._registeredComponents) {
+        context._registeredComponents.add(moduleIdentifier)
+      }
+    }
+    // used by ssr in case component is cached and beforeCreate
+    // never gets called
+    options._ssrRegister = hook
+  } else if (injectStyles) {
+    hook = injectStyles
+  }
+
+  if (hook) {
+    var functional = options.functional
+    var existing = functional
+      ? options.render
+      : options.beforeCreate
+
+    if (!functional) {
+      // inject component registration as beforeCreate hook
+      options.beforeCreate = existing
+        ? [].concat(existing, hook)
+        : [hook]
+    } else {
+      // for template-only hot-reload because in that case the render fn doesn't
+      // go through the normalizer
+      options._injectStyles = hook
+      // register for functioal component in vue file
+      options.render = function renderWithStyleInjection (h, context) {
+        hook.call(context)
+        return existing(h, context)
+      }
+    }
+  }
+
+  return {
+    esModule: esModule,
+    exports: scriptExports,
+    options: options
+  }
+}
+
+
 /***/ })
-],[15]);
+
+},[141]);

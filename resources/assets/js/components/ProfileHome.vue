@@ -162,10 +162,10 @@
                                                 <div class="media-body align-self-center">
                                                     <template v-if='_badge.url_web'>
                                                         <a :href="_badge.url_web" class="text-body">
-                                                            {{ _badge.name }} ({{ _badge.award_date }})
+                                                            {{ _badge.name }} <span v-if="_badge.award_date">({{ _badge.award_date }})</span>
                                                         </a>
                                                     </template>
-                                                    <p v-else>{{ _badge.name }} ({{ _badge.award_date }})</p>
+                                                    <p v-else>{{ _badge.name }} <span v-if="_badge.award_date">({{ _badge.award_date }})</span></p>
                                                 </div>
                                             </div>
                                         </div>
