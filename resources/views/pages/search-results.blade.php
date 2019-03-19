@@ -161,7 +161,7 @@ $(function() {
     // iterate over the card images to load the respective profile images
     $("img.profile-card__img").each(function(index, element) {
         let profileUri = $(element).attr('data-profile-uri');
-        let profileImgUri = profileUri + '/avatar';
+        let profileImgUri = profileUri + '/avatar?source=true';
 
         // fire off the Axios call to retrieve the image
         axios.get(
@@ -170,10 +170,7 @@ $(function() {
                 baseURL: mediaWsUrl + 'faculty/media'
             }
         ).then(function(response) {
-            // Media WS results in a JSON object when it returns the proper image
-            // result so we can use that as the "src" attribute in the profile image
-            // placeholder
-            $(element).attr('src', response.data.avatar_image);
+            $(element).attr('src',response.request.responseURL);
         }).catch(function(error) {
             console.error(error);
         });
