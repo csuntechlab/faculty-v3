@@ -112,7 +112,7 @@ $(function() {
     axios.get(
         profileImgUri,
         {
-            baseURL: mediaWsUrl + 'faculty/media/'
+            baseURL: mediaWsUrl + 'faculty/media'
         }
     ).then(function(response) {
         $("#profile-image").attr('src',response.request.responseURL);
