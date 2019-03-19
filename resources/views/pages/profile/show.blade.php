@@ -106,19 +106,18 @@
 @section('page-specific-scripts')
 <script>
 $(function() {
+    console.log("foo")
     var mediaWsUrl = $("meta[name=media-url]").attr('content');
     var profileImgUri = $("meta[name=person-uri]").attr('content') +
-        '/avatar';
+        '/avatar?source=true ';
     axios.get(
         profileImgUri,
         {
-            baseURL: mediaWsUrl + 'faculty/media'
+            baseURL: mediaWsUrl + 'faculty/media/'
         }
     ).then(function(response) {
-        // Media WS results in a JSON object when it returns the proper image
-        // result so we can use that as the "src" attribute in the profile image
-        // placeholder
-        $("#profile-image").attr('src', response.data.avatar_image);
+        console.log(response.request.responseURL);
+        $("#profile-image").attr('src',response.request.responseURL);
     }).catch(function(error) {
         console.error(error);
     });
