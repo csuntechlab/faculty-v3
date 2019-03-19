@@ -106,7 +106,6 @@
 @section('page-specific-scripts')
 <script>
 $(function() {
-    console.log("foo")
     var mediaWsUrl = $("meta[name=media-url]").attr('content');
     var profileImgUri = $("meta[name=person-uri]").attr('content') +
         '/avatar?source=true ';
@@ -116,7 +115,6 @@ $(function() {
             baseURL: mediaWsUrl + 'faculty/media/'
         }
     ).then(function(response) {
-        console.log(response.request.responseURL);
         $("#profile-image").attr('src',response.request.responseURL);
     }).catch(function(error) {
         console.error(error);

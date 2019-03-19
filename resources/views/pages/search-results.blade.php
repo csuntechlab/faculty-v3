@@ -170,7 +170,6 @@ $(function() {
                 baseURL: mediaWsUrl + 'faculty/media'
             }
         ).then(function(response) {
-            console.log(response.request.responseURL);
             $(element).attr('src',response.request.responseURL);
         }).catch(function(error) {
             console.error(error);
