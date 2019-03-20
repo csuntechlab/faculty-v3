@@ -28298,7 +28298,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             // apply the profile metadata
             var person_data = metadata.data;
             _this.user = person_data;
-            _this.contact = person_data.primary_connection.pivot;
+            if (person_data.primary_connection) {
+                _this.contact = person_data.primary_connection.pivot;
+            } else {
+                _this.contact = null;
+            }
+
             _this.degrees = person_data.degrees;
             _this.biography = person_data.biography;
 

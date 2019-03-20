@@ -269,7 +269,12 @@ export default {
             // apply the profile metadata
             var person_data = metadata.data;
             this.user = person_data;
-            this.contact = person_data.primary_connection.pivot;
+            if (person_data.primary_connection) {
+                this.contact = person_data.primary_connection.pivot;
+            } else {
+                this.contact = null;
+            }
+            
             this.degrees = person_data.degrees;
             this.biography = person_data.biography;
 
