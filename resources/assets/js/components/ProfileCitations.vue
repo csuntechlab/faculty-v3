@@ -71,11 +71,13 @@
                             </div>
                         </div>
                         
-                        <template v-if="aFilterHasBeenApplied">
-                            <div class="mb-2">Showing <strong>{{ filteredCitations.length }}</strong> of <strong>{{ citations.length }}</strong> citations</div>
-                        </template>
-                        <template v-else>
-                            <div class="mb-2">Showing <strong>{{ citations.length }}</strong> of <strong>{{ citations.length }}</strong> citations</div>
+                        <template v-if="citations.length">
+                            <template v-if="aFilterHasBeenApplied">
+                                <div class="mb-2">Showing <strong>{{ filteredCitations.length }}</strong> of <strong>{{ citations.length }}</strong> citations</div>
+                            </template>
+                            <template v-else>
+                                <div class="mb-2">Showing <strong>{{ citations.length }}</strong> of <strong>{{ citations.length }}</strong> citations</div>
+                            </template>
                         </template>
                         
                         <div class="profileCitationWrapper">

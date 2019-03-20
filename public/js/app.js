@@ -32291,6 +32291,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: 'ProfileCitations',
@@ -32700,33 +32702,37 @@ var render = function() {
                       )
                     ]),
                     _vm._v(" "),
-                    _vm.aFilterHasBeenApplied
+                    _vm.citations.length
                       ? [
-                          _c("div", { staticClass: "mb-2" }, [
-                            _vm._v("Showing "),
-                            _c("strong", [
-                              _vm._v(_vm._s(_vm.filteredCitations.length))
-                            ]),
-                            _vm._v(" of "),
-                            _c("strong", [
-                              _vm._v(_vm._s(_vm.citations.length))
-                            ]),
-                            _vm._v(" citations")
-                          ])
+                          _vm.aFilterHasBeenApplied
+                            ? [
+                                _c("div", { staticClass: "mb-2" }, [
+                                  _vm._v("Showing "),
+                                  _c("strong", [
+                                    _vm._v(_vm._s(_vm.filteredCitations.length))
+                                  ]),
+                                  _vm._v(" of "),
+                                  _c("strong", [
+                                    _vm._v(_vm._s(_vm.citations.length))
+                                  ]),
+                                  _vm._v(" citations")
+                                ])
+                              ]
+                            : [
+                                _c("div", { staticClass: "mb-2" }, [
+                                  _vm._v("Showing "),
+                                  _c("strong", [
+                                    _vm._v(_vm._s(_vm.citations.length))
+                                  ]),
+                                  _vm._v(" of "),
+                                  _c("strong", [
+                                    _vm._v(_vm._s(_vm.citations.length))
+                                  ]),
+                                  _vm._v(" citations")
+                                ])
+                              ]
                         ]
-                      : [
-                          _c("div", { staticClass: "mb-2" }, [
-                            _vm._v("Showing "),
-                            _c("strong", [
-                              _vm._v(_vm._s(_vm.citations.length))
-                            ]),
-                            _vm._v(" of "),
-                            _c("strong", [
-                              _vm._v(_vm._s(_vm.citations.length))
-                            ]),
-                            _vm._v(" citations")
-                          ])
-                        ],
+                      : _vm._e(),
                     _vm._v(" "),
                     _c(
                       "div",
