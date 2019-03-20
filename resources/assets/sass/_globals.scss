@@ -6,3 +6,7 @@ body {
 .main {
     min-height: calc(100vh - 30rem);
 }
+
+.empty-state-msg {
+    color: $gray-600;
+}

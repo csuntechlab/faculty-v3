@@ -14,6 +14,19 @@
                 <div class="row">                 
                     <div class="col-md-4">
                         
+                        <div class="d-none d-md-block mb-3 pb-3">
+                            <h6 class="h5 mb-3">RESEARCH INTERESTS</h6>
+                            <template v-if="interests.length">
+                                <a :href="generateInterestSearchUrl(_interest)" v-for="_interest in interests" class="badge  badge-danger badge--profile-interests py-2 px-2 my-1 mr-1" target="_blank">
+                                    {{ _interest.title }}
+                                </a>
+                            </template>
+                            <template v-else>
+                                <span class="empty-state-msg">There are currently no research interests to display.</span>
+                            </template>
+                        </div>
+                        
+
                         <div class="clearfix" v-bind:class="{ 'd-block': isMobile, 'd-none': isDesktop }">
                             <h2 class="h3 text-primary mb-4 float-left">Projects</h2>
                             <div v-if="projects.length" class="btn btn-sm btn-secondary float-right" data-toggle="collapse" data-target="#collapseFilters" aria-expanded="false" aria-controls="collapseFilters"> 
@@ -85,17 +98,7 @@
                             </div>
                         </template>
 
-                        <div class="d-none d-md-block">
-                            <h6 class="h5 mb-4" v-bind:class="{'mt-5': projects.length}">RESEARCH INTERESTS</h6>
-                            <template v-if="interests.length">
-                                <a :href="generateInterestSearchUrl(_interest)" v-for="_interest in interests" class="badge  badge-danger badge--profile-interests py-2 px-2 my-1 mr-1" target="_blank">
-                                    {{ _interest.title }}
-                                </a>
-                            </template>
-                            <template v-else>
-                                There are currently no research interests to display.
-                            </template>
-                        </div>
+
                     </div>
 
                     <div class="col-md-8">
@@ -185,7 +188,7 @@
                                 </a>
                             </template>
                             <template v-else>
-                                There are currently no research interests to display.
+                                <span class="empty-state-msg">There are currently no research interests to display.</span>
                             </template>
                         </div>
 

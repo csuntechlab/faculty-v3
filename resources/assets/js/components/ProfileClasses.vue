@@ -14,6 +14,20 @@
                 <div class="row">    
                     <div class="order-last order-md-first col-md-4 pt-3 pt-md-0">
                         <div class="mb-3 pb-3">
+                            <h6 class="h5 mb-3">TEACHING INTERESTS</h6>
+                            <template v-if="teaching_interest.length">
+                                <template v-for="interest in teaching_interest">
+                                    <span class="badge  badge-danger badge--profile-interests py-2 px-2 my-1 mr-1">
+                                        {{interest.title}}
+                                    </span>                                
+                                </template>
+                            </template>
+                            <template v-else>
+                                <span class="empty-state-msg">There are currently no teaching interests to display.</span>
+                            </template>
+                        </div>
+
+                        <div class="mb-3 pb-3">
                             <h6 class="h5 mb-3">PAST COURSES</h6>
                             <template v-if='past_courses.length'>  
                                 <ul class="past-courses-list list-unstyled">
@@ -54,15 +68,6 @@
                             <template v-else>
                                 {{ person_name }} does not have any past classes.
                             </template>
-                        </div>
-                        <div class="mb-3 pb-3">
-                            <h6 class="h5 mb-3">TEACHING INTERESTS</h6>
-                            <span class="badge  badge-danger badge--profile-interests py-2 px-2 my-1 mr-1">
-                                Foo
-                            </span>
-                            <span class="badge  badge-danger badge--profile-interests py-2 px-2 my-1 mr-1">
-                                Bar
-                            </span>
                         </div>
                     </div>
                     
@@ -312,6 +317,7 @@ export default {
             selected_term: $("meta[name=current-term-id]").attr('content'),
             classes: [],
             office_hours: [],
+            teaching_interest: [],
             loading_all: true,
             loading_classes: false,
             loading_officehours: false
@@ -335,6 +341,9 @@ export default {
         },
         current_term_id: function() {
             return $("meta[name=current-term-id]").attr('content');
+        },
+        person_email: function() {
+            return $("meta[name=person-email]").attr('content');
         }
     },
     methods: {
@@ -384,6 +393,17 @@ export default {
                 }
             );
         },
+        loadTeachingInterests: function() {
+            return axios.get(
+                'interests/academic?email=' + this.person_email,
+                {
+                    baseURL: $("meta[name=affinity-url]").attr('content'),
+                    params: {
+                        email: this.person_email
+                    }
+                }
+            );
+        },
         loadOfficeHours: function() {
             return axios.get(
                 'people/' + this.person_uri + '/office-hours',
@@ -415,8 +435,8 @@ export default {
     mounted() {
         // make the Axios calls concurrently and wait for all of them to return
         // before applying the reactive data
-        axios.all([this.loadCurrentClasses(), this.loadOfficeHours(), this.loadPastCourses(), this.loadTerms()])
-            .then(axios.spread((current_classes, office_hours, past_courses, terms) => {
+        axios.all([this.loadCurrentClasses(), this.loadOfficeHours(), this.loadPastCourses(), this.loadTerms(), this.loadTeachingInterests()])
+            .then(axios.spread((current_classes, office_hours, past_courses, terms, teaching_interests) => {
                 // apply the current classes
                 var current_class_data = current_classes.data;
                 this.classes = current_class_data;
@@ -433,6 +453,10 @@ export default {
                 var term_data = terms.data;
                 this.terms = term_data.terms;
                 this.current_term = term_data.current;
+
+                // apply the set of teaching interests
+                var teaching_interests_data = teaching_interests.data.interests;
+                this.teaching_interest = teaching_interests_data;
 
                 // we have finished loading everything
                 this.loading_all = false;
