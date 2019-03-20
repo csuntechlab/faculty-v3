@@ -16,7 +16,7 @@
 		<link rel="icon" href="//www.csun.edu/sites/default/themes/csun/favicon.ico" type="image/x-icon" />
 
 		{{-- STYLESHEETS --}}
-		{!! HTML::style('css/app.css') !!}
+		<link rel="stylesheet" href="{{ asset('css/app.css') }}">
 
 		@yield('page-specific-headers')
 	</head>
@@ -31,9 +31,9 @@
 		@include('layouts.partials.footer')
 
 		{{-- SCRIPTS --}}
-		{!! HTML::script('/js/manifest.js') !!}
-		{!! HTML::script('/js/vendor.js') !!}
-		{!! HTML::script('js/app.js') !!}
+		<script src="{{ asset('js/app.js') }}"></script>
+		<script src="{{ asset('js/manifest.js') }}"></script>
+		<script src="{{ asset('js/vendor.js') }}"></script>
 
 		@yield('page-specific-scripts')
 		{{-- GOOGLE ANALYTICS --}}
