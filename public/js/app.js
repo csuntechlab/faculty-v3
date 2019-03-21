@@ -32293,6 +32293,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: 'ProfileCitations',
@@ -32747,14 +32750,27 @@ var render = function() {
                                   attrs: { "data-type": citation.type }
                                 },
                                 [
-                                  _c("div", {}, [
-                                    _c("span", {
-                                      domProps: {
-                                        innerHTML: _vm._s(citation.formatted)
-                                      }
-                                    })
-                                  ])
-                                ]
+                                  citation.formatted != ""
+                                    ? [
+                                        _c("span", {
+                                          domProps: {
+                                            innerHTML: _vm._s(
+                                              citation.formatted
+                                            )
+                                          }
+                                        })
+                                      ]
+                                    : [
+                                        _c("span", {
+                                          domProps: {
+                                            innerHTML: _vm._s(
+                                              citation.metadata.title
+                                            )
+                                          }
+                                        })
+                                      ]
+                                ],
+                                2
                               )
                             })
                           : [

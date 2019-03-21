@@ -83,9 +83,12 @@
                         <div class="profileCitationWrapper">
                             <template v-if="citations.length">
                                 <div v-for="citation in citations" class="profileProject profileCitation" :data-type="citation.type">
-                                    <div class="">
+                                    <template v-if="citation.formatted != ''">
                                         <span v-html="citation.formatted"></span>
-                                    </div>
+                                    </template>
+                                    <template v-else>
+                                        <span v-html="citation.metadata.title"></span>
+                                    </template>
                                 </div>
                             </template>
                             <template v-else>
