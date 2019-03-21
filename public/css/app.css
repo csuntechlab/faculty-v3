@@ -11185,6 +11185,13 @@ body {
   z-index: -1;
 }
 
+@media screen and (max-width: 400px) {
+  .profile-nav .nav-link {
+    font-size: 1.4rem;
+    padding: .5rem .5rem;
+  }
+}
+
 .profileProject {
   background: white;
   border: 1px solid #dee2e6;
@@ -11265,6 +11272,10 @@ body {
 
 .projectFilterList__clear:hover {
   text-decoration: underline;
+}
+
+.profileCitationWrapper--filters-applied .profileCitation:not(.is-filtered) {
+  display: none;
 }
 
 .indexHeader__rise-arrow {

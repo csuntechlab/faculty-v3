@@ -1,0 +1,7 @@
+.profileCitationWrapper {
+    &--filters-applied {
+        .profileCitation:not(.is-filtered) {
+            display: none;
+        }
+    }
+}

@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import ProfileHome from '../components/ProfileHome'
 import ProfileClasses from '../components/ProfileClasses'
 import ProfileProjects from '../components/ProfileProjects'
+import ProfileCitations from '../components/ProfileCitations'
 
 Vue.use(Router);
 
@@ -22,6 +23,11 @@ export default new Router({
       path:'/projects',
       name: 'ProfileProjects',
       component: ProfileProjects,
+    },
+    {
+      path:'/citations',
+      name: 'ProfileCitations',
+      component: ProfileCitations,
     }
   ]
 })
