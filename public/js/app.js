@@ -28245,6 +28245,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: 'ProfileHome',
@@ -28316,7 +28326,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             // apply the profile metadata
             var person_data = metadata.data;
             _this.user = person_data;
-            _this.contact = person_data.primary_connection.pivot;
+            if (person_data.primary_connection) {
+                _this.contact = person_data.primary_connection.pivot;
+            }
+
             _this.degrees = person_data.degrees;
             _this.biography = person_data.biography;
 
@@ -28572,16 +28585,16 @@ var render = function() {
                         ]
                       : _vm._e(),
                     _vm._v(" "),
-                    _vm.interests.length
-                      ? [
-                          _c(
-                            "div",
-                            { staticClass: "mb-3 pb-3 " },
-                            [
-                              _c("h6", { staticClass: "h5 mb-3" }, [
-                                _vm._v("INTERESTS")
-                              ]),
-                              _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "mb-3 pb-3 " },
+                      [
+                        _c("h6", { staticClass: "h5 mb-3" }, [
+                          _vm._v("INTERESTS")
+                        ]),
+                        _vm._v(" "),
+                        _vm.interests.length
+                          ? [
                               _vm._l(_vm.interests, function(_interest) {
                                 return [
                                   _c(
@@ -28600,11 +28613,17 @@ var render = function() {
                                   )
                                 ]
                               })
-                            ],
-                            2
-                          )
-                        ]
-                      : _vm._e()
+                            ]
+                          : [
+                              _c("span", { staticClass: "empty-state-msg" }, [
+                                _vm._v(
+                                  "There are currently no interests to display."
+                                )
+                              ])
+                            ]
+                      ],
+                      2
+                    )
                   ],
                   2
                 ),
@@ -28792,38 +28811,42 @@ var render = function() {
                         ]
                       : _vm._e(),
                     _vm._v(" "),
-                    _vm.biography
-                      ? [
-                          _c(
-                            "h2",
-                            {
-                              staticClass: "h3 d-none d-md-block text-primary"
-                            },
-                            [_vm._v("Overview")]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "h2",
-                            {
-                              staticClass:
-                                "h5 mb-3 d-block d-md-none text-uppercase"
-                            },
-                            [_vm._v("Overview")]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "div",
-                            { staticClass: "mb-3 pb-3 mb-md-5 pb-md-4" },
-                            [
+                    _c(
+                      "h2",
+                      { staticClass: "h3 d-none d-md-block text-primary" },
+                      [_vm._v("Overview")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "h2",
+                      {
+                        staticClass: "h5 mb-3 d-block d-md-none text-uppercase"
+                      },
+                      [_vm._v("Overview")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "mb-3 pb-3 mb-md-5 pb-md-4" },
+                      [
+                        _vm.biography
+                          ? [
                               _vm._v(
                                 "\n                            " +
                                   _vm._s(_vm.biography) +
                                   "\n                        "
                               )
                             ]
-                          )
-                        ]
-                      : _vm._e(),
+                          : [
+                              _c("span", { staticClass: "empty-state-msg" }, [
+                                _vm._v(
+                                  "There is currently no overview information to display."
+                                )
+                              ])
+                            ]
+                      ],
+                      2
+                    ),
                     _vm._v(" "),
                     _vm.badges.length
                       ? [
@@ -29332,6 +29355,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: 'ProfileClasses',
@@ -29343,6 +29371,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             selected_term: $("meta[name=current-term-id]").attr('content'),
             classes: [],
             office_hours: [],
+            teaching_interest: [],
             loading_all: true,
             loading_classes: false,
             loading_officehours: false
@@ -29367,6 +29396,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         current_term_id: function current_term_id() {
             return $("meta[name=current-term-id]").attr('content');
+        },
+        person_email: function person_email() {
+            return $("meta[name=person-email]").attr('content');
         }
     },
     methods: {
@@ -29413,6 +29445,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 }
             });
         },
+        loadTeachingInterests: function loadTeachingInterests() {
+            return axios.get('interests/academic?email=' + this.person_email, {
+                baseURL: $("meta[name=affinity-url]").attr('content'),
+                params: {
+                    email: this.person_email
+                }
+            });
+        },
         loadOfficeHours: function loadOfficeHours() {
             return axios.get('people/' + this.person_uri + '/office-hours', {
                 baseURL: this.api_url,
@@ -29437,7 +29477,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
         // make the Axios calls concurrently and wait for all of them to return
         // before applying the reactive data
-        axios.all([this.loadCurrentClasses(), this.loadOfficeHours(), this.loadPastCourses(), this.loadTerms()]).then(axios.spread(function (current_classes, office_hours, past_courses, terms) {
+        axios.all([this.loadCurrentClasses(), this.loadOfficeHours(), this.loadPastCourses(), this.loadTerms(), this.loadTeachingInterests()]).then(axios.spread(function (current_classes, office_hours, past_courses, terms, teaching_interests) {
             // apply the current classes
             var current_class_data = current_classes.data;
             _this2.classes = current_class_data;
@@ -29454,6 +29494,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var term_data = terms.data;
             _this2.terms = term_data.terms;
             _this2.current_term = term_data.current;
+
+            // apply the set of teaching interests
+            var teaching_interests_data = teaching_interests.data.interests;
+            _this2.teaching_interest = teaching_interests_data;
 
             // we have finished loading everything
             _this2.loading_all = false;
@@ -29489,6 +29533,46 @@ var render = function() {
                       "order-last order-md-first col-md-4 pt-3 pt-md-0"
                   },
                   [
+                    _c(
+                      "div",
+                      { staticClass: "mb-3 pb-3" },
+                      [
+                        _c("h6", { staticClass: "h5 mb-3" }, [
+                          _vm._v("TEACHING INTERESTS")
+                        ]),
+                        _vm._v(" "),
+                        _vm.teaching_interest.length
+                          ? [
+                              _vm._l(_vm.teaching_interest, function(interest) {
+                                return [
+                                  _c(
+                                    "span",
+                                    {
+                                      staticClass:
+                                        "badge  badge-danger badge--profile-interests py-2 px-2 my-1 mr-1"
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                                    " +
+                                          _vm._s(interest.title) +
+                                          "\n                                "
+                                      )
+                                    ]
+                                  )
+                                ]
+                              })
+                            ]
+                          : [
+                              _c("span", { staticClass: "empty-state-msg" }, [
+                                _vm._v(
+                                  "There are currently no teaching interests to display."
+                                )
+                              ])
+                            ]
+                      ],
+                      2
+                    ),
+                    _vm._v(" "),
                     _c(
                       "div",
                       { staticClass: "mb-3 pb-3" },
@@ -29634,9 +29718,7 @@ var render = function() {
                             ]
                       ],
                       2
-                    ),
-                    _vm._v(" "),
-                    _vm._m(3)
+                    )
                   ]
                 ),
                 _vm._v(" "),
@@ -29800,7 +29882,7 @@ var render = function() {
                                     [_vm._v("Classes")]
                                   ),
                                   _vm._v(" "),
-                                  _vm.classes.length ? [_vm._m(4)] : _vm._e()
+                                  _vm.classes.length ? [_vm._m(3)] : _vm._e()
                                 ],
                                 2
                               ),
@@ -29810,10 +29892,10 @@ var render = function() {
                                   "div",
                                   { staticClass: "classes-table" },
                                   [
-                                    _vm._m(5),
+                                    _vm._m(4),
                                     _vm._v(" "),
                                     _vm.loading_classes
-                                      ? [_vm._m(6)]
+                                      ? [_vm._m(5)]
                                       : _vm.classes.length
                                         ? _vm._l(_vm.classes, function(_class) {
                                             return _vm._l(
@@ -30138,7 +30220,7 @@ var render = function() {
                                                                 ]
                                                               : _vm._e(),
                                                             _vm._v(" "),
-                                                            _vm._m(7, true)
+                                                            _vm._m(6, true)
                                                           ],
                                                           2
                                                         )
@@ -30178,7 +30260,7 @@ var render = function() {
                                 )
                               ]),
                               _vm._v(" "),
-                              _vm.classes.length ? [_vm._m(8)] : _vm._e()
+                              _vm.classes.length ? [_vm._m(7)] : _vm._e()
                             ],
                             2
                           )
@@ -30209,7 +30291,7 @@ var render = function() {
                                 [_vm._v("Office Hours")]
                               ),
                               _vm._v(" "),
-                              _vm.office_hours.length ? [_vm._m(9)] : _vm._e()
+                              _vm.office_hours.length ? [_vm._m(8)] : _vm._e()
                             ],
                             2
                           ),
@@ -30219,10 +30301,10 @@ var render = function() {
                               "div",
                               { staticClass: "classes-table" },
                               [
-                                _vm._m(10),
+                                _vm._m(9),
                                 _vm._v(" "),
                                 _vm.loading_officehours
-                                  ? [_vm._m(11)]
+                                  ? [_vm._m(10)]
                                   : _vm.office_hours.length
                                     ? _vm._l(_vm.office_hours, function(
                                         _office_hour,
@@ -30429,7 +30511,7 @@ var render = function() {
                                               2
                                             ),
                                             _vm._v(" "),
-                                            _vm._m(12, true)
+                                            _vm._m(11, true)
                                           ]
                                         )
                                       })
@@ -30460,7 +30542,7 @@ var render = function() {
                             )
                           ]),
                           _vm._v(" "),
-                          _vm.office_hours.length ? [_vm._m(13)] : _vm._e()
+                          _vm.office_hours.length ? [_vm._m(12)] : _vm._e()
                         ]
                       : _vm._e()
                   ],
@@ -30511,32 +30593,6 @@ var staticRenderFns = [
         _vm._v(" Show Fewer Courses ")
       ]
     )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "mb-3 pb-3" }, [
-      _c("h6", { staticClass: "h5 mb-3" }, [_vm._v("TEACHING INTERESTS")]),
-      _vm._v(" "),
-      _c(
-        "span",
-        {
-          staticClass:
-            "badge  badge-danger badge--profile-interests py-2 px-2 my-1 mr-1"
-        },
-        [_vm._v("\n                            Foo\n                        ")]
-      ),
-      _vm._v(" "),
-      _c(
-        "span",
-        {
-          staticClass:
-            "badge  badge-danger badge--profile-interests py-2 px-2 my-1 mr-1"
-        },
-        [_vm._v("\n                            Bar\n                        ")]
-      )
-    ])
   },
   function() {
     var _vm = this
@@ -30781,6 +30837,9 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
 //
 //
 //
@@ -31387,6 +31446,48 @@ var render = function() {
                   [
                     _c(
                       "div",
+                      { staticClass: "d-none d-md-block mb-3 pb-3" },
+                      [
+                        _c("h6", { staticClass: "h5 mb-3" }, [
+                          _vm._v("RESEARCH INTERESTS")
+                        ]),
+                        _vm._v(" "),
+                        _vm.interests.length
+                          ? _vm._l(_vm.interests, function(_interest) {
+                              return _c(
+                                "a",
+                                {
+                                  staticClass:
+                                    "badge  badge-danger badge--profile-interests py-2 px-2 my-1 mr-1",
+                                  attrs: {
+                                    href: _vm.generateInterestSearchUrl(
+                                      _interest
+                                    ),
+                                    target: "_blank"
+                                  }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                " +
+                                      _vm._s(_interest.title) +
+                                      "\n                            "
+                                  )
+                                ]
+                              )
+                            })
+                          : [
+                              _c("span", { staticClass: "empty-state-msg" }, [
+                                _vm._v(
+                                  "There are currently no research interests to display."
+                                )
+                              ])
+                            ]
+                      ],
+                      2
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
                       {
                         staticClass: "clearfix",
                         class: {
@@ -31648,52 +31749,7 @@ var render = function() {
                             ]
                           )
                         ]
-                      : _vm._e(),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "d-none d-md-block" },
-                      [
-                        _c(
-                          "h6",
-                          {
-                            staticClass: "h5 mb-4",
-                            class: { "mt-5": _vm.projects.length }
-                          },
-                          [_vm._v("RESEARCH INTERESTS")]
-                        ),
-                        _vm._v(" "),
-                        _vm.interests.length
-                          ? _vm._l(_vm.interests, function(_interest) {
-                              return _c(
-                                "a",
-                                {
-                                  staticClass:
-                                    "badge  badge-danger badge--profile-interests py-2 px-2 my-1 mr-1",
-                                  attrs: {
-                                    href: _vm.generateInterestSearchUrl(
-                                      _interest
-                                    ),
-                                    target: "_blank"
-                                  }
-                                },
-                                [
-                                  _vm._v(
-                                    "\n                                " +
-                                      _vm._s(_interest.title) +
-                                      "\n                            "
-                                  )
-                                ]
-                              )
-                            })
-                          : [
-                              _vm._v(
-                                "\n                            There are currently no research interests to display.\n                        "
-                              )
-                            ]
-                      ],
-                      2
-                    )
+                      : _vm._e()
                   ],
                   2
                 ),
@@ -32076,9 +32132,11 @@ var render = function() {
                               )
                             })
                           : [
-                              _vm._v(
-                                "\n                            There are currently no research interests to display.\n                        "
-                              )
+                              _c("span", { staticClass: "empty-state-msg" }, [
+                                _vm._v(
+                                  "There are currently no research interests to display."
+                                )
+                              ])
                             ]
                       ],
                       2

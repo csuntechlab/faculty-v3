@@ -76,16 +76,20 @@
                             </div>
                         </template>
 
-                        <template v-if='interests.length'>
-                            <div class="mb-3 pb-3 ">
-                                <h6 class="h5 mb-3">INTERESTS</h6>
+                        
+                        <div class="mb-3 pb-3 ">
+                            <h6 class="h5 mb-3">INTERESTS</h6>
+                            <template v-if='interests.length'>
                                 <template v-for='_interest in interests'>
                                     <span class="badge badge-danger badge--profile-interests py-2 px-2 my-1 mr-1">
                                         {{ _interest.title }}
                                     </span>
                                 </template>
-                            </div>
-                        </template>
+                            </template>
+                            <template v-else>
+                                <span class="empty-state-msg">There are currently no interests to display.</span>
+                            </template>
+                        </div>
                     </div>
 
                     <div class="col-md-8 order-first order-md-last">
@@ -139,13 +143,19 @@
                             </div>
                         </template>
                         
-                        <template v-if='biography'>
-                            <h2 class="h3 d-none d-md-block text-primary">Overview</h2>
-                            <h2 class="h5 mb-3 d-block d-md-none text-uppercase">Overview</h2>
-                            <div class="mb-3 pb-3 mb-md-5 pb-md-4">
+                        
+                        <h2 class="h3 d-none d-md-block text-primary">Overview</h2>
+                        <h2 class="h5 mb-3 d-block d-md-none text-uppercase">Overview</h2>
+                    
+                        <div class="mb-3 pb-3 mb-md-5 pb-md-4">
+                            <template v-if='biography'>
                                 {{ biography }}
-                            </div>
-                        </template>
+                            </template>
+                            <template v-else>
+                                <span class="empty-state-msg">There is currently no overview information to display.</span>
+                            </template>
+                        </div>
+                        
 
                         <template v-if='badges.length'>
                             <h2 class="h3 d-none d-md-block text-primary">Badges &amp; Awards</h2>
@@ -259,7 +269,10 @@ export default {
             // apply the profile metadata
             var person_data = metadata.data;
             this.user = person_data;
-            this.contact = person_data.primary_connection.pivot;
+            if (person_data.primary_connection) {
+                this.contact = person_data.primary_connection.pivot;
+            } 
+            
             this.degrees = person_data.degrees;
             this.biography = person_data.biography;
 
