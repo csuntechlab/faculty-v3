@@ -271,11 +271,7 @@ export default {
             this.user = person_data;
             if (person_data.primary_connection) {
                 this.contact = person_data.primary_connection.pivot;
-            }
-                this.contact = person_data.primary_connection.pivot;
-            } else {
-                this.contact = null;
-            }
+            } 
             
             this.degrees = person_data.degrees;
             this.biography = person_data.biography;

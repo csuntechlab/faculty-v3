@@ -28300,8 +28300,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             _this.user = person_data;
             if (person_data.primary_connection) {
                 _this.contact = person_data.primary_connection.pivot;
-            } else {
-                _this.contact = null;
             }
 
             _this.degrees = person_data.degrees;
