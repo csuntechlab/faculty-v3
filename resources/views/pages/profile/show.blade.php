@@ -64,7 +64,17 @@
                                 </div>
                             </div>
                             <div class="col-12 order-1 order-md-2">
-                                <h1 class="profile-banner__name">{{ $user->display_name }}</h1> 
+                                <h1 class="profile-banner__name">
+                                    <span class="position-relative">
+                                        {{ $user->display_name }}
+                                        <span id="audio-play" class="profile-banner__audio-icon d-none">
+                                            <i class="fas fa-volume-up"></i>
+                                        </span>
+                                    </span>
+                                </h1> 
+
+                                <audio id="audio" class="d-none" src="https://us-nc-recordings.s3.amazonaws.com/recording_a572e053fbc35b441364d57f666764b3.mp3?digest=8aa497d0ea81a6b3c77ae654b1c524e6?source=true">
+                                </audio>
                             </div>
                             @if($user->primary_connection_line)
                                 <div class="col-12 order-3">
@@ -109,7 +119,12 @@
 $(function() {
     var mediaWsUrl = $("meta[name=media-url]").attr('content');
     var profileImgUri = $("meta[name=person-uri]").attr('content') +
-        '/avatar?source=true ';
+        '/avatar?source=true';
+    var profileAudioUri = $("meta[name=person-uri]").attr('content') +
+        '/audio';
+    var audioElem = document.querySelector("#audio");
+    var audioPlayButton = document.querySelector("#audio-play");
+
     axios.get(
         profileImgUri,
         {
@@ -120,6 +135,53 @@ $(function() {
     }).catch(function(error) {
         console.error(error);
     });
+
+    //hit media webservice and retrieve raw audio file
+    axios.get(
+        profileAudioUri,
+        {
+            baseURL: mediaWsUrl + 'faculty/media'
+        }
+    ).then(function(response) {
+        //check to make sure the audio file exists
+        if( response.data.audio_recording !== undefined && response.data.audio_recording !== null) {
+            //set the <audio> element src attribute to the audio file we just retrieved from media
+            $("#audio").attr('src',response.data.audio_recording + "?source=true")
+
+            //make the play icon visible and add event listener
+            audioPlayButton.classList.remove("d-none");
+            audioPlayButton.addEventListener("click", handlePlayButton, false);
+            
+            // the rest of this code uses the HTMLMediaElement API to handle playing, pausing, and ending the video
+            function handlePlayButton() {
+                if (audioElem.paused) {
+                    playAudio();
+                } else {
+                    audioElem.pause();
+                }
+            }
+            async function playAudio() {
+                try {
+                    await audioElem.play();
+                    audioPlayButton.classList.add("playing");
+                } catch(err) {
+                    audioPlayButton.classList.remove("playing");
+                }
+            }
+            function handlePausedOrEndedAudio() {
+                audioPlayButton.classList.remove("playing");
+            }
+            audioElem.addEventListener('ended', () => {
+                handlePausedOrEndedAudio();
+            });
+            audioElem.addEventListener('pause', () => {
+                handlePausedOrEndedAudio();
+            });
+        }
+    }).catch(function(error) {
+        console.error(error);
+    });
+
 });
 </script>
 {{-- Waldo map scripts --}}

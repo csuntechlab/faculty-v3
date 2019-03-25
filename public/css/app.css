@@ -11096,6 +11096,10 @@ body {
   }
 }
 
+.profile-banner__department a:hover {
+  color: #d22030;
+}
+
 .profile-banner__name {
   color: #fff;
   margin: .8rem 0 0 0;
@@ -11138,6 +11142,34 @@ body {
     font-size: 1.7rem;
     margin-top: 0;
   }
+}
+
+.profile-banner__audio-icon {
+  cursor: pointer;
+  font-size: 3rem;
+  padding: .5rem 1rem;
+  position: absolute;
+  top: -1rem;
+  right: -4rem;
+  color: #FF635E;
+  -webkit-transition: color .2s linear;
+  transition: color .2s linear;
+}
+
+@media (max-width: 767.98px) {
+  .profile-banner__audio-icon {
+    font-size: 2.5rem;
+    top: -0.5rem;
+    right: -3.5rem;
+  }
+}
+
+.profile-banner__audio-icon:hover {
+  color: #d22030;
+}
+
+.profile-banner__audio-icon.playing {
+  color: #d22030;
 }
 
 .profile-banner__icons {
