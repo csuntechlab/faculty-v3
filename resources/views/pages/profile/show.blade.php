@@ -73,7 +73,7 @@
                                     </span>
                                 </h1> 
 
-                                <audio id="audio" class="d-none" src="https://us-nc-recordings.s3.amazonaws.com/recording_a572e053fbc35b441364d57f666764b3.mp3?digest=8aa497d0ea81a6b3c77ae654b1c524e6?source=true">
+                                <audio id="audio" class="d-none">
                                 </audio>
                             </div>
                             @if($user->primary_connection_line)
