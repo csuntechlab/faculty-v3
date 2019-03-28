@@ -31037,6 +31037,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: 'ProfileProjects',
@@ -31942,144 +31944,151 @@ var render = function() {
                                 ) {
                                   return _c(
                                     "div",
-                                    { staticClass: "profileProject" },
+                                    {
+                                      staticClass:
+                                        "profileProject card card--styled d-block mb-3"
+                                    },
                                     [
-                                      _c(
-                                        "a",
-                                        {
-                                          staticClass: "profileProject__title",
-                                          attrs: {
-                                            href: _vm.generateProjectUrl(
-                                              project
-                                            ),
-                                            target: "_blank"
-                                          }
-                                        },
-                                        [
-                                          _vm._v(
-                                            "\n                                    " +
-                                              _vm._s(project.project_title) +
-                                              "\n                                "
-                                          )
-                                        ]
-                                      ),
-                                      _vm._v(" "),
-                                      project.attributes
-                                        ? _c(
-                                            "div",
-                                            {
-                                              staticClass:
-                                                "profileProject__type"
-                                            },
-                                            [
-                                              project.attributes.purpose_name ==
-                                              "creative"
-                                                ? _c("span", [
-                                                    _vm._v("Creative Work")
-                                                  ])
-                                                : _c("span", [
-                                                    _vm._v(
-                                                      _vm._s(
-                                                        _vm.uppercaseFirstLetter(
-                                                          project.attributes
-                                                            .purpose_name
-                                                        )
-                                                      )
-                                                    )
-                                                  ])
-                                            ]
-                                          )
-                                        : _vm._e(),
-                                      _vm._v(" "),
-                                      project.award.length
-                                        ? _c(
-                                            "div",
-                                            {
-                                              staticClass:
-                                                "profileProject__item"
-                                            },
-                                            [
-                                              _vm._l(
-                                                project.award_sponsors,
-                                                function(award_sponsor) {
-                                                  return [
-                                                    _c("p", [
-                                                      _c("strong", [
-                                                        _vm._v(
-                                                          _vm._s(
-                                                            award_sponsor.sponsor
-                                                          ) + ":"
-                                                        )
-                                                      ]),
+                                      _c("div", { staticClass: "card-body" }, [
+                                        _c(
+                                          "a",
+                                          {
+                                            staticClass:
+                                              "profileProject__title",
+                                            attrs: {
+                                              href: _vm.generateProjectUrl(
+                                                project
+                                              ),
+                                              target: "_blank"
+                                            }
+                                          },
+                                          [
+                                            _vm._v(
+                                              "\n                                        " +
+                                                _vm._s(project.project_title) +
+                                                "\n                                    "
+                                            )
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        project.attributes
+                                          ? _c(
+                                              "div",
+                                              {
+                                                staticClass:
+                                                  "profileProject__type"
+                                              },
+                                              [
+                                                project.attributes
+                                                  .purpose_name == "creative"
+                                                  ? _c("span", [
+                                                      _vm._v("Creative Work")
+                                                    ])
+                                                  : _c("span", [
                                                       _vm._v(
-                                                        " " +
-                                                          _vm._s(
-                                                            new Intl.NumberFormat(
-                                                              "en-US",
-                                                              {
-                                                                style:
-                                                                  "currency",
-                                                                currency: "USD"
-                                                              }
-                                                            ).format(
-                                                              award_sponsor.total
-                                                            )
+                                                        _vm._s(
+                                                          _vm.uppercaseFirstLetter(
+                                                            project.attributes
+                                                              .purpose_name
                                                           )
+                                                        )
                                                       )
                                                     ])
-                                                  ]
-                                                }
-                                              )
-                                            ],
-                                            2
-                                          )
-                                        : _vm._e(),
-                                      _vm._v(" "),
-                                      project.pi
-                                        ? _c(
-                                            "div",
-                                            {
-                                              staticClass:
-                                                "profileProject__item"
-                                            },
-                                            [
-                                              _c("strong", [
-                                                _vm._v(
-                                                  "Lead Principal Investigator:"
+                                              ]
+                                            )
+                                          : _vm._e(),
+                                        _vm._v(" "),
+                                        project.award.length
+                                          ? _c(
+                                              "div",
+                                              {
+                                                staticClass:
+                                                  "profileProject__item"
+                                              },
+                                              [
+                                                _vm._l(
+                                                  project.award_sponsors,
+                                                  function(award_sponsor) {
+                                                    return [
+                                                      _c("p", [
+                                                        _c("strong", [
+                                                          _vm._v(
+                                                            _vm._s(
+                                                              award_sponsor.sponsor
+                                                            ) + ":"
+                                                          )
+                                                        ]),
+                                                        _vm._v(
+                                                          " " +
+                                                            _vm._s(
+                                                              new Intl.NumberFormat(
+                                                                "en-US",
+                                                                {
+                                                                  style:
+                                                                    "currency",
+                                                                  currency:
+                                                                    "USD"
+                                                                }
+                                                              ).format(
+                                                                award_sponsor.total
+                                                              )
+                                                            )
+                                                        )
+                                                      ])
+                                                    ]
+                                                  }
                                                 )
-                                              ]),
-                                              _vm._v(
-                                                " " +
-                                                  _vm._s(
-                                                    project.pi.display_name
-                                                  ) +
-                                                  "\n                                "
-                                              )
-                                            ]
-                                          )
-                                        : _vm._e(),
-                                      _vm._v(" "),
-                                      project.members.length
-                                        ? _c(
-                                            "div",
-                                            {
-                                              staticClass:
-                                                "profileProject__item"
-                                            },
-                                            [
-                                              _c("strong", [_vm._v("Team:")]),
-                                              _vm._v(
-                                                " " +
-                                                  _vm._s(
-                                                    _vm.renderProjectTeamList(
-                                                      project
-                                                    )
-                                                  ) +
-                                                  "\n                                "
-                                              )
-                                            ]
-                                          )
-                                        : _vm._e()
+                                              ],
+                                              2
+                                            )
+                                          : _vm._e(),
+                                        _vm._v(" "),
+                                        project.pi
+                                          ? _c(
+                                              "div",
+                                              {
+                                                staticClass:
+                                                  "profileProject__item"
+                                              },
+                                              [
+                                                _c("strong", [
+                                                  _vm._v(
+                                                    "Lead Principal Investigator:"
+                                                  )
+                                                ]),
+                                                _vm._v(
+                                                  " " +
+                                                    _vm._s(
+                                                      project.pi.display_name
+                                                    ) +
+                                                    "\n                                    "
+                                                )
+                                              ]
+                                            )
+                                          : _vm._e(),
+                                        _vm._v(" "),
+                                        project.members.length
+                                          ? _c(
+                                              "div",
+                                              {
+                                                staticClass:
+                                                  "profileProject__item"
+                                              },
+                                              [
+                                                _c("strong", [_vm._v("Team:")]),
+                                                _vm._v(
+                                                  " " +
+                                                    _vm._s(
+                                                      _vm.renderProjectTeamList(
+                                                        project
+                                                      )
+                                                    ) +
+                                                    "\n                                    "
+                                                )
+                                              ]
+                                            )
+                                          : _vm._e()
+                                      ])
                                     ]
                                   )
                                 })
@@ -32354,6 +32363,64 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: 'ProfileCitations',
@@ -32402,9 +32469,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }).then(function (response) {
             if (response.data.citations != null) {
                 vm.citations = response.data.citations;
-            } else {
-                vm.citations = [];
             }
+
             vm.loading_all = false;
         });
     },
@@ -32415,9 +32481,26 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     computed: {
         person_email: function person_email() {
             return $("meta[name=person-email]").attr('content');
+        },
+        orderedCitations: function orderedCitations() {
+            return _.orderBy(this.citations, 'published.date', 'desc');
         }
     },
     methods: {
+        returnCitationYear: function returnCitationYear(date) {
+            var year = date;
+            if (date.length > 4) {
+                year = moment(date).format('YYYY');
+            }
+            return year;
+        },
+        returnCitationDate: function returnCitationDate(date) {
+            var finalDate = date;
+            if (date.length > 4) {
+                finalDate = moment(date).format('MMMM Do YYYY');
+            }
+            return finalDate;
+        },
         filterCheckboxWasClicked: function filterCheckboxWasClicked(event) {
             var correspondingBadge = document.getElementById(event.target.id.replace(/role/i, 'badge'));
 
@@ -32458,8 +32541,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 var itemType = item.getAttribute('data-type');
                 if (itemType == singularSelectedFilter) {
                     item.classList.remove("is-filtered");
-
-                    // vm.filteredCitations.splice(item);
 
                     for (var i = vm.filteredCitations.length - 1; i >= 0; i--) {
                         if (vm.filteredCitations[i] === item) {
@@ -32795,63 +32876,355 @@ var render = function() {
                         ]
                       : _vm._e(),
                     _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "profileCitationWrapper" },
-                      [
-                        _vm.citations.length
-                          ? _vm._l(_vm.citations, function(citation) {
+                    _vm.citations.length
+                      ? [
+                          _c(
+                            "div",
+                            { staticClass: "profileCitationWrapper" },
+                            _vm._l(_vm.orderedCitations, function(
+                              citation,
+                              index
+                            ) {
                               return _c(
                                 "div",
                                 {
-                                  staticClass: "profileProject profileCitation",
-                                  attrs: { "data-type": citation.type }
+                                  staticClass:
+                                    "profileCitation card card--styled d-block mb-3",
+                                  attrs: {
+                                    "data-type": citation.type,
+                                    id: "profileCitation--" + index
+                                  }
                                 },
                                 [
-                                  citation.formatted != ""
-                                    ? [
-                                        _c("span", {
-                                          domProps: {
-                                            innerHTML: _vm._s(
-                                              citation.formatted
-                                            )
-                                          }
-                                        })
-                                      ]
-                                    : [
-                                        _c("span", {
-                                          domProps: {
-                                            innerHTML: _vm._s(
-                                              citation.metadata.title
-                                            )
-                                          }
-                                        })
-                                      ]
-                                ],
-                                2
+                                  _c(
+                                    "div",
+                                    {
+                                      staticClass: "card-header bg-white",
+                                      attrs: {
+                                        id: "heading--" + index,
+                                        "data-toggle": "collapse",
+                                        "data-target": "#collapse--" + index,
+                                        "aria-expanded": "false",
+                                        "aria-controls": "#collapse--" + index
+                                      }
+                                    },
+                                    [
+                                      _c(
+                                        "div",
+                                        {
+                                          staticClass:
+                                            "profileCitation__citation"
+                                        },
+                                        [
+                                          citation.formatted != ""
+                                            ? [
+                                                _c("span", {
+                                                  domProps: {
+                                                    innerHTML: _vm._s(
+                                                      citation.formatted
+                                                    )
+                                                  }
+                                                })
+                                              ]
+                                            : [
+                                                _c("span", {
+                                                  domProps: {
+                                                    innerHTML: _vm._s(
+                                                      citation.metadata.title
+                                                    )
+                                                  }
+                                                })
+                                              ]
+                                        ],
+                                        2
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "div",
+                                        {
+                                          staticClass:
+                                            "d-flex justify-content-center justify-content-sm-end align-items-center flex-wrap"
+                                        },
+                                        [
+                                          citation.published.date
+                                            ? _c(
+                                                "div",
+                                                {
+                                                  staticClass:
+                                                    "text-wrap pr-5 py-2"
+                                                },
+                                                [
+                                                  _c("strong", [
+                                                    _vm._v("Year: ")
+                                                  ]),
+                                                  _vm._v(
+                                                    "\n                                            " +
+                                                      _vm._s(
+                                                        _vm.returnCitationYear(
+                                                          citation.published
+                                                            .date
+                                                        )
+                                                      ) +
+                                                      "\n                                        "
+                                                  )
+                                                ]
+                                              )
+                                            : _vm._e(),
+                                          _vm._v(" "),
+                                          citation.type
+                                            ? _c(
+                                                "div",
+                                                {
+                                                  staticClass:
+                                                    "text-wrap pr-5 py-2"
+                                                },
+                                                [
+                                                  _c("strong", [
+                                                    _vm._v("Type: ")
+                                                  ]),
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "span",
+                                                    {
+                                                      staticClass:
+                                                        "text-capitalize"
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        _vm._s(citation.type)
+                                                      )
+                                                    ]
+                                                  )
+                                                ]
+                                              )
+                                            : _vm._e(),
+                                          _vm._v(" "),
+                                          _vm._m(2, true)
+                                        ]
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "div",
+                                    {
+                                      staticClass: "collapse",
+                                      attrs: {
+                                        id: "collapse--" + index,
+                                        "aria-labelledby": "heading--" + index
+                                      }
+                                    },
+                                    [
+                                      _c(
+                                        "div",
+                                        { staticClass: "card-body" },
+                                        [
+                                          citation.metadata.title
+                                            ? _c(
+                                                "div",
+                                                { staticClass: "mt-4 mb-3" },
+                                                [
+                                                  _c(
+                                                    "div",
+                                                    {
+                                                      staticClass:
+                                                        "font-weight-bold"
+                                                    },
+                                                    [_vm._v("Title:")]
+                                                  ),
+                                                  _vm._v(" "),
+                                                  _c("span", [
+                                                    _vm._v(
+                                                      _vm._s(
+                                                        citation.metadata.title
+                                                      )
+                                                    )
+                                                  ])
+                                                ]
+                                              )
+                                            : _vm._e(),
+                                          _vm._v(" "),
+                                          citation.membership.members.length > 1
+                                            ? _c(
+                                                "div",
+                                                { staticClass: "mt-4 mb-3" },
+                                                [
+                                                  _c(
+                                                    "div",
+                                                    {
+                                                      staticClass:
+                                                        "font-weight-bold"
+                                                    },
+                                                    [_vm._v("Collaborators:")]
+                                                  ),
+                                                  _vm._v(" "),
+                                                  _vm._l(
+                                                    citation.membership.members,
+                                                    function(member, index) {
+                                                      return [
+                                                        _c(
+                                                          "span",
+                                                          [
+                                                            _vm._v(
+                                                              "\n                                                    " +
+                                                                _vm._s(
+                                                                  member.display_name
+                                                                )
+                                                            ),
+                                                            index !==
+                                                            citation.membership
+                                                              .members.length -
+                                                              1
+                                                              ? [_vm._v(",")]
+                                                              : _vm._e()
+                                                          ],
+                                                          2
+                                                        )
+                                                      ]
+                                                    }
+                                                  )
+                                                ],
+                                                2
+                                              )
+                                            : _vm._e(),
+                                          _vm._v(" "),
+                                          citation.published.date
+                                            ? _c(
+                                                "div",
+                                                { staticClass: "mt-4 mb-3" },
+                                                [
+                                                  _c(
+                                                    "div",
+                                                    {
+                                                      staticClass:
+                                                        "font-weight-bold"
+                                                    },
+                                                    [_vm._v("Date: ")]
+                                                  ),
+                                                  _vm._v(
+                                                    "\n                                            " +
+                                                      _vm._s(
+                                                        _vm.returnCitationDate(
+                                                          citation.published
+                                                            .date
+                                                        )
+                                                      ) +
+                                                      "\n                                        "
+                                                  )
+                                                ]
+                                              )
+                                            : _vm._e(),
+                                          _vm._v(" "),
+                                          citation.metadata.journal
+                                            ? _c(
+                                                "div",
+                                                { staticClass: "mt-4 mb-3" },
+                                                [
+                                                  _c(
+                                                    "div",
+                                                    {
+                                                      staticClass:
+                                                        "font-weight-bold"
+                                                    },
+                                                    [_vm._v("Journal:")]
+                                                  ),
+                                                  _vm._v(" "),
+                                                  _c("span", [
+                                                    _vm._v(
+                                                      _vm._s(
+                                                        citation.metadata
+                                                          .journal
+                                                      )
+                                                    )
+                                                  ])
+                                                ]
+                                              )
+                                            : _vm._e(),
+                                          _vm._v(" "),
+                                          citation.publisher
+                                            ? [
+                                                citation.publisher.publisher
+                                                  ? _c(
+                                                      "div",
+                                                      {
+                                                        staticClass: "mt-4 mb-3"
+                                                      },
+                                                      [
+                                                        _c(
+                                                          "div",
+                                                          {
+                                                            staticClass:
+                                                              "font-weight-bold"
+                                                          },
+                                                          [_vm._v("Publisher:")]
+                                                        ),
+                                                        _vm._v(" "),
+                                                        _c("span", [
+                                                          _vm._v(
+                                                            _vm._s(
+                                                              citation.publisher
+                                                                .publisher
+                                                            )
+                                                          )
+                                                        ])
+                                                      ]
+                                                    )
+                                                  : _vm._e()
+                                              ]
+                                            : _vm._e(),
+                                          _vm._v(" "),
+                                          citation.metadata.abstract
+                                            ? _c(
+                                                "div",
+                                                { staticClass: "mt-4 mb-3" },
+                                                [
+                                                  _c(
+                                                    "div",
+                                                    {
+                                                      staticClass:
+                                                        "font-weight-bold"
+                                                    },
+                                                    [_vm._v("Abstract:")]
+                                                  ),
+                                                  _vm._v(" "),
+                                                  _c("span", [
+                                                    _vm._v(
+                                                      _vm._s(
+                                                        citation.metadata
+                                                          .abstract
+                                                      )
+                                                    )
+                                                  ])
+                                                ]
+                                              )
+                                            : _vm._e()
+                                        ],
+                                        2
+                                      )
+                                    ]
+                                  )
+                                ]
                               )
                             })
-                          : [
-                              _c("div", { staticClass: "mb-2" }, [
-                                _vm._v(
-                                  "There are currently no citations to display."
-                                )
-                              ])
-                            ],
-                        _vm._v(" "),
-                        _vm.aFilterHasBeenApplied &&
-                        !_vm.filteredCitations.length
-                          ? [
-                              _c("div", { staticClass: "mb-2" }, [
-                                _vm._v(
-                                  "There are currently no citations that match your selected filters."
-                                )
-                              ])
-                            ]
-                          : _vm._e()
-                      ],
-                      2
-                    )
+                          )
+                        ]
+                      : [
+                          _c("div", { staticClass: "mb-2" }, [
+                            _vm._v(
+                              "There are currently no citations to display."
+                            )
+                          ])
+                        ],
+                    _vm._v(" "),
+                    _vm.aFilterHasBeenApplied && !_vm.filteredCitations.length
+                      ? [
+                          _c("div", { staticClass: "mb-2" }, [
+                            _vm._v(
+                              "There are currently no citations that match your selected filters."
+                            )
+                          ])
+                        ]
+                      : _vm._e()
                   ],
                   2
                 )
@@ -32880,6 +33253,23 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("li", [_c("strong", [_vm._v("Citation Type")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", [
+      _c(
+        "div",
+        { staticClass: "btn btn-outline-dark btn-sm btn-rounded mt-3 mt-sm-0" },
+        [
+          _c("span", { staticClass: "is--collapsed" }, [_vm._v("Show")]),
+          _c("span", { staticClass: "is--expanded" }, [_vm._v("Hide")]),
+          _vm._v(" Details "),
+          _c("i", { staticClass: "fas fa-chevron-down" })
+        ]
+      )
+    ])
   }
 ]
 render._withStripped = true

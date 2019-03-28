@@ -10811,6 +10811,24 @@ body {
   color: #6c757d;
 }
 
+.profileCitationWrapper .profileCitation,
+.card--styled {
+  background: white;
+  border: 1px solid #dee2e6;
+  -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.16);
+          box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.16);
+  border-radius: 0;
+}
+
+.profileCitationWrapper .profileCitation .card-body,
+.profileCitationWrapper .profileCitation .card-header,
+.profileCitationWrapper .profileCitation .card-footer,
+.card--styled .card-body,
+.card--styled .card-header,
+.card--styled .card-footer {
+  padding: 1.5rem 3rem;
+}
+
 .past-courses-list {
   margin-bottom: 0;
 }
@@ -11196,15 +11214,6 @@ body {
   }
 }
 
-.profileProject {
-  background: white;
-  border: 1px solid #dee2e6;
-  -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.16);
-          box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.16);
-  padding: 1.5rem 3rem;
-  margin-bottom: 1rem;
-}
-
 .profileProject__title,
 .profileProject a.profileProject__title {
   display: block;
@@ -11279,6 +11288,42 @@ body {
 }
 
 .profileCitationWrapper--filters-applied .profileCitation:not(.is-filtered) {
+  display: none !important;
+}
+
+.profileCitationWrapper .profileCitation__citation {
+  padding-bottom: .5rem;
+  margin-bottom: .5rem;
+}
+
+@media (max-width: 767.98px) {
+  .profileCitationWrapper .profileCitation .card-header {
+    text-align: center;
+  }
+}
+
+.profileCitationWrapper .profileCitation .card-header .btn {
+  width: 13rem;
+}
+
+.profileCitationWrapper .profileCitation .card-header[aria-expanded="true"] .btn svg {
+  -webkit-transform: rotate(180deg);
+          transform: rotate(180deg);
+}
+
+.profileCitationWrapper .profileCitation .card-header[aria-expanded="true"] .btn .is--collapsed {
+  display: none;
+}
+
+.profileCitationWrapper .profileCitation .card-header[aria-expanded="true"] .btn .is--expanded {
+  display: inline;
+}
+
+.profileCitationWrapper .profileCitation .card-header[aria-expanded="false"] .btn .is--collapsed {
+  display: inline;
+}
+
+.profileCitationWrapper .profileCitation .card-header[aria-expanded="false"] .btn .is--expanded {
   display: none;
 }
 
