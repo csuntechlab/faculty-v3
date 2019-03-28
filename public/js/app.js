@@ -28827,7 +28827,10 @@ var render = function() {
                     _vm._v(" "),
                     _c(
                       "div",
-                      { staticClass: "mb-3 pb-3 mb-md-5 pb-md-4" },
+                      {
+                        staticClass:
+                          "mb-3 pb-3 mb-md-5 pb-md-4 white-space-pre-line"
+                      },
                       [
                         _vm.biography
                           ? [
