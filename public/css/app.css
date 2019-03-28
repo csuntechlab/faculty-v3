@@ -10811,7 +10811,6 @@ body {
   color: #6c757d;
 }
 
-.profileCitationWrapper .profileCitation,
 .card--styled {
   background: white;
   border: 1px solid #dee2e6;
@@ -10820,9 +10819,6 @@ body {
   border-radius: 0;
 }
 
-.profileCitationWrapper .profileCitation .card-body,
-.profileCitationWrapper .profileCitation .card-header,
-.profileCitationWrapper .profileCitation .card-footer,
 .card--styled .card-body,
 .card--styled .card-header,
 .card--styled .card-footer {

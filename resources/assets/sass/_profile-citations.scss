@@ -6,8 +6,6 @@
     }
 
     .profileCitation {
-        @extend %card--styled;
-
         &__citation {
             // border-bottom: 1px solid $light-gray;
             padding-bottom: .5rem;
