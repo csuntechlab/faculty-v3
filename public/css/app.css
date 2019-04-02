@@ -10811,6 +10811,10 @@ body {
   color: #6c757d;
 }
 
+.white-space-pre-line {
+  white-space: pre-line;
+}
+
 .past-courses-list {
   margin-bottom: 0;
 }
