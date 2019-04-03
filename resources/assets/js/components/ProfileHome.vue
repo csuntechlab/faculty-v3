@@ -147,7 +147,7 @@
                         <h2 class="h3 d-none d-md-block text-primary">Overview</h2>
                         <h2 class="h5 mb-3 d-block d-md-none text-uppercase">Overview</h2>
                     
-                        <div class="mb-3 pb-3 mb-md-5 pb-md-4">
+                        <div class="mb-3 pb-3 mb-md-5 pb-md-4 white-space-pre-line">
                             <template v-if='biography'>
                                 {{ biography }}
                             </template>
