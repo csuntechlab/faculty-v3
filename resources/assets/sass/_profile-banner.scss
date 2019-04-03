@@ -53,6 +53,11 @@
             position: relative;
             z-index: 2;
         }
+
+        
+        a:hover {
+            color: $primary;
+        }
     }
 
     &__name {  
@@ -92,6 +97,31 @@
             text-align: center;
             font-size: 1.7rem;
             margin-top: 0;
+        }
+    }
+
+    &__audio-icon {
+        cursor: pointer;
+        font-size: 3rem;
+        position: absolute;
+        top: .2rem;
+        right: -5rem;
+        color: $peach-red;
+        transition: color .2s linear;
+        padding: .5rem 1rem;
+
+        @include media-breakpoint-down(sm){
+            font-size: 2.5rem;
+            right: -4.5rem;
+            top: -0.1rem;
+        }
+
+        &:hover {
+            color: $primary;
+        }
+
+        &.playing {
+            color: $primary;
         }
     }
 
