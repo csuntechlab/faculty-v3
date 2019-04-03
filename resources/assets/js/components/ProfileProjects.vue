@@ -425,7 +425,7 @@ export default {
             return axios.get(
                 'members/projects',
                 {
-                    baseURL: $('meta[name=projects-url').attr('content'),
+                    baseURL: $('meta[name=projects-url]').attr('content'),
                     params: {
                         email: this.person_email
                     }
