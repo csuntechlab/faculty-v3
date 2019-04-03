@@ -1,7 +1,49 @@
 .profileCitationWrapper {
     &--filters-applied {
         .profileCitation:not(.is-filtered) {
-            display: none;
+            display: none !important;
+        }
+    }
+
+    .profileCitation {
+        &__citation {
+            // border-bottom: 1px solid $light-gray;
+            padding-bottom: .5rem;
+            margin-bottom: .5rem;
+        }
+        
+        .card-header {
+
+            @include media-breakpoint-down(sm){
+                text-align: center;
+            }
+
+            .btn { 
+                width: 13rem;
+            }
+            &[aria-expanded="true"] {
+                .btn {
+                    svg {
+                        transform: rotate(180deg);
+                    }
+                    .is--collapsed {
+                        display: none;
+                    }
+                    .is--expanded {
+                        display: inline;
+                    }
+                }
+            }
+            &[aria-expanded="false"] {
+                .btn {
+                    .is--collapsed {
+                        display: inline;
+                    }
+                    .is--expanded {
+                        display: none;
+                    }
+                }
+            }
         }
     }
 }
