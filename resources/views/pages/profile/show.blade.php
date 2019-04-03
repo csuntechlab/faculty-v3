@@ -65,7 +65,7 @@
                             </div>
                             <div class="col-12 order-1 order-md-2">
                                 <h1 class="profile-banner__name">
-                                    <span class="position-relative">
+                                    <span class="position-relative d-inline-block">
                                         {{ $user->display_name }}
                                         <span id="audio-play" class="profile-banner__audio-icon d-none">
                                             <i class="fas fa-volume-up"></i>

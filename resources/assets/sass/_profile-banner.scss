@@ -103,17 +103,17 @@
     &__audio-icon {
         cursor: pointer;
         font-size: 3rem;
-        padding: .5rem 1rem;
         position: absolute;
-        top: -1rem;
-        right: -4rem;
+        top: .2rem;
+        right: -5rem;
         color: $peach-red;
         transition: color .2s linear;
+        padding: .5rem 1rem;
 
         @include media-breakpoint-down(sm){
             font-size: 2.5rem;
-            top: -0.5rem;
-            right: -3.5rem;
+            right: -4.5rem;
+            top: -0.1rem;
         }
 
         &:hover {

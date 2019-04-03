@@ -11147,20 +11147,20 @@ body {
 .profile-banner__audio-icon {
   cursor: pointer;
   font-size: 3rem;
-  padding: .5rem 1rem;
   position: absolute;
-  top: -1rem;
-  right: -4rem;
+  top: .2rem;
+  right: -5rem;
   color: #FF635E;
   -webkit-transition: color .2s linear;
   transition: color .2s linear;
+  padding: .5rem 1rem;
 }
 
 @media (max-width: 767.98px) {
   .profile-banner__audio-icon {
     font-size: 2.5rem;
-    top: -0.5rem;
-    right: -3.5rem;
+    right: -4.5rem;
+    top: -0.1rem;
   }
 }
 
