@@ -151,24 +151,26 @@
                             <template v-if="displayedProjects.length">
                                 <div class="mb-2">Showing <strong>{{ displayedProjects.length }}</strong> of <strong>{{ projects.length }}</strong> project(s)</div>
 
-                                <div v-for="project in displayedProjects" class="profileProject">
-                                    <a class="profileProject__title" :href="generateProjectUrl(project)" target="_blank">
-                                        {{ project.project_title }}
-                                    </a>
-                                    <div v-if="project.attributes" class="profileProject__type">
-                                        <span v-if="project.attributes.purpose_name == 'creative'">Creative Work</span>
-                                        <span v-else>{{ uppercaseFirstLetter(project.attributes.purpose_name) }}</span>
-                                    </div>
-                                    <div v-if="project.award.length" class="profileProject__item">
-                                        <template v-for="award_sponsor in project.award_sponsors">
-                                            <p><strong>{{ award_sponsor.sponsor }}:</strong> {{ new Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD'}).format(award_sponsor.total) }}</p>
-                                        </template>
-                                    </div>
-                                    <div v-if="project.pi" class="profileProject__item">
-                                        <strong>Lead Principal Investigator:</strong> {{ project.pi.display_name }}
-                                    </div>
-                                    <div v-if="project.members.length" class="profileProject__item">
-                                        <strong>Team:</strong> {{ renderProjectTeamList(project) }}
+                                <div v-for="project in displayedProjects" class="profileProject card card--styled d-block mb-3">
+                                    <div class="card-body">
+                                        <a class="profileProject__title" :href="generateProjectUrl(project)" target="_blank">
+                                            {{ project.project_title }}
+                                        </a>
+                                        <div v-if="project.attributes" class="profileProject__type">
+                                            <span v-if="project.attributes.purpose_name == 'creative'">Creative Work</span>
+                                            <span v-else>{{ uppercaseFirstLetter(project.attributes.purpose_name) }}</span>
+                                        </div>
+                                        <div v-if="project.award.length" class="profileProject__item">
+                                            <template v-for="award_sponsor in project.award_sponsors">
+                                                <p><strong>{{ award_sponsor.sponsor }}:</strong> {{ new Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD'}).format(award_sponsor.total) }}</p>
+                                            </template>
+                                        </div>
+                                        <div v-if="project.pi" class="profileProject__item">
+                                            <strong>Lead Principal Investigator:</strong> {{ project.pi.display_name }}
+                                        </div>
+                                        <div v-if="project.members.length" class="profileProject__item">
+                                            <strong>Team:</strong> {{ renderProjectTeamList(project) }}
+                                        </div>
                                     </div>
                                 </div>
                             </template>
@@ -423,7 +425,7 @@ export default {
             return axios.get(
                 'members/projects',
                 {
-                    baseURL: $('meta[name=projects-url').attr('content'),
+                    baseURL: $('meta[name=projects-url]').attr('content'),
                     params: {
                         email: this.person_email
                     }
