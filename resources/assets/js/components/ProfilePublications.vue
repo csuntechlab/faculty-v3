@@ -81,7 +81,7 @@
                         
                         <template v-if="publications.length">
                             <div class="profilePublicationWrapper">
-                                <div v-for="(publication, index) in orderedPublications" class="profilePublication card card--styled d-block mb-3" :data-type="publication.type" :id="'profilePublication--'+index">
+                                <div v-for="(publication, index) in orderedPublications" class="profilePublication card card--styled d-block mb-3" :data-type="convertDataTypeToOtherIfIrregular(publication.type)" :id="'profilePublication--'+index">
                                     <div class="card-header bg-white" :id="'heading--'+index" data-toggle="collapse" :data-target="'#collapse--'+index" aria-expanded="false" :aria-controls="'#collapse--'+index">
                                         <div class="profilePublication__publication">
                                             <template v-if="publication.formatted != ''">
@@ -92,11 +92,6 @@
                                             </template>
                                         </div>
                                         <div class="d-flex justify-content-center justify-content-sm-end align-items-center flex-wrap">
-                                            <div class="text-wrap pr-5 py-2" v-if="publication.published.date">
-                                                <strong>Year: </strong>
-                                                {{ returnPublicationYear(publication.published.date) }}
-                                            </div>
-
                                             <div class="text-wrap pr-5 py-2" v-if="publication.type">
                                                 <strong>Type: </strong>
                                                 <span class="text-capitalize">{{ publication.type }}</span>
@@ -188,8 +183,8 @@ export default {
                     singular: 'presentation' 
                 },
                 {
-                    plural: 'Thesis',
-                    singular: 'thesis' 
+                    plural: 'Other',
+                    singular: 'other' 
                 }
             ],
             selectedFilters: [],
@@ -221,6 +216,22 @@ export default {
         .then(function (response) {
             if (response.data.citations != null) {
                 vm.publications = response.data.citations;
+                
+                var publicationsWithoutThesis = vm.publications.filter(function (item) {
+                    //dont display thesis here, because we display those on the "Students" tab instead...
+                    if( item.type !== 'thesis' ) {
+                        return item;
+                    }
+
+                    //...unless this faculty member was the author of a thesis (rare)
+                    if( item.type == 'thesis' && item.membership.members[0].role == 'author' && item.membership.members[0].email === vm.person_email) {
+                        return item;
+                    } 
+
+                });
+
+
+                vm.publications = publicationsWithoutThesis;
             }
             
             vm.loading_all = false;
@@ -238,12 +249,20 @@ export default {
         }
     },
     methods: {
-        returnPublicationYear: function(date) {
-            var year = date
-            if( date.length > 4) {
-                year = moment(date).format('YYYY');
-            } 
-            return year
+        convertDataTypeToOtherIfIrregular: function(dataType) {
+            //check to see if the dataType (returned by the webservice) of each publication equals one of the standard "publication types" from the list of filters.
+            //if it does NOT match one of the standard data types, then set the dataType of the publication to equal "other"
+            var vm = this; 
+            var dataTypeIsStandard = false;
+            for (var i = 0; i < vm.typeFiltersObject.length; i++) {
+                if( dataType == vm.typeFiltersObject[i].singular ) {
+                    dataTypeIsStandard = true;
+                } 
+            }
+            if( dataTypeIsStandard == false ) {
+                dataType = "other"
+            }
+            return dataType;
         },
         returnPublicationDate: function(date) {
             var finalDate = date
@@ -258,9 +277,7 @@ export default {
             if (event.target.checked) {
                 correspondingBadge.classList.add('active');
                 this.selectedFilters.push(event.target.value)
-                
                 this.applyTheFilter(event);
-                
             } else {
                 correspondingBadge.classList.remove('active');
                 var index = this.selectedFilters.indexOf(event.target.value);    // <-- Not supported in <IE9
