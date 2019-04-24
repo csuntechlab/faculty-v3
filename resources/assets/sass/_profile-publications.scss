@@ -1,19 +1,18 @@
-.profileCitationWrapper {
+.profilePublicationWrapper {
     &--filters-applied {
-        .profileCitation:not(.is-filtered) {
+        .profilePublication:not(.is-filtered) {
             display: none !important;
         }
     }
 
-    .profileCitation {
-        &__citation {
+    .profilePublication {
+        &__publication {
             // border-bottom: 1px solid $light-gray;
             padding-bottom: .5rem;
             margin-bottom: .5rem;
         }
         
         .card-header {
-
             @include media-breakpoint-down(sm){
                 text-align: center;
             }
