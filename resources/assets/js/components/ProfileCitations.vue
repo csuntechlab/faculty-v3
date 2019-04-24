@@ -212,7 +212,7 @@ export default {
         axios.get(
             'citations',
             {
-                baseURL: $('meta[name=citations-url').attr('content'),
+                baseURL: $('meta[name=citations-url]').attr('content'),
                 params: {
                     email: this.person_email
                 }
