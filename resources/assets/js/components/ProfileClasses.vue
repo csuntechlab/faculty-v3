@@ -36,11 +36,8 @@
                                             <strong>{{ _past_course.subject }} {{ _past_course.catalog_number }}</strong>
                                             <div>{{ _past_course.title }}</div>
                                             <div>Last Offered {{ _past_course.last_taught }}</div>
-                                            <div v-if='_past_course.times_taught > 1'>
-                                                Taught {{ _past_course.times_taught }} sections
-                                            </div>
-                                            <div v-else>
-                                                Taught 1 sections
+                                            <div>
+                                                Taught {{ _past_course.times_taught }} section<template v-if='_past_course.times_taught > 1'>s</template>
                                             </div>
                                         </li>
                                     </template>
@@ -51,11 +48,8 @@
                                             <strong>{{ _past_course.subject }} {{ _past_course.catalog_number }}</strong>
                                             <div>{{ _past_course.title }}</div>
                                             <div>Last Offered {{ _past_course.last_taught }}</div>
-                                            <div v-if='_past_course.times_taught > 1'>
-                                                Taught {{ _past_course.times_taught }} sections
-                                            </div>
-                                            <div v-else>
-                                                Taught 1 sections
+                                            <div>
+                                                Taught {{ _past_course.times_taught }} section<template v-if='_past_course.times_taught > 1'>s</template>
                                             </div>
                                         </li>
                                     </template>

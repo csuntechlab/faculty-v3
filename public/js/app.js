@@ -3,20 +3,68 @@ webpackJsonp([1],{
 /***/ 141:
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(142);
-module.exports = __webpack_require__(187);
+var disposed = false
+var normalizeComponent = __webpack_require__(2)
+/* script */
+var __vue_script__ = __webpack_require__(181)
+/* template */
+var __vue_template__ = __webpack_require__(182)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/tooltip.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-0fd28abc", Component.options)
+  } else {
+    hotAPI.reload("data-v-0fd28abc", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
 
 
 /***/ }),
 
 /***/ 142:
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__(143);
+module.exports = __webpack_require__(190);
+
+
+/***/ }),
+
+/***/ 143:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ProfileApp__ = __webpack_require__(168);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ProfileApp__ = __webpack_require__(169);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ProfileApp___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__ProfileApp__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__router_profile_js__ = __webpack_require__(171);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__router_profile_js__ = __webpack_require__(172);
 
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -24,7 +72,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-__webpack_require__(143);
+__webpack_require__(144);
 
 
 
@@ -50,11 +98,11 @@ if (document.getElementById('profile_app')) {
 
 /***/ }),
 
-/***/ 143:
+/***/ 144:
 /***/ (function(module, exports, __webpack_require__) {
 
 
-window._ = __webpack_require__(144);
+window._ = __webpack_require__(145);
 window.Popper = __webpack_require__(5).default;
 
 /**
@@ -65,17 +113,17 @@ window.Popper = __webpack_require__(5).default;
  */
 
 try {
-  window.$ = window.jQuery = __webpack_require__(3);
+  window.$ = window.jQuery = __webpack_require__(4);
 
-  __webpack_require__(145);
+  __webpack_require__(146);
 
   __webpack_require__(9);
-  __webpack_require__(146);
+  __webpack_require__(147);
 
   window.moment = __webpack_require__(0);
 
-  window.Helpers = __webpack_require__(148);
-  window.Waldo = __webpack_require__(149);
+  window.Helpers = __webpack_require__(149);
+  window.Waldo = __webpack_require__(150);
 } catch (e) {}
 
 /**
@@ -121,7 +169,7 @@ if (token) {
 
 /***/ }),
 
-/***/ 144:
+/***/ 145:
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, module) {var __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -17231,11 +17279,11 @@ if (token) {
   }
 }.call(this));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(8)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3), __webpack_require__(8)(module)))
 
 /***/ }),
 
-/***/ 145:
+/***/ 146:
 /***/ (function(module, exports, __webpack_require__) {
 
 /*!
@@ -17244,7 +17292,7 @@ if (token) {
   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
   */
 (function (global, factory) {
-   true ? factory(exports, __webpack_require__(3), __webpack_require__(5)) :
+   true ? factory(exports, __webpack_require__(4), __webpack_require__(5)) :
   typeof define === 'function' && define.amd ? define(['exports', 'jquery', 'popper.js'], factory) :
   (factory((global.bootstrap = {}),global.jQuery,global.Popper));
 }(this, (function (exports,$,Popper) { 'use strict';
@@ -21186,7 +21234,7 @@ if (token) {
 
 /***/ }),
 
-/***/ 146:
+/***/ 147:
 /***/ (function(module, exports) {
 
 /*!
@@ -24928,7 +24976,7 @@ bunker(bootstrap);
 
 /***/ }),
 
-/***/ 148:
+/***/ 149:
 /***/ (function(module, exports) {
 
 // Reads from master-blade data, which reads from .env file.
@@ -24988,7 +25036,7 @@ module.exports.default = helpers;
 
 /***/ }),
 
-/***/ 149:
+/***/ 150:
 /***/ (function(module, exports) {
 
 var waldo = {};
@@ -25143,15 +25191,15 @@ module.exports.default = waldo;
 
 /***/ }),
 
-/***/ 168:
+/***/ 169:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(4)
+var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(169)
+var __vue_script__ = __webpack_require__(170)
 /* template */
-var __vue_template__ = __webpack_require__(170)
+var __vue_template__ = __webpack_require__(171)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -25191,7 +25239,7 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 169:
+/***/ 170:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -25219,7 +25267,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ 170:
+/***/ 171:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -25332,20 +25380,20 @@ if (false) {
 
 /***/ }),
 
-/***/ 171:
+/***/ 172:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_router__ = __webpack_require__(174);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_ProfileHome__ = __webpack_require__(175);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_router__ = __webpack_require__(175);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_ProfileHome__ = __webpack_require__(176);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_ProfileHome___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_ProfileHome__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_ProfileClasses__ = __webpack_require__(178);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_ProfileClasses__ = __webpack_require__(179);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_ProfileClasses___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_ProfileClasses__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_ProfileProjects__ = __webpack_require__(181);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_ProfileProjects__ = __webpack_require__(184);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_ProfileProjects___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_ProfileProjects__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_ProfilePublications__ = __webpack_require__(184);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_ProfilePublications__ = __webpack_require__(187);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_ProfilePublications___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__components_ProfilePublications__);
 
 
@@ -25354,7 +25402,7 @@ if (false) {
 
 
 
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component("tooltip", __webpack_require__(195));
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component("tooltip", __webpack_require__(141));
 
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]);
 
@@ -25380,7 +25428,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_
 
 /***/ }),
 
-/***/ 174:
+/***/ 175:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -28011,15 +28059,15 @@ if (inBrowser && window.Vue) {
 
 /***/ }),
 
-/***/ 175:
+/***/ 176:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(4)
+var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(176)
+var __vue_script__ = __webpack_require__(177)
 /* template */
-var __vue_template__ = __webpack_require__(177)
+var __vue_template__ = __webpack_require__(178)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -28059,7 +28107,7 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 176:
+/***/ 177:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -28354,7 +28402,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ 177:
+/***/ 178:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -29004,15 +29052,15 @@ if (false) {
 
 /***/ }),
 
-/***/ 178:
+/***/ 179:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(4)
+var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(179)
+var __vue_script__ = __webpack_require__(180)
 /* template */
-var __vue_template__ = __webpack_require__(180)
+var __vue_template__ = __webpack_require__(183)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -29052,19 +29100,13 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 179:
+/***/ 180:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__tooltip_vue__ = __webpack_require__(195);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__tooltip_vue__ = __webpack_require__(141);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__tooltip_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__tooltip_vue__);
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -29525,7 +29567,95 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ 180:
+/***/ 181:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    name: 'tooltip',
+    props: {
+        tooltipContent: String,
+        tooltipPlacement: {
+            type: String,
+            default: 'auto'
+        },
+        destroyOnXSBreakpoint: {
+            type: Boolean,
+            default: false
+        }
+    },
+    data: function data() {
+        return {
+            windowWidth: window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth
+        };
+    },
+
+    methods: {
+        initTooltip: function initTooltip() {
+            $(this.$el).tooltip({ boundary: 'window' });
+        },
+        destroyTooltop: function destroyTooltop() {
+            $(this.$el).tooltip('dispose');
+        }
+    },
+    mounted: function mounted() {
+        if (this.$options.propsData.destroyOnXSBreakpoint == true) {
+            if (this.windowWidth > 575) {
+                this.initTooltip();
+            }
+        } else {
+            this.initTooltip();
+        }
+    },
+
+    beforeDestroy: function beforeDestroy() {
+        this.destroyTooltop();
+    }
+});
+
+/***/ }),
+
+/***/ 182:
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "span",
+    {
+      attrs: {
+        "data-toggle": "tooltip",
+        "data-placement": _vm.tooltipPlacement,
+        title: _vm.tooltipContent
+      }
+    },
+    [_vm._t("default")],
+    2
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-0fd28abc", module.exports)
+  }
+}
+
+/***/ }),
+
+/***/ 183:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -29630,21 +29760,22 @@ var render = function() {
                                           )
                                         ]),
                                         _vm._v(" "),
-                                        _past_course.times_taught > 1
-                                          ? _c("div", [
-                                              _vm._v(
-                                                "\n                                            Taught " +
-                                                  _vm._s(
-                                                    _past_course.times_taught
-                                                  ) +
-                                                  " sections\n                                        "
-                                              )
-                                            ])
-                                          : _c("div", [
-                                              _vm._v(
-                                                "\n                                            Taught 1 sections\n                                        "
-                                              )
-                                            ])
+                                        _c(
+                                          "div",
+                                          [
+                                            _vm._v(
+                                              "\n                                            Taught " +
+                                                _vm._s(
+                                                  _past_course.times_taught
+                                                ) +
+                                                " section"
+                                            ),
+                                            _past_course.times_taught > 1
+                                              ? [_vm._v("s")]
+                                              : _vm._e()
+                                          ],
+                                          2
+                                        )
                                       ])
                                     ]
                                   })
@@ -29686,21 +29817,22 @@ var render = function() {
                                           )
                                         ]),
                                         _vm._v(" "),
-                                        _past_course.times_taught > 1
-                                          ? _c("div", [
-                                              _vm._v(
-                                                "\n                                            Taught " +
-                                                  _vm._s(
-                                                    _past_course.times_taught
-                                                  ) +
-                                                  " sections\n                                        "
-                                              )
-                                            ])
-                                          : _c("div", [
-                                              _vm._v(
-                                                "\n                                            Taught 1 sections\n                                        "
-                                              )
-                                            ])
+                                        _c(
+                                          "div",
+                                          [
+                                            _vm._v(
+                                              "\n                                            Taught " +
+                                                _vm._s(
+                                                  _past_course.times_taught
+                                                ) +
+                                                " section"
+                                            ),
+                                            _past_course.times_taught > 1
+                                              ? [_vm._v("s")]
+                                              : _vm._e()
+                                          ],
+                                          2
+                                        )
                                       ])
                                     ]
                                   })
@@ -30895,15 +31027,15 @@ if (false) {
 
 /***/ }),
 
-/***/ 181:
+/***/ 184:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(4)
+var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(182)
+var __vue_script__ = __webpack_require__(185)
 /* template */
-var __vue_template__ = __webpack_require__(183)
+var __vue_template__ = __webpack_require__(186)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -30943,7 +31075,7 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 182:
+/***/ 185:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -31537,7 +31669,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ 183:
+/***/ 186:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -32314,15 +32446,15 @@ if (false) {
 
 /***/ }),
 
-/***/ 184:
+/***/ 187:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(4)
+var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(185)
+var __vue_script__ = __webpack_require__(188)
 /* template */
-var __vue_template__ = __webpack_require__(186)
+var __vue_template__ = __webpack_require__(189)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -32362,7 +32494,7 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 185:
+/***/ 188:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -32721,7 +32853,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ 186:
+/***/ 189:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -33395,150 +33527,14 @@ if (false) {
 
 /***/ }),
 
-/***/ 187:
+/***/ 190:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
 
-/***/ 195:
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(4)
-/* script */
-var __vue_script__ = __webpack_require__(196)
-/* template */
-var __vue_template__ = __webpack_require__(197)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/js/components/tooltip.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-0fd28abc", Component.options)
-  } else {
-    hotAPI.reload("data-v-0fd28abc", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-
-/***/ 196:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-    name: 'tooltip',
-    props: {
-        tooltipContent: String,
-        tooltipPlacement: {
-            type: String,
-            default: 'auto'
-        },
-        destroyOnXSBreakpoint: {
-            type: Boolean,
-            default: false
-        }
-    },
-    data: function data() {
-        return {
-            windowWidth: window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth
-        };
-    },
-
-    methods: {
-        initTooltip: function initTooltip() {
-            $(this.$el).tooltip({ boundary: 'window' });
-        },
-        destroyTooltop: function destroyTooltop() {
-            $(this.$el).tooltip('dispose');
-        }
-    },
-    mounted: function mounted() {
-        if (this.$options.propsData.destroyOnXSBreakpoint == true) {
-            if (this.windowWidth > 575) {
-                this.initTooltip();
-            }
-        } else {
-            this.initTooltip();
-        }
-    },
-
-    beforeDestroy: function beforeDestroy() {
-        this.destroyTooltop();
-    }
-});
-
-/***/ }),
-
-/***/ 197:
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "span",
-    {
-      attrs: {
-        "data-toggle": "tooltip",
-        "data-placement": _vm.tooltipPlacement,
-        title: _vm.tooltipContent
-      }
-    },
-    [_vm._t("default")],
-    2
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-0fd28abc", module.exports)
-  }
-}
-
-/***/ }),
-
-/***/ 4:
+/***/ 2:
 /***/ (function(module, exports) {
 
 /* globals __VUE_SSR_CONTEXT__ */
@@ -33648,4 +33644,4 @@ module.exports = function normalizeComponent (
 
 /***/ })
 
-},[141]);
+},[142]);
