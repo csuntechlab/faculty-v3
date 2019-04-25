@@ -154,22 +154,27 @@
                                                             <i class="fas fa-map-marker-alt"></i>
                                                             <span class="text-underline">View Location ({{ _meeting.location }})</span>
                                                         </a>
+                                                        
+                                                        
                                                         <template v-if='_class.syllabus'>
-                                                            <a class="classes-table__info-icon" :href="_class.syllabus.url" :title="'View syllabus for ' + _class.subject + ' ' + _class.catalog_number" target="_blank">
-                                                                <i class="fas fa-file-pdf"></i>
-                                                                <span class="d-inline d-sm-none text-underline">View Syllabus</span>
-                                                            </a>
+                                                            <tooltip :destroyOnXSBreakpoint="true" :tooltip-content="'View syllabus for ' + _class.subject + ' ' + _class.catalog_number">
+                                                                <a class="classes-table__info-icon" :href="_class.syllabus.url" data-toggle="tooltip" data-placement="top" title="Tooltip on top" :title="'View syllabus for ' + _class.subject + ' ' + _class.catalog_number" target="_blank">
+                                                                    <i class="fas fa-file-pdf"></i><span class="d-inline d-sm-none text-underline"> View syllabus for {{_class.subject}}  {{_class.catalog_number}}</span>
+                                                                </a> 
+                                                            </tooltip>
                                                         </template>
                                                         <template v-if='_class.bookstore_url'>
-                                                            <a class="classes-table__info-icon" :href="_class.bookstore_url" :title="'View books for ' + _class.subject + ' ' + _class.catalog_number" target="_blank">
-                                                                <i class="fas fa-book"></i>
-                                                                <span class="d-inline d-sm-none text-underline">View Books</span>
-                                                            </a>
+                                                            <tooltip :destroyOnXSBreakpoint="true" :tooltip-content="'View books for ' + _class.subject + ' ' + _class.catalog_number">
+                                                                <a class="classes-table__info-icon" :href="_class.bookstore_url" :title="'View books for ' + _class.subject + ' ' + _class.catalog_number" target="_blank">
+                                                                    <i class="fas fa-book"></i><span class="d-inline d-sm-none text-underline"> View Books for {{_class.subject}} {{_class.catalog_number}} </span>
+                                                                </a>
+                                                            </tooltip>
                                                         </template>
-                                                        <a class="classes-table__info-icon" href="#">
-                                                            <i class="fas fa-calendar-alt"></i>
-                                                            <span class="d-inline d-sm-none text-underline">Download iCal File</span>
-                                                        </a>
+                                                        <tooltip :destroyOnXSBreakpoint="true" :tooltip-content="'Add '  + _class.subject + ' ' + _class.catalog_number + ' to your calendar'">
+                                                            <a class="classes-table__info-icon" href="#">
+                                                                <i class="fas fa-calendar-alt"></i><span class="d-inline d-sm-none text-underline"> Add {{_class.subject}} {{_class.catalog_number}} to your calendar</span>
+                                                            </a>
+                                                        </tooltip>
                                                     </div>
                                                 </div>
                                             </div>
@@ -200,12 +205,9 @@
                                 <h3 class="d-none d-md-inline">Office Hours</h3>
                                 <h3 class="d-inline d-md-none font-display h5">Office Hours</h3>
 
-                                <template v-if='office_hours.length'>
-                                    <a href="#" class="btn btn-outline-primary float-right d-none d-md-inline" role="button"><i class="fas fa-calendar-alt fa-xs"></i> Download Office Hours</a>
-                                </template>
+                                <a href="#" class="btn btn-outline-primary float-right d-none d-md-inline" role="button"><i class="fas fa-calendar-alt fa-xs"></i> Download Office Hours</a>
                             </div>
 
-                          
                             <!-- MOVE THE DESCRIPTION ONE TO 3 and MOVE THE REST OVER 1 -->
                             
                             <div class="container-fluid">
@@ -270,18 +272,18 @@
                                             <div class="col-sm-2 col-12 pl-4 pl-sm-0 pl-lg-3 pl-xl-0 text-nowrap d-none d-sm-block">
                                                 <template v-if='_office_hour.location'> 
                                                     <a class="classes-table__location-icon" href="javascript:void(0);" data-target="modal" data-modal="#waldoMap" data-waldo-event-trigger="click">
-                                                        <i class="fas fa-map-marker-alt px-1"></i>
-                                                        <span class="text-underline">{{ _office_hour.location }}</span>
+                                                        <i class="fas fa-map-marker-alt px-1"></i><span class="text-underline">{{ _office_hour.location }}</span>
                                                     </a>
                                                 </template>
                                             </div>
                                                 <!-- Info -->
                                             <div class="col-sm-2 col-12 text-sm-center text-left">
                                                 <span class="d-inline d-sm-none font-weight-bold float-left mr-3">Info: </span>
-                                                <a class="classes-table__info-icon" href="#">
-                                                    <i class="fas fa-calendar-alt"></i>
-                                                    <span class="d-inline d-sm-none text-underline">Download iCal File</span>
-                                                </a>
+                                                <tooltip :destroyOnXSBreakpoint="true" tooltip-content="Add to your calendar">
+                                                    <a class="classes-table__info-icon" href="#">
+                                                        <i class="fas fa-calendar-alt"></i><span class="d-inline d-sm-none text-underline"> Add to your calendar</span>
+                                                    </a>
+                                                </tooltip>
                                             </div>
                                         </div>
                                     </template>
@@ -292,7 +294,6 @@
                                             </div>
                                         </div>
                                     </template>
-                                  
                                 </div>
                             </div>
                             <template v-if='office_hours.length'>
@@ -307,6 +308,8 @@
     </div>
 </template>
 <script>
+import { tooltip } from './tooltip.vue'
+
 export default {
     name: 'ProfileClasses',
     data() {
@@ -465,6 +468,11 @@ export default {
                 // allow for the map to be used for location information
                 Waldo.setAllWaldoListeners();
             });
+
+            this.$nextTick(() => {
+                // The whole view is rendered, so I can safely access or query the DOM. 
+                $('[data-toggle="tooltip"]').tooltip()
+            })
     }
 }
 </script>
