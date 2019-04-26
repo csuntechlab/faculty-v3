@@ -113,12 +113,6 @@
                     term: window.term
                 }
             });
-
-            console.log(window.current_classes)
-            // console.log(window.current_office_hours)
-            // console.log(window.person_name)
-            // console.log(window.person_email)
-            // console.log(window.term)
         </script>
     </body>
 </html>

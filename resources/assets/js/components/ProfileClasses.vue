@@ -81,10 +81,6 @@
                                 <button @click="openDoorSignWindow()" class="btn btn-outline-primary d-none d-md-inline" role="button">
                                     <i class="fas fa-print fa-xs"></i> Printer Friendly Door Sign
                                 </button>
-                                
-                                <!-- <a :href="faculty_profile_url + '/printout'" class="btn btn-outline-primary d-none d-md-inline" role="button">
-                                    <i class="fas fa-print fa-xs"></i> Printer Friendly Door Sign
-                                </a> -->
                             </div>
                             <hr class="hr-metaphor d-none d-sm-block">
                         </template>
