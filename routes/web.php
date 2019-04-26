@@ -24,5 +24,9 @@ Route::get('/departments', 'DepartmentController@all')
 Route::get('/departments/{id}/faculty', 'DepartmentController@faculty')
 	->name('departments.faculty');
 
+	Route::get('/printer-friendly-door-sign', function () {
+		return view('pages.printerFriendlyDoorSign');
+	})->name('printer-friendly-door-sign');
+
 Route::get('{uri}', 'ProfileController@show')
 	->name('profile');

@@ -78,9 +78,13 @@
                                         </option>
                                     </select>
                                 </template>
-                                <a :href="faculty_profile_url + '/printout'" class="btn btn-outline-primary d-none d-md-inline" role="button">
+                                <button @click="openDoorSignWindow()" class="btn btn-outline-primary d-none d-md-inline" role="button">
                                     <i class="fas fa-print fa-xs"></i> Printer Friendly Door Sign
-                                </a>
+                                </button>
+                                
+                                <!-- <a :href="faculty_profile_url + '/printout'" class="btn btn-outline-primary d-none d-md-inline" role="button">
+                                    <i class="fas fa-print fa-xs"></i> Printer Friendly Door Sign
+                                </a> -->
                             </div>
                             <hr class="hr-metaphor d-none d-sm-block">
                         </template>
@@ -312,8 +316,11 @@ export default {
             terms: [],
             current_term: null,
             selected_term: $("meta[name=current-term-id]").attr('content'),
+            current_term_name_for_door_sign: '',
             classes: [],
+            current_classes: [],
             office_hours: [],
+            current_office_hours: [],
             teaching_interest: [],
             loading_all: true,
             loading_classes: false,
@@ -427,6 +434,17 @@ export default {
                     baseURL: this.api_url
                 }
             );
+        },
+        openDoorSignWindow: function () {
+            var windowObjectReference;
+            var strWindowFeatures = "menubar=no,toolbar=no,personalbar=no,resizable=yes,scrollbars=yes,status=no,titlebar=no,height=600,width=700,centerscreen=yes";
+
+            windowObjectReference = window.open("/printer-friendly-door-sign", "DoorSign", strWindowFeatures);
+            windowObjectReference.current_classes = this.current_classes;
+            windowObjectReference.current_office_hours = this.current_office_hours;
+            windowObjectReference.person_name = this.person_name
+            windowObjectReference.person_email = this.person_email
+            windowObjectReference.term = this.current_term_name_for_door_sign
         }
     },
     mounted() {
@@ -437,10 +455,12 @@ export default {
                 // apply the current classes
                 var current_class_data = current_classes.data;
                 this.classes = current_class_data;
+                this.current_classes = current_class_data;
 
                 // apply the office hours
                 var office_hours_data = office_hours.data;
                 this.office_hours = office_hours_data;
+                this.current_office_hours = office_hours_data;
 
                 // apply the past courses
                 var past_courses_data = past_courses.data;
@@ -450,6 +470,7 @@ export default {
                 var term_data = terms.data;
                 this.terms = term_data.terms;
                 this.current_term = term_data.current;
+                this.current_term_name_for_door_sign  = term_data.current.term_display;
 
                 // apply the set of teaching interests
                 var teaching_interests_data = teaching_interests.data.interests;
@@ -462,11 +483,6 @@ export default {
                 // allow for the map to be used for location information
                 Waldo.setAllWaldoListeners();
             });
-
-            this.$nextTick(() => {
-                // The whole view is rendered, so I can safely access or query the DOM. 
-                $('[data-toggle="tooltip"]').tooltip()
-            })
     }
 }
 </script>
