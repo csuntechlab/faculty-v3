@@ -6,10 +6,28 @@
     }
 
     .profilePublication {
+
+        a {
+            color: $body-color;
+
+            &:hover {
+                color: $primary;
+            }
+        }
+
         &__publication {
-            // border-bottom: 1px solid $light-gray;
             padding-bottom: .5rem;
-            margin-bottom: .5rem;
+            margin-bottom: 1rem;
+            font-weight: bold;
+
+            a {
+                color: $body-color;
+                text-decoration: none;
+
+                &:hover {
+                    color: $primary;
+                }
+            }
         }
         
         .card-header {
