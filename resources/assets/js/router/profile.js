@@ -6,6 +6,7 @@ import ProfileProjects from '../components/ProfileProjects'
 import ProfilePublications from '../components/ProfilePublications'
 import ProfileStudents from '../components/ProfileStudents'
 
+Vue.component("tooltip",require("../components/tooltip.vue"));
 Vue.use(Router);
 
 export default new Router({

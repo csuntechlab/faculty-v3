@@ -36,11 +36,8 @@
                                             <strong>{{ _past_course.subject }} {{ _past_course.catalog_number }}</strong>
                                             <div>{{ _past_course.title }}</div>
                                             <div>Last Offered {{ _past_course.last_taught }}</div>
-                                            <div v-if='_past_course.times_taught > 1'>
-                                                Taught {{ _past_course.times_taught }} sections
-                                            </div>
-                                            <div v-else>
-                                                Taught 1 sections
+                                            <div>
+                                                Taught {{ _past_course.times_taught }} section<template v-if='_past_course.times_taught > 1'>s</template>
                                             </div>
                                         </li>
                                     </template>
@@ -51,11 +48,8 @@
                                             <strong>{{ _past_course.subject }} {{ _past_course.catalog_number }}</strong>
                                             <div>{{ _past_course.title }}</div>
                                             <div>Last Offered {{ _past_course.last_taught }}</div>
-                                            <div v-if='_past_course.times_taught > 1'>
-                                                Taught {{ _past_course.times_taught }} sections
-                                            </div>
-                                            <div v-else>
-                                                Taught 1 sections
+                                            <div>
+                                                Taught {{ _past_course.times_taught }} section<template v-if='_past_course.times_taught > 1'>s</template>
                                             </div>
                                         </li>
                                     </template>
@@ -84,9 +78,9 @@
                                         </option>
                                     </select>
                                 </template>
-                                <a :href="faculty_profile_url + '/printout'" class="btn btn-outline-primary d-none d-md-inline" role="button">
+                                <button @click="openDoorSignWindow()" class="btn btn-outline-primary d-none d-md-inline" role="button">
                                     <i class="fas fa-print fa-xs"></i> Printer Friendly Door Sign
-                                </a>
+                                </button>
                             </div>
                             <hr class="hr-metaphor d-none d-sm-block">
                         </template>
@@ -154,22 +148,27 @@
                                                             <i class="fas fa-map-marker-alt"></i>
                                                             <span class="text-underline">View Location ({{ _meeting.location }})</span>
                                                         </a>
+                                                        
+                                                        
                                                         <template v-if='_class.syllabus'>
-                                                            <a class="classes-table__info-icon" :href="_class.syllabus.url" :title="'View syllabus for ' + _class.subject + ' ' + _class.catalog_number" target="_blank">
-                                                                <i class="fas fa-file-pdf"></i>
-                                                                <span class="d-inline d-sm-none text-underline">View Syllabus</span>
-                                                            </a>
+                                                            <tooltip :destroyOnXSBreakpoint="true" :tooltip-content="'View syllabus for ' + _class.subject + ' ' + _class.catalog_number">
+                                                                <a class="classes-table__info-icon" :href="_class.syllabus.url" data-toggle="tooltip" data-placement="top" title="Tooltip on top" :title="'View syllabus for ' + _class.subject + ' ' + _class.catalog_number" target="_blank">
+                                                                    <i class="fas fa-file-pdf"></i><span class="d-inline d-sm-none text-underline"> View syllabus for {{_class.subject}}  {{_class.catalog_number}}</span>
+                                                                </a> 
+                                                            </tooltip>
                                                         </template>
                                                         <template v-if='_class.bookstore_url'>
-                                                            <a class="classes-table__info-icon" :href="_class.bookstore_url" :title="'View books for ' + _class.subject + ' ' + _class.catalog_number" target="_blank">
-                                                                <i class="fas fa-book"></i>
-                                                                <span class="d-inline d-sm-none text-underline">View Books</span>
-                                                            </a>
+                                                            <tooltip :destroyOnXSBreakpoint="true" :tooltip-content="'View books for ' + _class.subject + ' ' + _class.catalog_number">
+                                                                <a class="classes-table__info-icon" :href="_class.bookstore_url" :title="'View books for ' + _class.subject + ' ' + _class.catalog_number" target="_blank">
+                                                                    <i class="fas fa-book"></i><span class="d-inline d-sm-none text-underline"> View Books for {{_class.subject}} {{_class.catalog_number}} </span>
+                                                                </a>
+                                                            </tooltip>
                                                         </template>
-                                                        <a class="classes-table__info-icon" href="#">
-                                                            <i class="fas fa-calendar-alt"></i>
-                                                            <span class="d-inline d-sm-none text-underline">Download iCal File</span>
-                                                        </a>
+                                                        <tooltip :destroyOnXSBreakpoint="true" :tooltip-content="'Add '  + _class.subject + ' ' + _class.catalog_number + ' to your calendar'">
+                                                            <a class="classes-table__info-icon" href="#">
+                                                                <i class="fas fa-calendar-alt"></i><span class="d-inline d-sm-none text-underline"> Add {{_class.subject}} {{_class.catalog_number}} to your calendar</span>
+                                                            </a>
+                                                        </tooltip>
                                                     </div>
                                                 </div>
                                             </div>
@@ -200,12 +199,9 @@
                                 <h3 class="d-none d-md-inline">Office Hours</h3>
                                 <h3 class="d-inline d-md-none font-display h5">Office Hours</h3>
 
-                                <template v-if='office_hours.length'>
-                                    <a href="#" class="btn btn-outline-primary float-right d-none d-md-inline" role="button"><i class="fas fa-calendar-alt fa-xs"></i> Download Office Hours</a>
-                                </template>
+                                <a href="#" class="btn btn-outline-primary float-right d-none d-md-inline" role="button"><i class="fas fa-calendar-alt fa-xs"></i> Download Office Hours</a>
                             </div>
 
-                          
                             <!-- MOVE THE DESCRIPTION ONE TO 3 and MOVE THE REST OVER 1 -->
                             
                             <div class="container-fluid">
@@ -270,18 +266,18 @@
                                             <div class="col-sm-2 col-12 pl-4 pl-sm-0 pl-lg-3 pl-xl-0 text-nowrap d-none d-sm-block">
                                                 <template v-if='_office_hour.location'> 
                                                     <a class="classes-table__location-icon" href="javascript:void(0);" data-target="modal" data-modal="#waldoMap" data-waldo-event-trigger="click">
-                                                        <i class="fas fa-map-marker-alt px-1"></i>
-                                                        <span class="text-underline">{{ _office_hour.location }}</span>
+                                                        <i class="fas fa-map-marker-alt px-1"></i><span class="text-underline">{{ _office_hour.location }}</span>
                                                     </a>
                                                 </template>
                                             </div>
                                                 <!-- Info -->
                                             <div class="col-sm-2 col-12 text-sm-center text-left">
                                                 <span class="d-inline d-sm-none font-weight-bold float-left mr-3">Info: </span>
-                                                <a class="classes-table__info-icon" href="#">
-                                                    <i class="fas fa-calendar-alt"></i>
-                                                    <span class="d-inline d-sm-none text-underline">Download iCal File</span>
-                                                </a>
+                                                <tooltip :destroyOnXSBreakpoint="true" tooltip-content="Add to your calendar">
+                                                    <a class="classes-table__info-icon" href="#">
+                                                        <i class="fas fa-calendar-alt"></i><span class="d-inline d-sm-none text-underline"> Add to your calendar</span>
+                                                    </a>
+                                                </tooltip>
                                             </div>
                                         </div>
                                     </template>
@@ -292,7 +288,6 @@
                                             </div>
                                         </div>
                                     </template>
-                                  
                                 </div>
                             </div>
                             <template v-if='office_hours.length'>
@@ -307,6 +302,8 @@
     </div>
 </template>
 <script>
+import { tooltip } from './tooltip.vue'
+
 export default {
     name: 'ProfileClasses',
     data() {
@@ -315,8 +312,11 @@ export default {
             terms: [],
             current_term: null,
             selected_term: $("meta[name=current-term-id]").attr('content'),
+            current_term_name_for_door_sign: '',
             classes: [],
+            current_classes: [],
             office_hours: [],
+            current_office_hours: [],
             teaching_interest: [],
             loading_all: true,
             loading_classes: false,
@@ -430,6 +430,18 @@ export default {
                     baseURL: this.api_url
                 }
             );
+        },
+        openDoorSignWindow: function () {
+            var windowObjectReference;
+            var strWindowFeatures = "menubar=no,toolbar=no,personalbar=no,resizable=yes,scrollbars=yes,status=no,titlebar=no,height=600,width=700,centerscreen=yes";
+            var appUrl = document.querySelector("html").getAttribute("data-url") 
+
+            windowObjectReference = window.open(appUrl + "/printer-friendly-door-sign", "DoorSign", strWindowFeatures);
+            windowObjectReference.current_classes = this.current_classes;
+            windowObjectReference.current_office_hours = this.current_office_hours;
+            windowObjectReference.person_name = this.person_name
+            windowObjectReference.person_email = this.person_email
+            windowObjectReference.term = this.current_term_name_for_door_sign
         }
     },
     mounted() {
@@ -440,10 +452,12 @@ export default {
                 // apply the current classes
                 var current_class_data = current_classes.data;
                 this.classes = current_class_data;
+                this.current_classes = current_class_data;
 
                 // apply the office hours
                 var office_hours_data = office_hours.data;
                 this.office_hours = office_hours_data;
+                this.current_office_hours = office_hours_data;
 
                 // apply the past courses
                 var past_courses_data = past_courses.data;
@@ -453,6 +467,7 @@ export default {
                 var term_data = terms.data;
                 this.terms = term_data.terms;
                 this.current_term = term_data.current;
+                this.current_term_name_for_door_sign  = term_data.current.term_display;
 
                 // apply the set of teaching interests
                 var teaching_interests_data = teaching_interests.data.interests;
