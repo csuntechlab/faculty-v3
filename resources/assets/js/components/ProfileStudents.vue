@@ -23,7 +23,7 @@
                                     <div class="card-header bg-white" :id="'heading--'+index" data-toggle="collapse" :data-target="'#collapse--'+index" aria-expanded="false" :aria-controls="'#collapse--'+index">
                                         <div class="profilePublication__publication">
                                             <template v-if="publication.document.handle.split('http://hdl.handle.net')[1]">
-                                                <a class="project__title" @click.stop :href="'http://scholarworks.csun.edu/handle' + publication.document.handle.split('http://hdl.handle.net')[1]" target="scholarworks">
+                                                <a @click.stop :href="'http://scholarworks.csun.edu/handle' + publication.document.handle.split('http://hdl.handle.net')[1]" target="scholarworks">
                                                     <template v-if="publication.formatted != ''">
                                                         <span v-html="publication.formatted"></span>
                                                     </template>
@@ -45,7 +45,7 @@
                                         <span class="text-capitalize font-weight-bold">
                                             Chair:
                                         </span>
-                                        <a @click.stop class="text-underline project__committee" :href="'/' + publication.membership.members[1].email.split('@')[0] + '#/students'">{{publication.membership.members[1].display_name}}</a>
+                                        <a @click.stop :href="'/' + publication.membership.members[1].email.split('@')[0] + '#/students'">{{publication.membership.members[1].display_name}}</a>
                                         
 
                                         <span class="text-capitalize font-weight-bold pl-4">
@@ -54,7 +54,7 @@
                                         <span>
                                             <template v-for="(member, index) in publication.membership.members">
                                                 <template v-if="index > 1">
-                                                    <a v-bind:key="index.id" @click.stop class="text-underline project__committee" :href="'/' + member.email.split('@')[0] + '#/students'">{{member.display_name}}</a><template v-if="index !== publication.membership.members.length-1">, </template>
+                                                    <a v-bind:key="index.id" @click.stop :href="'/' + member.email.split('@')[0] + '#/students'">{{member.display_name}}</a><template v-if="index !== publication.membership.members.length-1">, </template>
                                                 </template>
                                             </template>
                                         </span>

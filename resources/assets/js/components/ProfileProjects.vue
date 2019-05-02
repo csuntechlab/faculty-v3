@@ -151,25 +151,26 @@
                             <template v-if="displayedProjects.length">
                                 <div class="mb-2">Showing <strong>{{ displayedProjects.length }}</strong> of <strong>{{ projects.length }}</strong> project(s)</div>
 
-                                <div v-for="project in displayedProjects" class="project card card--styled d-block mb-3">
+                                <div v-for="project in displayedProjects" class="profileProject card card--styled d-block mb-3">
                                     <div class="card-body">
-                                        <a class="project__title" :href="generateProjectUrl(project)" target="_blank">
+                                        <a class="profileProject__title" :href="generateProjectUrl(project)" target="_blank">
                                             {{ project.project_title }}
                                             <sup><i class="fas fa-external-link-alt"></i></sup>
                                         </a>
-                                        <div v-if="project.attributes" class="project__type">
+                                        <div v-if="project.attributes" class="profileProject__type">
+                                            <strong>Type:</strong> 
                                             <span v-if="project.attributes.purpose_name == 'creative'">Creative Work</span>
-                                            <span v-else>{{ uppercaseFirstLetter(project.attributes.purpose_name) }}</span>
+                                            <span v-else class="text-capitalize"> {{ project.attributes.purpose_name }} </span>
                                         </div>
-                                        <div v-if="project.award.length" class="project__item">
+                                        <div v-if="project.award.length" class="profileProject__item">
                                             <template v-for="award_sponsor in project.award_sponsors">
-                                                <p><strong>{{ award_sponsor.sponsor }}:</strong> {{ new Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD'}).format(award_sponsor.total) }}</p>
+                                                <div><strong>{{ award_sponsor.sponsor }}:</strong> {{ new Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD'}).format(award_sponsor.total) }}</div>
                                             </template>
                                         </div>
-                                        <div v-if="project.pi" class="project__item">
+                                        <div v-if="project.pi" class="profileProject__item">
                                             <strong>Lead Principal Investigator:</strong> {{ project.pi.display_name }}
                                         </div>
-                                        <div v-if="project.members.length" class="project__item">
+                                        <div v-if="project.members.length" class="profileProject__item">
                                             <strong>Team:</strong> {{ renderProjectTeamList(project) }}
                                         </div>
                                     </div>
@@ -525,10 +526,6 @@ export default {
             });
 
             return filteredProjects;
-        },
-        uppercaseFirstLetter: function(str) {
-            // https://dzone.com/articles/how-to-capitalize-the-first-letter-of-a-string-in
-            return str.charAt(0).toUpperCase() + str.slice(1);
         },
         renderProjectTeamList: function(project) {
             // returns a comma-separated string representing the members on
