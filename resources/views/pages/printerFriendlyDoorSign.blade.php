@@ -1,9 +1,6 @@
 <!DOCTYPE HTML>
 <html lang="en">
 	<head>
-		@if ( config('app.google_site_id') )
-		<meta name="google-site-verification" content="{{ config('app.google_site_id') }}">
-		@endif
 		<meta charset="utf-8">
 		<meta http-equiv="pragma" content="no-cache">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -88,20 +85,6 @@
 		{!! HTML::script('/js/vendor.js') !!}
 		{!! HTML::script('js/app.js') !!}
 
-		@yield('page-specific-scripts')
-		{{-- GOOGLE ANALYTICS --}}
-		@if ( config('app.google_analytics_id') )
-		<script>
-			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-			})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-			ga('create', '{{ config("app.google_analytics_id") }}', 'auto');
-			ga('send', 'pageview');
-		</script>
-        @endif
-        
         <script>
             var app = new Vue({
             el: '#app',

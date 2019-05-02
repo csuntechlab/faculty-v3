@@ -434,8 +434,9 @@ export default {
         openDoorSignWindow: function () {
             var windowObjectReference;
             var strWindowFeatures = "menubar=no,toolbar=no,personalbar=no,resizable=yes,scrollbars=yes,status=no,titlebar=no,height=600,width=700,centerscreen=yes";
+            var appUrl = document.querySelector("html").getAttribute("data-url") 
 
-            windowObjectReference = window.open("/printer-friendly-door-sign", "DoorSign", strWindowFeatures);
+            windowObjectReference = window.open(appUrl + "/printer-friendly-door-sign", "DoorSign", strWindowFeatures);
             windowObjectReference.current_classes = this.current_classes;
             windowObjectReference.current_office_hours = this.current_office_hours;
             windowObjectReference.person_name = this.person_name
