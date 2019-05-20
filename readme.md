@@ -16,4 +16,4 @@ To install this application please refer to the official [Laravel website](https
 The Faculty v3 app is open-sourced software licensed under the 
 [GNU General Public License v3+](https://www.gnu.org/licenses/gpl.html). A copy can be found in the `COPYING` file.
 
-The Lumen framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
+The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
